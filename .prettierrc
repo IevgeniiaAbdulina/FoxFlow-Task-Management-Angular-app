@@ -1,0 +1,29 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "bracketSameLine": true,
+  "objectWrap": "preserve",
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "crlf",
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.component.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
+}
