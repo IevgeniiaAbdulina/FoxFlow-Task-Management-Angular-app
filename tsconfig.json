@@ -7,12 +7,8 @@
     "outDir": "dist",
     "rootDir": "src",
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ]
+      "@app/*": ["src/app/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "strict": true,
     "noImplicitAny": true,
@@ -31,12 +27,7 @@
     "target": "ES2022",
     "moduleResolution": "node",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "es2021",
-      "es2022",
-      "dom"
-    ]
+    "lib": ["es2020", "es2021", "es2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -55,14 +46,6 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.html",
-    "src/**/*.scss"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "e2e"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.html", "src/**/*.scss"],
+  "exclude": ["node_modules", "dist", "e2e"]
 }
