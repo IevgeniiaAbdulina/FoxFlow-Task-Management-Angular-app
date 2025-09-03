@@ -24,7 +24,6 @@ export default tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      indent: 'error',
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -51,5 +50,5 @@ export default tseslint.config(
       eslintConfigPrettier,
     ],
     rules: {},
-  },
+  }
 );
