@@ -20,7 +20,17 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.html": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.scss": [
+      "prettier --write"
+    ]
   },
   "private": true,
   "dependencies": {

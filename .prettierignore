@@ -1,9 +1,9 @@
 # Ignore artifacts:
-build
-coverage
-dist
+/build
+/coverage
+/dist
 package-lock.json
-yarn.lock
+/yarn.lock
 .next
 .env
 
