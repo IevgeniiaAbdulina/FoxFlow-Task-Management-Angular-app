@@ -3,7 +3,23 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ]
+    },
     "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "noEmitOnError": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -13,13 +29,21 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "moduleResolution": "node",
+    "module": "esnext",
+    "lib": [
+      "es2020",
+      "es2021",
+      "es2022",
+      "dom"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
+    "fullTemplateTypeCheck": true,
     "strictTemplates": true
   },
   "files": [],
@@ -30,5 +54,15 @@
     {
       "path": "./tsconfig.spec.json"
     }
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.html",
+    "src/**/*.scss"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "e2e"
   ]
 }
