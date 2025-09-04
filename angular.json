@@ -84,6 +84,7 @@
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
+            "codeCoverage": true,
             "inlineStyleLanguage": "scss",
             "assets": [
               {
