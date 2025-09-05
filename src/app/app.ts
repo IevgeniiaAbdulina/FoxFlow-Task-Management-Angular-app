@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FirebaseServiceTs } from './services/firebase/firebase-service.ts';
+import { FirebaseServiceTs } from './services/firebase/firebase-service';
 
 @Component({
   selector: 'app-root',
