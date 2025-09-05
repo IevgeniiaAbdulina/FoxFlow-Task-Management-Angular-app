@@ -37,6 +37,7 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#architecture-diagram">Architecture</a></li>
+    <li><a href="#Feature-sliced-project-structure">Project structure</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -220,53 +221,58 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- FOLDER STRUCTURE -->
 
-## Feature-sliced structure
+## Feature-sliced project structure
 
 ```
 src/
 ├── app/
 │   ├── core/
-│   │   ├── services/
+│   │   ├── services/                      # Application business logic
 │   │   ├── guards/
 │   │   │   ├── auth.guard.ts              # Protects routes based on authentication
 │   │   ├── interceptors/
 │   │   │   ├── auth.interceptor.ts        # Intercepts HTTP requests for authentication
+│   ├── auth/
+│   │   ├── components/
+│   │   │   ├── login/
+│   │   │   │   ├── login.ts               # Login page component
+│   │   │   ├── register/
+│   │   │   │   ├── register.ts            # Registration page component
+│   │   ├── services/
+│   │   │   ├── auth.service.ts            # Handles authentication logic
+│   │   ├── auth-store/
+│   │   │   ├── auth-store.ts              # NgRx store for authentication state
+│   │   │   ├── auth-reducer.ts            # NgRx reducer for authentication state
 │   ├── features/
-│   │   ├── auth/
-│   │   │   ├── components/
-│   │   │   │   ├── login/
-│   │   │   │   │   ├── login.ts           # Login page component
-│   │   │   │   ├── register/
-│   │   │   │   │   ├── register.ts        # Registration page component
-│   │   │   ├── services/
-│   │   │   │   ├── auth.service.ts        # Handles authentication logic
-│   │   │   ├── auth-store/
-│   │   │   │   ├── auth-store.ts          # NgRx store for authentication state
-│   │   │   │   ├── auth-reducer.ts        # NgRx reducer for authentication state
-│   │   ├── tasks/
-│   │   │   ├── components/
-│   │   │   │   ├── task-list/
-│   │   │   │   │   ├── task-list.ts       # Displays list of tasks
-│   │   │   │   ├── task-detail/
-│   │   │   │   │   ├── task-detail.ts     # Shows details of a selected task
-│   │   │   ├── services/
-│   │   │   │   ├── task.service.ts        # Manages task-related API calls
-│   │   │   ├── task-store/
-│   │   │   │   ├── task-store.ts          # NgRx store for task state
-│   │   │   │   ├── task-reducer.ts        # NgRx reducer for task state
-│   │   ├── shared/
-│   │   │   ├── components/
-│   │   │   │   ├── header.ts              # Application header component
-│   │   │   │   ├── footer.ts              # Application footer component
-│   │   │   ├── models/
-│   │   │   │   ├── task.model.ts          # Task data model
-│   │   │   │   ├── user.model.ts          # User data model
+│   │   ├── components/
+│   │   │   ├── task-list/
+│   │   │   │   ├── task-list.ts           # Displays list of tasks
+│   │   │   ├── task-detail/
+│   │   │   │   ├── task-detail.ts         # Shows details of a selected task
+│   │   ├── services/
+│   │   │   ├── task.service.ts            # Manages task-related API calls
+│   │   ├── task-store/
+│   │   │   ├── task-store.ts              # NgRx store for task state
+│   │   │   ├── task-reducer.ts            # NgRx reducer for task state
+│   ├── shared/
+│   │   ├── interfaces/                    
+│   │   ├── directives/                    
+│   │   ├── pipes/                         
+│   │   ├── types/                         
+│   │   ├── enums/                         
+│   │   ├── utils/                         # Simple functions                  
+│   │   ├── components/
+│   │   │   ├── header.ts                  # Application header component
+│   │   │   ├── footer.ts                  # Application footer component
+│   │   ├── models/
+│   │   │   ├── task.model.ts              # Task data model
+│   │   │   ├── user.model.ts              # User data model
 │   ├── app.routes.ts                      # Defines application routes
 │   ├── app.ts                             # Root component
 ├── assets/                                # Static assets (images, styles, etc.)
 ├── environments/                          # Environment-specific configurations
-│   ├── environment.ts                     # Development environment settings
-│   ├── environment.prod.ts                # Production environment settings
+│   ├── environment.ts                     # Production environment settings 
+│   ├── environment.development.ts         # Development environment settings
 └── index.html                             # Main HTML file
 ```
 
