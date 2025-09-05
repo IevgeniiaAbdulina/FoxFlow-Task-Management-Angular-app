@@ -87,11 +87,54 @@ FoxFlow is built using a modern tech stack that includes:
 
 ## Getting Started
 
-### Development server
+### Prerequisites
 
-To start a local development server, run:
+A list of everything you need to use the software and how to install it.
 
 ```bash
+npm install npm@latest -g
+```
+
+### Installation
+
+#### Clone the repository
+
+```bash
+git clone https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angular-app.git
+```
+
+#### Setting up Firestore and Firebase Google Auth
+
+Before running the FoxFlow project, you'll need to set up Firebase for database management and Firebase Google Auth for user authentication.
+
+[Firestore](https://console.firebase.google.com/)
+
+[Firebase Auth](https://firebase.google.com/docs/auth)
+
+#### Create `.env` file
+
+In the root directory, create the `.env` file and add the required keys.
+
+```ts
+// example TBD
+export const firebaseConfig = {
+  apiKey: 'apiKey',
+  databaseURL: 'databaseURL',
+  projectId: 'projectId',
+};
+```
+
+#### Install dependencies
+
+```bash
+# Install frontend dependencies
+npm install
+```
+
+### Development server
+
+```bash
+# To start a local development server, run:
 ng serve
 ```
 
@@ -99,9 +142,8 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 ### Building
 
-To build the project run:
-
 ```bash
+# To build the project run:
 ng build
 ```
 
@@ -135,26 +177,6 @@ ng format
 
 Clear coding guidelines for a clean and consistent codebase.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angular-app.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
 
@@ -163,9 +185,65 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!--  Use this space to show useful examples of how a project can be used.
+      Additional screenshots, code examples and demos work well in this space.
+      You may also link to more resources. -->
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+1. **Task Creation and Management**: Users can create, edit, and delete tasks, assign them to team members, and set deadlines.
+2. **Project Collaboration**: Team members can collaborate on projects by sharing tasks, commenting, and updating task statuses.
+
+* _Screenshots_:
+  * Task Detail View: A detailed view of a specific task, including comments, attachments, and status updates.
+
+3. **Progress Tracking**: Users can track the progress of tasks and projects through visual indicators like progress bars or Kanban boards.
+
+* _Screenshots_:
+  * Dashboard: A view of the main dashboard displaying active projects and tasks.
+  * Task List: A screenshot showing a list of tasks with options to filter, sort, and search.
+  * Project Overview: A visual representation of project progress, including completed and pending tasks.
+
+4. **Notifications and Reminders**: Users receive notifications for upcoming deadlines, task assignments, and comments from team members.
+5. **User Authentication**: Secure login and registration using Firebase OAuth, allowing users to manage their tasks safely.
+
+* _Screenshots_:
+  * Login Screen: A screenshot of the login form where users enter their credentials.
+
+### Code Examples
+
+1. Task Model (task.model.ts)
+
+```ts
+export interface Task {
+  id: string;
+  title: string;
+  description: string;
+  assignedTo: string;
+  dueDate: Date;
+  status: 'pending' | 'in-progress' | 'completed';
+}
+
+```
+
+### Demo of features
+
+Video Walkthrough: Create a video walkthrough demonstrating how to use the application, showcasing features like task creation, collaboration, and progress tracking.
+
+<details>
+  <summary>✏️ Task creation</summary>
+  <video></video>
+</details>
+
+<details>
+  <summary>🚀 Collaboration</summary>
+  <video></video>
+</details>
+
+<details>
+  <summary>🎯 Progress tracking</summary>
+  <video></video>
+</details>
+
+_For more examples, please refer to the [Project Wiki](https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angular-app/wiki)_
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
@@ -187,7 +265,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
  🔲   | Subtasks                                   | Allow users to break down tasks into smaller, manageable subtasks.                                                        
  🔲   | Search and Filter                          | Enable users to search and filter tasks based on various criteria.                                                        
  🔲   | Sort                                       | Enable users to sort tasks by Due date or Assignee members.                                                               
- 🙋   | **Collaboration features:**                |
+ 🚀   | **Collaboration features:**                |
  🔲   | Collaboration Tools                        | Allow users to comment on tasks and share files.                                                                          
  🔲   | Task Tracking                              | Monitor task progress and status updates.                                                                                 
  🔲   | Notifications                              | Send reminders for deadlines and updates on task status. (Optional: add accent text color or status label on a task card) 
