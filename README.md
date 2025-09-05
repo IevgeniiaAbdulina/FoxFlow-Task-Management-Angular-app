@@ -116,11 +116,18 @@ Before running the FoxFlow project, you'll need to set up Firebase for database 
 In the root directory, create the `.env` file and add the required keys.
 
 ```ts
-// example TBD
-export const firebaseConfig = {
-  apiKey: 'apiKey',
-  databaseURL: 'databaseURL',
-  projectId: 'projectId',
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: '<API_KEY>',
+    authDomain: '<AUTH_DOMAIN>',
+    databaseURL: '<DATABASE_URL>',
+    projectId: '<PROJECT_ID>',
+    storageBucket: '<STORAGE_BUCKET>',
+    messagingSenderId: '<MESSAGING_SENDER_ID>',
+    appId: '<APP_ID>'
+  }
 };
 ```
 
