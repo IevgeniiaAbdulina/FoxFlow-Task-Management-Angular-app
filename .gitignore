@@ -14,8 +14,6 @@
 
 # Environment files
 /.env
-/environments/*
-/src/environments/*
 
 # Angular CLI and build artefacts
 /.angular-cli.json
