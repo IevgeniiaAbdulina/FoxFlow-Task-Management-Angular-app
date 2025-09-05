@@ -37,7 +37,8 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#architecture-diagram">Architecture</a></li>
-    <li><a href="#Feature-sliced-project-structure">Project structure</a></li>
+    <li><a href="#feature-sliced-project-structure">Project structure</a></li>
+    <li><a href="#performance-budgets">Performance budgets</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -360,6 +361,35 @@ src/
 │   ├── environment.development.ts         # Development environment settings
 └── index.html                             # Main HTML file
 ```
+
+<p align="right"><a href="#readme-top">⬆️ back to top</a></p>
+
+
+
+<!-- PERFORMANCE BUDGETS -->
+
+## Performance budgets
+
+### Performance budgets with the Angular CLI
+
+The Angular CLI performs the checks at build time, looking at the production assets and verifying their sizes.
+
+| Initial chunk files   | Names         |  Raw size | Estimated transfer size 
+|-----------------------|---------------|----------:|------------------------:|
+| main-IL2EJBOH.js      | main          | 186.35 kB |                50.70 kB 
+| polyfills-5CFQRCPP.js | polyfills     |  34.59 kB |                11.33 kB 
+| styles-5INURTSO.css   | styles        |   0 bytes |                 0 bytes 
+|                       | Initial total | 220.94 kB |                62.03 kB 
+
+Application bundle generation complete. [10.544 seconds]
+
+### Performance budgets with the Lighthouse
+
+Lighthouse opens the deployed version of the application and measures the asset size.
+
+<div align="left">
+  <img src="./src/assets/images/performance-lighthouse.png" alt="angular" width=60%>
+</div>
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
