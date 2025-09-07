@@ -1,7 +1,20 @@
 <main class="main">
   <div class="content">
-    <h1>{{ title() }} application run!</h1>
+    <h1>{{ 'HOME.TITLE' | translate }}</h1>
     <h2>{{ testConnection() }} work</h2>
+    <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
+    <div class="lang-switcher">
+      <button
+        type="button"
+        (click)="switchLanguage('en')">
+        EN
+      </button>
+      <button
+        type="button"
+        (click)="switchLanguage('pl')">
+        PL
+      </button>
+    </div>
   </div>
 </main>
 
