@@ -10,27 +10,3 @@
   max-width: 600px;
   text-align: center;
 }
-
-.lang-switcher-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.lang-switcher {
-  margin-top: 1.5rem;
-  display: inline-flex;
-  justify-content: center;
-  width: auto;
-
-  ::ng-deep .mat-button-toggle {
-    min-width: 70px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  ::ng-deep .mat-button-toggle-checked {
-    background-color: var(--mat-sys-primary);
-    color: var(--mat-sys-on-primary);
-  }
-}

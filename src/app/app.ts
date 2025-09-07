@@ -7,19 +7,19 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FirebaseServiceTs } from './services/firebase/firebase-service';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    TranslateModule,
     CommonModule,
-    MatButtonToggleModule,
     MatCardModule,
+    TranslateModule,
+    LanguageSwitcherComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -30,32 +30,11 @@ export class App implements OnInit {
   protected readonly testConnection = signal('');
 
   firebaseService = inject(FirebaseServiceTs);
-  protected translate = inject(TranslateService);
 
   ngOnInit(): void {
-    this.translate.addLangs(['en', 'pl']);
-    this.translate.setDefaultLang('en');
-
-    const savedLang = localStorage.getItem('lang');
-    const browserLang = this.translate.getBrowserLang();
-
-    this.translate.use(
-      savedLang || (browserLang?.match(/en|pl/) ? browserLang : 'en')
-    );
-
     this.firebaseService.getTestConnection().subscribe((documents) => {
       const firstDoc = documents[0];
       this.testConnection.set(firstDoc?.['text'] ?? '');
     });
-  }
-
-  // switchLanguage(lang: string): void {
-  //   this.translate.use(lang);
-  //   localStorage.setItem('lang', lang);
-  // }
-
-  onLangChange(lang: string): void {
-    this.translate.use(lang);
-    localStorage.setItem('lang', lang);
   }
 }

@@ -3,17 +3,7 @@
     <h1>{{ 'HOME.TITLE' | translate }}</h1>
     <h2>{{ testConnection() }} work</h2>
     <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
-    <div class="lang-switcher-wrapper">
-      <mat-button-toggle-group
-        appearance="standard"
-        class="lang-switcher"
-        name="lang"
-        [value]="translate.currentLang"
-        (change)="onLangChange($event.value)">
-        <mat-button-toggle value="en">EN</mat-button-toggle>
-        <mat-button-toggle value="pl">PL</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+    <app-language-switcher />
   </mat-card>
 </main>
 
