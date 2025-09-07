@@ -1,25 +1,39 @@
 {
-  "AUTH.LOGIN": "Log In",
-  "AUTH.REGISTER": "Register",
-  "AUTH.EMAIL": "Email",
-  "AUTH.PASSWORD": "Password",
-  "AUTH.ERROR": "Invalid email or password",
-  "HOME.TITLE": "Welcome to FoxFlow",
-  "HOME.DESCRIPTION": "A Trello-like task management app for seamless collaboration",
-  "HOME.GOALS": "Key Goals",
-  "HOME.GOAL_1": "Organize tasks with intuitive Kanban boards",
-  "HOME.GOAL_2": "Track progress with real-time updates",
-  "HOME.TEAM": "Our Team",
-  "HOME.YEAR": "Created in 2025",
-  "NOT_FOUND.TITLE": "Page Not Found",
-  "NOT_FOUND.MESSAGE": "The page you requested does not exist.",
-  "BOARD.TITLE": "Task Board",
-  "BOARD.CREATE": "Create Board",
-  "TASK.ADD": "Add Task",
-  "TASK.TITLE_LABEL": "Task Title",
-  "TASK.DUE_DATE_LABEL": "Due Date",
-  "TASK.ASSIGNEE_LABEL": "Assignee",
-  "NOTIFICATION.DUE": "Task {{title}} is due on {{date}}",
-  "NOTIFICATION.COMPLETE": "Task completed successfully",
-  "EMPTY_STATE.NO_TASKS": "No tasks yet. Add one!"
+  "AUTH": {
+    "LOGIN": "Log In",
+    "REGISTER": "Register",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "ERROR": "Invalid email or password"
+  },
+  "HOME": {
+    "TITLE": "Welcome to FoxFlow",
+    "DESCRIPTION": "A Trello-like task management app for seamless collaboration",
+    "GOALS": "Key Goals",
+    "GOAL_1": "Organize tasks with intuitive Kanban boards",
+    "GOAL_2": "Track progress with real-time updates",
+    "TEAM": "Our Team",
+    "YEAR": "Created in 2025"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page Not Found",
+    "MESSAGE": "The page you requested does not exist."
+  },
+  "BOARD": {
+    "TITLE": "Task Board",
+    "CREATE": "Create Board"
+  },
+  "TASK": {
+    "ADD": "Add Task",
+    "TITLE_LABEL": "Task Title",
+    "DUE_DATE_LABEL": "Due Date",
+    "ASSIGNEE_LABEL": "Assignee"
+  },
+  "NOTIFICATION": {
+    "DUE": "Task {{title}} is due on {{date}}",
+    "COMPLETE": "Task completed successfully"
+  },
+  "EMPTY_STATE": {
+    "NO_TASKS": "No tasks yet. Add one!"
+  }
 }
