@@ -8,10 +8,19 @@ import {
 import { RouterOutlet } from '@angular/router';
 import { FirebaseServiceTs } from './services/firebase/firebase-service';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TranslateModule],
+  imports: [
+    RouterOutlet,
+    TranslateModule,
+    CommonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,7 +49,12 @@ export class App implements OnInit {
     });
   }
 
-  switchLanguage(lang: string): void {
+  // switchLanguage(lang: string): void {
+  //   this.translate.use(lang);
+  //   localStorage.setItem('lang', lang);
+  // }
+
+  onLangChange(lang: string): void {
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
   }

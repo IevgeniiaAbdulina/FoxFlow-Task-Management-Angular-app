@@ -1,21 +1,20 @@
 <main class="main">
-  <div class="content">
+  <mat-card class="content-card">
     <h1>{{ 'HOME.TITLE' | translate }}</h1>
     <h2>{{ testConnection() }} work</h2>
     <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
-    <div class="lang-switcher">
-      <button
-        type="button"
-        (click)="switchLanguage('en')">
-        EN
-      </button>
-      <button
-        type="button"
-        (click)="switchLanguage('pl')">
-        PL
-      </button>
+    <div class="lang-switcher-wrapper">
+      <mat-button-toggle-group
+        appearance="standard"
+        class="lang-switcher"
+        name="lang"
+        [value]="translate.currentLang"
+        (change)="onLangChange($event.value)">
+        <mat-button-toggle value="en">EN</mat-button-toggle>
+        <mat-button-toggle value="pl">PL</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
-  </div>
+  </mat-card>
 </main>
 
 <router-outlet />
