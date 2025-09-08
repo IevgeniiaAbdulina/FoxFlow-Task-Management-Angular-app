@@ -1,0 +1,39 @@
+{
+  "AUTH": {
+    "LOGIN": "Log In",
+    "REGISTER": "Register",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "ERROR": "Invalid email or password"
+  },
+  "HOME": {
+    "TITLE": "Welcome to FoxFlow",
+    "DESCRIPTION": "A Trello-like task management app for seamless collaboration",
+    "GOALS": "Key Goals",
+    "GOAL_1": "Organize tasks with intuitive Kanban boards",
+    "GOAL_2": "Track progress with real-time updates",
+    "TEAM": "Our Team",
+    "YEAR": "Created in 2025"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page Not Found",
+    "MESSAGE": "The page you requested does not exist."
+  },
+  "BOARD": {
+    "TITLE": "Task Board",
+    "CREATE": "Create Board"
+  },
+  "TASK": {
+    "ADD": "Add Task",
+    "TITLE_LABEL": "Task Title",
+    "DUE_DATE_LABEL": "Due Date",
+    "ASSIGNEE_LABEL": "Assignee"
+  },
+  "NOTIFICATION": {
+    "DUE": "Task {{title}} is due on {{date}}",
+    "COMPLETE": "Task completed successfully"
+  },
+  "EMPTY_STATE": {
+    "NO_TASKS": "No tasks yet. Add one!"
+  }
+}
