@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     apiKey: import.meta.env.NG_APP_API_KEY,
     authDomain: import.meta.env.NG_APP_AUTH_DOMAIN,
