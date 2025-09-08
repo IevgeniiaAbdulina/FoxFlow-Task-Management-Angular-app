@@ -163,8 +163,13 @@ Once the server is running, open your browser and navigate to `http://localhost:
 ### Building
 
 ```bash
-# To build the project run:
-ng build
+# To build the project in development mode run:
+npm run build:dev
+```
+
+```bash
+# To build the project in production mode run:
+npm run build:prod
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory.
@@ -386,14 +391,14 @@ src/
 
 The Angular CLI performs the checks at build time, looking at the production assets and verifying their sizes.
 
-| Initial chunk files   | Names         |  Raw size | Estimated transfer size 
+ Initial chunk files   | Names         |  Raw size | Estimated transfer size 
 |-----------------------|---------------|----------:|------------------------:|
-| main-IL2EJBOH.js      | main          | 186.35 kB |                50.70 kB 
-| polyfills-5CFQRCPP.js | polyfills     |  34.59 kB |                11.33 kB 
-| styles-5INURTSO.css   | styles        |   0 bytes |                 0 bytes 
-|                       | Initial total | 220.94 kB |                62.03 kB 
+ main-6NGPTIUD.js      | main          | 837.84 kB |               216.67 kB 
+ polyfills-ED6LRYKL.js | polyfills     |  34.59 kB |                11.32 kB 
+ styles-DTTV3AOM.css   | styles        |   8.10 kB |                 1.32 kB 
+|                       | Initial total | 880.53 kB |               229.31 kB 
 
-Application bundle generation complete. [10.544 seconds]
+Application bundle generation complete. [5.920 seconds]
 
 ### Performance budgets with the Lighthouse
 
