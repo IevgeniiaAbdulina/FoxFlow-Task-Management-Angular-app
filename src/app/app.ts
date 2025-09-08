@@ -7,10 +7,20 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FirebaseServiceTs } from './services/firebase/firebase-service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MatCardModule,
+    TranslateModule,
+    LanguageSwitcherComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

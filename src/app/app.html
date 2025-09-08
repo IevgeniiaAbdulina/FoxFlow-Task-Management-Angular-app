@@ -1,8 +1,10 @@
 <main class="main">
-  <div class="content">
-    <h1>{{ title() }} application run!</h1>
+  <mat-card class="content-card">
+    <h1>{{ 'HOME.TITLE' | translate }}</h1>
     <h2>{{ testConnection() }} work</h2>
-  </div>
+    <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
+    <app-language-switcher />
+  </mat-card>
 </main>
 
 <router-outlet />
