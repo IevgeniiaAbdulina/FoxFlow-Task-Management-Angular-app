@@ -50,7 +50,7 @@ export default tseslint.config(
       '@typescript-eslint/array-type': ['warn'],
       '@typescript-eslint/consistent-indexed-object-style': 'off',
       '@typescript-eslint/consistent-type-assertions': 'warn',
-      '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
+      '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-member-accessibility': [
         'error',
