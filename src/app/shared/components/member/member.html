@@ -1,0 +1,23 @@
+<mat-card
+  appearance="outlined"
+  class="card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ name() }}</mat-card-title>
+      <mat-card-subtitle>{{ position() }}</mat-card-subtitle>
+      <img
+        alt="avatar"
+        height="50"
+        mat-card-md-image
+        ngSrc="image()"
+        width="50" />
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <a
+      target="_blank"
+      [href]="gitHub()"
+      >gitHub {{ name() }}</a
+    >
+  </mat-card-content>
+</mat-card>
