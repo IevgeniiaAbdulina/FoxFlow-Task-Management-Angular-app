@@ -38,8 +38,11 @@
   },
   "MAIN": {
     "TITLE": "FoxFlow",
+    "SUBTITLE": "O projekcie",
     "DESCRIPTION": "FoxFlow to intuicyjna aplikacja do zarządzania zadaniami, zaprojektowana z myślą o usprawnieniu przepływu pracy i zwiększeniu produktywności. FoxFlow pozwala łatwo tworzyć, organizować i priorytetyzować zadania, zapewniając pełną kontrolę nad projektami. Bezproblemowa współpraca z członkami zespołu, ustalanie terminów i śledzenie postępów w czasie rzeczywistym – to idealne narzędzie dla osób i zespołów, które chcą zoptymalizować zarządzanie zadaniami.",
     "TEAM": "Nasz Zespół",
-    "YEAR": "Utworzono w 2025 roku"
+    "YEAR": "Utworzono w 2025 roku",
+    "RS_MESSAGE": "Projekt FowFlow powstał jako część kursu RS School",
+    "RS_TEXT": "Dowiedz się więcej o Szkole RS"
   }
 }

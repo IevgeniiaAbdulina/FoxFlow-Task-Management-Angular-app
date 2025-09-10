@@ -1,17 +1,32 @@
 <div class="container">
-  <h1>{{ 'MAIN.TITLE' | translate }}</h1>
-  <p>{{ 'MAIN.DESCRIPTION' | translate }}</p>
+  <div class="main-page">
+    <h1>{{ 'MAIN.TITLE' | translate }}</h1>
+    <h3> {{ 'MAIN.SUBTITLE' | translate }}</h3>
+    <p>{{ 'MAIN.DESCRIPTION' | translate }}</p>
 
-  <section>
-    <h2>{{ 'MAIN.TEAM' | translate }}</h2>
-    <div class="members">
-      @for (member of members; track member.id) {
-      <app-member
-        [gitHub]="member.gitHub"
-        [image]="member.image"
-        [name]="member.name"
-        [position]="member.position" />
-      }
-    </div>
-  </section>
+    <section class="rs-link">
+      <a href="https://rs.school/">
+        <div class="rs-information">
+          <div class="logo-rs"></div>
+          <div class="logo-rs__message">
+            <h2>{{ 'MAIN.RS_MESSAGE' | translate }}</h2>
+            <p>{{ 'MAIN.RS_TEXT' | translate }}</p>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section>
+      <h2>{{ 'MAIN.TEAM' | translate }}</h2>
+      <div class="members">
+        @for (member of members; track member.id) {
+        <app-member
+          [gitHub]="member.gitHub"
+          [image]="member.image"
+          [name]="member.name"
+          [position]="member.position" />
+        }
+      </div>
+    </section>
+  </div>
 </div>
