@@ -1,10 +1,17 @@
-<p>main works!</p>
-<h1>{{ 'HOME.TITLE' | translate }}</h1>
-<p>
-  FoxFlow is an intuitive task management application designed to streamline
-  your workflow and enhance productivity. FoxFlow allows you to easily create,
-  organize, and prioritize tasks, ensuring that you stay on top of your
-  projects. Collaborate seamlessly with team members, set deadlines, and track
-  progress in real-time, making it the perfect tool for individuals and teams
-  looking to optimize their task management experience.
-</p>
+<div class="container">
+  <h1>{{ 'MAIN.TITLE' | translate }}</h1>
+  <p>{{ 'MAIN.DESCRIPTION' | translate }}</p>
+
+  <section>
+    <h2>{{ 'MAIN.TEAM' | translate }}</h2>
+    <div class="members">
+      @for (member of members; track member.id) {
+      <app-member
+        [gitHub]="member.gitHub"
+        [image]="member.image"
+        [name]="member.name"
+        [position]="member.position" />
+      }
+    </div>
+  </section>
+</div>
