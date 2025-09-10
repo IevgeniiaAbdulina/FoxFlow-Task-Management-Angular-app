@@ -38,8 +38,11 @@
   },
   "MAIN": {
     "TITLE": "FoxFlow",
+    "SUBTITLE": "About The Project",
     "DESCRIPTION": "FoxFlow is an intuitive task management application designed to streamline your workflow and enhance productivity. FoxFlow allows you to easily create, organize, and prioritize tasks, ensuring that you stay on top of your projects. Collaborate seamlessly with team members, set deadlines, and track progress in real-time, making it the perfect tool for individuals and teams looking to optimize their task management experience",
     "TEAM": "Our Team",
-    "YEAR": "Created in 2025"
+    "YEAR": "Created in 2025",
+    "RS_MESSAGE": "FowFlow project is created as learning part of the RS School course",
+    "RS_TEXT": "Learn more about RS School"
   }
 }

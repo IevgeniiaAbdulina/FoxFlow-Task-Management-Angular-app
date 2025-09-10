@@ -1,8 +1,59 @@
+@use '../../styles/placeholders' as *;
+
 .container {
   max-width: 1440px;
   margin: 0 auto 10px;
 }
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+}
+
 .members {
   display: flex;
   justify-content: space-between;
+}
+
+.rs-link {
+  width: 60%;
+  border: 2px solid var(--mat-sys-primary);
+  border-radius: 10px;
+  margin: 0 auto;
+  @extend %transition;
+
+  &:hover {
+    box-shadow: 0 3px 7px grey;
+    background-color: var(--mat-sys-surface-container);
+  }
+  a {
+    text-decoration: none;
+    color: var(--mat-sys-primary);
+    padding: 1.5rem;
+
+    &:hover {
+      color: var(--mat-sys-on-surface);
+    }
+  }
+}
+
+.rs-information {
+  display: flex;
+  justify-content: center;
+  column-gap: 2rem;
+  align-items: center;
+
+  .logo-rs {
+    width: 5rem;
+    height: 5rem;
+    background-image: url('../../../../assets/images/rss-logo.svg');
+    background-repeat: no-repeat;
+
+    &__message {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+      font-weight: 600;
+    }
+  }
 }
