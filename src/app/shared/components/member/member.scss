@@ -1,18 +1,23 @@
+@use '../../styles/placeholders' as *;
+
 .card {
   width: 330px;
-  background-color: var(--mat-sys-surface-container-low);
-  border-color: var(
-    --mat-card-elevated-container-color,
-    var(--mat-sys-surface-container-low)
-  );
-  border-radius: var(
-    --mat-card-elevated-container-shape,
-    var(--mat-sys-corner-medium)
-  );
-  box-shadow: var(
-    --mat-card-elevated-container-elevation,
-    var(--mat-sys-level1)
-  );
+  border: 2px solid var(--mat-sys-primary);
+  border-radius: 10px;
+  @extend %transition;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 7px grey;
+    background-color: var(--mat-sys-surface-container);
+
+    a {
+      color: var(--mat-sys-primary);
+    }
+    mat-card-title-group {
+      color: var(--mat-sys-primary);
+    }
+  }
 }
 
 :host ::ng-deep .mat-mdc-card-title {
