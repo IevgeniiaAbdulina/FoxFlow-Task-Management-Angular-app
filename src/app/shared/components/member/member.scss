@@ -1,7 +1,7 @@
-@use '../../styles/placeholders' as *;
+@use '../../style/abstract/placeholders' as *;
 
 .card {
-  width: 330px;
+  width: 310px;
   border: 2px solid var(--mat-sys-primary);
   border-radius: 10px;
   @extend %transition;
