@@ -1,3 +1,22 @@
+<header>
+  @if (authService.currentUser() === null) {
+  <nav>
+    <a routerLink="/register">Get Started</a>
+  </nav>
+  } @if (authService.currentUser()) {
+  <div>
+    <h2>Registration works:</h2>
+    {{ authService.currentUser()?.username }}
+
+    <button
+      type="button"
+      (click)="logout()"
+      >Logout</button
+    >
+  </div>
+  }
+</header>
+
 <main class="main">
   <mat-card class="content-card">
     <h1>{{ 'HOME.TITLE' | translate }}</h1>

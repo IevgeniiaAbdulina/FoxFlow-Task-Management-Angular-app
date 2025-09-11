@@ -1,0 +1,123 @@
+<mat-card
+  appearance="outlined"
+  class="register-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>You’re one click away from less busywork</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="social-buttons__container">
+      <div class="social-buttons__item">
+        Continue with your Google work account
+      </div>
+      <div class="social-buttons__item"> Continue with GitHub account </div>
+    </div>
+
+    <div class="social-buttons__separator">OR</div>
+
+    <h3>Continue with email</h3>
+
+    <form
+      class="register-form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field class="register-form__full-width">
+        <mat-label>Username</mat-label>
+        <input
+          formControlName="username"
+          matInput
+          placeholder="Username"
+          type="text" />
+      </mat-form-field>
+
+      @if (form.get("username")?.invalid && form.get("username")?.touched) {
+      <mat-error>{{ getErrorMessage("username") }}</mat-error>
+      }
+
+      <mat-form-field class="register-form__full-width">
+        <mat-label>Email address</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="Email"
+          type="email" />
+      </mat-form-field>
+
+      @if (form.get("email")?.invalid && form.get("email")?.touched) {
+      <mat-error>{{ getErrorMessage("email") }}</mat-error>
+      }
+
+      <mat-form-field class="register-form__full-width">
+        <mat-label>Password</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="Password"
+          [type]="hide() ? 'password' : 'text'" />
+        <button
+          matIconButton
+          matSuffix
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+          (click)="visibilityToggle($event)">
+          <mat-icon matSuffix>
+            {{ hide() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      @if (form.get("password")?.invalid) { @if (form.get("password")?.touched)
+      {
+      <mat-error>{{ getErrorMessage("password") }}</mat-error>
+      }
+
+      <div class="text-sm err-message">
+        @if (form.get("password")?.dirty) {
+        <mat-error
+          [appHighlightMessage]="controlValidity('^(?=.*[A-Z])')
+            ? colorValid
+            : colorError">
+          At least one uppercase letter.
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(?=.*[a-z])')
+            ? colorValid
+            : colorError">
+          At least one lowercase letter.
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(.*[0-9].*)')
+            ? colorValid
+            : colorError">
+          At least one digit.
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(?=.*[!@#$%^&*])')
+            ? colorValid
+            : colorError">
+          At least one special character.
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('.{8,}')
+            ? colorValid
+            : colorError">
+          At least one At least 8 characters long.
+        </mat-error>
+        }
+      </div>
+      } @if (form.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+      }
+
+      <div class="form-actions__submit-button">
+        <button
+          matButton="filled"
+          type="submit">
+          Continue
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
