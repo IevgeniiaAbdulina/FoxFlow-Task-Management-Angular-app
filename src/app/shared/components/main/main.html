@@ -1,19 +1,27 @@
 <div class="container">
   <div class="main-page">
     <h1>{{ 'MAIN.TITLE' | translate }}</h1>
-    <h3> {{ 'MAIN.SUBTITLE' | translate }}</h3>
-    <p>{{ 'MAIN.DESCRIPTION' | translate }}</p>
+    <section class="description">
+      <h2> {{ 'MAIN.SUBTITLE' | translate }}</h2>
+      <p class="description-text">{{ 'MAIN.DESCRIPTION' | translate }}</p>
+    </section>
 
-    <section class="rs-link">
-      <a href="https://rs.school/">
-        <div class="rs-information">
-          <div class="logo-rs"></div>
-          <div class="logo-rs__message">
-            <h2>{{ 'MAIN.RS_MESSAGE' | translate }}</h2>
-            <p>{{ 'MAIN.RS_TEXT' | translate }}</p>
-          </div>
-        </div>
-      </a>
+    <section class="goals">
+      <h2>{{ 'MAIN.GOALS' | translate }}:</h2>
+      <ul class="goals__list">
+        <li>{{ 'MAIN.GOAL_1' | translate }}</li>
+        <li>{{ 'MAIN.GOAL_2' | translate }}</li>
+        <li>{{ 'MAIN.GOAL_3' | translate }}</li>
+      </ul>
+    </section>
+
+    <section class="advantages">
+      <h2>{{ 'MAIN.ADVANTAGES' | translate }}:</h2>
+      <ul class="advantages__list">
+        <li>{{ 'MAIN.ADVANTAGE_1' | translate }}</li>
+        <li>{{ 'MAIN.ADVANTAGE_2' | translate }}</li>
+        <li>{{ 'MAIN.ADVANTAGE_3' | translate }}</li>
+      </ul>
     </section>
 
     <section>
@@ -29,4 +37,20 @@
       </div>
     </section>
   </div>
+
+  <section class="rs-link">
+    <a href="https://rs.school/">
+      <div class="rs-information">
+        <div class="logo-rs"></div>
+        <div class="logo-rs__message">
+          <h2>{{ 'MAIN.RS_MESSAGE' | translate }}</h2>
+          <p>{{ 'MAIN.RS_TEXT' | translate }}</p>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <div>{{ 'MAIN.YEAR' | translate }}</div>
+  </footer>
 </div>
