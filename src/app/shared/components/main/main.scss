@@ -84,6 +84,10 @@ h2 {
   padding: 10px;
   @extend %transition;
 
+  @include media-tablet {
+    width: 90%;
+  }
+
   @include media-mobile {
     width: 100%;
   }
