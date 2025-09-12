@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -38,6 +39,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatIconButton,
     MatIconModule,
     MatCardModule,
+    TranslateModule,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -105,7 +107,7 @@ export class Register {
       if (control?.hasError('minlength')) {
         return 'Username must be at least 3 characters.';
       }
-      if (control?.hasError('specialChars')) {
+      if (control?.hasError('noSpecialChars')) {
         return 'Username must contain only letters.';
       }
     }
@@ -114,7 +116,7 @@ export class Register {
 
   noSpecialChars(control: AbstractControl): ValidationErrors | null {
     const regex = /[^a-zA-Z0-9]/;
-    return regex.test(control.value) ? { specialChars: true } : null;
+    return regex.test(control.value) ? { noSpecialChars: true } : null;
   }
 
   controlValidity(regex: string): RegExpMatchArray | null {

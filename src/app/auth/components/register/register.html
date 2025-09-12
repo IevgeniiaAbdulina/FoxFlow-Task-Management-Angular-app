@@ -3,7 +3,7 @@
   class="register-card">
   <mat-card-header>
     <mat-card-title>
-      <h1>You’re one click away from less busywork</h1>
+      <h1>{{ "REGISTER_PAGE.TITLE" | translate }}</h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -11,23 +11,23 @@
       <div class="social-buttons__item">
         Continue with your Google work account
       </div>
-      <div class="social-buttons__item"> Continue with GitHub account </div>
+      <div class="social-buttons__item"> Continue with GitHub account</div>
     </div>
 
     <div class="social-buttons__separator">OR</div>
 
-    <h3>Continue with email</h3>
+    <h3>{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
 
     <form
       class="register-form"
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
       <mat-form-field class="register-form__full-width">
-        <mat-label>Username</mat-label>
+        <mat-label>{{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}</mat-label>
         <input
           formControlName="username"
           matInput
-          placeholder="Username"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}"
           type="text" />
       </mat-form-field>
 
@@ -36,11 +36,11 @@
       }
 
       <mat-form-field class="register-form__full-width">
-        <mat-label>Email address</mat-label>
+        <mat-label>{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}</mat-label>
         <input
           formControlName="email"
           matInput
-          placeholder="Email"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}"
           type="email" />
       </mat-form-field>
 
@@ -49,11 +49,11 @@
       }
 
       <mat-form-field class="register-form__full-width">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
         <input
           formControlName="password"
           matInput
-          placeholder="Password"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}"
           [type]="hide() ? 'password' : 'text'" />
         <button
           matIconButton
@@ -79,31 +79,31 @@
           [appHighlightMessage]="controlValidity('^(?=.*[A-Z])')
             ? colorValid
             : colorError">
-          At least one uppercase letter.
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.UPPERCASE' | translate }}
         </mat-error>
         <mat-error
           [appHighlightMessage]="controlValidity('(?=.*[a-z])')
             ? colorValid
             : colorError">
-          At least one lowercase letter.
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.LOWERCASE' | translate }}
         </mat-error>
         <mat-error
           [appHighlightMessage]="controlValidity('(.*[0-9].*)')
             ? colorValid
             : colorError">
-          At least one digit.
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.DIGIT' | translate }}
         </mat-error>
         <mat-error
           [appHighlightMessage]="controlValidity('(?=.*[!@#$%^&*])')
             ? colorValid
             : colorError">
-          At least one special character.
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.SPECIAL_CHAR' | translate }}
         </mat-error>
         <mat-error
           [appHighlightMessage]="controlValidity('.{8,}')
             ? colorValid
             : colorError">
-          At least one At least 8 characters long.
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.CHARS_LONG' | translate }}
         </mat-error>
         }
       </div>
@@ -115,7 +115,7 @@
         <button
           matButton="filled"
           type="submit">
-          Continue
+          {{ "REGISTER_PAGE.ACTION_SUBMIT" | translate }}
         </button>
       </div>
     </form>
