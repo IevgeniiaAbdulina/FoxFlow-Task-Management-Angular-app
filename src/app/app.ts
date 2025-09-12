@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 
+import { Main } from './features/components/main/main';
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -20,6 +22,7 @@ import { LanguageSwitcherComponent } from './shared/components/language-switcher
     MatCardModule,
     TranslateModule,
     LanguageSwitcherComponent,
+    Main,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

@@ -35,5 +35,25 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "No tasks yet. Add one!"
+  },
+  "MAIN": {
+    "TITLE": "FoxFlow",
+    "SUBTITLE": "About The Project",
+    "DESCRIPTION": "FoxFlow is an intuitive task management application designed to streamline your workflow and enhance productivity",
+    "GOALS": "Goals",
+    "GOAL_1": "Simplify task organization",
+    "GOAL_2": "Enhance team collaboration",
+    "GOAL_3": "Provide real-time updates and notifications",
+    "ADVANTAGES": "Why Choose FoxFlow",
+    "ADVANTAGE_TITLE1": "User-Friendly Interface",
+    "ADVANTAGE_TITLE2": "Collaboration Tools",
+    "ADVANTAGE_TITLE3": "Customizable Workflows",
+    "ADVANTAGE_1": "FoxFlow features an intuitive design that makes it easy for users of all skill levels to navigate and manage tasks efficiently.",
+    "ADVANTAGE_2": "The application offers robust collaboration features, allowing teams to work together seamlessly, share updates, and communicate effectively on projects.",
+    "ADVANTAGE_3": "FoxFlow enables users to tailor their task management experience with customizable workflows, ensuring that it fits their unique project needs and preferences.",
+    "TEAM": "Our Team",
+    "YEAR": "Created in 2025",
+    "RS_MESSAGE": "FowFlow project is created as learning part of the RS School course",
+    "RS_TEXT": "Learn more about RS School"
   }
 }

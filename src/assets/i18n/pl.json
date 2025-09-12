@@ -35,5 +35,25 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "Brak zadań. Dodaj jedno!"
+  },
+  "MAIN": {
+    "TITLE": "FoxFlow",
+    "SUBTITLE": "O projekcie",
+    "DESCRIPTION": "FoxFlow to intuicyjna aplikacja do zarządzania zadaniami, która usprawnia twój przepływ pracy i zwiększa produktywność",
+    "GOALS": "Cele",
+    "GOAL_1": "Uprościć organizację zadań",
+    "GOAL_2": "Ulepszenie współpracy zespołowej",
+    "GOAL_3": "Podaj aktualizacje i powiadomienia w czasie rzeczywistym",
+    "ADVANTAGES": "Dlaczego warto wybrać FoxFlow",
+    "ADVANTAGE_TITLE1": "Przyjazny dla użytkownika interfejs",
+    "ADVANTAGE_TITLE2": "Narzędzia do współpracy",
+    "ADVANTAGE_TITLE3": "Konfigurowalne przepływy pracy",
+    "ADVANTAGE_1": "FoxFlow charakteryzuje się intuicyjnym interfejsem, który ułatwia użytkownikom o różnym poziomie umiejętności nawigację i efektywne zarządzanie zadaniami.",
+    "ADVANTAGE_2": "Aplikacja oferuje rozbudowane funkcje współpracy, umożliwiając zespołom bezproblemową współpracę, udostępnianie aktualizacji i efektywną komunikację w ramach projektów.",
+    "ADVANTAGE_3": "FoxFlow umożliwia użytkownikom dostosowanie sposobu zarządzania zadaniami dzięki konfigurowalnym przepływom pracy, które odpowiadają ich unikalnym potrzebom i preferencjom projektu.",
+    "TEAM": "Nasz Zespół",
+    "YEAR": "Utworzono w 2025 roku",
+    "RS_MESSAGE": "Projekt FowFlow powstał jako część kursu RS School",
+    "RS_TEXT": "Dowiedz się więcej o Szkole RS"
   }
 }
