@@ -52,19 +52,19 @@
   FoxFlow is an intuitive task management application designed to streamline your workflow and enhance productivity. With its user-friendly interface, FoxFlow allows you to easily create, organize, and prioritize tasks, ensuring that you stay on top of your projects. Collaborate seamlessly with team members, set deadlines, and track progress in real-time, making it the perfect tool for individuals and teams looking to optimize their task management experience. Whether you're managing personal to-do lists or complex team projects, FoxFlow adapts to your needs, helping you achieve your goals efficiently.
 </p>
 
- Why Choose FoxFlow      | Description                                                                                                                                                     
--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------- 
- User-Friendly Interface | FoxFlow features an intuitive design that makes it easy for users of all skill levels to navigate and manage tasks efficiently.                                 
- Collaboration Tools     | The application offers robust collaboration features, allowing teams to work together seamlessly, share updates, and communicate effectively on projects.       
- Customizable Workflows  | FoxFlow enables users to tailor their task management experience with customizable workflows, ensuring that it fits their unique project needs and preferences. 
+| Why Choose FoxFlow      | Description                                                                                                                                                     |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User-Friendly Interface | FoxFlow features an intuitive design that makes it easy for users of all skill levels to navigate and manage tasks efficiently.                                 |
+| Collaboration Tools     | The application offers robust collaboration features, allowing teams to work together seamlessly, share updates, and communicate effectively on projects.       |
+| Customizable Workflows  | FoxFlow enables users to tailor their task management experience with customizable workflows, ensuring that it fits their unique project needs and preferences. |
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
 ### Built With
 
-* Angular CLI: 20.2.1
-* Node: 24.7.0
-* Package Manager: npm 10.9.2
+- Angular CLI: 20.2.1
+- Node: 24.7.0
+- Package Manager: npm 10.9.2
 
 FoxFlow is built using a modern tech stack that includes:
 
@@ -81,8 +81,6 @@ FoxFlow is built using a modern tech stack that includes:
 - ✅ Testing Jasmine/Karma - unit tests for core logic and **E2E** for the main user flow.
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
-
-
 
 <!-- GETTING STARTED -->
 
@@ -140,7 +138,7 @@ export const environment = {
     messagingSenderId: import.meta.env.NG_APP_MESSAGING_SENDER_ID,
     appId: import.meta.env.NG_APP_APP_ID,
     measurementId: import.meta.env.NG_APP_MEASUREMENT_ID,
-  }
+  },
 };
 ```
 
@@ -204,8 +202,6 @@ Clear coding guidelines for a clean and consistent codebase.
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
-
-
 <!-- USAGE EXAMPLES -->
 
 ## Usage
@@ -217,21 +213,21 @@ Clear coding guidelines for a clean and consistent codebase.
 1. **Task Creation and Management**: Users can create, edit, and delete tasks, assign them to team members, and set deadlines.
 2. **Project Collaboration**: Team members can collaborate on projects by sharing tasks, commenting, and updating task statuses.
 
-* _Screenshots_:
-  * Task Detail View: A detailed view of a specific task, including comments, attachments, and status updates.
+- _Screenshots_:
+  - Task Detail View: A detailed view of a specific task, including comments, attachments, and status updates.
 
 3. **Progress Tracking**: Users can track the progress of tasks and projects through visual indicators like progress bars or Kanban boards.
 
-* _Screenshots_:
-  * Dashboard: A view of the main dashboard displaying active projects and tasks.
-  * Task List: A screenshot showing a list of tasks with options to filter, sort, and search.
-  * Project Overview: A visual representation of project progress, including completed and pending tasks.
+- _Screenshots_:
+  - Dashboard: A view of the main dashboard displaying active projects and tasks.
+  - Task List: A screenshot showing a list of tasks with options to filter, sort, and search.
+  - Project Overview: A visual representation of project progress, including completed and pending tasks.
 
 4. **Notifications and Reminders**: Users receive notifications for upcoming deadlines, task assignments, and comments from team members.
 5. **User Authentication**: Secure login and registration using Firebase OAuth, allowing users to manage their tasks safely.
 
-* _Screenshots_:
-  * Login Screen: A screenshot of the login form where users enter their credentials.
+- _Screenshots_:
+  - Login Screen: A screenshot of the login form where users enter their credentials.
 
 ### Code Examples
 
@@ -246,7 +242,6 @@ export interface Task {
   dueDate: Date;
   status: 'pending' | 'in-progress' | 'completed';
 }
-
 ```
 
 ### Demo of features
@@ -272,41 +267,39 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
-
-
 <!-- ROADMAP -->
 
 ## Roadmap
 
- Done | Feature                                    | Description                                                                                                               
-------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------
- 🔲   | User Authentication                        | Implement OAuth for secure login and user management. Google, GitHub (OAuth)                                              
- 📊   | **Boards:**                                
- 🔲   | List Board                                 | Organize tasks in a powerful table.                                                                                       
- 🔲   | Kanban Board                               | Track work in a Kanban view.                                                                                              
- 🔲   | Analytics Dashboard                        | Generate real-time reports with customizable charts. (Use Signals & Reactivity)                                           
- 🎯   | **Actions:**                               |
- 🔲   | Task Creation and Assignment               | Users can create tasks, assign them to team members, and set deadlines.                                                   
- 🔲   | Subtasks                                   | Allow users to break down tasks into smaller, manageable subtasks.                                                        
- 🔲   | Search and Filter                          | Enable users to search and filter tasks based on various criteria.                                                        
- 🔲   | Sort                                       | Enable users to sort tasks by Due date or Assignee members.                                                               
- 🚀   | **Collaboration features:**                |
- 🔲   | Collaboration Tools                        | Allow users to comment on tasks and share files.                                                                          
- 🔲   | Task Tracking                              | Monitor task progress and status updates.                                                                                 
- 🔲   | Notifications                              | Send reminders for deadlines and updates on task status. (Optional: add accent text color or status label on a task card) 
- 🔲   | Labels and Tags                            | Organize tasks with customizable labels and tags.                                                                         | 👀                                                                              
- 🎨   | **Visual implementation:**                 |
- 🔲   | Dark Mode                                  | Offer a dark mode option for customizing the user interface.                                                              
- 🔲   | Mobile Responsiveness                      | Ensure the application is usable on mobile devices.                                                                       
- 🔲   | Angular animations                         | That improve UX.                                                                                                          
- 🔲   | Good empty/loading/error states, skeletons | Show user-friendly messages and view without content.                                                                     
- 🌐   |                                            |
- 🔲   | Internationalization                       | Two languages using Angular i18n or ngx-translate.                                                                        
- 💻   | **User Experience Enhancements:**          |
- 🔲   | Drag-and-Drop Interface                    | Implement a user-friendly drag-and-drop interface for task management.                                                    
- 🔲   | Keyboard Shortcuts                         | Provide keyboard shortcuts for common actions to improve efficiency.                                                      
- 🔲   | Tooltips                                   | Include guided tutorials for new users to help them navigate the application.                                             
- 🔲   | Mark task Complete                         | Show success notification or animated image.                                                                              
+| Done | Feature                                    | Description                                                                                                               |
+| ---- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | --- |
+| 🔲   | User Authentication                        | Implement OAuth for secure login and user management. Google, GitHub (OAuth)                                              |
+| 📊   | **Boards:**                                |
+| 🔲   | List Board                                 | Organize tasks in a powerful table.                                                                                       |
+| 🔲   | Kanban Board                               | Track work in a Kanban view.                                                                                              |
+| 🔲   | Analytics Dashboard                        | Generate real-time reports with customizable charts. (Use Signals & Reactivity)                                           |
+| 🎯   | **Actions:**                               |
+| 🔲   | Task Creation and Assignment               | Users can create tasks, assign them to team members, and set deadlines.                                                   |
+| 🔲   | Subtasks                                   | Allow users to break down tasks into smaller, manageable subtasks.                                                        |
+| 🔲   | Search and Filter                          | Enable users to search and filter tasks based on various criteria.                                                        |
+| 🔲   | Sort                                       | Enable users to sort tasks by Due date or Assignee members.                                                               |
+| 🚀   | **Collaboration features:**                |
+| 🔲   | Collaboration Tools                        | Allow users to comment on tasks and share files.                                                                          |
+| 🔲   | Task Tracking                              | Monitor task progress and status updates.                                                                                 |
+| 🔲   | Notifications                              | Send reminders for deadlines and updates on task status. (Optional: add accent text color or status label on a task card) |
+| 🔲   | Labels and Tags                            | Organize tasks with customizable labels and tags.                                                                         | 👀  |
+| 🎨   | **Visual implementation:**                 |
+| 🔲   | Dark Mode                                  | Offer a dark mode option for customizing the user interface.                                                              |
+| 🔲   | Mobile Responsiveness                      | Ensure the application is usable on mobile devices.                                                                       |
+| 🔲   | Angular animations                         | That improve UX.                                                                                                          |
+| 🔲   | Good empty/loading/error states, skeletons | Show user-friendly messages and view without content.                                                                     |
+| 🌐   |                                            |
+| 🔲   | Internationalization                       | Two languages using Angular i18n or ngx-translate.                                                                        |
+| 💻   | **User Experience Enhancements:**          |
+| 🔲   | Drag-and-Drop Interface                    | Implement a user-friendly drag-and-drop interface for task management.                                                    |
+| 🔲   | Keyboard Shortcuts                         | Provide keyboard shortcuts for common actions to improve efficiency.                                                      |
+| 🔲   | Tooltips                                   | Include guided tutorials for new users to help them navigate the application.                                             |
+| 🔲   | Mark task Complete                         | Show success notification or animated image.                                                                              |
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
@@ -319,8 +312,6 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 </div>
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
-
-
 
 <!-- FOLDER STRUCTURE -->
 
@@ -358,12 +349,12 @@ src/
 │   │   │   ├── task-store.ts              # NgRx store for task state
 │   │   │   ├── task-reducer.ts            # NgRx reducer for task state
 │   ├── shared/
-│   │   ├── interfaces/                    
-│   │   ├── directives/                    
-│   │   ├── pipes/                         
-│   │   ├── types/                         
-│   │   ├── enums/                         
-│   │   ├── utils/                         # Simple functions                  
+│   │   ├── interfaces/
+│   │   ├── directives/
+│   │   ├── pipes/
+│   │   ├── types/
+│   │   ├── enums/
+│   │   ├── utils/                         # Simple functions
 │   │   ├── components/
 │   │   │   ├── header.ts                  # Application header component
 │   │   │   ├── footer.ts                  # Application footer component
@@ -374,14 +365,12 @@ src/
 │   ├── app.ts                             # Root component
 ├── assets/                                # Static assets (images, styles, etc.)
 ├── environments/                          # Environment-specific configurations
-│   ├── environment.ts                     # Production environment settings 
+│   ├── environment.ts                     # Production environment settings
 │   ├── environment.development.ts         # Development environment settings
 └── index.html                             # Main HTML file
 ```
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
-
-
 
 <!-- PERFORMANCE BUDGETS -->
 
@@ -391,12 +380,12 @@ src/
 
 The Angular CLI performs the checks at build time, looking at the production assets and verifying their sizes.
 
- Initial chunk files   | Names         |  Raw size | Estimated transfer size 
-|-----------------------|---------------|----------:|------------------------:|
- main-6NGPTIUD.js      | main          | 837.84 kB |               216.67 kB 
- polyfills-ED6LRYKL.js | polyfills     |  34.59 kB |                11.32 kB 
- styles-DTTV3AOM.css   | styles        |   8.10 kB |                 1.32 kB 
-|                       | Initial total | 880.53 kB |               229.31 kB 
+| Initial chunk files   | Names         |  Raw size | Estimated transfer size |
+| --------------------- | ------------- | --------: | ----------------------: |
+| main-6NGPTIUD.js      | main          | 837.84 kB |               216.67 kB |
+| polyfills-ED6LRYKL.js | polyfills     |  34.59 kB |                11.32 kB |
+| styles-DTTV3AOM.css   | styles        |   8.10 kB |                 1.32 kB |
+|                       | Initial total | 880.53 kB |               229.31 kB |
 
 Application bundle generation complete. [5.920 seconds]
 
@@ -410,7 +399,16 @@ Lighthouse opens the deployed version of the application and measures the asset 
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
+<!-- DEPLOYMENT -->
 
+## Deployment
+
+Hosted on Firebase Hosting: https://foxflowangular2025.web.app
+
+- Configured Firebase Hosting with Angular build (`dist/foxflow/browser` via `@ngx-env/builder`).
+- Supports SPA routing and i18n (English/Polish via `ngx-translate`).
+- Environment variables loaded via `.env` files and `@ngx-env/builder`.
+- Deployment command: `ng build --configuration production && firebase deploy --only hosting`.
 
 <!-- CONTRIBUTING -->
 
@@ -428,17 +426,15 @@ Project Link: [https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angu
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
-
-
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
 
 This is a list of resources we find useful and would like to thank.
 
-* [Angular - Getting started](https://angular.io/guide/quickstart) 🅰️
-* [TypeScript - Getting started](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html) 📏
-* [Angular Material UI component library](https://material.angular.io/components/categories)
-* [My favorite Angular Setup in 2025](https://dev.to/this-is-angular/my-favorite-angular-setup-in-2025-3mbo) by Rainer Hahnekamp.
+- [Angular - Getting started](https://angular.io/guide/quickstart) 🅰️
+- [TypeScript - Getting started](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html) 📏
+- [Angular Material UI component library](https://material.angular.io/components/categories)
+- [My favorite Angular Setup in 2025](https://dev.to/this-is-angular/my-favorite-angular-setup-in-2025-3mbo) by Rainer Hahnekamp.
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>

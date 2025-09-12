@@ -1,12 +1,12 @@
 {
   "hosting": {
     "public": "dist/foxflow/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
-      {
-        "source": "/assets/i18n/**",
-        "destination": "/assets/i18n/**"
-      },
       {
         "source": "**",
         "destination": "/index.html"
@@ -14,4 +14,3 @@
     ]
   }
 }
-
