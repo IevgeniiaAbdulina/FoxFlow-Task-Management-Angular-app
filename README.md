@@ -14,7 +14,7 @@
   <br /><br />
   <a href="https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angular-app"><strong>Explore the docs</strong></a>
   &middot;
-  <a href="#"><strong>View Demo</strong></a>
+  <a href="https://foxflowangular2025.web.app/"><strong>View Demo</strong></a>
 </p>
 
 <!-- TABLE OF CONTENTS -->
