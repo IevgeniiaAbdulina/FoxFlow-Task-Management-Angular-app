@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 
-import { Main } from './shared/components/main/main';
+import { Main } from './features/components/main/main';
 
 @Component({
   selector: 'app-root',

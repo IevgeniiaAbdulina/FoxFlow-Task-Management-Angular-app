@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { Member } from '../member/member';
+import { Member } from '../../../shared/components/member/member';
 import { MemberData } from '@app/shared/interfaces/member-interface';
 import { MembersService } from './members-service/members-service';
 
