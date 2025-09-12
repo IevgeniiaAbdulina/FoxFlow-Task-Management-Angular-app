@@ -39,6 +39,7 @@
   "REGISTER_PAGE": {
     "TITLE": "Załóż konto",
     "SUBTITLE": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
     "LABEL_USERNAME": "Imię użytkownika",
     "LABEL_EMAIL": "E-mail",
     "LABEL_PASSWORD": "Hasło",
@@ -75,5 +76,18 @@
     "YEAR": "Utworzono w 2025 roku",
     "RS_MESSAGE": "Projekt FowFlow powstał jako część kursu RS School",
     "RS_TEXT": "Dowiedz się więcej o Szkole RS"
+  },
+  "LOGIN_PAGE": {
+    "TITLE": "Załóż konto",
+    "SUBTITLE_1": "Zaloguj się, aby rozpocząć",
+    "SUBTITLE_2": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
+    "LABEL_EMAIL": "E-mail",
+    "LABEL_PASSWORD": "Hasło",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "To pole jest wymagane.",
+      "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail."
+    },
+    "ACTION_SUBMIT": "Dalej"
   }
 }

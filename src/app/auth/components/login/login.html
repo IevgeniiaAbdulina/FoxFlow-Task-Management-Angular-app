@@ -1,0 +1,86 @@
+<mat-card
+  appearance="outlined"
+  class="login-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>{{ "LOGIN_PAGE.TITLE" | translate }}</h1>
+      <h2>{{ "LOGIN_PAGE.SUBTITLE_1" | translate }}</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="social-buttons__container">
+      <div class="social-buttons__item">
+        Continue with your Google work account
+      </div>
+      <div class="social-buttons__item"> Continue with GitHub account</div>
+    </div>
+
+    <div class="social-buttons__separator"
+      >{{ "LOGIN_PAGE.DIVIDER" | translate | uppercase }}
+    </div>
+
+    <h3>{{ "LOGIN_PAGE.SUBTITLE_2" | translate }}</h3>
+
+    <form
+      class="login-form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field class="login-form__full-width">
+        <mat-label>{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}"
+          type="email" />
+      </mat-form-field>
+
+      @if (form.get("email")?.hasError("required") &&
+      form.get("email")?.touched) {
+      <mat-error
+        >{{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}</mat-error
+      >
+      } @if (form.get("email")?.hasError("email")) {
+      <mat-error
+        >{{ "LOGIN_PAGE.ERROR_MESSAGE.INVALID_EMAIL" | translate }}</mat-error
+      >
+      }
+
+      <mat-form-field class="login-form__full-width">
+        <mat-label>{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}"
+          [type]="hide() ? 'password' : 'text'" />
+        <button
+          matIconButton
+          matSuffix
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+          (click)="visibilityToggle($event)">
+          <mat-icon matSuffix>
+            {{ hide() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      @if (form.get("password")?.hasError("required") &&
+      form.get("password")?.touched) {
+      <mat-error
+        >{{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}</mat-error
+      >
+      } @if (errorMessage()) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+      }
+
+      <div class="form-actions__submit-button">
+        <button
+          matButton="filled"
+          type="submit">
+          {{ "LOGIN_PAGE.ACTION_SUBMIT" | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

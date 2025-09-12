@@ -1,16 +1,14 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   inject,
   signal,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@app/auth/services/auth-service';
 import { HighlightMessage } from '@app/shared/directives/highlight-message';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -29,7 +26,7 @@ import { UpperCasePipe } from '@angular/common';
 import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   imports: [
     HighlightMessage,
     ReactiveFormsModule,
@@ -44,31 +41,22 @@ import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter
     TranslateModule,
     UpperCasePipe,
   ],
-  templateUrl: './register.html',
-  styleUrl: './register.scss',
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Register {
+export class Login {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
 
   readonly errorMessage = signal<string | null>(null);
-  colorError = '#ba1a1a';
-  colorValid = '#00c853';
   readonly hide = signal<boolean>(true);
 
   form = this.fb.nonNullable.group({
-    username: [
-      '',
-      [Validators.required, Validators.minLength(3), this.noSpecialChars],
-    ],
     email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [Validators.required, Validators.pattern(StrongPasswordRegx)],
-    ],
+    password: ['', Validators.required],
   });
 
   visibilityToggle(event: MouseEvent): void {
@@ -83,7 +71,7 @@ export class Register {
       this.errorMessage.set('Please enter the required information.');
     } else {
       this.authService
-        .register(rawForm.email, rawForm.username, rawForm.password)
+        .login(rawForm.email, rawForm.password)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
@@ -102,34 +90,5 @@ export class Register {
           },
         });
     }
-  }
-
-  getErrorMessage(controlName: string): string | null {
-    const control = this.form.get(controlName);
-
-    if (control !== undefined) {
-      if (control?.hasError('required')) {
-        return 'This field is required.';
-      }
-      if (control?.hasError('email')) {
-        return 'Invalid email format.';
-      }
-      if (control?.hasError('minlength')) {
-        return 'Username must be at least 3 characters.';
-      }
-      if (control?.hasError('noSpecialChars')) {
-        return 'Username must contain only letters.';
-      }
-    }
-    return null;
-  }
-
-  noSpecialChars(control: AbstractControl): ValidationErrors | null {
-    const regex = /[^a-zA-Z0-9]/;
-    return regex.test(control.value) ? { noSpecialChars: true } : null;
-  }
-
-  controlValidity(regex: string): RegExpMatchArray | null {
-    return this.form.value.password?.match(regex) ?? null;
   }
 }

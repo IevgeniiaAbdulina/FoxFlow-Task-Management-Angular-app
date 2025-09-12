@@ -1,12 +1,17 @@
 <header>
   @if (authService.currentUser() === null) {
   <nav>
+    <a routerLink="/login">Log in</a>
     <a routerLink="/register">Get Started</a>
   </nav>
   } @if (authService.currentUser()) {
   <div>
     <h2>Registration works:</h2>
-    {{ authService.currentUser()?.username }}
+    {{ authService.currentUser()?.username }} @if (authService.user$ | async; as
+    user) {
+    <span>{{ user.displayName }}</span>
+    <span>{{ user.email }}</span>
+    }
 
     <button
       type="button"
