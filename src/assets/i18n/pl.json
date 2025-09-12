@@ -35,5 +35,24 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "Brak zadań. Dodaj jedno!"
+  },
+  "REGISTER_PAGE": {
+    "TITLE": "Załóż konto",
+    "SUBTITLE": "Kontynuuj z E-mailem",
+    "LABEL_USERNAME": "Imię użytkownika",
+    "LABEL_EMAIL": "E-mail",
+    "LABEL_PASSWORD": "Hasło",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "To pole jest wymagane.",
+      "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail.",
+      "MIN_LENGTH": "Nazwa użytkownika musi mieć co najmniej 3 litery.",
+      "NO_SPECIAL_CHAR": "Nazwa użytkownika może zawierać wyłącznie litery i cyfry.",
+      "UPPERCASE": "Co najmniej jedna wielka litera.",
+      "LOWERCASE": "Co najmniej jedna mała litera.",
+      "DIGIT": "Co najmniej jedna cyfra.",
+      "SPECIAL_CHAR": "Co najmniej jeden znak specjalny.",
+      "CHARS_LONG": "Co najmniej 8 znaków."
+    },
+    "ACTION_SUBMIT": "Zarejestruj się"
   }
 }

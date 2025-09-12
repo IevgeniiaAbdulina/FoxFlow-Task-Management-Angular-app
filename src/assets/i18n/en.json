@@ -35,5 +35,24 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "No tasks yet. Add one!"
+  },
+  "REGISTER_PAGE": {
+    "TITLE": "You’re one click away from less busywork",
+    "SUBTITLE": "Continue with email",
+    "LABEL_USERNAME": "Username",
+    "LABEL_EMAIL": "Email address",
+    "LABEL_PASSWORD": "Password",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "This field is required.",
+      "INVALID_EMAIL": "Invalid email format.",
+      "MIN_LENGTH": "Username must be at least 3 characters.",
+      "NO_SPECIAL_CHAR": "Username must contain only letters or numbers.",
+      "UPPERCASE": "At least one uppercase letter.",
+      "LOWERCASE": "At least one lowercase letter.",
+      "DIGIT": "At least one digit.",
+      "SPECIAL_CHAR": "At least one special character.",
+      "CHARS_LONG": "At least 8 characters long."
+    },
+    "ACTION_SUBMIT": "Continue"
   }
 }
