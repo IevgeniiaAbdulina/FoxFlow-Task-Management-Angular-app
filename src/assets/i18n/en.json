@@ -39,6 +39,7 @@
   "REGISTER_PAGE": {
     "TITLE": "You’re one click away from less busywork",
     "SUBTITLE": "Continue with email",
+    "DIVIDER": "OR",
     "LABEL_USERNAME": "Username",
     "LABEL_EMAIL": "Email address",
     "LABEL_PASSWORD": "Password",
@@ -52,6 +53,19 @@
       "DIGIT": "At least one digit.",
       "SPECIAL_CHAR": "At least one special character.",
       "CHARS_LONG": "At least 8 characters long."
+    },
+    "ACTION_SUBMIT": "Continue"
+  },
+  "LOGIN_PAGE": {
+    "TITLE": "Welcome to FoxFlow",
+    "SUBTITLE_1": "To get started, please sign in",
+    "SUBTITLE_2": "Continue with email",
+    "DIVIDER": "OR",
+    "LABEL_EMAIL": "Email address",
+    "LABEL_PASSWORD": "Password",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "This field is required.",
+      "INVALID_EMAIL": "Invalid email format."
     },
     "ACTION_SUBMIT": "Continue"
   }

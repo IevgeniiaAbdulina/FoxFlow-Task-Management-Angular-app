@@ -14,7 +14,9 @@
       <div class="social-buttons__item"> Continue with GitHub account</div>
     </div>
 
-    <div class="social-buttons__separator">OR</div>
+    <div class="social-buttons__separator"
+      >{{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
+    </div>
 
     <h3>{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
 
@@ -107,8 +109,8 @@
         </mat-error>
         }
       </div>
-      } @if (form.invalid) {
-      <mat-error>{{ errorMessage }}</mat-error>
+      } @if (errorMessage()) {
+      <mat-error>{{ errorMessage() }}</mat-error>
       }
 
       <div class="form-actions__submit-button">

@@ -39,6 +39,7 @@
   "REGISTER_PAGE": {
     "TITLE": "Załóż konto",
     "SUBTITLE": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
     "LABEL_USERNAME": "Imię użytkownika",
     "LABEL_EMAIL": "E-mail",
     "LABEL_PASSWORD": "Hasło",
@@ -54,5 +55,18 @@
       "CHARS_LONG": "Co najmniej 8 znaków."
     },
     "ACTION_SUBMIT": "Zarejestruj się"
+  },
+  "LOGIN_PAGE": {
+    "TITLE": "Załóż konto",
+    "SUBTITLE_1": "Zaloguj się, aby rozpocząć",
+    "SUBTITLE_2": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
+    "LABEL_EMAIL": "E-mail",
+    "LABEL_PASSWORD": "Hasło",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "To pole jest wymagane.",
+      "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail."
+    },
+    "ACTION_SUBMIT": "Dalej"
   }
 }
