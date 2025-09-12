@@ -1,0 +1,120 @@
+<section class="description">
+  <div class="container">
+    <div class="description__container">
+      <div class="description__information">
+        <h1>{{ 'MAIN.TITLE' | translate }}</h1>
+        <div class="description__text"
+          >{{ 'MAIN.DESCRIPTION' | translate }}</div
+        >
+        <button
+          class="description__button"
+          type="submit"
+          >Get started</button
+        >
+      </div>
+      <div class="description__image"></div>
+    </div>
+  </div>
+</section>
+
+<section class="goals">
+  <div class="container">
+    <h2>{{ 'MAIN.GOALS' | translate }}:</h2>
+    <div class="goals__container">
+      <div class="goals__image"></div>
+      <div class="goals__information">
+        <ul class="goals__list">
+          <li class="goals__list__item">
+            <div class="goals__list__img"></div
+            ><div>{{ 'MAIN.GOAL_1' | translate }}</div>
+          </li>
+          <li class="goals__list__item">
+            <div class="goals__list__img"></div
+            ><div>{{ 'MAIN.GOAL_2' | translate }}</div>
+          </li>
+          <li class="goals__list__item">
+            <div class="goals__list__img"></div
+            ><div>{{ 'MAIN.GOAL_3' | translate }}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advantages">
+  <div class="container">
+    <h2>{{ 'MAIN.ADVANTAGES' | translate }}:</h2>
+    <div class="advantages__container">
+      <div class="advantages__card">
+        <div class="advantages__card__image user-friendly"></div>
+        <h3 class="advantages__card__title"
+          >{{ 'MAIN.ADVANTAGE_TITLE1' | translate }}</h3
+        >
+        <p class="advantages__card__text"
+          >{{ 'MAIN.ADVANTAGE_1' | translate }}</p
+        >
+      </div>
+      <div class="advantages__card">
+        <div class="advantages__card__image tools"></div>
+        <h3 class="advantages__card__title"
+          >{{ 'MAIN.ADVANTAGE_TITLE2' | translate }}</h3
+        >
+        <p class="advantages__card__text"
+          >{{ 'MAIN.ADVANTAGE_2' | translate }}</p
+        >
+      </div>
+      <div class="advantages__card">
+        <div class="advantages__card__image workflow">
+          <img
+            alt=""
+            ngSrc="../../../../assets/images/frendly_interface.png" />
+        </div>
+        <h3 class="advantages__card__title"
+          >{{ 'MAIN.ADVANTAGE_TITLE3' | translate }}</h3
+        >
+        <p class="advantages__card__text"
+          >{{ 'MAIN.ADVANTAGE_3' | translate }}</p
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="members">
+  <div class="container">
+    <h2>{{ 'MAIN.TEAM' | translate }}</h2>
+    <div class="members__container">
+      @for (member of members; track member.id) {
+      <app-member
+        [gitHub]="member.gitHub"
+        [image]="member.image"
+        [name]="member.name"
+        [position]="member.position" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="link">
+  <div class="container">
+    <div class="rs-link">
+      <a
+        href="https://rs.school/courses/angular"
+        target="_blank">
+        <div class="rs-information">
+          <div class="logo-rs"></div>
+          <div class="logo-rs__message">
+            <h2>{{ 'MAIN.RS_MESSAGE' | translate }}</h2>
+            <p>{{ 'MAIN.RS_TEXT' | translate }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__information">{{ 'MAIN.YEAR' | translate }}</div>
+  </div>
+</footer>
