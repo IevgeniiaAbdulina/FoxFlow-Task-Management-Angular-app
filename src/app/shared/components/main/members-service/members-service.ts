@@ -11,7 +11,6 @@ export class MembersService {
   private membersCollection = collection(this.firestore, 'teammates');
 
   getMembers(): Observable<MemberData[]> {
-    console.log('getMembers');
     return collectionData(this.membersCollection, {
       idField: 'id',
     }) as Observable<MemberData[]>;
