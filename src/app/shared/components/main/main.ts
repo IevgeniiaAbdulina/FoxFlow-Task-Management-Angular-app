@@ -25,9 +25,7 @@ export class Main implements OnInit {
 
   ngOnInit(): void {
     this.membersService.getMembers().subscribe((members) => {
-      console.log('members', members);
       this.members = members;
-      console.log('this.members', this.members);
     });
   }
 }
