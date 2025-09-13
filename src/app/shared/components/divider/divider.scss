@@ -1,0 +1,24 @@
+.social-buttons {
+  &__divider {
+    align-items: center;
+    color: #4b4b4b;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 400;
+    gap: 0.5em;
+    line-height: 24px;
+    text-align: center;
+
+    &::before {
+      border-bottom: 1px solid #b8b8b8;
+      content: '';
+      flex: 1;
+    }
+
+    &::after {
+      border-bottom: 1px solid #b8b8b8;
+      content: '';
+      flex: 1;
+    }
+  }
+}

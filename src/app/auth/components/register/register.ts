@@ -25,8 +25,11 @@ import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
 import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
+import { SocialButtonGoogle } from '@app/shared/components/social-button-google/social-button-google';
+import { SocialButtonGithub } from '@app/shared/components/social-button-github/social-button-github';
+import { Divider } from '@app/shared/components/divider/divider';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -42,6 +45,9 @@ import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter
     MatIconModule,
     MatCardModule,
     TranslateModule,
+    SocialButtonGoogle,
+    SocialButtonGithub,
+    Divider,
     UpperCasePipe,
   ],
   templateUrl: './register.html',

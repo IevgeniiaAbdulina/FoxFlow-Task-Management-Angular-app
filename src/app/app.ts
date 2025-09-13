@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FirebaseServiceTs } from './services/firebase/firebase-service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
@@ -25,6 +25,7 @@ import { Main } from './features/components/main/main';
     RouterLink,
     LanguageSwitcherComponent,
     Main,
+    NgOptimizedImage,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -45,8 +46,10 @@ export class App implements OnInit {
     this.authService.user$.subscribe((user) => {
       if (user) {
         this.authService.currentUser.set({
+          uid: user.uid,
           email: user.email!,
-          username: user.displayName!,
+          displayName: user.displayName!,
+          photoURL: user.photoURL!,
         });
       } else {
         this.authService.currentUser.set(null);

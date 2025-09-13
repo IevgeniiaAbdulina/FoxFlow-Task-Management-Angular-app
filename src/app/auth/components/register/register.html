@@ -8,24 +8,32 @@
   </mat-card-header>
   <mat-card-content>
     <div class="social-buttons__container">
-      <div class="social-buttons__item">
-        Continue with your Google work account
-      </div>
-      <div class="social-buttons__item"> Continue with GitHub account</div>
+      <app-social-button-google
+        (loginWithGoogle)="authService.loginWithGoogle()">
+        {{ "REGISTER_PAGE.ACTION_GOOGLE" | translate }}
+      </app-social-button-google>
+      <app-social-button-github
+        (loginWithGitHub)="authService.loginWithGitHub()">
+        {{ "REGISTER_PAGE.ACTION_GITHUB" | translate }}
+      </app-social-button-github>
     </div>
 
-    <div class="social-buttons__separator"
-      >{{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
-    </div>
+    <app-divider>
+      {{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
+    </app-divider>
 
-    <h3>{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
+    <h3 class="section-title">{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
 
     <form
       class="register-form"
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
-      <mat-form-field class="register-form__full-width">
-        <mat-label>{{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}</mat-label>
+      <mat-form-field
+        appearance="outline"
+        class="register-form__full-width">
+        <mat-label>
+          {{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}
+        </mat-label>
         <input
           formControlName="username"
           matInput
@@ -37,7 +45,9 @@
       <mat-error>{{ getErrorMessage("username") }}</mat-error>
       }
 
-      <mat-form-field class="register-form__full-width">
+      <mat-form-field
+        appearance="outline"
+        class="register-form__full-width">
         <mat-label>{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}</mat-label>
         <input
           formControlName="email"
@@ -50,7 +60,9 @@
       <mat-error>{{ getErrorMessage("email") }}</mat-error>
       }
 
-      <mat-form-field class="register-form__full-width">
+      <mat-form-field
+        appearance="outline"
+        class="register-form__full-width">
         <mat-label>{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
         <input
           formControlName="password"

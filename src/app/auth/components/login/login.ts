@@ -17,18 +17,19 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@app/auth/services/auth-service';
-import { HighlightMessage } from '@app/shared/directives/highlight-message';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
 import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
+import { SocialButtonGithub } from '@app/shared/components/social-button-github/social-button-github';
+import { SocialButtonGoogle } from '@app/shared/components/social-button-google/social-button-google';
+import { Divider } from '@app/shared/components/divider/divider';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   imports: [
-    HighlightMessage,
     ReactiveFormsModule,
     MatFormFieldModule,
     FormsModule,
@@ -39,6 +40,9 @@ import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter
     MatIconModule,
     MatCardModule,
     TranslateModule,
+    SocialButtonGithub,
+    SocialButtonGoogle,
+    Divider,
     UpperCasePipe,
   ],
   templateUrl: './login.html',

@@ -4,28 +4,34 @@
   <mat-card-header>
     <mat-card-title>
       <h1>{{ "LOGIN_PAGE.TITLE" | translate }}</h1>
-      <h2>{{ "LOGIN_PAGE.SUBTITLE_1" | translate }}</h2>
+      <h3>{{ "LOGIN_PAGE.SUBTITLE_1" | translate }}</h3>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="social-buttons__container">
-      <div class="social-buttons__item">
-        Continue with your Google work account
-      </div>
-      <div class="social-buttons__item"> Continue with GitHub account</div>
+      <app-social-button-google
+        (loginWithGoogle)="authService.loginWithGoogle()">
+        {{ "LOGIN_PAGE.ACTION_GOOGLE" | translate }}
+      </app-social-button-google>
+      <app-social-button-github
+        (loginWithGitHub)="authService.loginWithGitHub()">
+        {{ "LOGIN_PAGE.ACTION_GITHUB" | translate }}
+      </app-social-button-github>
     </div>
 
-    <div class="social-buttons__separator"
-      >{{ "LOGIN_PAGE.DIVIDER" | translate | uppercase }}
-    </div>
+    <app-divider>
+      {{ "LOGIN_PAGE.DIVIDER" | translate | uppercase }}
+    </app-divider>
 
-    <h3>{{ "LOGIN_PAGE.SUBTITLE_2" | translate }}</h3>
+    <h3 class="section-title">{{ "LOGIN_PAGE.SUBTITLE_2" | translate }}</h3>
 
     <form
       class="login-form"
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
-      <mat-form-field class="login-form__full-width">
+      <mat-form-field
+        appearance="outline"
+        class="login-form__full-width">
         <mat-label>{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}</mat-label>
         <input
           formControlName="email"
@@ -36,16 +42,18 @@
 
       @if (form.get("email")?.hasError("required") &&
       form.get("email")?.touched) {
-      <mat-error
-        >{{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}</mat-error
-      >
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}
+      </mat-error>
       } @if (form.get("email")?.hasError("email")) {
-      <mat-error
-        >{{ "LOGIN_PAGE.ERROR_MESSAGE.INVALID_EMAIL" | translate }}</mat-error
-      >
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.INVALID_EMAIL" | translate }}
+      </mat-error>
       }
 
-      <mat-form-field class="login-form__full-width">
+      <mat-form-field
+        appearance="outline"
+        class="login-form__full-width">
         <mat-label>{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
         <input
           formControlName="password"
@@ -67,9 +75,9 @@
 
       @if (form.get("password")?.hasError("required") &&
       form.get("password")?.touched) {
-      <mat-error
-        >{{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}</mat-error
-      >
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}
+      </mat-error>
       } @if (errorMessage()) {
       <mat-error>{{ errorMessage() }}</mat-error>
       }

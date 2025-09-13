@@ -54,7 +54,9 @@
       "SPECIAL_CHAR": "Co najmniej jeden znak specjalny.",
       "CHARS_LONG": "Co najmniej 8 znaków."
     },
-    "ACTION_SUBMIT": "Zarejestruj się"
+    "ACTION_SUBMIT": "Zarejestruj się",
+    "ACTION_GOOGLE": "Kontynuuj za pomocą Google",
+    "ACTION_GITHUB": "Kontynuuj za pomocą GitHub"
   },
   "MAIN": {
     "TITLE": "FoxFlow",
@@ -78,7 +80,7 @@
     "RS_TEXT": "Dowiedz się więcej o Szkole RS"
   },
   "LOGIN_PAGE": {
-    "TITLE": "Załóż konto",
+    "TITLE": "Witamy w FoxFlow",
     "SUBTITLE_1": "Zaloguj się, aby rozpocząć",
     "SUBTITLE_2": "Kontynuuj z E-mailem",
     "DIVIDER": "lub",
@@ -88,6 +90,8 @@
       "REQUIRED": "To pole jest wymagane.",
       "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail."
     },
-    "ACTION_SUBMIT": "Dalej"
+    "ACTION_SUBMIT": "Dalej",
+    "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
+    "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
   }
 }

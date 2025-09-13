@@ -6,19 +6,44 @@
   margin: 65px 0;
 
   h1 {
-    margin: 0;
     line-height: 120%;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #6d6e6f;
   }
 
   mat-form-field {
     margin: 1rem 0 0;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  mat-card-header {
+    justify-content: center;
+  }
+
+  mat-card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 .register-card {
   box-sizing: border-box;
   min-width: 150px;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   padding: 24px 56px 40px;
 }
@@ -26,44 +51,20 @@
 .social-buttons {
   &__container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     margin: 24px 0;
-  }
 
-  &__item {
-    flex: 1;
-    border: 1px solid grey;
+    & > * {
+      width: 100%;
+    }
   }
 }
 
 .register-form {
   &__full-width {
     width: 100%;
-  }
-}
-
-.social-buttons {
-  &__separator {
-    align-items: center;
-    color: #4b4b4b;
-    display: flex;
-    font-size: 1rem;
-    font-weight: 400;
-    gap: 0.5em;
-    line-height: 24px;
-    text-align: center;
-
-    &::before {
-      border-bottom: 1px solid #b8b8b8;
-      content: '';
-      flex: 1;
-    }
-
-    &::after {
-      border-bottom: 1px solid #b8b8b8;
-      content: '';
-      flex: 1;
-    }
   }
 }
 

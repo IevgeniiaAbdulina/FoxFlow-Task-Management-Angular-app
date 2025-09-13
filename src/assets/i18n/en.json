@@ -54,7 +54,9 @@
       "SPECIAL_CHAR": "At least one special character.",
       "CHARS_LONG": "At least 8 characters long."
     },
-    "ACTION_SUBMIT": "Continue"
+    "ACTION_SUBMIT": "Continue",
+    "ACTION_GOOGLE": "Continue with Google",
+    "ACTION_GITHUB": "Continue with GitHub"
   },
   "LOGIN_PAGE": {
     "TITLE": "Welcome to FoxFlow",
@@ -89,5 +91,8 @@
     "YEAR": "Created in 2025",
     "RS_MESSAGE": "FowFlow project is created as learning part of the RS School course",
     "RS_TEXT": "Learn more about RS School"
+    "ACTION_SUBMIT": "Continue",
+    "ACTION_GOOGLE": "Continue with Google",
+    "ACTION_GITHUB": "Continue with GitHub"
   }
 }
