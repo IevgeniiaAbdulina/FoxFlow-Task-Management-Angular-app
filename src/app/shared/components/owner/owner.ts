@@ -4,13 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'app-member',
+  selector: 'app-owner',
   imports: [MatCardModule, NgOptimizedImage],
-  templateUrl: './member.html',
-  styleUrl: './member.scss',
+  templateUrl: './owner.html',
+  styleUrl: './owner.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Member {
+export class Owner {
   readonly name = input<string>('');
   readonly position = input<string>('');
   readonly image = input<string>('');

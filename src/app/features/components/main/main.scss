@@ -5,7 +5,7 @@
 .container {
   max-width: $content-width;
   margin: 0 auto;
-  padding: 1.5rem 5rem;
+  padding: 0 7rem;
 
   @include media-tablet {
     padding: 1.5rem 2rem;
@@ -15,20 +15,16 @@
   }
 }
 
-h1 {
-  font-size: 32px;
-  color: var(--mat-sys-primary);
-}
-
 h2 {
-  text-decoration: underline;
-  text-decoration-color: var(--mat-sys-primary);
+  font-size: 3.6rem;
+  font-weight: 500;
 }
 
 .description {
   background-color: var(--mat-sys-surface-container-low);
 
   &__container {
+    padding: 10rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,36 +40,37 @@ h2 {
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
-    width: 450px;
+    width: 530px;
 
     @include media-tablet-mobile {
       width: 350px;
     }
-  }
 
-  &__text {
-    font-size: 18px;
-    line-height: 1.5;
-
-    @include media-tablet {
-      font-size: 16px;
+    &__title {
+      font-size: 6.4rem;
+      font-weight: 800;
     }
-  }
 
-  &__button {
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 16px;
-    width: 300px;
-    background-color: var(--mat-sys-primary);
-    border-color: transparent;
-    box-sizing: border-box;
-    color: var(--mat-sys-surface-container-low);
-    @extend %transition;
+    &__text {
+      font-size: 18px;
+      line-height: 1.5;
 
-    &:hover {
-      cursor: pointer;
-      background-color: var(--mat-sys-on-primary-container);
+      @include media-tablet {
+        font-size: 16px;
+      }
+    }
+
+    &__button {
+      border-radius: 50px;
+      padding: 1rem;
+      font-size: 1.6rem;
+      width: 300px;
+      box-sizing: border-box;
+      @extend %transition;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -92,10 +89,13 @@ h2 {
 }
 
 .goals {
+  padding: 8rem 0;
+  text-align: center;
+
   &__container {
     display: flex;
     justify-content: space-around;
-    padding: 1.5rem 0;
+    padding: 6rem 0 0;
     align-items: center;
 
     @include media-tablet {
@@ -124,6 +124,8 @@ h2 {
       justify-content: left;
       align-items: center;
       column-gap: 1.5rem;
+      font-size: 2.4rem;
+      font-weight: 500;
 
       @include media-tablet-mobile {
         column-gap: 0.5rem;
@@ -146,20 +148,25 @@ h2 {
 
 .advantages {
   background-color: var(--mat-sys-surface-container-low);
+  padding: 8rem 0;
+
+  &__title {
+    text-align: center;
+  }
 
   &__container {
     display: flex;
     justify-content: space-around;
-    padding: 2rem 0;
+    padding: 6rem 0 0;
     flex-wrap: wrap;
     row-gap: 1.5rem;
   }
 
   &__card {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    row-gap: 1rem;
+    row-gap: 2rem;
     text-align: center;
     width: 300px;
     background-color: var(--mat-sys-surface);
@@ -188,6 +195,17 @@ h2 {
       background-repeat: no-repeat;
       align-self: center;
     }
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    &__text {
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
   }
 }
 .user-friendly {
@@ -200,13 +218,19 @@ h2 {
   background-image: url('../../../../assets/images/workflow.png');
 }
 
-.members {
+.owners {
+  padding: 8rem 0;
+
+  &__title {
+    text-align: center;
+  }
+
   &__container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     row-gap: 1.5rem;
-    padding: 2rem 0;
+    padding: 6rem 0 0;
   }
 }
 
@@ -259,9 +283,11 @@ h2 {
     background-repeat: no-repeat;
 
     &__message {
+      font-size: 1.8rem;
+      font-weight: 400;
       display: flex;
       flex-direction: column;
-      row-gap: 1rem;
+      row-gap: 1.5rem;
       font-weight: 600;
 
       @include media-tablet {
@@ -278,6 +304,7 @@ h2 {
   color: var(--mat-sys-primary);
 
   &__information {
+    padding: 2rem 0;
     text-align: center;
     font-weight: 400;
     font-size: 16px;

@@ -1,7 +1,7 @@
 @use '../../style/abstract/placeholders' as *;
 
 .card {
-  width: 310px;
+  width: 270px;
   border: 2px solid var(--mat-sys-primary);
   border-radius: 10px;
   @extend %transition;
@@ -18,15 +18,29 @@
       color: var(--mat-sys-primary);
     }
   }
+
+  &__image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    background-repeat: round;
+    background-size: cover;
+    border-radius: 50%;
+  }
+}
+
+:host ::ng-deep .mat-mdc-card-title-group {
+  margin-bottom: 1.5rem;
 }
 
 :host ::ng-deep .mat-mdc-card-title {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 :host ::ng-deep .mat-mdc-card-subtitle {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 400;
 }
 

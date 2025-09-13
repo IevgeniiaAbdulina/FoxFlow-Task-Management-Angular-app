@@ -1,3 +1,7 @@
+<link
+  href="https://avatars.githubusercontent.com"
+  rel="preconnect" />
+
 <mat-card
   appearance="outlined"
   class="card">
@@ -7,9 +11,10 @@
       <mat-card-subtitle>{{ position() }}</mat-card-subtitle>
       <img
         alt="avatar"
+        class="card__image"
         height="50"
         mat-card-md-image
-        ngSrc="image()"
+        ngSrc="{{ image() }}"
         priority
         width="50" />
     </mat-card-title-group>
