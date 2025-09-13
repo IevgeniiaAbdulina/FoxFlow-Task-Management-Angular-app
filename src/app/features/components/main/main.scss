@@ -6,10 +6,16 @@
   max-width: $content-width;
   margin: 0 auto;
   padding: 0 7rem;
+  line-height: 1;
+
+  @include media-laptop-tablet {
+    padding: 0 2rem;
+  }
 
   @include media-tablet {
-    padding: 1.5rem 2rem;
+    padding: 0rem 2rem;
   }
+
   @include media-tablet-mobile {
     padding: 1.5rem 1rem;
   }
@@ -32,7 +38,9 @@ h2 {
 
     @include media-tablet-mobile {
       flex-direction: column;
-      row-gap: 1rem;
+      row-gap: 2rem;
+      text-align: center;
+      padding: 5rem 0;
     }
   }
 
@@ -49,15 +57,18 @@ h2 {
     &__title {
       font-size: 6.4rem;
       font-weight: 800;
-      line-height: 1;
+
+      @include media-tablet {
+        font-size: 3.6rem;
+      }
     }
 
     &__text {
-      font-size: 18px;
+      font-size: 1.8rem;
       line-height: 1.5;
 
       @include media-tablet {
-        font-size: 16px;
+        font-size: 1.6rem;
       }
     }
 
@@ -71,6 +82,10 @@ h2 {
 
       &:hover {
         cursor: pointer;
+      }
+
+      @include media-tablet {
+        align-self: center;
       }
     }
   }
@@ -91,10 +106,9 @@ h2 {
 
 .goals {
   padding: 8rem 0;
-  text-align: center;
 
   &__title {
-    line-height: 1;
+    text-align: center;
   }
 
   &__container {
@@ -108,22 +122,25 @@ h2 {
       row-gap: 1rem;
     }
   }
+
   &__image {
     background-image: url('../../../../assets/images/goals.png');
     background-repeat: round;
-    width: 400px;
-    height: 400px;
+    width: 40rem;
+    height: 40rem;
     object-fit: cover;
 
     @include media-tablet-mobile {
-      width: 250px;
-      height: 250px;
+      width: 25rem;
+      height: 25rem;
     }
   }
+
   &__list {
     display: flex;
     flex-direction: column;
     row-gap: 1.5rem;
+
     &__item {
       display: flex;
       justify-content: left;
@@ -135,19 +152,32 @@ h2 {
       @include media-tablet-mobile {
         column-gap: 0.5rem;
       }
+
+      @include media-tablet {
+        font-size: 2rem;
+      }
+
+      @include media-mobile {
+        font-size: 1.6rem;
+      }
     }
+
     &__img {
       background-image: url('../../../../assets/images/checkmark.png');
-      width: 50px;
-      height: 50px;
+      width: 5rem;
+      height: 5rem;
 
       @include media-tablet-mobile {
-        width: 30px;
-        height: 30px;
+        width: 3rem;
+        height: 3rem;
         object-fit: cover;
         background-repeat: round;
       }
     }
+  }
+
+  @include media-tablet {
+    padding: 4rem 0;
   }
 }
 
@@ -157,7 +187,6 @@ h2 {
 
   &__title {
     text-align: center;
-    line-height: 1;
   }
 
   &__container {
@@ -205,7 +234,6 @@ h2 {
     &__title {
       font-size: 2rem;
       font-weight: 500;
-      line-height: 1;
     }
 
     &__text {
@@ -213,6 +241,10 @@ h2 {
       font-weight: 400;
       line-height: 1.5;
     }
+  }
+
+  @include media-tablet {
+    padding: 4rem 0;
   }
 }
 .user-friendly {
@@ -230,7 +262,6 @@ h2 {
 
   &__title {
     text-align: center;
-    line-height: 1;
   }
 
   &__container {
@@ -239,6 +270,10 @@ h2 {
     flex-wrap: wrap;
     row-gap: 1.5rem;
     padding: 6rem 0 0;
+  }
+
+  @include media-tablet {
+    padding: 4rem 0;
   }
 }
 

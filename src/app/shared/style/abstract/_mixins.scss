@@ -22,3 +22,9 @@
     @content;
   }
 }
+
+@mixin media-laptop-tablet {
+  @media (max-width: $laptop-tablet-width) {
+    @content;
+  }
+}
