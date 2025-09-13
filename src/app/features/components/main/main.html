@@ -9,9 +9,11 @@
           >{{ 'MAIN.DESCRIPTION' | translate }}</div
         >
         <button
+          #actionButton
           class="description__information__button"
           matButton="filled"
           type="submit"
+          (click)="goToRegisterPage()"
           >{{ 'MAIN.BUTTON' | translate}}</button
         >
       </div>
