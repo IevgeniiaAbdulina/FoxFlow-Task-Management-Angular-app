@@ -2,14 +2,17 @@
   <div class="container">
     <div class="description__container">
       <div class="description__information">
-        <h1>{{ 'MAIN.TITLE' | translate }}</h1>
-        <div class="description__text"
+        <h1 class="description__information__title"
+          >{{ 'MAIN.TITLE' | translate }}</h1
+        >
+        <div class="description__information__text"
           >{{ 'MAIN.DESCRIPTION' | translate }}</div
         >
         <button
-          class="description__button"
+          class="description__information__button"
+          matButton="filled"
           type="submit"
-          >Get started</button
+          >{{ 'MAIN.BUTTON' | translate}}</button
         >
       </div>
       <div class="description__image"></div>
@@ -19,7 +22,7 @@
 
 <section class="goals">
   <div class="container">
-    <h2>{{ 'MAIN.GOALS' | translate }}:</h2>
+    <h2>{{ 'MAIN.GOALS' | translate }}</h2>
     <div class="goals__container">
       <div class="goals__image"></div>
       <div class="goals__information">
@@ -44,7 +47,7 @@
 
 <section class="advantages">
   <div class="container">
-    <h2>{{ 'MAIN.ADVANTAGES' | translate }}:</h2>
+    <h2 class="advantages__title">{{ 'MAIN.ADVANTAGES' | translate }}</h2>
     <div class="advantages__container">
       <div class="advantages__card">
         <div class="advantages__card__image user-friendly"></div>
@@ -65,11 +68,7 @@
         >
       </div>
       <div class="advantages__card">
-        <div class="advantages__card__image workflow">
-          <img
-            alt=""
-            ngSrc="../../../../assets/images/frendly_interface.png" />
-        </div>
+        <div class="advantages__card__image workflow"></div>
         <h3 class="advantages__card__title"
           >{{ 'MAIN.ADVANTAGE_TITLE3' | translate }}</h3
         >
@@ -81,16 +80,16 @@
   </div>
 </section>
 
-<section class="members">
+<section class="owners">
   <div class="container">
-    <h2>{{ 'MAIN.TEAM' | translate }}</h2>
-    <div class="members__container">
-      @for (member of members; track member.id) {
-      <app-member
-        [gitHub]="member.gitHub"
-        [image]="member.image"
-        [name]="member.name"
-        [position]="member.position" />
+    <h2 class="owners__title">{{ 'MAIN.TEAM' | translate }}</h2>
+    <div class="owners__container">
+      @for (owner of owners; track owner.id) {
+      <app-owner
+        [gitHub]="owner.gitHub"
+        [image]="owner.image"
+        [name]="owner.name"
+        [position]="owner.position" />
       }
     </div>
   </div>
@@ -105,7 +104,7 @@
         <div class="rs-information">
           <div class="logo-rs"></div>
           <div class="logo-rs__message">
-            <h2>{{ 'MAIN.RS_MESSAGE' | translate }}</h2>
+            <p>{{ 'MAIN.RS_MESSAGE' | translate }}</p>
             <p>{{ 'MAIN.RS_TEXT' | translate }}</p>
           </div>
         </div>
