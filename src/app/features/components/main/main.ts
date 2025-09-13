@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   OnInit,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -35,5 +36,9 @@ export class Main implements OnInit {
     this.ownersService.getOwners().subscribe((owners) => {
       this.owners = owners;
     });
+  }
+
+  goToRegisterPage(): void {
+    console.log('Click button Get started');
   }
 }
