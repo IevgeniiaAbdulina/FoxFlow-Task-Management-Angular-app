@@ -7,8 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-language-switcher',
   standalone: true,
   imports: [CommonModule, MatButtonToggleModule],
-  templateUrl: './language-switcher.component.html',
-  styleUrls: ['./language-switcher.component.scss'],
+  templateUrl: './language-switcher.html',
+  styleUrls: ['./language-switcher.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSwitcherComponent {

@@ -35,5 +35,8 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "No tasks yet. Add one!"
+  },
+  "HEADER": {
+    "LANGUAGE": "Language"
   }
 }

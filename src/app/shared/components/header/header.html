@@ -1,0 +1,64 @@
+<mat-toolbar
+  aria-label="Main navigation"
+  color="primary"
+  role="banner">
+  <div class="header-container">
+    <a
+      aria-label="FoxFlow Home"
+      class="logo"
+      routerLink="/">
+      <img
+        alt="FoxFlow Logo"
+        class="logo-img"
+        ngSrc="/assets/images/logo.png" />
+    </a>
+    <span class="spacer"></span>
+    @if (!isAuthenticated && (isMobile$ | async) === false) {
+    <div class="nav-links">
+      <a
+        aria-label="Log in"
+        mat-button
+        routerLink="/login"
+        routerLinkActive="active">
+        {{ 'AUTH.LOGIN' | translate }}
+      </a>
+      <a
+        aria-label="Register"
+        mat-button
+        routerLink="/register"
+        routerLinkActive="active">
+        {{ 'AUTH.REGISTER' | translate }}
+      </a>
+    </div>
+    } @if (!isAuthenticated && (isMobile$ | async)) {
+    <button
+      aria-label="Open navigation menu"
+      mat-icon-button
+      type="button"
+      [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    }
+    <mat-menu #menu="matMenu">
+      <a
+        aria-label="Log in"
+        mat-menu-item
+        routerLink="/login">
+        {{ 'AUTH.LOGIN' | translate }}
+      </a>
+      <a
+        aria-label="Register"
+        mat-menu-item
+        routerLink="/register">
+        {{ 'AUTH.REGISTER' | translate }}
+      </a>
+    </mat-menu>
+    <app-language-switcher />
+    <mat-slide-toggle
+      aria-label="Toggle dark/light theme"
+      [checked]="isDarkMode"
+      (change)="toggleTheme()">
+      <mat-icon>{{ isDarkMode ? 'brightness_4' : 'brightness_7' }}</mat-icon>
+    </mat-slide-toggle>
+  </div>
+</mat-toolbar>

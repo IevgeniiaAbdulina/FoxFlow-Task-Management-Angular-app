@@ -10,7 +10,7 @@ import { FirebaseServiceTs } from './services/firebase/firebase-service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
+import { HeaderComponent } from './shared/components/header/header';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ import { LanguageSwitcherComponent } from './shared/components/language-switcher
     CommonModule,
     MatCardModule,
     TranslateModule,
-    LanguageSwitcherComponent,
+    HeaderComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
