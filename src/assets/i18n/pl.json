@@ -15,10 +15,6 @@
     "TEAM": "Nasz Zespół",
     "YEAR": "Utworzono w 2025 roku"
   },
-  "NOT_FOUND": {
-    "TITLE": "Strona Nie Znaleziona",
-    "MESSAGE": "Żądana strona nie istnieje."
-  },
   "BOARD": {
     "TITLE": "Tablica Zadań",
     "CREATE": "Utwórz Tablicę"
@@ -38,5 +34,10 @@
   },
   "HEADER": {
     "LANGUAGE": "Język"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Strona nie znaleziona",
+    "MESSAGE": "Przepraszamy, strona, której szukasz, nie istnieje.",
+    "HOME": "Przejdź do strony głównej"
   }
 }
