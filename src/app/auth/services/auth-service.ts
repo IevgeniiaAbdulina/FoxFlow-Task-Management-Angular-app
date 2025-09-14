@@ -13,6 +13,7 @@ import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { from, Observable } from 'rxjs';
 import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
+import { NotificationService } from '@app/shared/services/notification-service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   firebaseAuth = inject(Auth);
   router = inject(Router);
+  notificationService = inject(NotificationService);
 
   user$: Observable<User | null> = user(this.firebaseAuth);
   readonly currentUser = signal<UserInterface | null | undefined>(undefined);
@@ -53,9 +55,9 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    const promise = signOut(this.firebaseAuth);
-    this.router.navigate(['/']);
-
+    const promise = signOut(this.firebaseAuth).then(() => {
+      this.router.navigateByUrl('/main');
+    });
     return from(promise);
   }
 
@@ -67,12 +69,14 @@ export class AuthService {
         const currUser = credential.user;
 
         if (!currUser) {
+          this.notificationService.showErrorMessage('Google-Login error');
           throw new Error('Google-Login error');
         } else {
           this.router.navigate(['/home']);
         }
       })
       .catch((error) => {
+        this.notificationService.showErrorMessage('Login with Google failed.');
         throw new Error('Google-Login error', error.message);
       });
   }
@@ -90,6 +94,7 @@ export class AuthService {
         this.router.navigate(['/home']);
       })
       .catch((error) => {
+        this.notificationService.showErrorMessage('Login with GitHub failed.');
         console.error('Error during sign-in:', error.message);
       });
   }

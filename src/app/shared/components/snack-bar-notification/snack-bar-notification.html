@@ -1,0 +1,14 @@
+<span
+  matSnackBarLabel
+  [ngClass]="className">
+  {{ message }}
+</span>
+<span matSnackBarActions>
+  <button
+    matButton
+    matSnackBarAction
+    type="button"
+    (click)="snackBarRef.dismissWithAction()">
+    Close
+  </button>
+</span>

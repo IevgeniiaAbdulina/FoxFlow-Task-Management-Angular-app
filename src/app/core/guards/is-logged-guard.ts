@@ -10,13 +10,10 @@ export const isLoggedGuard: CanActivateFn = (): Observable<boolean> => {
   return authService.user$.pipe(
     take(1),
     map((user) => {
-      if (user) {
-        console.log('access');
-        router.navigate(['/home']);
+      if (!user) {
         return true;
       } else {
-        console.log('access denied');
-        router.navigate(['/login']);
+        router.navigate(['/home']);
         return false;
       }
     })

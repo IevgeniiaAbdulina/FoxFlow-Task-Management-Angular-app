@@ -21,11 +21,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
 import { SocialButtonGithub } from '@app/shared/components/social-button-github/social-button-github';
 import { SocialButtonGoogle } from '@app/shared/components/social-button-google/social-button-google';
 import { Divider } from '@app/shared/components/divider/divider';
 import { UpperCasePipe } from '@angular/common';
+import { NotificationService } from '@app/shared/services/notification-service';
+import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
+import firebase from 'firebase/compat';
+import FirebaseError = firebase.FirebaseError;
 
 @Component({
   selector: 'app-login',
@@ -55,6 +58,7 @@ export class Login {
   router = inject(Router);
   authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
+  notificationService = inject(NotificationService);
 
   readonly errorMessage = signal<string | null>(null);
   readonly hide = signal<boolean>(true);
@@ -80,17 +84,15 @@ export class Login {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
+            this.notificationService.showSuccessMessage(
+              `Welcome back ${this.authService.currentUser()?.displayName ?? ''}!`
+            );
             this.router.navigate(['/home']);
           },
-          error: (error) => {
-            console.log(error.code);
-            const code = error.code.split('/')[0];
-            const reason = error.code.split('/')[1].split('-').join(' ');
-            const errorMessage = CapitalizeFirstLetter(reason);
+          error: (error: FirebaseError) => {
+            const errorMessage = FormatErrorMessage(error);
+            this.notificationService.showErrorMessage(errorMessage);
 
-            this.errorMessage.set(
-              `The ${code} error occurred. ${errorMessage}.`
-            );
             this.form.reset();
           },
         });

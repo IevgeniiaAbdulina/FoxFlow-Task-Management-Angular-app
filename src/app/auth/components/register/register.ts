@@ -25,11 +25,14 @@ import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
 import { SocialButtonGoogle } from '@app/shared/components/social-button-google/social-button-google';
 import { SocialButtonGithub } from '@app/shared/components/social-button-github/social-button-github';
 import { Divider } from '@app/shared/components/divider/divider';
 import { UpperCasePipe } from '@angular/common';
+import { NotificationService } from '@app/shared/services/notification-service';
+import firebase from 'firebase/compat';
+import FirebaseError = firebase.FirebaseError;
+import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
 
 @Component({
   selector: 'app-register',
@@ -60,6 +63,7 @@ export class Register {
   router = inject(Router);
   authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
+  notificationService = inject(NotificationService);
 
   readonly errorMessage = signal<string | null>(null);
   colorError = '#ba1a1a';
@@ -96,15 +100,10 @@ export class Register {
           next: () => {
             this.router.navigate(['/home']);
           },
-          error: (error) => {
-            console.log(error.code);
-            const code = error.code.split('/')[0];
-            const reason = error.code.split('/')[1].split('-').join(' ');
-            const errorMessage = CapitalizeFirstLetter(reason);
+          error: (error: FirebaseError) => {
+            const errorMessage = FormatErrorMessage(error);
+            this.notificationService.showErrorMessage(errorMessage);
 
-            this.errorMessage.set(
-              `The ${code} error occurred. ${errorMessage}.`
-            );
             this.form.reset();
           },
         });

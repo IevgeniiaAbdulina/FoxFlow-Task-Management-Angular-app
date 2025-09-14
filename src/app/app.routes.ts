@@ -10,10 +10,26 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    redirectTo: 'main',
+  },
+  {
+    path: 'login',
+    component: Login,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'register',
+    component: Register,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'main',
     component: MainPage,
     canActivate: [isLoggedGuard],
   },
-  { path: 'login', component: Login, canActivate: [isLoggedGuard] },
-  { path: 'register', component: Register, canActivate: [isLoggedGuard] },
-  { path: 'home', component: HomePage, canActivate: [authGuard] },
+  {
+    path: 'home',
+    component: HomePage,
+    canActivate: [authGuard],
+  },
 ];
