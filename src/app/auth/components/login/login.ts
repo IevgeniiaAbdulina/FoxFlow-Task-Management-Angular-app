@@ -29,6 +29,7 @@ import { NotificationService } from '@app/shared/services/notification-service';
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
 import firebase from 'firebase/compat';
 import FirebaseError = firebase.FirebaseError;
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +49,7 @@ import FirebaseError = firebase.FirebaseError;
     Divider,
     UpperCasePipe,
     RouterLink,
+    MatTooltip,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

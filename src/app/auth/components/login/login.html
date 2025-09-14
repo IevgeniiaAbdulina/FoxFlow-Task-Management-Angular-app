@@ -19,7 +19,8 @@ component -->
 </nav>
 <mat-card
   appearance="outlined"
-  class="login-card">
+  class="login-card"
+  id="loginForm">
   <mat-card-header>
     <mat-card-title>
       <h1>{{ "LOGIN_PAGE.TITLE" | translate }}</h1>
@@ -45,12 +46,16 @@ component -->
     <h3 class="section-title">{{ "LOGIN_PAGE.SUBTITLE_2" | translate }}</h3>
 
     <form
+      aria-labelledby="loginForm"
       class="login-form"
+      role="form"
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
       <mat-form-field
         appearance="outline"
-        class="login-form__full-width">
+        aria-labelledby="personalInfo"
+        class="login-form__full-width"
+        role="group">
         <mat-label>{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}</mat-label>
         <input
           formControlName="email"
@@ -72,7 +77,9 @@ component -->
 
       <mat-form-field
         appearance="outline"
-        class="login-form__full-width">
+        aria-labelledby="passwordInfo"
+        class="login-form__full-width"
+        role="group">
         <mat-label>{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
         <input
           formControlName="password"
@@ -82,6 +89,7 @@ component -->
         <button
           matIconButton
           matSuffix
+          matTooltip="Show or hide your password"
           type="button"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide()"
@@ -103,6 +111,7 @@ component -->
 
       <div class="form-actions__submit-button">
         <button
+          aria-label="Submit Login"
           matButton="filled"
           type="submit">
           {{ "LOGIN_PAGE.ACTION_SUBMIT" | translate }}

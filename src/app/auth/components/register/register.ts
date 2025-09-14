@@ -33,6 +33,7 @@ import { NotificationService } from '@app/shared/services/notification-service';
 import firebase from 'firebase/compat';
 import FirebaseError = firebase.FirebaseError;
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-register',
@@ -53,6 +54,7 @@ import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
     Divider,
     UpperCasePipe,
     RouterLink,
+    MatTooltip,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',

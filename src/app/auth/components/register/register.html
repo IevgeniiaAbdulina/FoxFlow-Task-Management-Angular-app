@@ -44,12 +44,17 @@ component -->
     <h3 class="section-title">{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
 
     <form
+      aria-labelledby="registrationForm"
       class="register-form"
+      id="registrationForm"
+      role="form"
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
       <mat-form-field
         appearance="outline"
-        class="register-form__full-width">
+        aria-labelledby="personalInfo"
+        class="register-form__full-width"
+        role="group">
         <mat-label>
           {{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}
         </mat-label>
@@ -66,7 +71,9 @@ component -->
 
       <mat-form-field
         appearance="outline"
-        class="register-form__full-width">
+        aria-labelledby="personalInfo"
+        class="register-form__full-width"
+        role="group">
         <mat-label>{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}</mat-label>
         <input
           formControlName="email"
@@ -81,7 +88,9 @@ component -->
 
       <mat-form-field
         appearance="outline"
-        class="register-form__full-width">
+        aria-labelledby="passwordInfo"
+        class="register-form__full-width"
+        role="group">
         <mat-label>{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
         <input
           formControlName="password"
@@ -91,6 +100,7 @@ component -->
         <button
           matIconButton
           matSuffix
+          matTooltip="Show or hide your password"
           type="button"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide()"
@@ -146,6 +156,7 @@ component -->
 
       <div class="form-actions__submit-button">
         <button
+          aria-label="Submit Registration"
           matButton="filled"
           type="submit">
           {{ "REGISTER_PAGE.ACTION_SUBMIT" | translate }}
