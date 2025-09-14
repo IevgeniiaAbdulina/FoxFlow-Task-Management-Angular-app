@@ -4,11 +4,10 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
 import { AuthService } from '@app/auth/services/auth-service';
 
 import { Main } from './features/components/main/main';
@@ -20,11 +19,9 @@ import { Main } from './features/components/main/main';
     CommonModule,
     MatCardModule,
     TranslateModule,
-    RouterLink,
-    LanguageSwitcherComponent,
     Main,
-    NgOptimizedImage,
   ],
+  imports: [RouterOutlet, CommonModule, MatCardModule, TranslateModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

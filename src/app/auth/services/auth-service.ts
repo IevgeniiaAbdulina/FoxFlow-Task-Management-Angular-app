@@ -12,12 +12,14 @@ import {
 import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { from, Observable } from 'rxjs';
 import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   firebaseAuth = inject(Auth);
+  router = inject(Router);
 
   user$: Observable<User | null> = user(this.firebaseAuth);
   readonly currentUser = signal<UserInterface | null | undefined>(undefined);
@@ -52,6 +54,8 @@ export class AuthService {
 
   logout(): Observable<void> {
     const promise = signOut(this.firebaseAuth);
+    this.router.navigate(['/']);
+
     return from(promise);
   }
 
@@ -64,6 +68,8 @@ export class AuthService {
 
         if (!currUser) {
           throw new Error('Google-Login error');
+        } else {
+          this.router.navigate(['/home']);
         }
       })
       .catch((error) => {
@@ -81,6 +87,7 @@ export class AuthService {
         const accessToken = credential.refreshToken;
 
         console.log('TOKEN:', credential, accessToken);
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         console.error('Error during sign-in:', error.message);

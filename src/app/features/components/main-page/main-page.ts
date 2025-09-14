@@ -34,8 +34,4 @@ export class MainPage implements OnInit {
       this.testConnection.set(firstDoc?.['text'] ?? '');
     });
   }
-
-  logout(): void {
-    this.authService.logout();
-  }
 }

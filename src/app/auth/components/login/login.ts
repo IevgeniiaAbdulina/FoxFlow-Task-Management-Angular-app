@@ -80,7 +80,7 @@ export class Login {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('/');
+            this.router.navigate(['/home']);
           },
           error: (error) => {
             console.log(error.code);
