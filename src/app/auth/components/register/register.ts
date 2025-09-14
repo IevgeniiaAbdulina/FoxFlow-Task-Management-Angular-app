@@ -13,7 +13,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
@@ -49,6 +49,7 @@ import { UpperCasePipe } from '@angular/common';
     SocialButtonGithub,
     Divider,
     UpperCasePipe,
+    RouterLink,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',

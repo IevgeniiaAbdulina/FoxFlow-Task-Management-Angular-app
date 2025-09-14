@@ -92,7 +92,7 @@
     "RS_MESSAGE": "FowFlow project is created as learning part of the RS School course",
     "RS_TEXT": "Learn more about RS School"
     "ACTION_SUBMIT": "Continue",
-    "ACTION_GOOGLE": "Continue with Google",
-    "ACTION_GITHUB": "Continue with GitHub"
+    "ACTION_GOOGLE": "Sign in with Google",
+    "ACTION_GITHUB": "Sign in with GitHub"
   }
 }

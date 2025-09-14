@@ -3,10 +3,8 @@ import {
   Component,
   inject,
   OnInit,
-  signal,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { FirebaseServiceTs } from './services/firebase/firebase-service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -32,17 +30,9 @@ import { Main } from './features/components/main/main';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements OnInit {
-  firebaseService = inject(FirebaseServiceTs);
   authService = inject(AuthService);
 
-  protected readonly testConnection = signal('');
-
   ngOnInit(): void {
-    this.firebaseService.getTestConnection().subscribe((documents) => {
-      const firstDoc = documents[0];
-      this.testConnection.set(firstDoc?.['text'] ?? '');
-    });
-
     this.authService.user$.subscribe((user) => {
       if (user) {
         this.authService.currentUser.set({
@@ -56,9 +46,5 @@ export class App implements OnInit {
       }
       console.log(this.authService.currentUser());
     });
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 }
