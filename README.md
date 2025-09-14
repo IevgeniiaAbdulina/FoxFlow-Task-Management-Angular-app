@@ -272,8 +272,8 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 ## Roadmap
 
 | Done | Feature                                    | Description                                                                                                               |
-| ---- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | --- |
-| 🔲   | User Authentication                        | Implement OAuth for secure login and user management. Google, GitHub (OAuth)                                              |
+|------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------| 
+| ✅    | User Authentication                        | Implement OAuth for secure login and user management. Google, GitHub (OAuth)                                              |
 | 📊   | **Boards:**                                |
 | 🔲   | List Board                                 | Organize tasks in a powerful table.                                                                                       |
 | 🔲   | Kanban Board                               | Track work in a Kanban view.                                                                                              |
@@ -290,11 +290,11 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 | 🔲   | Labels and Tags                            | Organize tasks with customizable labels and tags.                                                                         | 👀  |
 | 🎨   | **Visual implementation:**                 |
 | 🔲   | Dark Mode                                  | Offer a dark mode option for customizing the user interface.                                                              |
-| 🔲   | Mobile Responsiveness                      | Ensure the application is usable on mobile devices.                                                                       |
+| ✅    | Mobile Responsiveness                      | Ensure the application is usable on mobile devices.                                                                       |
 | 🔲   | Angular animations                         | That improve UX.                                                                                                          |
 | 🔲   | Good empty/loading/error states, skeletons | Show user-friendly messages and view without content.                                                                     |
 | 🌐   |                                            |
-| 🔲   | Internationalization                       | Two languages using Angular i18n or ngx-translate.                                                                        |
+| ✅    | Internationalization                       | Two languages using Angular i18n or ngx-translate.                                                                        |
 | 💻   | **User Experience Enhancements:**          |
 | 🔲   | Drag-and-Drop Interface                    | Implement a user-friendly drag-and-drop interface for task management.                                                    |
 | 🔲   | Keyboard Shortcuts                         | Provide keyboard shortcuts for common actions to improve efficiency.                                                      |

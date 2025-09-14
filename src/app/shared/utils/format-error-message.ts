@@ -1,6 +1,5 @@
 import { CapitalizeFirstLetter } from '@app/shared/utils/capitalize-first-letter';
-import firebase from 'firebase/compat';
-import FirebaseError = firebase.FirebaseError;
+import { FirebaseError } from '@firebase/util';
 
 export const FormatErrorMessage = (error: FirebaseError): string => {
   const code = error.code.split('/')[0];

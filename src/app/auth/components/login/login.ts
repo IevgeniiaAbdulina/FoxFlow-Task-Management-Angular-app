@@ -27,8 +27,7 @@ import { Divider } from '@app/shared/components/divider/divider';
 import { UpperCasePipe } from '@angular/common';
 import { NotificationService } from '@app/shared/services/notification-service';
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
-import firebase from 'firebase/compat';
-import FirebaseError = firebase.FirebaseError;
+import { FirebaseError } from '@firebase/util';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
