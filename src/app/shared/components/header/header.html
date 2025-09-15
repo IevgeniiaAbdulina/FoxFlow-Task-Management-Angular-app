@@ -58,6 +58,8 @@
     <mat-slide-toggle
       aria-label="Toggle dark/light theme"
       class="icon-only-toggle"
+      matTooltip="Toggle dark/light theme"
+      matTooltipPosition="above"
       [checked]="isDarkMode"
       (change)="toggleTheme()">
       <mat-icon>{{ isDarkMode ? 'brightness_4' : 'brightness_7' }}</mat-icon>
