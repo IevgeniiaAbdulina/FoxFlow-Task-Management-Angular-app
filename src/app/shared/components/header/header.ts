@@ -4,7 +4,7 @@ import {
   Component,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,7 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
     TranslateModule,
     MatMenuModule,
     LanguageSwitcherComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],

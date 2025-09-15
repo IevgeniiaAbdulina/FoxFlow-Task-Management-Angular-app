@@ -9,8 +9,9 @@
       routerLink="/">
       <img
         alt="FoxFlow Logo"
-        class="logo-img"
-        ngSrc="/assets/images/logo.png" />
+        height="48"
+        ngSrc="assets/images/logo.png"
+        width="48" />
     </a>
     <span class="spacer"></span>
     @if (!isAuthenticated && (isMobile$ | async) === false) {
@@ -56,6 +57,7 @@
     <app-language-switcher />
     <mat-slide-toggle
       aria-label="Toggle dark/light theme"
+      class="icon-only-toggle"
       [checked]="isDarkMode"
       (change)="toggleTheme()">
       <mat-icon>{{ isDarkMode ? 'brightness_4' : 'brightness_7' }}</mat-icon>

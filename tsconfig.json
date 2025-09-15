@@ -5,7 +5,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "dist",
-    "rootDir": "src",
     "paths": {
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"]
@@ -27,7 +26,8 @@
     "target": "ES2022",
     "moduleResolution": "node",
     "module": "esnext",
-    "lib": ["es2020", "es2021", "es2022", "dom"]
+    "lib": ["es2020", "es2021", "es2022", "dom"],
+    "composite": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
