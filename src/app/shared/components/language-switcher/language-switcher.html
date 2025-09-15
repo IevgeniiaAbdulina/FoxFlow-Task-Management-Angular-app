@@ -1,11 +1,23 @@
-<div class="lang-switcher">
-  <mat-button-toggle-group
-    appearance="standard"
-    class="lang-switcher"
-    name="lang"
-    [value]="translate.currentLang"
-    (change)="switchLanguage($event.value)">
-    <mat-button-toggle value="en">EN</mat-button-toggle>
-    <mat-button-toggle value="pl">PL</mat-button-toggle>
-  </mat-button-toggle-group>
-</div>
+<button
+  aria-label="Select language"
+  mat-icon-button
+  matTooltip="Choose your preferred language"
+  matTooltipPosition="below"
+  type="button"
+  [matMenuTriggerFor]="langMenu">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #langMenu="matMenu">
+  <button
+    mat-menu-item
+    type="button"
+    (click)="languageService.switchLanguage('en')"
+    >EN</button
+  >
+  <button
+    mat-menu-item
+    type="button"
+    (click)="languageService.switchLanguage('pl')"
+    >PL</button
+  >
+</mat-menu>

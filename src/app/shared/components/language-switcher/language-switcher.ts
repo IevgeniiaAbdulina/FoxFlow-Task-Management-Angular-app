@@ -1,33 +1,28 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { TranslateService } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconButton, MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LanguageService } from '../../../services/language/language';
 
 @Component({
   selector: 'app-language-switcher',
   standalone: true,
-  imports: [CommonModule, MatButtonToggleModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconButton,
+  ],
   templateUrl: './language-switcher.html',
   styleUrls: ['./language-switcher.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSwitcherComponent {
-  protected readonly translate = inject(TranslateService);
+  protected readonly languageService = inject(LanguageService);
 
-  constructor() {
-    this.translate.addLangs(['en', 'pl']);
-    this.translate.setDefaultLang('en');
-
-    const savedLang = localStorage.getItem('lang');
-    const browserLang = this.translate.getBrowserLang();
-
-    this.translate.use(
-      savedLang || (browserLang?.match(/en|pl/) ? browserLang : 'en')
-    );
-  }
-
-  switchLanguage(lang: string): void {
-    this.translate.use(lang);
-    localStorage.setItem('lang', lang);
-  }
+  currentLang$ = this.languageService.currentLang$;
 }

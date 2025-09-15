@@ -24,6 +24,10 @@
   display: none;
 }
 
+::ng-deep .mat-internal-form-field > label {
+  padding-top: 4px;
+}
+
 @media (max-width: 600px) {
   .header-container {
     flex-wrap: wrap;
