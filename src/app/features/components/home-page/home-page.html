@@ -1,4 +1,18 @@
 <p>HOME-page works!</p>
+<div>
+  <h2>Registration works:</h2>
+
+  @if (authService.user$ | async; as user) {
+  <h3>Good afternoon, {{ user.displayName }}</h3>
+  <img
+    alt="User photo"
+    height="50"
+    ngSrc="{{ user.photoURL }}"
+    width="50" />
+  <span [style.color]="'grey'">{{ user.email }}</span>
+  }
+</div>
+
 <button
   type="button"
   (click)="authService.logout()">

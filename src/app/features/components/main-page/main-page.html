@@ -1,5 +1,4 @@
 <header>
-  @if (authService.currentUser() === null) {
   <nav>
     <button
       matButton="tonal"
@@ -17,22 +16,6 @@
       <a routerLink="/register">Register page</a>
     </button>
   </nav>
-  } @if (authService.currentUser()) {
-
-  <div>
-    <h2>Registration works:</h2>
-
-    @if (authService.user$ | async; as user) {
-    <h3>Good afternoon, {{ user.displayName }}</h3>
-    <img
-      alt="User photo"
-      height="50"
-      ngSrc="{{ user.photoURL }}"
-      width="50" />
-    <span [style.color]="'grey'">{{ user.email }}</span>
-    }
-  </div>
-  }
 </header>
 
 <main class="main">
