@@ -16,14 +16,7 @@ import { Main } from './features/components/main/main';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    CommonModule,
-    MatCardModule,
-    TranslateModule,
-    Main,
-  ],
-  imports: [RouterOutlet, CommonModule, MatCardModule, TranslateModule],
+  imports: [RouterOutlet, CommonModule, MatCardModule, TranslateModule, Main],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

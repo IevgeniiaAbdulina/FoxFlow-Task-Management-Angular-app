@@ -5,7 +5,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "dist",
-    "composite": true,
     "paths": {
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"]
