@@ -1,0 +1,127 @@
+<!-- TODO: Navigation element, will need to be removed when adding the header
+component -->
+<!-- <nav>
+  <button
+    matButton="tonal"
+    type="button">
+    <a routerLink="/">Main Olga page</a>
+  </button>
+  <button
+    matButton="tonal"
+    type="button">
+    <a routerLink="/main-page">Main Jane page</a>
+  </button>
+  <button
+    matButton="tonal"
+    type="button">
+    <a routerLink="/login">Login page</a>
+  </button>
+  <button
+    matButton="tonal"
+    type="button">
+    <a routerLink="/register">Register page</a>
+  </button>
+</nav> -->
+<mat-card
+  appearance="outlined"
+  class="login-card"
+  id="loginForm">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>{{ "LOGIN_PAGE.TITLE" | translate }}</h1>
+      <h3>{{ "LOGIN_PAGE.SUBTITLE_1" | translate }}</h3>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="social-buttons__container">
+      <app-social-button-google (loginWithGoogle)="loginWithGoogle()">
+        {{ "LOGIN_PAGE.ACTION_GOOGLE" | translate }}
+      </app-social-button-google>
+      <app-social-button-github (loginWithGitHub)="loginWithGitHub()">
+        {{ "LOGIN_PAGE.ACTION_GITHUB" | translate }}
+      </app-social-button-github>
+    </div>
+
+    <app-divider>
+      {{ "LOGIN_PAGE.DIVIDER" | translate | uppercase }}
+    </app-divider>
+
+    <h3 class="section-title">{{ "LOGIN_PAGE.SUBTITLE_2" | translate }}</h3>
+
+    <form
+      aria-labelledby="loginForm"
+      class="login-form"
+      role="form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field
+        appearance="outline"
+        aria-labelledby="personalInfo"
+        class="login-form__full-width"
+        role="group">
+        <mat-label>{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          name="email"
+          placeholder="{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}"
+          type="email" />
+      </mat-form-field>
+
+      @if (form.get("email")?.hasError("required") &&
+      form.get("email")?.touched) {
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}
+      </mat-error>
+      } @if (form.get("email")?.hasError("email")) {
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.INVALID_EMAIL" | translate }}
+      </mat-error>
+      }
+
+      <mat-form-field
+        appearance="outline"
+        aria-labelledby="passwordInfo"
+        class="login-form__full-width"
+        role="group">
+        <mat-label>{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          name="password"
+          placeholder="{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}"
+          [type]="hide() ? 'password' : 'text'" />
+        <button
+          matIconButton
+          matSuffix
+          matTooltip="Show or hide your password"
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+          (click)="visibilityToggle($event)">
+          <mat-icon matSuffix>
+            {{ hide() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      @if (form.get("password")?.hasError("required") &&
+      form.get("password")?.touched) {
+      <mat-error>
+        {{ "LOGIN_PAGE.ERROR_MESSAGE.REQUIRED" | translate }}
+      </mat-error>
+      } @if (errorMessage()) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+      }
+
+      <div class="form-actions__submit-button">
+        <button
+          aria-label="Submit Login"
+          matButton="filled"
+          type="submit">
+          {{ "LOGIN_PAGE.ACTION_SUBMIT" | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

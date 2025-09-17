@@ -1,28 +1,41 @@
 import { Routes } from '@angular/router';
+import { Register } from '@app/auth/components/register/register';
+import { Login } from '@app/auth/components/login/login';
+import { HomePage } from '@app/features/components/home-page/home-page';
+import { authGuard } from '@app/core/guards/auth-guard';
+import { isLoggedGuard } from '@app/core/guards/is-logged-guard';
+import { Main } from '@app/features/components/main/main';
+import { NotFoundComponent } from './shared/components/not-found/not-found';
 
 export const routes: Routes = [
-  //   {
-  //     path: '',
-  //     loadComponent: () =>
-  //       import('./features/components/home/home').then((c) => c.HomeComponent),
-  //   },
-  //   {
-  //     path: 'login',
-  //     loadComponent: () =>
-  //       import('./auth/components/login/login').then((c) => c.LoginComponent),
-  //   },
-  //   {
-  //     path: 'register',
-  //     loadComponent: () =>
-  //       import('./auth/components/register/register').then(
-  //         (c) => c.RegisterComponent
-  //       ),
-  //   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'main',
+  },
+  {
+    path: 'login',
+    component: Login,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'register',
+    component: Register,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'main',
+    component: Main,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'home',
+    component: HomePage,
+    canActivate: [authGuard],
+  },
   {
     path: '**',
-    loadComponent: () =>
-      import('./shared/components/not-found/not-found').then(
-        (c) => c.NotFoundComponent
-      ),
+    component: NotFoundComponent,
+    canActivate: [authGuard],
   },
 ];
