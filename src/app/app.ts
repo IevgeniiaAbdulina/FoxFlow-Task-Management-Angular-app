@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './shared/components/header/header';
 
+import { Main } from './features/components/main/main';
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -20,6 +22,7 @@ import { HeaderComponent } from './shared/components/header/header';
     MatCardModule,
     TranslateModule,
     HeaderComponent,
+    Main,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
