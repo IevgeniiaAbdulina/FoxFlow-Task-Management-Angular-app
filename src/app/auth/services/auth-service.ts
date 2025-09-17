@@ -24,7 +24,7 @@ export class AuthService {
   notificationService = inject(NotificationService);
 
   user$: Observable<User | null> = user(this.firebaseAuth);
-  readonly currentUser = signal<UserInterface | null | undefined>(undefined);
+  readonly currentUser = signal<UserInterface | null>(null);
 
   register(
     email: string,

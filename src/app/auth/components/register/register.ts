@@ -72,10 +72,7 @@ export class Register {
   readonly hide = signal<boolean>(true);
 
   form = this.fb.nonNullable.group({
-    username: [
-      '',
-      [Validators.required, Validators.minLength(3), this.noSpecialChars],
-    ],
+    username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
@@ -84,7 +81,7 @@ export class Register {
   });
 
   visibilityToggle(event: MouseEvent): void {
-    this.hide.set(!this.hide());
+    this.hide.update((value) => !value);
     event.stopPropagation();
   }
 
@@ -111,32 +108,15 @@ export class Register {
     }
   }
 
-  getErrorMessage(controlName: string): string | null {
-    const control = this.form.get(controlName);
-
-    if (control !== undefined) {
-      if (control?.hasError('required')) {
-        return 'This field is required.';
-      }
-      if (control?.hasError('email')) {
-        return 'Invalid email format.';
-      }
-      if (control?.hasError('minlength')) {
-        return 'Username must be at least 3 characters.';
-      }
-      if (control?.hasError('noSpecialChars')) {
-        return 'Username must contain only letters.';
-      }
-    }
-    return null;
-  }
-
-  noSpecialChars(control: AbstractControl): ValidationErrors | null {
-    const regex = /[^a-zA-Z0-9]/;
-    return regex.test(control.value) ? { noSpecialChars: true } : null;
-  }
-
   controlValidity(regex: string): RegExpMatchArray | null {
     return this.form.value.password?.match(regex) ?? null;
+  }
+
+  loginWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithGitHub(): void {
+    this.authService.loginWithGitHub();
   }
 }

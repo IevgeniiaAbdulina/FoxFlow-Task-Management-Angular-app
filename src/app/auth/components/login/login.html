@@ -29,12 +29,10 @@ component -->
   </mat-card-header>
   <mat-card-content>
     <div class="social-buttons__container">
-      <app-social-button-google
-        (loginWithGoogle)="authService.loginWithGoogle()">
+      <app-social-button-google (loginWithGoogle)="loginWithGoogle()">
         {{ "LOGIN_PAGE.ACTION_GOOGLE" | translate }}
       </app-social-button-google>
-      <app-social-button-github
-        (loginWithGitHub)="authService.loginWithGitHub()">
+      <app-social-button-github (loginWithGitHub)="loginWithGitHub()">
         {{ "LOGIN_PAGE.ACTION_GITHUB" | translate }}
       </app-social-button-github>
     </div>
@@ -60,6 +58,7 @@ component -->
         <input
           formControlName="email"
           matInput
+          name="email"
           placeholder="{{ 'LOGIN_PAGE.LABEL_EMAIL' | translate }}"
           type="email" />
       </mat-form-field>
@@ -84,6 +83,7 @@ component -->
         <input
           formControlName="password"
           matInput
+          name="password"
           placeholder="{{ 'LOGIN_PAGE.LABEL_PASSWORD' | translate }}"
           [type]="hide() ? 'password' : 'text'" />
         <button

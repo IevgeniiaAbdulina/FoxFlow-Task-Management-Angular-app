@@ -27,9 +27,13 @@ interface SnackBarData {
   styleUrl: './snack-bar-notification.scss',
 })
 export class SnackBarNotification {
-  snackBarRef = inject(MatSnackBarRef);
-  data: SnackBarData = inject(MAT_SNACK_BAR_DATA);
+  private snackBarRef = inject(MatSnackBarRef);
+  private data: SnackBarData = inject(MAT_SNACK_BAR_DATA);
 
   message = this.data.message;
   className = this.data.className;
+
+  dismissWithAction(): void {
+    this.snackBarRef.dismissWithAction();
+  }
 }

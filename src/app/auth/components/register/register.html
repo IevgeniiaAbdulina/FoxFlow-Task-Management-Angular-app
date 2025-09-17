@@ -27,12 +27,10 @@ component -->
   </mat-card-header>
   <mat-card-content>
     <div class="social-buttons__container">
-      <app-social-button-google
-        (loginWithGoogle)="authService.loginWithGoogle()">
+      <app-social-button-google (loginWithGoogle)="loginWithGoogle()">
         {{ "REGISTER_PAGE.ACTION_GOOGLE" | translate }}
       </app-social-button-google>
-      <app-social-button-github
-        (loginWithGitHub)="authService.loginWithGitHub()">
+      <app-social-button-github (loginWithGitHub)="loginWithGitHub()">
         {{ "REGISTER_PAGE.ACTION_GITHUB" | translate }}
       </app-social-button-github>
     </div>
@@ -61,13 +59,21 @@ component -->
         <input
           formControlName="username"
           matInput
+          name="username"
           placeholder="{{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}"
           type="text" />
       </mat-form-field>
 
-      @if (form.get("username")?.invalid && form.get("username")?.touched) {
-      <mat-error>{{ getErrorMessage("username") }}</mat-error>
-      }
+      @if (form.get("username")?.invalid && form.get("username")?.touched) { @if
+      (form.get("username")?.hasError("required")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
+      } @else if (form.get("username")?.hasError("minlength")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.MIN_LENGTH' | translate }}</mat-error
+      >
+      } }
 
       <mat-form-field
         appearance="outline"
@@ -78,13 +84,22 @@ component -->
         <input
           formControlName="email"
           matInput
+          name="email"
           placeholder="{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}"
           type="email" />
       </mat-form-field>
 
-      @if (form.get("email")?.invalid && form.get("email")?.touched) {
-      <mat-error>{{ getErrorMessage("email") }}</mat-error>
-      }
+      @if (form.get("email")?.invalid && form.get("email")?.touched) { @if
+      (form.get("email")?.hasError("required")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
+      } @else if (form.get("email")?.hasError("email")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.INVALID_EMAIL' | translate
+        }}</mat-error
+      >
+      } }
 
       <mat-form-field
         appearance="outline"
@@ -95,6 +110,7 @@ component -->
         <input
           formControlName="password"
           matInput
+          name="password"
           placeholder="{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}"
           [type]="hide() ? 'password' : 'text'" />
         <button
@@ -113,7 +129,9 @@ component -->
 
       @if (form.get("password")?.invalid) { @if (form.get("password")?.touched)
       {
-      <mat-error>{{ getErrorMessage("password") }}</mat-error>
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
       }
 
       <div class="text-sm err-message">

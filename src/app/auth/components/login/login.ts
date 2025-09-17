@@ -55,11 +55,11 @@ import { MatTooltip } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  fb = inject(FormBuilder);
-  router = inject(Router);
-  authService = inject(AuthService);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
-  notificationService = inject(NotificationService);
+  private notificationService = inject(NotificationService);
 
   readonly errorMessage = signal<string | null>(null);
   readonly hide = signal<boolean>(true);
@@ -70,7 +70,7 @@ export class Login {
   });
 
   visibilityToggle(event: MouseEvent): void {
-    this.hide.set(!this.hide());
+    this.hide.update((value) => !value);
     event.stopPropagation();
   }
 
@@ -98,5 +98,13 @@ export class Login {
           },
         });
     }
+  }
+
+  loginWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithGitHub(): void {
+    this.authService.loginWithGitHub();
   }
 }

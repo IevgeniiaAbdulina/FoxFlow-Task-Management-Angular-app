@@ -12,9 +12,9 @@ import { SnackBarNotification } from '@app/shared/components/snack-bar-notificat
 export class NotificationService {
   private _snackBar = inject(MatSnackBar);
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 10;
+  private horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  private verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private durationInSeconds = 10;
 
   private openSnackBar(message: string, className: string): void {
     this._snackBar.openFromComponent(SnackBarNotification, {
