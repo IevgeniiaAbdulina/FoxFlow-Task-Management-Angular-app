@@ -3,6 +3,7 @@
   color="primary"
   role="banner">
   <div class="header-container">
+    @let isMobile = isMobile$ | async;
     <a
       aria-label="FoxFlow Home"
       class="logo"
@@ -14,7 +15,7 @@
         width="48" />
     </a>
     <span class="spacer"></span>
-    @if (!isAuthenticated && (isMobile$ | async) === false) {
+    @if (!isAuthenticated() && !isMobile) {
     <div class="nav-links">
       <a
         aria-label="Log in"
@@ -31,7 +32,7 @@
         {{ 'AUTH.REGISTER' | translate }}
       </a>
     </div>
-    } @if (!isAuthenticated && (isMobile$ | async)) {
+    } @if (!isAuthenticated && !isMobile) {
     <button
       aria-label="Open navigation menu"
       mat-icon-button
@@ -41,18 +42,20 @@
     </button>
     }
     <mat-menu #menu="matMenu">
-      <a
+      <button
         aria-label="Log in"
         mat-menu-item
-        routerLink="/login">
+        routerLink="/login"
+        type="button">
         {{ 'AUTH.LOGIN' | translate }}
-      </a>
-      <a
+      </button>
+      <button
         aria-label="Register"
         mat-menu-item
-        routerLink="/register">
+        routerLink="/register"
+        type="button">
         {{ 'AUTH.REGISTER' | translate }}
-      </a>
+      </button>
     </mat-menu>
     <app-language-switcher />
     <mat-slide-toggle
@@ -62,7 +65,7 @@
       matTooltipPosition="above"
       [checked]="isDarkMode"
       (change)="toggleTheme()">
-      <mat-icon>{{ isDarkMode ? 'brightness_4' : 'brightness_7' }}</mat-icon>
+      <mat-icon>{{ isDarkMode() ? 'brightness_4' : 'brightness_7' }}</mat-icon>
     </mat-slide-toggle>
   </div>
 </mat-toolbar>

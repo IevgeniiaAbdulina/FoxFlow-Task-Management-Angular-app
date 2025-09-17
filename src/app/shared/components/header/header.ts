@@ -1,10 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
+  Renderer2,
+  signal,
 } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,31 +41,30 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private cdr = inject(ChangeDetectorRef);
-  isDarkMode = false;
-  isMobile$: Observable<boolean> = inject(BreakpointObserver)
+  private document = inject(DOCUMENT);
+  private renderer = inject(Renderer2);
+  private breakpointObserver = inject(BreakpointObserver);
+  readonly isDarkMode = signal(localStorage.getItem('theme') === 'dark');
+  isMobile$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
     .pipe(map((result) => result.matches));
+  readonly isAuthenticated = signal(false);
 
   constructor() {
-    this.isDarkMode = localStorage.getItem('theme') === 'dark';
     this.updateTheme();
-  }
-
-  private readonly isAuthenticatedValue = false;
-
-  get isAuthenticated(): boolean {
-    return this.isAuthenticatedValue;
   }
 
   toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    this.isDarkMode.set(!this.isDarkMode());
+    localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
     this.updateTheme();
-    this.cdr.markForCheck();
   }
 
   private updateTheme(): void {
-    document.body.classList.toggle('dark-theme', this.isDarkMode);
+    if (this.isDarkMode()) {
+      this.renderer.addClass(this.document.body, 'dark-theme');
+    } else {
+      this.renderer.removeClass(this.document.body, 'dark-theme');
+    }
   }
 }
