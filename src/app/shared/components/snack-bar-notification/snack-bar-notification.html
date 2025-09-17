@@ -1,0 +1,15 @@
+<span
+  matSnackBarLabel
+  [ngClass]="className">
+  {{ message }}
+</span>
+<span matSnackBarActions>
+  <button
+    aria-label="Show a notification message"
+    matButton
+    matSnackBarAction
+    type="button"
+    (click)="dismissWithAction()">
+    Close
+  </button>
+</span>

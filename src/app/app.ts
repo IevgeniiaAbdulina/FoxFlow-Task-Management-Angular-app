@@ -1,43 +1,44 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   OnInit,
-  signal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FirebaseServiceTs } from './services/firebase/firebase-service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSwitcherComponent } from './shared/components/language-switcher/language-switcher.component';
+import { AuthService } from '@app/auth/services/auth-service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Main } from './features/components/main/main';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    CommonModule,
-    MatCardModule,
-    TranslateModule,
-    LanguageSwitcherComponent,
-    Main,
-  ],
+  imports: [RouterOutlet, CommonModule, MatCardModule, TranslateModule, Main],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements OnInit {
-  protected readonly title = signal('FoxFlow');
-  protected readonly testConnection = signal('');
-
-  firebaseService = inject(FirebaseServiceTs);
+  private authService = inject(AuthService);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.firebaseService.getTestConnection().subscribe((documents) => {
-      const firstDoc = documents[0];
-      this.testConnection.set(firstDoc?.['text'] ?? '');
-    });
+    this.authService.user$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((user) => {
+        if (user) {
+          this.authService.currentUser.set({
+            uid: user.uid,
+            email: user.email!,
+            displayName: user.displayName!,
+            photoURL: user.photoURL!,
+          });
+        } else {
+          this.authService.currentUser.set(null);
+        }
+      });
   }
 }
