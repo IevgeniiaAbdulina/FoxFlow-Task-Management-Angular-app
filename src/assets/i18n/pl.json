@@ -1,7 +1,7 @@
 {
   "AUTH": {
     "LOGIN": "Zaloguj się",
-    "REGISTER": "Zarejestruj się",
+    "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
     "ERROR": "Nieprawidłowy e-mail lub hasło"

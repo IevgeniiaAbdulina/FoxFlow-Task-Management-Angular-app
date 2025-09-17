@@ -27,6 +27,9 @@
 ::ng-deep .mat-internal-form-field > label {
   padding-top: 4px;
 }
+::ng-deep .mat-icon {
+  opacity: 0.6;
+}
 
 @media (max-width: 600px) {
   .header-container {

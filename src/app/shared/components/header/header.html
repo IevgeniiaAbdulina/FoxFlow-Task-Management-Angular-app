@@ -15,24 +15,7 @@
         width="48" />
     </a>
     <span class="spacer"></span>
-    @if (!isAuthenticated() && !isMobile) {
-    <div class="nav-links">
-      <a
-        aria-label="Log in"
-        mat-button
-        routerLink="/login"
-        routerLinkActive="active">
-        {{ 'AUTH.LOGIN' | translate }}
-      </a>
-      <a
-        aria-label="Register"
-        mat-button
-        routerLink="/register"
-        routerLinkActive="active">
-        {{ 'AUTH.REGISTER' | translate }}
-      </a>
-    </div>
-    } @if (!isAuthenticated && !isMobile) {
+    @if (!isAuthenticated && isMobile) {
     <button
       aria-label="Open navigation menu"
       mat-icon-button
@@ -57,15 +40,33 @@
         {{ 'AUTH.REGISTER' | translate }}
       </button>
     </mat-menu>
-    <app-language-switcher />
     <mat-slide-toggle
       aria-label="Toggle dark/light theme"
       class="icon-only-toggle"
       matTooltip="Toggle dark/light theme"
       matTooltipPosition="above"
-      [checked]="isDarkMode"
+      [checked]="isDarkMode()"
       (change)="toggleTheme()">
-      <mat-icon>{{ isDarkMode() ? 'brightness_4' : 'brightness_7' }}</mat-icon>
+      <mat-icon>{{ isDarkMode() ? 'dark_mode' : 'light_mode' }}</mat-icon>
     </mat-slide-toggle>
+    <app-language-switcher />
+    @if (!isAuthenticated() && !isMobile) {
+    <div class="nav-links">
+      <a
+        aria-label="Log in"
+        mat-button
+        routerLink="/login"
+        routerLinkActive="active">
+        {{ 'AUTH.LOGIN' | translate }}
+      </a>
+      <a
+        aria-label="Register"
+        matButton="filled"
+        routerLink="/register"
+        routerLinkActive="active">
+        {{ 'AUTH.REGISTER' | translate }}
+      </a>
+    </div>
+    }
   </div>
 </mat-toolbar>
