@@ -1,0 +1,17 @@
+<div class="home-page__header">
+  <h3 class="current-date">{{ today | date:"EEEE, MMMM d" }}</h3>
+  <h1>Good {{ today | date:"bbbb" }}, {{ user$().displayName }}</h1>
+</div>
+<div class="home-page__content">
+  <div class="projects-list">
+    <h2>Projects</h2>
+    <button
+      matButton="filled"
+      type="button"
+      (click)="addProject()">
+      <mat-icon matPrefix>add</mat-icon>
+      Create project
+    </button>
+    <app-projects-list-large [projects$]="projects$()" />
+  </div>
+</div>

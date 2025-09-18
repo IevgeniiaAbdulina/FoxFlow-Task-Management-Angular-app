@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  padding: 0 clamp(16px, 4vw, 56px);
+
+  h1 {
+    font-size: 32px;
+    line-height: 40px;
+    margin: 32px 0 56px;
+  }
+
+  h2 {
+    margin: 16px 0 8px;
+  }
+
+  button {
+    font-size: 1.4rem;
+  }
+
+  .mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
+}
+
+.home-page {
+  &__header {
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+    position: relative;
+  }
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
+  padding: clamp(8px, 2vw, 24px);
+  border-radius: 16px;
+  border: 1px solid #999999;
+  background-color: rgb(64 123 255 / 10%);
+}
