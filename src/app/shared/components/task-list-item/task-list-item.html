@@ -1,0 +1,39 @@
+<li
+  class="list"
+  [ngClass]="{editing: isEditing()}">
+  <div class="item">
+    <div class="item__header">
+      <mat-icon>check_circle_outline</mat-icon>
+      @if (!isEditing()) {
+      <p class="item__header__text">{{ task().title }}</p>
+      <mat-icon
+        class="color"
+        (click)="setTaskInEditMode()"
+        >edit</mat-icon
+      >
+      } @if (isEditing()) {
+      <ng-container>
+        <input
+          class="edit"
+          type="text"
+          [value]="editingText"
+          (keyup)="changeText($event)"
+          (keyup.enter)="changeTask()" />
+      </ng-container>
+      }
+    </div>
+    <div class="item__footer">
+      <div class="item__footer__information">
+        <mat-icon class="color">person</mat-icon>
+        <mat-icon class="color">date_range</mat-icon>
+      </div>
+      <button
+        #actionButton
+        class="delete"
+        type="submit"
+        (click)="deleteTask()">
+        <mat-icon class="color">delete_forever</mat-icon>
+      </button>
+    </div>
+  </div>
+</li>
