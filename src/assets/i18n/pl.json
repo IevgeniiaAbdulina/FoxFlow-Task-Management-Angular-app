@@ -1,7 +1,7 @@
 {
   "AUTH": {
     "LOGIN": "Zaloguj się",
-    "REGISTER": "Zarejestruj się",
+    "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
     "ERROR": "Nieprawidłowy e-mail lub hasło"
@@ -14,10 +14,6 @@
     "GOAL_2": "Śledź postępy w czasie rzeczywistym",
     "TEAM": "Nasz Zespół",
     "YEAR": "Utworzono w 2025 roku"
-  },
-  "NOT_FOUND": {
-    "TITLE": "Strona Nie Znaleziona",
-    "MESSAGE": "Żądana strona nie istnieje."
   },
   "BOARD": {
     "TITLE": "Tablica Zadań",
@@ -35,5 +31,71 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "Brak zadań. Dodaj jedno!"
+  },
+  "HEADER": {
+    "LANGUAGE": "Język"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Strona nie znaleziona",
+    "MESSAGE": "Przepraszamy, strona, której szukasz, nie istnieje.",
+    "HOME": "Przejdź do strony głównej"
+  },
+  "REGISTER_PAGE": {
+    "TITLE": "Załóż konto",
+    "SUBTITLE": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
+    "LABEL_USERNAME": "Imię użytkownika",
+    "LABEL_EMAIL": "E-mail",
+    "LABEL_PASSWORD": "Hasło",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "To pole jest wymagane.",
+      "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail.",
+      "MIN_LENGTH": "Nazwa użytkownika musi mieć co najmniej 3 litery.",
+      "NO_SPECIAL_CHAR": "Nazwa użytkownika może zawierać wyłącznie litery i cyfry.",
+      "UPPERCASE": "Co najmniej jedna wielka litera.",
+      "LOWERCASE": "Co najmniej jedna mała litera.",
+      "DIGIT": "Co najmniej jedna cyfra.",
+      "SPECIAL_CHAR": "Co najmniej jeden znak specjalny.",
+      "CHARS_LONG": "Co najmniej 8 znaków."
+    },
+    "ACTION_SUBMIT": "Zarejestruj się",
+    "ACTION_GOOGLE": "Kontynuuj za pomocą Google",
+    "ACTION_GITHUB": "Kontynuuj za pomocą GitHub"
+  },
+  "MAIN": {
+    "TITLE": "FoxFlow",
+    "SUBTITLE": "O projekcie",
+    "DESCRIPTION": "FoxFlow to intuicyjna aplikacja do zarządzania zadaniami, która usprawnia twój przepływ pracy i zwiększa produktywność",
+    "BUTTON": "Zacznij",
+    "GOALS": "Cele",
+    "GOAL_1": "Uprościć organizację zadań",
+    "GOAL_2": "Ulepszenie współpracy zespołowej",
+    "GOAL_3": "Podaj aktualizacje i powiadomienia w czasie rzeczywistym",
+    "ADVANTAGES": "Dlaczego warto wybrać FoxFlow",
+    "ADVANTAGE_TITLE1": "Przyjazny dla użytkownika interfejs",
+    "ADVANTAGE_TITLE2": "Narzędzia do współpracy",
+    "ADVANTAGE_TITLE3": "Konfigurowalne przepływy pracy",
+    "ADVANTAGE_1": "FoxFlow charakteryzuje się intuicyjnym interfejsem, który ułatwia użytkownikom o różnym poziomie umiejętności nawigację i efektywne zarządzanie zadaniami.",
+    "ADVANTAGE_2": "Aplikacja oferuje rozbudowane funkcje współpracy, umożliwiając zespołom bezproblemową współpracę, udostępnianie aktualizacji i efektywną komunikację w ramach projektów.",
+    "ADVANTAGE_3": "FoxFlow umożliwia użytkownikom dostosowanie sposobu zarządzania zadaniami dzięki konfigurowalnym przepływom pracy, które odpowiadają ich unikalnym potrzebom i preferencjom projektu.",
+    "TEAM": "Nasz Zespół",
+    "YEAR": "Utworzono w 2025 roku",
+    "RS_MESSAGE": "Projekt FowFlow powstał jako część kursu RS School",
+    "RS_TEXT": "Dowiedz się więcej o Szkole RS"
+  },
+  "LOGIN_PAGE": {
+    "TITLE": "Witamy w FoxFlow",
+    "SUBTITLE_1": "Zaloguj się, aby rozpocząć",
+    "SUBTITLE_2": "Kontynuuj z E-mailem",
+    "DIVIDER": "lub",
+    "LABEL_EMAIL": "E-mail",
+    "LABEL_PASSWORD": "Hasło",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "To pole jest wymagane.",
+      "INVALID_EMAIL": "Nieprawidłowy format adresu e-mail."
+    },
+    "ACTION_SUBMIT": "Dalej",
+    "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
+    "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
   }
 }

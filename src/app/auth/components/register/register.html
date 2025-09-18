@@ -1,0 +1,166 @@
+<mat-card
+  appearance="outlined"
+  class="register-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>{{ "REGISTER_PAGE.TITLE" | translate }}</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="social-buttons__container">
+      <app-social-button-google (loginWithGoogle)="loginWithGoogle()">
+        {{ "REGISTER_PAGE.ACTION_GOOGLE" | translate }}
+      </app-social-button-google>
+      <app-social-button-github (loginWithGitHub)="loginWithGitHub()">
+        {{ "REGISTER_PAGE.ACTION_GITHUB" | translate }}
+      </app-social-button-github>
+    </div>
+
+    <app-divider>
+      {{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
+    </app-divider>
+
+    <h3 class="section-title">{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
+
+    <form
+      aria-labelledby="registrationForm"
+      class="register-form"
+      id="registrationForm"
+      role="form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field
+        appearance="outline"
+        aria-labelledby="personalInfo"
+        class="register-form__full-width"
+        role="group">
+        <mat-label>
+          {{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}
+        </mat-label>
+        <input
+          formControlName="username"
+          matInput
+          name="username"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_USERNAME' | translate }}"
+          type="text" />
+      </mat-form-field>
+
+      @if (form.get("username")?.invalid && form.get("username")?.touched) { @if
+      (form.get("username")?.hasError("required")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
+      } @else if (form.get("username")?.hasError("minlength")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.MIN_LENGTH' | translate }}</mat-error
+      >
+      } }
+
+      <mat-form-field
+        appearance="outline"
+        aria-labelledby="personalInfo"
+        class="register-form__full-width"
+        role="group">
+        <mat-label>{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          name="email"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_EMAIL' | translate }}"
+          type="email" />
+      </mat-form-field>
+
+      @if (form.get("email")?.invalid && form.get("email")?.touched) { @if
+      (form.get("email")?.hasError("required")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
+      } @else if (form.get("email")?.hasError("email")) {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.INVALID_EMAIL' | translate
+        }}</mat-error
+      >
+      } }
+
+      <mat-form-field
+        appearance="outline"
+        aria-labelledby="passwordInfo"
+        class="register-form__full-width"
+        role="group">
+        <mat-label>{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          name="password"
+          placeholder="{{ 'REGISTER_PAGE.LABEL_PASSWORD' | translate }}"
+          [type]="hide() ? 'password' : 'text'" />
+        <button
+          matIconButton
+          matSuffix
+          matTooltip="Show or hide your password"
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+          (click)="visibilityToggle($event)">
+          <mat-icon matSuffix>
+            {{ hide() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      @if (form.get("password")?.invalid) { @if (form.get("password")?.touched)
+      {
+      <mat-error
+        >{{ 'REGISTER_PAGE.ERROR_MESSAGE.REQUIRED' | translate }}</mat-error
+      >
+      }
+
+      <div class="text-sm err-message">
+        @if (form.get("password")?.dirty) {
+        <mat-error
+          [appHighlightMessage]="controlValidity('^(?=.*[A-Z])')
+            ? colorValid
+            : colorError">
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.UPPERCASE' | translate }}
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(?=.*[a-z])')
+            ? colorValid
+            : colorError">
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.LOWERCASE' | translate }}
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(.*[0-9].*)')
+            ? colorValid
+            : colorError">
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.DIGIT' | translate }}
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('(?=.*[!@#$%^&*])')
+            ? colorValid
+            : colorError">
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.SPECIAL_CHAR' | translate }}
+        </mat-error>
+        <mat-error
+          [appHighlightMessage]="controlValidity('.{8,}')
+            ? colorValid
+            : colorError">
+          {{ 'REGISTER_PAGE.ERROR_MESSAGE.CHARS_LONG' | translate }}
+        </mat-error>
+        }
+      </div>
+      } @if (errorMessage()) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+      }
+
+      <div class="form-actions__submit-button">
+        <button
+          aria-label="Submit Registration"
+          matButton="filled"
+          type="submit">
+          {{ "REGISTER_PAGE.ACTION_SUBMIT" | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
