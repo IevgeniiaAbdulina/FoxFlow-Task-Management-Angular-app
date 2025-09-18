@@ -23,6 +23,7 @@ import { StyleChange } from '@app/shared/directives/style-change/style-change';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProjectService } from '@app/features/services/projects-service/project-service';
 
 @Component({
   selector: 'app-task-list-item',
@@ -41,6 +42,7 @@ export class TaskListItem implements OnInit, OnChanges {
   readonly task = input.required<TaskData>();
   readonly isEditing = input<boolean>(false);
   @Output() readonly setEditingId = new EventEmitter<string | null>();
+  private projectService = inject(ProjectService);
   @Output() readonly requestEdit = new EventEmitter<string>();
   isCompleted = false;
 
@@ -48,6 +50,8 @@ export class TaskListItem implements OnInit, OnChanges {
   projectId = 'MnUTvclhDFbntBHR8Hba';
   today = Date.now();
   daysToDeadline = 0;
+  taskId = '';
+  projectId = '';
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -57,6 +61,7 @@ export class TaskListItem implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
+    this.projectId = this.projectService.currentProject().id as string;
   }
 
   ngOnChanges(): void {
@@ -85,6 +90,7 @@ export class TaskListItem implements OnInit, OnChanges {
   changeTask(): void {
     const dataToUpdate = {
       title: this.editingText,
+      isCompleted: this.task()?.isCompleted,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, this.task().id, dataToUpdate)

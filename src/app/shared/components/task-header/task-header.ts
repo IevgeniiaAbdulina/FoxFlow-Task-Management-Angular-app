@@ -1,6 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
   DestroyRef,
   inject,
 } from '@angular/core';
@@ -8,6 +14,7 @@ import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -17,15 +24,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './task-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskHeader {
+export class TaskHeader implements OnInit {
+  private projectService = inject(ProjectService);
+
   text = '';
-  projectId = 'MnUTvclhDFbntBHR8Hba';
+  projectId = '';
   status: 'todo' | 'inProgress' | 'done' = 'todo';
   //date = new Date();
 
   tasksService = inject(TasksService);
   tasksFirebaseService = inject(FirebaseServiceTs);
   private destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this.projectId = this.projectService.currentProject().id as string;
+  }
 
   changeText(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -35,6 +48,7 @@ export class TaskHeader {
   addTask(): void {
     const date = new Date();
     this.tasksFirebaseService
+      .addTask(this.text, this.projectId, new Date())
       .addTask(this.text, this.projectId, date)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((taskId) => {

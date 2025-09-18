@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import {
   Firestore,
   collection,
-  DocumentData,
   collectionData,
   doc,
   addDoc,
@@ -22,21 +21,7 @@ import { from, Observable } from 'rxjs';
 })
 export class FirebaseServiceTs {
   private firestore = inject(Firestore);
-  private testCollection = collection(this.firestore, 'foxflowtest');
   private usersCollection = collection(this.firestore, 'users');
-
-  //private projectId$ = new BehaviorSubject<string | null>(null);
-  //private taskId$ = new BehaviorSubject<string | null>(null);
-
-  /* setProjectId(projectid: string): void {
-    this.projectId$.next(projectid);
-  } */
-
-  getTestConnection(): Observable<DocumentData[]> {
-    return collectionData(this.testCollection, {
-      idField: 'id',
-    });
-  }
 
   getProjectTasks(projectId: string): Observable<TaskData[]> {
     const collectionURL = `projects/${projectId}`;
@@ -58,7 +43,12 @@ export class FirebaseServiceTs {
     const collectionURL = `projects/${projectId}`;
     const projectDocRef = doc(this.firestore, collectionURL);
     const taskCollectionRef = collection(projectDocRef, 'task-project1');
-    const todoToCreate = { title: text, status: 'todo', createdAt: date };
+    const todoToCreate = {
+      title: text,
+      status: 'todo',
+      createdAt: date,
+      status: 'todo',
+    };
 
     const promise = addDoc(taskCollectionRef, todoToCreate).then(
       (response) => response.id

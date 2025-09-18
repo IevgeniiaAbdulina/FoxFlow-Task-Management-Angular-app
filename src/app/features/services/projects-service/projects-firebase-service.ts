@@ -16,6 +16,7 @@ import { Project } from '@app/shared/interfaces/project-interface';
 import { AuthService } from '@app/auth/services/auth-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
+import { ProjectService } from '@app/features/services/projects-service/project-service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ import { UserInterface } from '@app/shared/interfaces/user-interface';
 export class ProjectsFirebaseService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
+  private projectService = inject(ProjectService);
 
   projectsCollection = collection(this.firestore, 'projects');
   projectsSortedByDate = query(
@@ -49,7 +51,10 @@ export class ProjectsFirebaseService {
     };
 
     const promise = addDoc(this.projectsCollection, projectToCreate).then(
-      (result) => result.id
+      (result) => {
+        this.projectService.addTasksCollection(result.id);
+        return result.id;
+      }
     );
     return from(promise);
   }

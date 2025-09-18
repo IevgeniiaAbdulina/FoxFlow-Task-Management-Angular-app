@@ -18,6 +18,8 @@ export class TasksService {
   addTask(title: string, id: string, date: Date): void {
     const newTask: TaskData = {
       title: title,
+      status: 'todo',
+      isCompleted: false,
       id: id,
       createdAt: date,
       status: 'todo',
