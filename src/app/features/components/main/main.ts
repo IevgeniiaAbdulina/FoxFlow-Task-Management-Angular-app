@@ -13,6 +13,7 @@ import { OwnerData } from '@app/shared/interfaces/owner-interface';
 import { OwnersService } from '../../services/owners-service/owners-service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatCardModule,
     MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './main.html',
   styleUrl: './main.scss',
