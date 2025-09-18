@@ -11,7 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
@@ -47,7 +47,6 @@ import { MatTooltip } from '@angular/material/tooltip';
     SocialButtonGoogle,
     Divider,
     UpperCasePipe,
-    RouterLink,
     MatTooltip,
   ],
   templateUrl: './login.html',

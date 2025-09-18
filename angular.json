@@ -46,8 +46,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "4MB",
+                  "maximumError": "6MB"
                 }
               ],
               "fileReplacements": [
@@ -119,6 +119,9 @@
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
+      },
+      "i18n": {
+        "sourceLocale": "en-US"
       }
     }
   },

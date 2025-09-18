@@ -6,14 +6,12 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
@@ -52,7 +50,6 @@ import { MatTooltip } from '@angular/material/tooltip';
     SocialButtonGithub,
     Divider,
     UpperCasePipe,
-    RouterLink,
     MatTooltip,
   ],
   templateUrl: './register.html',

@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatMenuModule } from '@angular/material/menu';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
+import { AuthService } from '@app/auth/services/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -44,6 +45,7 @@ export class HeaderComponent {
   private document = inject(DOCUMENT);
   private renderer = inject(Renderer2);
   private breakpointObserver = inject(BreakpointObserver);
+  private authService = inject(AuthService);
   readonly isDarkMode = signal(localStorage.getItem('theme') === 'dark');
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
@@ -66,5 +68,9 @@ export class HeaderComponent {
     } else {
       this.renderer.removeClass(this.document.body, 'dark-theme');
     }
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
