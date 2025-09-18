@@ -27,6 +27,10 @@
     background-size: cover;
     border-radius: 50%;
   }
+
+  &__content {
+    font-size: 1.2rem;
+  }
 }
 
 :host ::ng-deep .mat-mdc-card-title-group {
@@ -44,7 +48,7 @@
   font-weight: 400;
 }
 
-.card a {
+a {
   text-decoration: none;
   color: black;
 
