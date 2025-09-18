@@ -42,7 +42,7 @@ export class ProjectDetailsDialog {
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   readonly name = model(this.data.name);
 
-  onNoClick(): void {
+  onClose(): void {
     this.dialogRef.close();
   }
 }
