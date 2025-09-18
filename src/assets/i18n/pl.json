@@ -1,7 +1,7 @@
 {
   "AUTH": {
     "LOGIN": "Zaloguj się",
-    "REGISTER": "Zarejestruj się",
+    "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
     "ERROR": "Nieprawidłowy e-mail lub hasło"
@@ -14,10 +14,6 @@
     "GOAL_2": "Śledź postępy w czasie rzeczywistym",
     "TEAM": "Nasz Zespół",
     "YEAR": "Utworzono w 2025 roku"
-  },
-  "NOT_FOUND": {
-    "TITLE": "Strona Nie Znaleziona",
-    "MESSAGE": "Żądana strona nie istnieje."
   },
   "BOARD": {
     "TITLE": "Tablica Zadań",
@@ -35,6 +31,14 @@
   },
   "EMPTY_STATE": {
     "NO_TASKS": "Brak zadań. Dodaj jedno!"
+  },
+  "HEADER": {
+    "LANGUAGE": "Język"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Strona nie znaleziona",
+    "MESSAGE": "Przepraszamy, strona, której szukasz, nie istnieje.",
+    "HOME": "Przejdź do strony głównej"
   },
   "REGISTER_PAGE": {
     "TITLE": "Załóż konto",

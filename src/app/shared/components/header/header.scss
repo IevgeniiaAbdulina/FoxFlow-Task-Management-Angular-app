@@ -1,0 +1,44 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.mat-button.active {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+::ng-deep .icon-only-toggle .mdc-switch {
+  display: none;
+}
+
+::ng-deep .mat-internal-form-field > label {
+  padding-top: 4px;
+}
+::ng-deep .mat-icon {
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+  .nav-links {
+    display: none;
+  }
+  app-language-switcher {
+    margin-right: 4px;
+  }
+}

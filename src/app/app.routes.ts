@@ -5,7 +5,7 @@ import { HomePage } from '@app/features/components/home-page/home-page';
 import { authGuard } from '@app/core/guards/auth-guard';
 import { isLoggedGuard } from '@app/core/guards/is-logged-guard';
 import { Main } from '@app/features/components/main/main';
-import { MainPage } from '@app/features/components/main-page/main-page';
+import { NotFoundComponent } from './shared/components/not-found/not-found';
 
 export const routes: Routes = [
   {
@@ -29,13 +29,12 @@ export const routes: Routes = [
     canActivate: [isLoggedGuard],
   },
   {
-    path: 'main-page',
-    component: MainPage,
-    canActivate: [isLoggedGuard],
-  },
-  {
     path: 'home',
     component: HomePage,
     canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];

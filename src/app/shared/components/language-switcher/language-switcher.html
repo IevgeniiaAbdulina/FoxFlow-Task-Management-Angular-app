@@ -1,0 +1,23 @@
+<button
+  aria-label="Select language"
+  mat-icon-button
+  matTooltip="Choose your preferred language"
+  matTooltipPosition="below"
+  type="button"
+  [matMenuTriggerFor]="langMenu">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #langMenu="matMenu">
+  <button
+    mat-menu-item
+    type="button"
+    (click)="switchLanguage('en')"
+    >EN</button
+  >
+  <button
+    mat-menu-item
+    type="button"
+    (click)="switchLanguage('pl')"
+    >PL</button
+  >
+</mat-menu>

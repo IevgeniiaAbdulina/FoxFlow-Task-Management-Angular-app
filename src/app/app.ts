@@ -9,14 +9,19 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
+import { HeaderComponent } from './shared/components/header/header';
 import { AuthService } from '@app/auth/services/auth-service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Main } from './features/components/main/main';
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, MatCardModule, TranslateModule, Main],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MatCardModule,
+    TranslateModule,
+    HeaderComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

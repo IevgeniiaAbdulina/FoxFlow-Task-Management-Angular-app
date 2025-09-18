@@ -34,8 +34,8 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
   font: var(--mat-sys-body-medium);
 
   // Reset the user agent margin.
@@ -48,6 +48,26 @@ body {
   height: 100%;
 }
 body {
+  --primary-bg: #ffffff;
+  --primary-text: #333333;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body.dark-theme {
+  --primary-bg: #333333;
+  --primary-text: #ffffff;
+  --mat-toolbar-container-background-color: #44474e;
+  --mat-sys-surface-container-low: #252323;
+  --mat-sys-on-surface-variant: #000;
+}
+
+mat-toolbar {
+  background: var(--toolbar-bg);
+  color: var(--primary-text);
+}
+
+:root {
+  background: var(--primary-bg);
+  color: var(--primary-text);
 }

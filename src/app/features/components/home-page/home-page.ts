@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AuthService } from '@app/auth/services/auth-service';
 import { NgOptimizedImage } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -8,6 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [NgOptimizedImage],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
   private authService = inject(AuthService);
