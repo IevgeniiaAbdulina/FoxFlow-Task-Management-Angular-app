@@ -3,7 +3,7 @@
   [ngClass]="{editing: isEditing()}">
   <div class="item">
     <div class="item__header">
-      <mat-icon>check_circle_outline</mat-icon>
+      <mat-icon>star_border</mat-icon>
       @if (!isEditing()) {
       <p class="item__header__text">{{ task().title }}</p>
       <mat-icon
@@ -24,8 +24,8 @@
     </div>
     <div class="item__footer">
       <div class="item__footer__information">
-        <mat-icon class="color">person</mat-icon>
-        <mat-icon class="color">date_range</mat-icon>
+        <mat-icon class="disable">person</mat-icon>
+        <mat-icon class="disable">date_range</mat-icon>
       </div>
       <button
         #actionButton
