@@ -47,7 +47,6 @@ import { MatTooltip } from '@angular/material/tooltip';
     SocialButtonGoogle,
     Divider,
     UpperCasePipe,
-    RouterLink,
     MatTooltip,
   ],
   templateUrl: './login.html',
