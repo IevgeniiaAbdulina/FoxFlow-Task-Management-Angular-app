@@ -9,6 +9,8 @@ import {
   addDoc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
 } from '@angular/fire/firestore';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { from, Observable } from 'rxjs';
@@ -29,15 +31,16 @@ export class FirebaseServiceTs {
   getProjectTasks(projectId: string): Observable<TaskData[]> {
     const projectDocRef = doc(this.firestore, `projects/${projectId}`);
     const taskCollectionRef = collection(projectDocRef, 'task-project1');
-    return collectionData(taskCollectionRef, { idField: 'id' }) as Observable<
+    const tasksSortedByDate = query(taskCollectionRef, orderBy('createdAt'));
+    return collectionData(tasksSortedByDate, { idField: 'id' }) as Observable<
       TaskData[]
     >;
   }
 
-  addTask(text: string, projectId: string): Observable<string> {
+  addTask(text: string, projectId: string, date: Date): Observable<string> {
     const projectDocRef = doc(this.firestore, `projects/${projectId}`);
     const taskCollectionRef = collection(projectDocRef, 'task-project1');
-    const todoToCreate = { title: text, isCompleted: false };
+    const todoToCreate = { title: text, isCompleted: false, createdAt: date };
 
     const promise = addDoc(taskCollectionRef, todoToCreate).then(
       (response) => response.id

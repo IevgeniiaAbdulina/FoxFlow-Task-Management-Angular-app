@@ -15,11 +15,12 @@ export class TasksService {
     return this.tasksFirebaseService.getProjectTasks(projectId);
   }
 
-  addTask(title: string, id: string): void {
+  addTask(title: string, id: string, date: Date): void {
     const newTask: TaskData = {
       title: title,
       isCompleted: false,
       id: id,
+      createdAt: date,
       //status: 'todo'
     };
 

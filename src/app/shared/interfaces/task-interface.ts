@@ -4,4 +4,5 @@ export interface TaskData {
   //status: 'todo' | 'inprogress' | 'done';
   //assignedTo?: string;
   isCompleted?: boolean;
+  createdAt: Date;
 }
