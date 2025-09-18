@@ -17,7 +17,11 @@
   },
   "BOARD": {
     "TITLE": "Tablica Zadań",
-    "CREATE": "Utwórz Tablicę"
+    "CREATE": "Utwórz Tablicę",
+    "NEW_TASKS": "Nowe zadania",
+    "INPROGRESS": "W postępie",
+    "DONE": "Zrobione",
+    "NOT_APPROVED": "Niezatwierdzone"
   },
   "TASK": {
     "ADD": "Dodaj Zadanie",

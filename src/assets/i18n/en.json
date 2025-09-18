@@ -17,7 +17,11 @@
   },
   "BOARD": {
     "TITLE": "Task Board",
-    "CREATE": "Create Board"
+    "CREATE": "Create Board",
+    "NEW_TASKS": "New Requests",
+    "INPROGRESS": "In progress",
+    "DONE": "Done",
+    "NOT_APPROVED": "Not approved"
   },
   "TASK": {
     "ADD": "Add Task",
