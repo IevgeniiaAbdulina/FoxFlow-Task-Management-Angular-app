@@ -1,4 +1,9 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  input,
+  ChangeDetectionStrategy,
+  output,
+} from '@angular/core';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,9 +29,7 @@ export class GreetingComponent {
   readonly user$ = input.required<UserInterface>();
   readonly projects$ = input.required<Project[]>();
 
-  today: number = Date.now();
+  readonly addProject = output();
 
-  addProject(): void {
-    console.log('add project');
-  }
+  today: number = Date.now();
 }

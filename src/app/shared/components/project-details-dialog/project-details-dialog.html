@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add new project</h2>
+<mat-dialog-content>
+  <p class="dialog-subtitle">Add a project name</p>
+  <mat-form-field>
+    <mat-label>Project name</mat-label>
+    <input
+      matInput
+      placeholder="I love Angular (●＾o＾●)"
+      required
+      [(ngModel)]="name" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    matButton
+    type="button"
+    (click)="onNoClick()"
+    >Close</button
+  >
+  <button
+    matButton="filled"
+    type="button"
+    [mat-dialog-close]="name()"
+    >Create project
+  </button>
+</mat-dialog-actions>

@@ -9,6 +9,7 @@ import {
   orderBy,
   query,
   updateDoc,
+  limit,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Project } from '@app/shared/interfaces/project-interface';
@@ -24,7 +25,11 @@ export class ProjectsFirebaseService {
   private authService = inject(AuthService);
 
   projectsCollection = collection(this.firestore, 'projects');
-  projectsSortedByDate = query(this.projectsCollection, orderBy('createdAt'));
+  projectsSortedByDate = query(
+    this.projectsCollection,
+    orderBy('createdAt', 'desc'),
+    limit(12)
+  );
 
   private readonly projectOwner = toSignal(this.authService.user$, {
     initialValue: null,
