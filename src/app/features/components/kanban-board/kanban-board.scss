@@ -1,0 +1,37 @@
+.board {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+
+  &__column {
+    padding: 1.2rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    background-color: var(
+      --mat-card-elevated-container-color,
+      var(--mat-sys-surface-container-low)
+    );
+    border-color: var(
+      --mat-card-elevated-container-color,
+      var(--mat-sys-surface-container-low)
+    );
+    border-radius: var(
+      --mat-card-elevated-container-shape,
+      var(--mat-sys-corner-medium)
+    );
+    box-shadow: var(
+      --mat-card-elevated-container-elevation,
+      var(--mat-sys-level1)
+    );
+
+    &__title {
+      border-radius: 8px;
+      background-color: var(--mat-sys-on-primary);
+      padding: 1.2rem;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
+}

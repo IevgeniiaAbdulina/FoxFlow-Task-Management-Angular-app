@@ -1,0 +1,8 @@
+<header class="header">
+  <mat-icon>add</mat-icon>
+  <input
+    placeholder="{{ 'TASK.ADD' | translate}}"
+    [value]="text"
+    (keyup)="changeText($event)"
+    (keyup.enter)="addTask()" />
+</header>
