@@ -13,6 +13,9 @@ import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDetail } from '@app/features/components/task-detail/task-detail';
+//import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list-item',
@@ -29,8 +32,10 @@ export class TaskListItem implements OnInit {
   editingText = '';
   id = 'MnUTvclhDFbntBHR8Hba';
 
-  tasksService = inject(TasksService);
-  tasksFirebaseService = inject(FirebaseServiceTs);
+  private tasksService = inject(TasksService);
+  private tasksFirebaseService = inject(FirebaseServiceTs);
+  //private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.editingText = this.task().title;
@@ -66,5 +71,13 @@ export class TaskListItem implements OnInit {
       });
 
     this.setEditingId.emit(null);
+  }
+
+  openTaskDetailInformation(): void {
+    console.log('openTaskDetailInformation');
+    //this.router.navigate(['/task', this.task().id])
+    this.dialog.open(TaskDetail, {
+      data: { taskId: this.task().id },
+    });
   }
 }

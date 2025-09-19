@@ -20,11 +20,11 @@ import { TaskMain } from '../task-main/task-main';
 export class TaskBody implements OnInit {
   tasksService = inject(TasksService);
   tasksFirebaseService = inject(FirebaseServiceTs);
-  id = 'MnUTvclhDFbntBHR8Hba';
+  projectId = 'MnUTvclhDFbntBHR8Hba';
 
   ngOnInit(): void {
     this.tasksFirebaseService
-      .getProjectTasks(this.id)
+      .getProjectTasks(this.projectId)
       .subscribe((tasks: TaskData[]) => {
         this.tasksService.tasks$.next(tasks);
       });

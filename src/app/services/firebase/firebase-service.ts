@@ -11,6 +11,7 @@ import {
   updateDoc,
   query,
   orderBy,
+  docData,
 } from '@angular/fire/firestore';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { from, Observable } from 'rxjs';
@@ -35,6 +36,14 @@ export class FirebaseServiceTs {
     return collectionData(tasksSortedByDate, { idField: 'id' }) as Observable<
       TaskData[]
     >;
+  }
+
+  getTask(projectId: string, taskId: string): Observable<TaskData> {
+    const tascDocRef = doc(
+      this.firestore,
+      `projects/${projectId}/task-project1/${taskId}`
+    );
+    return docData(tascDocRef, { idField: 'id' }) as Observable<TaskData>;
   }
 
   addTask(text: string, projectId: string, date: Date): Observable<string> {

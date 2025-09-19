@@ -1,6 +1,10 @@
 <li
   class="list"
-  [ngClass]="{editing: isEditing()}">
+  role="button"
+  tabindex="0"
+  [ngClass]="{editing: isEditing()}"
+  (dblclick)="openTaskDetailInformation()"
+  (keydown.enter)="openTaskDetailInformation()">
   <div class="item">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
