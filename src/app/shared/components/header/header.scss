@@ -5,6 +5,15 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  gap: 8px;
+}
 
 .spacer {
   flex: 1 1 auto;

@@ -1,12 +1,6 @@
 import { Routes } from '@angular/router';
-import { Register } from '@app/auth/components/register/register';
-import { Login } from '@app/auth/components/login/login';
-import { HomePage } from '@app/features/components/home-page/home-page';
 import { authGuard } from '@app/core/guards/auth-guard';
 import { isLoggedGuard } from '@app/core/guards/is-logged-guard';
-import { Main } from '@app/features/components/main/main';
-import { NotFoundComponent } from './shared/components/not-found/not-found';
-import { KanbanBoard } from './features/components/kanban-board/kanban-board';
 
 export const routes: Routes = [
   {
@@ -16,37 +10,43 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: Login,
+    loadComponent: () =>
+      import('@app/auth/components/login/login').then((m) => m.Login),
     canActivate: [isLoggedGuard],
   },
   {
     path: 'register',
-    component: Register,
+    loadComponent: () =>
+      import('@app/auth/components/register/register').then((m) => m.Register),
     canActivate: [isLoggedGuard],
   },
   {
     path: 'main',
-    component: Main,
+    loadComponent: () =>
+      import('@app/features/components/main/main').then((m) => m.Main),
     canActivate: [isLoggedGuard],
   },
   {
     path: 'home',
-    component: HomePage,
+    loadComponent: () =>
+      import('@app/features/components/home-page/home-page').then(
+        (m) => m.HomePage
+      ),
     canActivate: [authGuard],
   },
   {
-
-    path: 'kanban-board', // delete after adding to home page
-    component: KanbanBoard,
     path: 'project/:id',
     loadComponent: () =>
-      import('./features/components/project-page/project-page').then(
-        (c) => c.ProjectPage
+      import('@app/features/components/project-page/project-page').then(
+        (m) => m.ProjectPage
       ),
     canActivate: [authGuard],
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./shared/components/not-found/not-found').then(
+        (m) => m.NotFoundComponent
+      ),
   },
 ];
