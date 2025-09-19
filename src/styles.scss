@@ -25,6 +25,11 @@ html {
   );
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
@@ -37,22 +42,9 @@ body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
   font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
-  margin: 0;
-}
-/* You can add global styles to this file, and also import other style files */
-
-html,
-body {
-  height: 100%;
-}
-body {
-  --primary-bg: #ffffff;
-  --primary-text: #333333;
-  margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+/* You can add global styles to this file, and also import other style files */
 
 body.dark-theme {
   --primary-bg: #333333;
@@ -62,12 +54,11 @@ body.dark-theme {
   --mat-sys-on-surface-variant: #000;
 }
 
-mat-toolbar {
-  background: var(--toolbar-bg);
-  color: var(--primary-text);
-}
-
 :root {
+  --primary-bg: #ffffff;
+  --primary-text: #333333;
+  --mat-icon-bg: rgba(0, 0, 0, 0.6);
+  --mat-icon-bg-hover: rgba(0, 0, 0, 0.1);
   background: var(--primary-bg);
   color: var(--primary-text);
 }
