@@ -27,7 +27,52 @@
       (change)="toggleTheme()">
       <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </mat-slide-toggle>
-    @if (!isAuthenticated() && isMobile) {
+    @if (isAuthenticated()) {
+    <div
+      class="user-info"
+      [matTooltip]="user()?.email ?? ''">
+      @if (user()?.photoURL) {
+      <img
+        alt="User avatar"
+        class="user-avatar"
+        height="32"
+        width="32"
+        [ngSrc]="user()!.photoURL!" />
+      } @else {
+      <span class="user-initials">{{ getUserInitials() }}</span>
+      }
+    </div>
+    @if (isMobile) {
+    <button
+      aria-label="Open user menu"
+      mat-icon-button
+      type="button"
+      [matMenuTriggerFor]="userMenu"
+      [matMenuTriggerRestoreFocus]="true">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu
+      #userMenu="matMenu"
+      overlapTrigger="false"
+      xPosition="before">
+      <button
+        aria-label="Log out"
+        mat-menu-item
+        type="button"
+        (click)="logout()">
+        {{ 'AUTH.LOGOUT' | translate }}
+      </button>
+    </mat-menu>
+    } @else {
+    <button
+      aria-label="Log out"
+      mat-icon-button
+      matTooltip="Log out"
+      type="button"
+      (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+    } } @else if (!isAuthenticated() && isMobile) {
     <button
       aria-label="Open navigation menu"
       mat-icon-button
@@ -55,7 +100,7 @@
         {{ 'AUTH.REGISTER' | translate }}
       </button>
     </mat-menu>
-    } @if (!isAuthenticated() && !isMobile) {
+    } @else if (!isAuthenticated() && !isMobile) {
     <div class="nav-links">
       <a
         aria-label="Log in"
@@ -66,21 +111,12 @@
       </a>
       <a
         aria-label="Register"
-        matButton="filled"
+        mat-button="filled"
         routerLink="/register"
         routerLinkActive="active">
         {{ 'AUTH.REGISTER' | translate }}
       </a>
     </div>
     }
-    <button
-      aria-label="Logout button"
-      class="example-icon"
-      matIconButton
-      matTooltip="Logout"
-      type="button"
-      (click)="logout()">
-      <mat-icon>logout</mat-icon>
-    </button>
   </div>
 </mat-toolbar>

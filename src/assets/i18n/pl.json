@@ -4,7 +4,8 @@
     "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
-    "ERROR": "Nieprawidłowy e-mail lub hasło"
+    "ERROR": "Nieprawidłowy e-mail lub hasło",
+    "LOGOUT": "Wyloguj się"
   },
   "HOME": {
     "TITLE": "Witaj w FoxFlow",
