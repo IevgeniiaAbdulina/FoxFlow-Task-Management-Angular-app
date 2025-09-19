@@ -13,8 +13,8 @@ import {
   orderBy,
   docData,
 } from '@angular/fire/firestore';
+import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { TaskData } from '@app/shared/interfaces/task-interface';
-import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -81,9 +81,9 @@ export class FirebaseServiceTs {
     return from(promise);
   }
 
-  getUsers(): Observable<UserInterface[]> {
+  getUsers(): Observable<MemberInterface[]> {
     return collectionData(this.usersCollection, {
       idField: 'id',
-    }) as Observable<UserInterface[]>;
+    }) as Observable<MemberInterface[]>;
   }
 }

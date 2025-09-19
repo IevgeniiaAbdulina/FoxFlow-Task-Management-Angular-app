@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class TaskHeader {
   text = '';
-  id = 'MnUTvclhDFbntBHR8Hba';
+  projectId = 'MnUTvclhDFbntBHR8Hba';
   //date = new Date();
 
   tasksService = inject(TasksService);
@@ -26,7 +26,7 @@ export class TaskHeader {
 
   addTask(): void {
     this.tasksFirebaseService
-      .addTask(this.text, this.id, new Date())
+      .addTask(this.text, this.projectId, new Date())
       .subscribe((taskId) => {
         this.tasksService.addTask(this.text, taskId, new Date());
       });

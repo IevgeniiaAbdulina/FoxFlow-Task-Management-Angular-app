@@ -1,10 +1,87 @@
-<div class="test">
-  <p>task-detail works!</p>
-  <div> {{ task()?.title }} </div>
+<div class="task">
+  <div class="task__header">
+    @if (!editing()) {
+    <h2>{{ task()?.title }}</h2>
 
-  <button
-    type="button"
-    (click)="closeTask()"
-    >Close</button
-  >
+    <div class="task__header__edit">
+      <button
+        mat-button
+        type="submit"
+        (click)="editTask()">
+        Edit
+      </button>
+      <button
+        mat-button
+        type="submit"
+        (click)="closeTask()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+    } @if (editing()) {
+    <input
+      #titleInput
+      class="edit"
+      type="text"
+      [value]="editingText"
+      (keyup)="changeText($event)"
+      (keyup.enter)="saveTask()" />
+
+    <div class="task__header__edit">
+      <button
+        mat-button
+        type="submit"
+        (click)="saveTask()">
+        Save
+      </button>
+
+      <button
+        mat-button
+        type="submit"
+        (click)="cancelEditTask()">
+        Cancel
+      </button>
+    </div>
+    }
+  </div>
+  <div class="task__description">
+    <div class="task__description__text">
+      <textarea
+        id="description"
+        name="description"></textarea>
+    </div>
+    <div class="task__description__users">
+      <mat-form-field appearance="fill">
+        <mat-label>Assign user</mat-label>
+        <mat-select
+          multiple
+          [(value)]="selectedUserIds">
+          @for (user of users; track user.id) {
+          <mat-option [value]="user.id">
+            <img
+              alt="avatar"
+              height="30"
+              ngSrc="{{user.photoURL}}"
+              width="30" />
+            {{ user.displayName }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div class="selected-users">
+        <h4>Assigned to:</h4>
+        @for (user of selectedUsers; track user.id) {
+        <div class="user-card">
+          <img
+            alt="avatar"
+            height="40"
+            mat-card-md-image
+            ngSrc="{{user.photoURL}}"
+            style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
+            width="40" />
+          <span>{{user.displayName}}</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
 </div>

@@ -30,7 +30,7 @@ export class TaskListItem implements OnInit {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
 
   editingText = '';
-  id = 'MnUTvclhDFbntBHR8Hba';
+  projectId = 'MnUTvclhDFbntBHR8Hba';
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -43,7 +43,7 @@ export class TaskListItem implements OnInit {
 
   deleteTask(): void {
     this.tasksFirebaseService
-      .deleteTask(this.id, this.task().id)
+      .deleteTask(this.projectId, this.task().id)
       .subscribe(() => {
         this.tasksService.deleteTask(this.task().id);
       });
@@ -65,7 +65,7 @@ export class TaskListItem implements OnInit {
       isCompleted: this.task().isCompleted,
     };
     this.tasksFirebaseService
-      .updateTask(this.id, this.task().id, dataToUpdate)
+      .updateTask(this.projectId, this.task().id, dataToUpdate)
       .subscribe(() => {
         this.tasksService.changeTask(this.task().id, this.editingText);
       });

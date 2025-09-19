@@ -1,6 +1,28 @@
-.test {
+.task {
   width: 500px;
   margin: 2rem auto;
   padding: 2rem;
   font-size: 1.6rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: burlywood;
+  }
+}
+
+.selected-users {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit {
+  font-size: 1.6rem;
+  font-weight: 400;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  width: 100%;
 }
