@@ -4,6 +4,7 @@ import {
   inject,
   Renderer2,
   signal,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -15,9 +16,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { MatMenuModule } from '@angular/material/menu';
-import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
+import { LanguageSwitcherComponent } from '@app/shared/components/language-switcher/language-switcher';
 import { AuthService } from '@app/auth/services/auth-service';
 
 @Component({
@@ -45,12 +46,17 @@ export class HeaderComponent {
   private document = inject(DOCUMENT);
   private renderer = inject(Renderer2);
   private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
   private authService = inject(AuthService);
   readonly isDarkMode = signal(localStorage.getItem('theme') === 'dark');
+  readonly isAuthenticated = this.authService.currentUser;
+  readonly user = this.authService.currentUser;
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
-    .pipe(map((result) => result.matches));
-  readonly isAuthenticated = signal(false);
+    .pipe(
+      map((result) => result.matches),
+      tap(() => this.cdr.markForCheck())
+    );
 
   constructor() {
     this.updateTheme();
@@ -60,6 +66,15 @@ export class HeaderComponent {
     this.isDarkMode.set(!this.isDarkMode());
     localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
     this.updateTheme();
+  }
+
+  getUserInitials(): string {
+    const user = this.user();
+    if (!user || !user.displayName) return 'U';
+    const names = user.displayName.trim().split(' ');
+    return names.length > 1
+      ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
+      : names[0][0].toUpperCase();
   }
 
   private updateTheme(): void {

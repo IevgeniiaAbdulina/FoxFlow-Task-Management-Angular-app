@@ -3,8 +3,9 @@
   align-items: center;
   gap: 16px;
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 16px;
+  position: relative;
 }
 
 .logo {
@@ -26,9 +27,45 @@
   gap: 16px;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--mat-icon-bg);
+  color: var(--primary-text);
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .mat-button.active {
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--mat-icon-bg);
+}
+
+button[mat-icon-button] {
+  color: inherit;
+  z-index: 100;
+  margin-left: 8px;
+  &:hover {
+    background-color: var(--mat-icon-bg-hover);
+  }
+}
+
+mat-menu {
+  z-index: 1000;
 }
 
 :host::ng-deep .icon-only-toggle .mdc-switch {
@@ -58,11 +95,41 @@
 @media (max-width: 600px) {
   .header-container {
     flex-wrap: wrap;
+    gap: 5px;
+    padding: 0;
   }
   .nav-links {
     display: none;
   }
+
+  .logo {
+    order: 1;
+    & > span {
+      display: none;
+    }
+  }
+
+  .spacer {
+    order: 2;
+  }
+
   app-language-switcher {
-    margin-right: 4px;
+    order: 3;
+    margin-left: 8px;
+  }
+
+  .icon-only-toggle {
+    order: 4;
+    margin-left: 8px;
+  }
+
+  .user-info {
+    order: 5;
+    margin-left: 8px;
+  }
+
+  button[mat-icon-button] {
+    order: 6;
+    margin-left: 8px;
   }
 }
