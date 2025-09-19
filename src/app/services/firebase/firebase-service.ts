@@ -14,6 +14,7 @@ import {
   docData,
 } from '@angular/fire/firestore';
 import { TaskData } from '@app/shared/interfaces/task-interface';
+import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -22,6 +23,7 @@ import { from, Observable } from 'rxjs';
 export class FirebaseServiceTs {
   private firestore = inject(Firestore);
   private testCollection = collection(this.firestore, 'foxflowtest');
+  private usersCollection = collection(this.firestore, 'users');
 
   getTestConnection(): Observable<DocumentData[]> {
     return collectionData(this.testCollection, {
@@ -77,5 +79,11 @@ export class FirebaseServiceTs {
     );
     const promise = updateDoc(docRef, updateFields);
     return from(promise);
+  }
+
+  getUsers(): Observable<UserInterface[]> {
+    return collectionData(this.usersCollection, {
+      idField: 'id',
+    }) as Observable<UserInterface[]>;
   }
 }
