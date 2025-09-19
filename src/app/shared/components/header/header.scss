@@ -1,10 +1,12 @@
 .header-container {
   display: flex;
   align-items: center;
+  gap: 16px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
 }
+
 .logo {
   display: flex;
   align-items: center;
@@ -36,8 +38,21 @@
 :host::ng-deep .mat-internal-form-field > label {
   padding-top: 4px;
 }
-:host ::ng-deep .mat-icon {
-  opacity: 0.6;
+
+::ng-deep .mdc-button__label {
+  font-size: 1.6rem;
+}
+
+::ng-deep
+  .mat-mdc-menu-panel
+  .mat-mdc-menu-content
+  .mat-mdc-menu-item
+  .mat-mdc-menu-item-text {
+  font-size: 1.6rem;
+}
+
+.mat-icon {
+  color: var(--mat-icon-bg);
 }
 
 @media (max-width: 600px) {
