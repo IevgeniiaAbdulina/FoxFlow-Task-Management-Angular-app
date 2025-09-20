@@ -7,6 +7,6 @@ export interface TaskData {
   assignedTo?: UserInterface[];
   isCompleted?: boolean;
   createdAt: Date;
-  dueTo?: Date;
+  dueTo?: Date | null;
   description?: string;
 }

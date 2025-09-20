@@ -15,7 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDetail } from '@app/features/components/task-detail/task-detail';
+import { Months } from '@app/shared/enums/Months';
 //import { Router } from '@angular/router';
+//import { Timestamp } from '@angular/fire/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-task-list-item',
@@ -31,6 +34,7 @@ export class TaskListItem implements OnInit {
 
   editingText = '';
   projectId = 'MnUTvclhDFbntBHR8Hba';
+  taskDeadline = '';
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -39,6 +43,7 @@ export class TaskListItem implements OnInit {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
+    //this.taskDeadline = this.task().dueTo;
   }
 
   deleteTask(): void {
@@ -79,5 +84,16 @@ export class TaskListItem implements OnInit {
     this.dialog.open(TaskDetail, {
       data: { taskId: this.task().id },
     });
+  }
+
+  getDeadline(): string | null {
+    const dueTo = this.task()?.dueTo;
+    if (!dueTo || !(dueTo instanceof Timestamp)) return null;
+
+    const date = (dueTo as Timestamp).toDate();
+    const day = date.getDate();
+    const month = Months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   }
 }

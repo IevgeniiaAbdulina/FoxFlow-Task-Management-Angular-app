@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   inject,
-  input,
   OnInit,
   Output,
   signal,
@@ -20,6 +19,14 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
+import {
+  MatCalendarCellClassFunction,
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-detail',
@@ -29,7 +36,12 @@ import { TasksService } from '@app/services/tasks-service/tasks-service';
     NgOptimizedImage,
     MatFormFieldModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FormsModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
   styleUrl: './task-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +56,7 @@ export class TaskDetail implements OnInit {
   editingText = '';
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
+  selectedDate: Date | null = null;
 
   private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -115,19 +128,24 @@ export class TaskDetail implements OnInit {
     this.setEditingId.emit(null);
   }
 
-  saveTask(): void {
+  saveHeaderTitle(): void {
     const currentTask = this.task();
     if (!currentTask || !this.editingText) return;
 
     const dataToUpdate = {
       title: this.editingText,
       isCompleted: currentTask.isCompleted,
+      dueTo: this.selectedDate ? this.selectedDate : null,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, currentTask.id, dataToUpdate)
       .subscribe(() => {
         this.tasksService.changeTask(currentTask.id, this.editingText!);
-        this.task.set({ ...currentTask, title: this.editingText });
+        this.task.set({
+          ...currentTask,
+          title: this.editingText,
+          dueTo: this.selectedDate,
+        });
         this.editing.set(false);
       });
   }
