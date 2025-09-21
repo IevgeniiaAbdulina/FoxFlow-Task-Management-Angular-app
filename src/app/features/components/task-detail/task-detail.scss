@@ -10,6 +10,23 @@
     align-items: center;
     background-color: burlywood;
   }
+
+  &__description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__text > h4 {
+      background-color: cadetblue;
+    }
+
+    &__text > textarea {
+      width: 100%;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+  }
 }
 
 .selected-users {

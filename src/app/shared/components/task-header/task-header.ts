@@ -25,10 +25,11 @@ export class TaskHeader {
   }
 
   addTask(): void {
+    const date = new Date();
     this.tasksFirebaseService
-      .addTask(this.text, this.projectId, new Date())
+      .addTask(this.text, this.projectId, date)
       .subscribe((taskId) => {
-        this.tasksService.addTask(this.text, taskId, new Date());
+        this.tasksService.addTask(this.text, taskId, date);
       });
     this.text = '';
   }

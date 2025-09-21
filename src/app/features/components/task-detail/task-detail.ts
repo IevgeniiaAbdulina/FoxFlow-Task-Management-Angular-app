@@ -9,7 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,14 +19,12 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
-import {
-  MatCalendarCellClassFunction,
-  MatDatepickerModule,
-} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-task-detail',
@@ -48,12 +46,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskDetail implements OnInit {
   readonly task = signal<TaskData | null>(null);
+  readonly editing = signal(false);
   projectId = 'MnUTvclhDFbntBHR8Hba';
+  editingText = '';
+  editingTaskDescription = '';
   users: MemberInterface[] = [];
   selectedUserIds: string[] = [];
-  readonly editing = signal(false);
   @Output() readonly setEditingId = new EventEmitter<string | null>();
-  editingText = '';
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
   selectedDate: Date | null = null;
@@ -61,27 +60,27 @@ export class TaskDetail implements OnInit {
   private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
   private tasksFirebaseService = inject(FirebaseServiceTs);
   private tasksService = inject(TasksService);
+  private dialogRef = inject(MatDialogRef<TaskDetail>);
 
   ngOnInit(): void {
-    console.log('Task ID:', this.data.taskId);
-    console.log('data', this.data);
     this.tasksFirebaseService
       .getTask(this.projectId, this.data.taskId)
       .subscribe((task) => {
         this.task.set(task);
         this.editingText = task.title;
+
+        if (task.dueTo instanceof Timestamp) {
+          this.selectedDate = task.dueTo.toDate();
+        }
       });
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
       this.users = users;
-      console.log('users', this.users);
     });
   }
 
   closeTask(): void {
-    console.log('Close task');
-    //this.editing.set(false);
-    //this.setEditingId.emit(null);
+    this.dialogRef.close();
   }
 
   deleteTask(): void {
@@ -93,13 +92,11 @@ export class TaskDetail implements OnInit {
   }
 
   editTask(): void {
-    console.log('edit header');
     const currentTask = this.task();
     if (!currentTask) return;
 
     this.editing.set(true);
     this.editingText = currentTask.title;
-    //this.setEditingId.emit(currentTask.id);
     setTimeout(() => {
       this.titleInputRef()?.nativeElement.focus();
     });
@@ -135,7 +132,6 @@ export class TaskDetail implements OnInit {
     const dataToUpdate = {
       title: this.editingText,
       isCompleted: currentTask.isCompleted,
-      dueTo: this.selectedDate ? this.selectedDate : null,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, currentTask.id, dataToUpdate)
@@ -144,15 +140,34 @@ export class TaskDetail implements OnInit {
         this.task.set({
           ...currentTask,
           title: this.editingText,
-          dueTo: this.selectedDate,
         });
         this.editing.set(false);
       });
   }
 
   cancelEditTask(): void {
-    console.log('cancelEditTask');
     this.editing.set(false);
     this.editingText = '';
+  }
+
+  saveDateOnBlur(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+
+    const dueTo = this.selectedDate ? new Date(this.selectedDate) : null;
+    const dataToUpdate = {
+      title: currentTask.title,
+      isCompleted: currentTask.isCompleted,
+      dueTo: dueTo,
+    };
+
+    this.tasksFirebaseService
+      .updateTask(this.projectId, currentTask.id, dataToUpdate)
+      .subscribe(() => {
+        this.task.set({
+          ...currentTask,
+          dueTo: dueTo,
+        });
+      });
   }
 }

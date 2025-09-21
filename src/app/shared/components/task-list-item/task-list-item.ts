@@ -34,7 +34,8 @@ export class TaskListItem implements OnInit {
 
   editingText = '';
   projectId = 'MnUTvclhDFbntBHR8Hba';
-  taskDeadline = '';
+  today = Date.now();
+  daysToDeadline = 0;
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -43,7 +44,7 @@ export class TaskListItem implements OnInit {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
-    //this.taskDeadline = this.task().dueTo;
+    this.getDaysToDeadline();
   }
 
   deleteTask(): void {
@@ -95,5 +96,21 @@ export class TaskListItem implements OnInit {
     const month = Months[date.getMonth()];
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
+  }
+
+  getDaysToDeadline(): number | null {
+    const dueTo = this.task()?.dueTo;
+    if (!dueTo || !(dueTo instanceof Timestamp)) {
+      this.daysToDeadline = 3;
+      return this.daysToDeadline;
+    }
+
+    const deadlineDate = dueTo.toDate();
+    const today = new Date();
+    //console.log('date', date);
+    //console.log('getDaysToDeadline', this.today);
+    const diff = deadlineDate.getTime() - today.getTime();
+    this.daysToDeadline = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return this.daysToDeadline;
   }
 }

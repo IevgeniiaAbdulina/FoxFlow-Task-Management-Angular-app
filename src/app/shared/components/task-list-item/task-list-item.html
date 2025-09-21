@@ -5,7 +5,9 @@
   [ngClass]="{editing: isEditing()}"
   (dblclick)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
-  <div class="item">
+  <div
+    class="item"
+    [ngClass]="{deadline : daysToDeadline <= 2}">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
       @if (!isEditing()) {
