@@ -28,9 +28,10 @@ import { Timestamp } from 'firebase/firestore';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListItem implements OnInit {
-  readonly task = input<TaskData>() as InputSignal<TaskData>;
-  readonly isEditing = input<boolean>();
+  readonly task = input.required<TaskData>();
+  readonly isEditing = input<boolean>(false);
   @Output() readonly setEditingId = new EventEmitter<string | null>();
+  @Output() readonly requestEdit = new EventEmitter<string>();
 
   editingText = '';
   projectId = 'MnUTvclhDFbntBHR8Hba';
@@ -68,7 +69,6 @@ export class TaskListItem implements OnInit {
   changeTask(): void {
     const dataToUpdate = {
       title: this.editingText,
-      isCompleted: this.task().isCompleted,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, this.task().id, dataToUpdate)
@@ -112,5 +112,9 @@ export class TaskListItem implements OnInit {
     const diff = deadlineDate.getTime() - today.getTime();
     this.daysToDeadline = Math.ceil(diff / (1000 * 60 * 60 * 24));
     return this.daysToDeadline;
+  }
+
+  onEditClick(): void {
+    this.requestEdit.emit(this.task().id);
   }
 }

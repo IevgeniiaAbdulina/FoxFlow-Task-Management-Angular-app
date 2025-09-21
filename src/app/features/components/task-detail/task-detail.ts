@@ -115,7 +115,6 @@ export class TaskDetail implements OnInit {
 
     const dataToUpdate = {
       title: this.editingText,
-      isCompleted: currentTask.isCompleted,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, currentTask.id, dataToUpdate)
@@ -132,8 +131,8 @@ export class TaskDetail implements OnInit {
     if (!currentTask || !this.editingText) return;
 
     const dataToUpdate = {
+      id: currentTask.id,
       title: this.editingText,
-      isCompleted: currentTask.isCompleted,
     };
     this.tasksFirebaseService
       .updateTask(this.projectId, currentTask.id, dataToUpdate)
@@ -159,7 +158,6 @@ export class TaskDetail implements OnInit {
     const dueTo = this.selectedDate ? new Date(this.selectedDate) : null;
     const dataToUpdate = {
       title: currentTask.title,
-      isCompleted: currentTask.isCompleted,
       dueTo: dueTo,
     };
 
@@ -183,7 +181,6 @@ export class TaskDetail implements OnInit {
 
     const dataToUpdate = {
       title: currentTask.title,
-      isComleted: currentTask.isCompleted,
       dueTo: currentTask.dueTo,
       description: this.descriptionText,
     };

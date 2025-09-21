@@ -25,6 +25,13 @@ export class FirebaseServiceTs {
   private testCollection = collection(this.firestore, 'foxflowtest');
   private usersCollection = collection(this.firestore, 'users');
 
+  //private projectId$ = new BehaviorSubject<string | null>(null);
+  //private taskId$ = new BehaviorSubject<string | null>(null);
+
+  /* setProjectId(projectid: string): void {
+    this.projectId$.next(projectid);
+  } */
+
   getTestConnection(): Observable<DocumentData[]> {
     return collectionData(this.testCollection, {
       idField: 'id',
@@ -51,7 +58,7 @@ export class FirebaseServiceTs {
   addTask(text: string, projectId: string, date: Date): Observable<string> {
     const projectDocRef = doc(this.firestore, `projects/${projectId}`);
     const taskCollectionRef = collection(projectDocRef, 'task-project1');
-    const todoToCreate = { title: text, isCompleted: false, createdAt: date };
+    const todoToCreate = { title: text, status: 'todo', createdAt: date };
 
     const promise = addDoc(taskCollectionRef, todoToCreate).then(
       (response) => response.id

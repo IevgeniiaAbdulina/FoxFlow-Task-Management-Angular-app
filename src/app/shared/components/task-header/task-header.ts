@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class TaskHeader {
   text = '';
   projectId = 'MnUTvclhDFbntBHR8Hba';
+  status: 'todo' | 'inProgress' | 'done' = 'todo';
   //date = new Date();
 
   tasksService = inject(TasksService);

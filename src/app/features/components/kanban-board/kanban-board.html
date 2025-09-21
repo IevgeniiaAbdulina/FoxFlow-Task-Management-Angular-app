@@ -2,15 +2,40 @@
   <div class="board">
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.NEW_TASKS' | translate }}</h2>
-      <div class="board__column__content"><app-task-body /></div>
+      @if (todo().length === 0) {
+      <p>{{ 'EMPTY_STATE.NO_TASKS' | translate }}</p>
+      }
+      <div class="board__column__content">
+        <app-task-header />
+        @for (task of todo(); track task.id) {
+        <app-task-list-item
+          [isEditing]="localEditingId === task.id"
+          [task]="task"
+          (setEditingId)="onEditClick($event)" />
+        }
+      </div>
     </div>
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.INPROGRESS' | translate }}</h2>
-      <div class="board__column__content"></div>
+      <div class="board__column__content">
+        @for (task of inProgress(); track task.id) {
+        <app-task-list-item
+          [isEditing]="localEditingId === task.id"
+          [task]="task"
+          (setEditingId)="onEditClick($event)" />
+        }
+      </div>
     </div>
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.DONE' | translate }}</h2>
-      <div class="board__column__content"></div>
+      <div class="board__column__content">
+        @for (task of done(); track task.id) {
+        <app-task-list-item
+          [isEditing]="localEditingId === task.id"
+          [task]="task"
+          (setEditingId)="onEditClick($event)" />
+        }
+      </div>
     </div>
   </div>
 </section>
