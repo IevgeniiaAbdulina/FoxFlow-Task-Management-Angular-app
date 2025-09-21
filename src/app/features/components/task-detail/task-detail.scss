@@ -26,6 +26,11 @@
       border: 1px solid #ccc;
       border-radius: 10px;
     }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 

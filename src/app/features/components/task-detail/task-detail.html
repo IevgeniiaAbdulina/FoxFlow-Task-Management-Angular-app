@@ -46,12 +46,40 @@
   </div>
   <div class="task__description">
     <div class="task__description__text">
-      <h4>Task description</h4>
+      <div class="task__description__header"
+        ><h4>Task description</h4>
+        @if (!editingDescription()) {
+        <button
+          mat-button
+          type="submit"
+          (click)="editTaskDesription()">
+          Edit
+        </button>
+        }
+      </div>
+      @if (!editingDescription()) {
+      <p>{{ task()?.description }}</p>
+      } @else {
       <textarea
         id="description"
-        name="description">
- {{ task()?.description }}</textarea
-      >
+        name="description"
+        [(ngModel)]="descriptionText"
+        (blur)="saveTaskDescription()"></textarea>
+      <div class="task__description__actions">
+        <button
+          mat-button
+          type="submit"
+          (click)="saveTaskDescription()"
+          >Save</button
+        >
+        <button
+          mat-button
+          type="submit"
+          (click)="cancelEditDescription()"
+          >Cancel</button
+        >
+      </div>
+      }
     </div>
     <div class="task__description__users">
       <mat-form-field appearance="fill">

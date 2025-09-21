@@ -47,9 +47,10 @@ import { Timestamp } from 'firebase/firestore';
 export class TaskDetail implements OnInit {
   readonly task = signal<TaskData | null>(null);
   readonly editing = signal(false);
+  readonly editingDescription = signal(false);
   projectId = 'MnUTvclhDFbntBHR8Hba';
   editingText = '';
-  editingTaskDescription = '';
+  descriptionText = '';
   users: MemberInterface[] = [];
   selectedUserIds: string[] = [];
   @Output() readonly setEditingId = new EventEmitter<string | null>();
@@ -72,6 +73,7 @@ export class TaskDetail implements OnInit {
         if (task.dueTo instanceof Timestamp) {
           this.selectedDate = task.dueTo.toDate();
         }
+        this.descriptionText = task.description || '';
       });
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
@@ -169,5 +171,35 @@ export class TaskDetail implements OnInit {
           dueTo: dueTo,
         });
       });
+  }
+
+  editTaskDesription(): void {
+    this.editingDescription.set(true);
+  }
+
+  saveTaskDescription(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+
+    const dataToUpdate = {
+      title: currentTask.title,
+      isComleted: currentTask.isCompleted,
+      dueTo: currentTask.dueTo,
+      description: this.descriptionText,
+    };
+    this.tasksFirebaseService
+      .updateTask(this.projectId, currentTask.id, dataToUpdate)
+      .subscribe(() => {
+        this.task.set({
+          ...currentTask,
+          description: this.descriptionText,
+        });
+        this.editingDescription.set(false);
+      });
+  }
+
+  cancelEditDescription(): void {
+    this.editingDescription.set(false);
+    this.descriptionText = this.task()?.description || '';
   }
 }
