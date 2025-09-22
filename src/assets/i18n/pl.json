@@ -30,7 +30,8 @@
     "ASSIGNEE_LABEL": "Przypisany",
     "TASK_DETAIL": "Szczegóły zadania",
     "NO_ASSIGNEE": "Brak cesjonariusza",
-    "STATUS": "Status"
+    "STATUS": "Status",
+    "DESCRIPTION": "Opis"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",

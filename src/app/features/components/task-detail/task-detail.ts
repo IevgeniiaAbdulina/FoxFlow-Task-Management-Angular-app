@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-detail',
@@ -42,6 +43,7 @@ import { MatDividerModule } from '@angular/material/divider';
     FormsModule,
     TranslateModule,
     MatDividerModule,
+    DatePipe,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
@@ -186,8 +188,7 @@ export class TaskDetail implements OnInit {
     if (!currentTask) return;
 
     const dataToUpdate = {
-      title: currentTask.title,
-      dueTo: currentTask.dueTo,
+      id: currentTask.id,
       description: this.descriptionText,
     };
     this.tasksFirebaseService

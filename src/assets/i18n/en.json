@@ -30,7 +30,8 @@
     "ASSIGNEE_LABEL": "Assignee",
     "TASK_DETAIL": "Task detail",
     "NO_ASSIGNEE": "No assignee",
-    "STATUS": "Status"
+    "STATUS": "Status",
+    "DESCRIPTION": "Description"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",

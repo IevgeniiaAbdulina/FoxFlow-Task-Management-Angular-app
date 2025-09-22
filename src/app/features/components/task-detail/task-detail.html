@@ -98,49 +98,39 @@
     </mat-form-field>
   </div>
   <div class="task__description">
+    <p>{{ 'TASK.DESCRIPTION' | translate }}</p>
+
     <div class="task__description__text">
-      <div class="task__description__header"
-        ><h4>Task description</h4>
-        @if (!editingDescription()) {
-        <button
-          mat-button
-          type="submit"
-          (click)="editTaskDesription()">
-          Edit
-        </button>
-        }
-      </div>
-      @if (!editingDescription()) {
-      <p>{{ task()?.description }}</p>
-      } @else {
       <textarea
-        id="description"
-        name="description"
+        placeholder="What is this task about?"
         [(ngModel)]="descriptionText"
-        (blur)="saveTaskDescription()"></textarea>
-      <div class="task__description__actions">
-        <button
-          mat-button
-          type="submit"
-          (click)="saveTaskDescription()"
-          >Save</button
-        >
-        <button
-          mat-button
-          type="submit"
-          (click)="cancelEditDescription()"
-          >Cancel</button
-        >
-      </div>
-      }
+        (blur)="saveTaskDescription()"
+        (click)="editTaskDesription()">
+      </textarea>
     </div>
+    @if (editingDescription()) {
+
+    <div class="task__description__actions">
+      <button
+        mat-button
+        type="submit"
+        (click)="saveTaskDescription()"
+        >Save</button
+      >
+      <button
+        mat-button
+        type="submit"
+        (click)="cancelEditDescription()"
+        >Cancel</button
+      >
+    </div>
+    }
   </div>
 
   <button
-    aria-label="Close"
-    mat-icon-button
+    matButton="filled"
     type="submit"
     (click)="closeTask()">
-    <mat-icon>close</mat-icon>
+    Close
   </button>
 </div>
