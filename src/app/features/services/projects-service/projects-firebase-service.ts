@@ -16,7 +16,7 @@ import { Project } from '@app/shared/interfaces/project-interface';
 import { AuthService } from '@app/auth/services/auth-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
-import { ProjectService } from '@app/features/services/projects-service/project-service';
+import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ import { ProjectService } from '@app/features/services/projects-service/project-
 export class ProjectsFirebaseService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
-  private projectService = inject(ProjectService);
+  private firebaseServiceTs = inject(FirebaseServiceTs);
 
   projectsCollection = collection(this.firestore, 'projects');
   projectsSortedByDate = query(
@@ -52,11 +52,20 @@ export class ProjectsFirebaseService {
 
     const promise = addDoc(this.projectsCollection, projectToCreate).then(
       (result) => {
-        this.projectService.addTasksCollection(result.id);
+        this.addTasksCollection(result.id);
         return result.id;
       }
     );
     return from(promise);
+  }
+
+  addTasksCollection(projectId: string): void {
+    const date = new Date();
+    const todoToCreate = '[EXAMPLE TASK] Learn Routing';
+
+    this.firebaseServiceTs
+      .addTask(todoToCreate, projectId, date)
+      .subscribe((result) => console.log('Added default first task.', result));
   }
 
   removeProject(projectID: string): Observable<void> {

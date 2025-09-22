@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
-  OnInit,
 } from '@angular/core';
 import {
   ChangeDetectionStrategy,
@@ -24,21 +24,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './task-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskHeader implements OnInit {
+export class TaskHeader {
   private projectService = inject(ProjectService);
 
   text = '';
-  projectId = '';
   status: 'todo' | 'inProgress' | 'done' = 'todo';
-  //date = new Date();
 
   tasksService = inject(TasksService);
   tasksFirebaseService = inject(FirebaseServiceTs);
   private destroyRef = inject(DestroyRef);
 
-  ngOnInit(): void {
-    this.projectId = this.projectService.currentProject().id as string;
-  }
+  readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
   changeText(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -48,8 +44,7 @@ export class TaskHeader implements OnInit {
   addTask(): void {
     const date = new Date();
     this.tasksFirebaseService
-      .addTask(this.text, this.projectId, new Date())
-      .addTask(this.text, this.projectId, date)
+      .addTask(this.text, this.projectId()!, date)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((taskId) => {
         this.tasksService.addTask(this.text, taskId, date);

@@ -1,0 +1,27 @@
+<mat-label (dblclick)="setProjectInEditMode()">
+  <h1>{{ project$()?.title }}</h1>
+</mat-label>
+@if (isEditing()) {
+<ng-container>
+  <input
+    matInput
+    type="text"
+    [value]="project$()?.title"
+    [(ngModel)]="editingText" />
+</ng-container>
+}
+
+<button
+  aria-label="Edit project button"
+  matIconButton
+  type="button"
+  (click)="updateProject()">
+  <mat-icon>edit</mat-icon>
+</button>
+<button
+  aria-label="Remove project button"
+  matIconButton
+  type="button"
+  (click)="removeProject()">
+  <mat-icon>delete</mat-icon>
+</button>

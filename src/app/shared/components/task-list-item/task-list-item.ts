@@ -6,6 +6,7 @@ import {
   input,
   Output,
   OnInit,
+  computed,
   OnChanges,
   DestroyRef,
 } from '@angular/core';
@@ -47,11 +48,10 @@ export class TaskListItem implements OnInit, OnChanges {
   isCompleted = false;
 
   editingText = '';
-  projectId = 'MnUTvclhDFbntBHR8Hba';
   today = Date.now();
   daysToDeadline = 0;
   taskId = '';
-  projectId = '';
+  readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -61,7 +61,6 @@ export class TaskListItem implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
-    this.projectId = this.projectService.currentProject().id as string;
   }
 
   ngOnChanges(): void {
@@ -70,7 +69,7 @@ export class TaskListItem implements OnInit, OnChanges {
 
   deleteTask(): void {
     this.tasksFirebaseService
-      .deleteTask(this.projectId, this.task().id)
+      .deleteTask(this.projectId()!, this.task().id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.tasksService.deleteTask(this.task().id);
@@ -93,7 +92,7 @@ export class TaskListItem implements OnInit, OnChanges {
       isCompleted: this.task()?.isCompleted,
     };
     this.tasksFirebaseService
-      .updateTask(this.projectId, this.task().id, dataToUpdate)
+      .updateTask(this.projectId()!, this.task().id, dataToUpdate)
       .subscribe(() => {
         this.tasksService.changeTask(this.task().id, this.editingText);
       });
