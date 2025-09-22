@@ -27,7 +27,10 @@
     "ADD": "Add Task",
     "TITLE_LABEL": "Task Title",
     "DUE_DATE_LABEL": "Due Date",
-    "ASSIGNEE_LABEL": "Assignee"
+    "ASSIGNEE_LABEL": "Assignee",
+    "TASK_DETAIL": "Task detail",
+    "NO_ASSIGNEE": "No assignee",
+    "STATUS": "Status"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",

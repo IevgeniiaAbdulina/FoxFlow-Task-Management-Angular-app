@@ -27,7 +27,10 @@
     "ADD": "Dodaj Zadanie",
     "TITLE_LABEL": "Tytuł Zadania",
     "DUE_DATE_LABEL": "Termin",
-    "ASSIGNEE_LABEL": "Przypisany"
+    "ASSIGNEE_LABEL": "Przypisany",
+    "TASK_DETAIL": "Szczegóły zadania",
+    "NO_ASSIGNEE": "Brak cesjonariusza",
+    "STATUS": "Status"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",

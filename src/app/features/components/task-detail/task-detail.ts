@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
-import { TaskData } from '@app/shared/interfaces/task-interface';
+import { TaskData, TaskStatus } from '@app/shared/interfaces/task-interface';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MemberInterface } from '@app/shared/interfaces/member-interface';
@@ -25,6 +25,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-task-detail',
@@ -38,6 +40,8 @@ import { Timestamp } from 'firebase/firestore';
     MatNativeDateModule,
     MatInputModule,
     FormsModule,
+    TranslateModule,
+    MatDividerModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
@@ -57,6 +61,7 @@ export class TaskDetail implements OnInit {
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
   selectedDate: Date | null = null;
+  selectedStatus: TaskStatus | undefined = 'todo';
 
   private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -74,6 +79,7 @@ export class TaskDetail implements OnInit {
           this.selectedDate = task.dueTo.toDate();
         }
         this.descriptionText = task.description || '';
+        this.selectedStatus = task.status;
       });
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
@@ -198,5 +204,22 @@ export class TaskDetail implements OnInit {
   cancelEditDescription(): void {
     this.editingDescription.set(false);
     this.descriptionText = this.task()?.description || '';
+  }
+
+  onStatusChange(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+
+    const updatedTask = {
+      status: this.selectedStatus,
+    };
+    this.tasksFirebaseService
+      .updateTask(this.projectId, currentTask.id, updatedTask)
+      .subscribe(() => {
+        this.task.set({
+          ...currentTask,
+          status: this.selectedStatus,
+        });
+      });
   }
 }

@@ -1,23 +1,14 @@
 <div class="task">
+  <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+  <mat-divider class="color" />
   <div class="task__header">
     @if (!editing()) {
-    <h2>{{ task()?.title }}</h2>
-
-    <div class="task__header__edit">
-      <button
-        mat-button
-        type="submit"
-        (click)="editTask()">
-        Edit
-      </button>
-      <button
-        aria-label="Close"
-        mat-icon-button
-        type="submit"
-        (click)="closeTask()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+    <p>{{ task()?.title }}</p>
+    <mat-icon
+      class="color"
+      (click)="editTask()"
+      >edit</mat-icon
+    >
     } @if (editing()) {
     <input
       #titleInput
@@ -31,18 +22,80 @@
       <button
         mat-button
         type="submit"
-        (click)="saveHeaderTitle()">
-        Save
-      </button>
-
-      <button
-        mat-button
-        type="submit"
         (click)="cancelEditTask()">
         Cancel
       </button>
+      <button
+        mat-button
+        type="submit"
+        (click)="saveHeaderTitle()">
+        Save
+      </button>
     </div>
     }
+  </div>
+  <div class="task__assignee">
+    <p>{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p>
+    <mat-form-field
+      appearance="outline"
+      class="form-assignee">
+      <mat-label>{{ 'TASK.NO_ASSIGNEE' | translate }}</mat-label>
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-select
+        multiple
+        [(value)]="selectedUserIds">
+        @for (user of users; track user.id) {
+        <mat-option [value]="user.id">
+          <img
+            alt="avatar"
+            height="30"
+            ngSrc="{{user.photoURL}}"
+            width="30" />
+          {{ user.displayName }}
+        </mat-option>
+        }
+      </mat-select>
+      <div class="selected-users">
+        @for (user of selectedUsers; track user.id) {
+        <div class="user-card">
+          <img
+            alt="avatar"
+            height="40"
+            mat-card-md-image
+            ngSrc="{{user.photoURL}}"
+            style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
+            width="40" />
+          <span>{{user.displayName}}</span>
+        </div>
+        }
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="task__deadline">
+    <p>{{ 'TASK.DUE_DATE_LABEL' | translate }}</p>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="selectedDate"
+        (dateChange)="saveDateOnBlur()" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+  </div>
+  <div class="task__status">
+    <p>{{ 'TASK.STATUS' | translate }}</p>
+    <mat-form-field appearance="outline">
+      <mat-select
+        [(value)]="selectedStatus"
+        (selectionChange)="onStatusChange()">
+        <mat-option value="todo">todo</mat-option>
+        <mat-option value="in-progress">in-progress</mat-option>
+        <mat-option value="done">done</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="task__description">
     <div class="task__description__text">
@@ -81,51 +134,13 @@
       </div>
       }
     </div>
-    <div class="task__description__users">
-      <mat-form-field appearance="fill">
-        <mat-label>Assign user</mat-label>
-        <mat-select
-          multiple
-          [(value)]="selectedUserIds">
-          @for (user of users; track user.id) {
-          <mat-option [value]="user.id">
-            <img
-              alt="avatar"
-              height="30"
-              ngSrc="{{user.photoURL}}"
-              width="30" />
-            {{ user.displayName }}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <div class="selected-users">
-        <h4>Assigned to:</h4>
-        @for (user of selectedUsers; track user.id) {
-        <div class="user-card">
-          <img
-            alt="avatar"
-            height="40"
-            mat-card-md-image
-            ngSrc="{{user.photoURL}}"
-            style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
-            width="40" />
-          <span>{{user.displayName}}</span>
-        </div>
-        }
-      </div>
-    </div>
   </div>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input
-      matInput
-      [matDatepicker]="picker"
-      [(ngModel)]="selectedDate"
-      (dateChange)="saveDateOnBlur()" />
-    <mat-datepicker-toggle
-      matIconSuffix
-      [for]="picker" />
-    <mat-datepicker #picker />
-  </mat-form-field>
+
+  <button
+    aria-label="Close"
+    mat-icon-button
+    type="submit"
+    (click)="closeTask()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>

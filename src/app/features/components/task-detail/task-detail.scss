@@ -1,14 +1,49 @@
 .task {
   width: 500px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 0 2rem;
   font-size: 1.6rem;
+  //font-weight: 500; ??? у всех элементов
+
+  & > h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 2rem 0;
+  }
 
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: burlywood;
+    font-size: 2.4rem;
+    font-weight: 500;
+    padding: 1rem 0;
+
+    &__edit {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__assignee {
+    display: flex;
+    column-gap: 1.5rem;
+    align-items: center;
+
+    & > svg {
+    }
+  }
+
+  &__deadline {
+    display: flex;
+    column-gap: 1.5rem;
+    align-items: center;
+  }
+
+  &__status {
+    display: flex;
+    column-gap: 1.5rem;
+    align-items: center;
   }
 
   &__description {
@@ -36,7 +71,7 @@
 
 .selected-users {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
 }
 
@@ -47,4 +82,8 @@
   border-radius: 4px;
   padding: 0.2rem 0.4rem;
   width: 100%;
+}
+
+:host ::ng-deep .form-assignee svg {
+  fill: none;
 }
