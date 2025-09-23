@@ -105,5 +105,16 @@
     "ACTION_SUBMIT": "Continue",
     "ACTION_GOOGLE": "Sign in with Google",
     "ACTION_GITHUB": "Sign in with GitHub"
+  },
+  "GREETING": {
+    "WELCOME": "Good {time}, {name}!",
+    "GUEST": "Good {time}, Guest!",
+    "MORNING": "morning",
+    "AFTERNOON": "afternoon",
+    "EVENING": "evening"
+  },
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "CREATE": "Create project"
   }
 }

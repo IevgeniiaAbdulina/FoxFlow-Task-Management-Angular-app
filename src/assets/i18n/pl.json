@@ -102,5 +102,16 @@
     "ACTION_SUBMIT": "Dalej",
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
+  },
+  "GREETING": {
+    "WELCOME": "Dobry {time}, {name}!",
+    "GUEST": "Dobry {time}, Gość!",
+    "MORNING": "poranek",
+    "AFTERNOON": "popołudnie",
+    "EVENING": "wieczór"
+  },
+  "PROJECTS": {
+    "TITLE": "Projekty",
+    "CREATE": "Utwórz projekt"
   }
 }
