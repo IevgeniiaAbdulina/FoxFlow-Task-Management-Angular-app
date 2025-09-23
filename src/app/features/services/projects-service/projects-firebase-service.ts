@@ -17,7 +17,6 @@ import { Project } from '@app/shared/interfaces/project-interface';
 import { AuthService } from '@app/auth/services/auth-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
-import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { NotificationService } from '@app/shared/services/notification-service';
 
 @Injectable({
@@ -26,7 +25,6 @@ import { NotificationService } from '@app/shared/services/notification-service';
 export class ProjectsFirebaseService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
-  private firebaseServiceTs = inject(FirebaseServiceTs);
   private notificationService = inject(NotificationService);
 
   projectsCollection = collection(this.firestore, 'projects');
