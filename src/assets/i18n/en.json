@@ -108,5 +108,9 @@
     "ACTION_SUBMIT": "Continue",
     "ACTION_GOOGLE": "Sign in with Google",
     "ACTION_GITHUB": "Sign in with GitHub"
+  },
+  "TOOLS": {
+    "EDIT": "Edit title",
+    "DELETE": "Delete task"
   }
 }

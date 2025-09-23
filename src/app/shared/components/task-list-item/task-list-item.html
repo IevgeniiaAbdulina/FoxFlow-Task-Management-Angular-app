@@ -17,7 +17,7 @@
       <mat-icon
         aria-label="Edit"
         class="color"
-        matTooltip="Edit"
+        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
         matTooltipPosition="right"
         (click)="setTaskInEditMode()"
         >edit</mat-icon
@@ -27,6 +27,7 @@
         class="edit"
         type="text"
         [value]="editingText"
+        (dateChange)="changeTask()"
         (keyup)="changeText($event)"
         (keyup.enter)="changeTask()" />
       }
@@ -42,7 +43,7 @@
         #actionButton
         aria-label="Delete task"
         class="delete"
-        matTooltip="Delete task"
+        matTooltip="{{ 'TOOLS.DELETE' | translate }}"
         matTooltipPosition="right"
         type="submit"
         (click)="deleteTask()">

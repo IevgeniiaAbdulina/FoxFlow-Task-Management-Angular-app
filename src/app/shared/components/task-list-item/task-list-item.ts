@@ -17,14 +17,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskDetail } from '@app/features/components/task-detail/task-detail';
 import { Months } from '@app/shared/enums/Months';
 //import { Router } from '@angular/router';
-//import { Timestamp } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { StyleChange } from '@app/shared/directives/style-change/style-change';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-list-item',
-  imports: [MatIconModule, CommonModule, StyleChange, MatTooltipModule],
+  imports: [
+    MatIconModule,
+    CommonModule,
+    StyleChange,
+    MatTooltipModule,
+    TranslateModule,
+  ],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +54,6 @@ export class TaskListItem implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
-    //this.getDaysToDeadline();
   }
 
   ngOnChanges(): void {
@@ -88,7 +93,6 @@ export class TaskListItem implements OnInit, OnChanges {
   }
 
   openTaskDetailInformation(): void {
-    console.log('openTaskDetailInformation');
     //this.router.navigate(['/task', this.task().id])
     this.dialog.open(TaskDetail, {
       data: { taskId: this.task().id },
@@ -120,8 +124,6 @@ export class TaskListItem implements OnInit, OnChanges {
 
     const deadlineDate = dueTo.toDate();
     const today = new Date();
-    //console.log('date', date);
-    //console.log('getDaysToDeadline', this.today);
     const diff = deadlineDate.getTime() - today.getTime();
     this.daysToDeadline = Math.ceil(diff / (1000 * 60 * 60 * 24));
     return this.daysToDeadline;

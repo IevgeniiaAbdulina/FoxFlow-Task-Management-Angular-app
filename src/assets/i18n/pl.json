@@ -105,5 +105,9 @@
     "ACTION_SUBMIT": "Dalej",
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
+  },
+    "TOOLS": {
+    "EDIT": "Edytuj tytuł",
+    "DELETE": "Usuń zadanie"
   }
 }
