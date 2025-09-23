@@ -47,9 +47,9 @@ export class KanbanBoard implements OnInit {
               (task: TaskData) => task.status
             );
 
-            this.toDoTasks.set(groupedTasks['todo'] || []);
-            this.inProgressTasks.set(groupedTasks['inprogress'] || []);
-            this.doneTasks.set(groupedTasks['done'] || []);
+            this.toDoTasks.set(groupedTasks['todo'] ?? []);
+            this.inProgressTasks.set(groupedTasks['inprogress'] ?? []);
+            this.doneTasks.set(groupedTasks['done'] ?? []);
           });
       }
     });
