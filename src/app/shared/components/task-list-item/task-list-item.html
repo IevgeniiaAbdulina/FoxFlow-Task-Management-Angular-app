@@ -7,7 +7,7 @@
   (keydown.enter)="openTaskDetailInformation()">
   <div
     class="item"
-    [ngClass]="{deadline : daysToDeadline <= 2}">
+    [ngClass]="{'deadline' : daysToDeadline <= 2, 'task-complete': isCompleted}">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
       @if (!isEditing()) {
@@ -18,21 +18,21 @@
         >edit</mat-icon
       >
       } @if (isEditing()) {
-      <ng-container>
-        <input
-          class="edit"
-          type="text"
-          [value]="editingText"
-          (keyup)="changeText($event)"
-          (keyup.enter)="changeTask()" />
-      </ng-container>
+      <input
+        class="edit"
+        type="text"
+        [value]="editingText"
+        (keyup)="changeText($event)"
+        (keyup.enter)="changeTask()" />
       }
     </div>
     <div class="item__footer">
       <div class="item__footer__information">
         <mat-icon class="disable">person</mat-icon>
         @if (getDeadline()) {
-        <p>{{ getDeadline() }}</p>
+        <p [ngClass]="{deadline : daysToDeadline <= 2}">
+          {{ getDeadline() }}
+        </p>
         } @else { <mat-icon class="disable">date_range</mat-icon>}
       </div>
       <button

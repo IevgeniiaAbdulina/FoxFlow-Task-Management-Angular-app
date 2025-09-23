@@ -32,6 +32,7 @@ export class TaskListItem implements OnInit {
   readonly isEditing = input<boolean>(false);
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   @Output() readonly requestEdit = new EventEmitter<string>();
+  isCompleted = false;
 
   editingText = '';
   projectId = 'MnUTvclhDFbntBHR8Hba';
@@ -53,7 +54,8 @@ export class TaskListItem implements OnInit {
       .deleteTask(this.projectId, this.task().id)
       .subscribe(() => {
         this.tasksService.deleteTask(this.task().id);
-      });
+      })
+      .unsubscribe();
   }
 
   setTaskInEditMode(): void {
@@ -103,6 +105,11 @@ export class TaskListItem implements OnInit {
     if (!dueTo || !(dueTo instanceof Timestamp)) {
       this.daysToDeadline = 3;
       return this.daysToDeadline;
+    }
+
+    if (this.task().status === 'done') {
+      this.isCompleted = true;
+      this.daysToDeadline = 3;
     }
 
     const deadlineDate = dueTo.toDate();
