@@ -6,8 +6,10 @@
   (dblclick)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
   <div
+    appStyleChange
     class="item"
-    [ngClass]="{'deadline' : daysToDeadline <= 2, 'task-complete': isCompleted}">
+    [daysForDeadline]="daysToDeadline"
+    [taskStatus]="task().status">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
       @if (!isEditing()) {
@@ -30,9 +32,7 @@
       <div class="item__footer__information">
         <mat-icon class="disable">person</mat-icon>
         @if (getDeadline()) {
-        <p [ngClass]="{deadline : daysToDeadline <= 2}">
-          {{ getDeadline() }}
-        </p>
+        <p> {{ getDeadline() }} </p>
         } @else { <mat-icon class="disable">date_range</mat-icon>}
       </div>
       <button

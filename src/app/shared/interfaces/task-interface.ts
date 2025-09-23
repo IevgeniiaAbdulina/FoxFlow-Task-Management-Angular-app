@@ -5,7 +5,7 @@ export type TaskStatus = 'todo' | 'in-progress' | 'done';
 export interface TaskData {
   id: string;
   title: string;
-  status?: TaskStatus;
+  status: TaskStatus;
   assignedTo?: MemberInterface[];
   createdAt: Date;
   dueTo?: Date | null;

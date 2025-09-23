@@ -4,9 +4,9 @@ import {
   EventEmitter,
   inject,
   input,
-  InputSignal,
   Output,
   OnInit,
+  OnChanges,
 } from '@angular/core';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
@@ -19,15 +19,16 @@ import { Months } from '@app/shared/enums/Months';
 //import { Router } from '@angular/router';
 //import { Timestamp } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
+import { StyleChange } from '@app/shared/directives/style-change/style-change';
 
 @Component({
   selector: 'app-task-list-item',
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, StyleChange],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListItem implements OnInit {
+export class TaskListItem implements OnInit, OnChanges {
   readonly task = input.required<TaskData>();
   readonly isEditing = input<boolean>(false);
   @Output() readonly setEditingId = new EventEmitter<string | null>();
@@ -46,6 +47,10 @@ export class TaskListItem implements OnInit {
 
   ngOnInit(): void {
     this.editingText = this.task().title;
+    //this.getDaysToDeadline();
+  }
+
+  ngOnChanges(): void {
     this.getDaysToDeadline();
   }
 
