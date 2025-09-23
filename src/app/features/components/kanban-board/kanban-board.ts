@@ -1,36 +1,21 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  inject,
-  OnInit,
-  Output,
-  signal,
-} from '@angular/core';
-import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
-import { TasksService } from '@app/services/tasks-service/tasks-service';
-//import { TaskBody } from '@app/shared/components/task-body/task-body';
-import { TaskData } from '@app/shared/interfaces/task-interface';
-import {
-  ChangeDetectionStrategy,
-  Component,
   inject,
   OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
-import { TaskBody } from '@app/shared/components/task-body/task-body';
 import { TranslateModule } from '@ngx-translate/core';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { TaskHeader } from '@app/shared/components/task-header/task-header';
 import { TaskListItem } from '@app/shared/components/task-list-item/task-list-item';
-import { ProjectHeader } from '@app/features/components/project-header/project-header';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-kanban-board',
-  imports: [TaskBody, TranslateModule, ProjectHeader, TaskHeader, TaskListItem],
+  imports: [TranslateModule, TaskHeader, TaskListItem],
   templateUrl: './kanban-board.html',
   styleUrl: './kanban-board.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,8 +34,6 @@ export class KanbanBoard implements OnInit {
 
   localEditingId: string | null = null;
 
-  private taskService = inject(TasksService);
-
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.projectId = params['id'];
@@ -59,11 +42,20 @@ export class KanbanBoard implements OnInit {
         this.tasksService
           .getTasksFromFirebase(this.projectId)
           .subscribe((tasks) => {
-            this.toDoTasks.set(tasks.filter((task) => task.status === 'todo'));
-            this.inProgressTasks.set(
-              tasks.filter((task) => task.status === 'inprogress')
+            const groupedTasks = tasks.reduce(
+              (acc, task) => {
+                if (!acc[task.status]) {
+                  acc[task.status] = [];
+                }
+                acc[task.status].push(task);
+                return acc;
+              },
+              {} as Record<string, TaskData[]>
             );
-            this.doneTasks.set(tasks.filter((task) => task.status === 'done'));
+
+            this.toDoTasks.set(groupedTasks['todo'] || []);
+            this.inProgressTasks.set(groupedTasks['inprogress'] || []);
+            this.doneTasks.set(groupedTasks['done'] || []);
           });
       }
     });
