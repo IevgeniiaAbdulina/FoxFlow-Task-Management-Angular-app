@@ -42,15 +42,9 @@ export class KanbanBoard implements OnInit {
         this.tasksService
           .getTasksFromFirebase(this.projectId)
           .subscribe((tasks) => {
-            const groupedTasks = tasks.reduce(
-              (acc, task) => {
-                if (!acc[task.status]) {
-                  acc[task.status] = [];
-                }
-                acc[task.status].push(task);
-                return acc;
-              },
-              {} as Record<string, TaskData[]>
+            const groupedTasks = Object.groupBy(
+              tasks,
+              (task: TaskData) => task.status
             );
 
             this.toDoTasks.set(groupedTasks['todo'] || []);
