@@ -1,27 +1,56 @@
-<mat-label (dblclick)="setProjectInEditMode()">
+@if (!isEditing()) {
+<mat-label>
   <h1>{{ project$()?.title }}</h1>
 </mat-label>
-@if (isEditing()) {
+} @else {
 <ng-container>
-  <input
-    matInput
-    type="text"
-    [value]="project$()?.title"
-    [(ngModel)]="editingText" />
+  <mat-form-field
+    appearance="outline"
+    class="project-form-field">
+    <mat-label>Project title</mat-label>
+    <input
+      #titleInput
+      matInput
+      type="text"
+      [(ngModel)]="editingText"
+      (keydown.enter)="saveEditing()"
+      (keydown.escape)="cancelEditing()" />
+  </mat-form-field>
 </ng-container>
 }
 
-<button
-  aria-label="Edit project button"
-  matIconButton
-  type="button"
-  (click)="updateProject()">
-  <mat-icon>edit</mat-icon>
-</button>
-<button
-  aria-label="Remove project button"
-  matIconButton
-  type="button"
-  (click)="removeProject()">
-  <mat-icon>delete</mat-icon>
-</button>
+<div class="actions">
+  @if (!isEditing()) {
+  <button
+    aria-label="Edit project button"
+    matIconButton
+    matTooltip="Edit paroject title"
+    type="button"
+    (click)="startEditing()">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button
+    aria-label="Remove project button"
+    matIconButton
+    matTooltip="Delete project"
+    type="button"
+    (click)="confirmDelete()">
+    <mat-icon>delete</mat-icon>
+  </button>
+  } @else {
+  <button
+    aria-label="Edit project button"
+    matButton="filled"
+    type="button"
+    (click)="saveEditing()">
+    Save
+  </button>
+  <button
+    aria-label="Remove project button"
+    matButton="outlined"
+    type="button"
+    (click)="cancelEditing()">
+    Cancel
+  </button>
+  }
+</div>

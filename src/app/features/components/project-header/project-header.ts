@@ -1,13 +1,12 @@
 import {
   Component,
   inject,
-  OnInit,
   signal,
   ChangeDetectionStrategy,
+  computed,
+  OnInit,
 } from '@angular/core';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
-import { Project } from '@app/shared/interfaces/project-interface';
-
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +15,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectStore } from '@app/features/project-store/project-store';
+import { ConfirmationDialog } from '@app/shared/components/confirmation-dialog/confirmation-dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-project-header',
@@ -31,36 +34,77 @@ import { FormsModule } from '@angular/forms';
   ],
   templateUrl: './project-header.html',
   styleUrl: './project-header.scss',
+  providers: [ProjectStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectHeader implements OnInit {
   private projectService = inject(ProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
 
-  readonly project$ = signal<Project | null>(null);
-
+  readonly project$ = computed(() => this.projectService.currentProject());
   readonly isEditing = signal<boolean>(false);
-  editingText = '';
+  readonly editingText = signal('');
+
+  projectId = '';
 
   ngOnInit(): void {
-    this.project$.set(this.projectService.currentProject()!);
+    this.route.params.subscribe((params) => {
+      this.projectId = params['id'];
+
+      this.projectService.getProject(this.projectId);
+    });
   }
 
-  removeProject(): void {
-    this.projectService.removeProject(this.project$()!);
+  startEditing(): void {
+    this.editingText.set(this.project$()?.title ?? '');
+    this.isEditing.set(true);
   }
 
-  updateProject(): void {
-    console.log('Value is updated', this.editingText);
-
-    this.projectService.updateProject(
-      this.project$()?.id as string,
-      this.editingText
-    );
+  saveEditing(): void {
+    if (this.editingText()) {
+      this.projectService.updateProject(this.projectId, this.editingText());
+    }
 
     this.isEditing.set(false);
   }
 
-  setProjectInEditMode(): void {
-    this.isEditing.set(true);
+  cancelEditing(): void {
+    this.isEditing.set(false);
+    this.editingText.set('');
+  }
+
+  confirmDelete(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        title: 'Delete Project',
+        message:
+          'Are you sure you want to delete this project? This action cannot be undone.',
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.removeProject();
+      }
+    });
+  }
+
+  removeProject(): void {
+    this.isEditing.set(false);
+    this.editingText.set('');
+
+    const projectOwner = this.project$()?.owner as string;
+
+    if (this.project$()) {
+      this.projectService.removeProject(this.projectId, projectOwner);
+    } else {
+      console.log('No such project!');
+    }
+
+    this.router.navigate(['/home']);
   }
 }

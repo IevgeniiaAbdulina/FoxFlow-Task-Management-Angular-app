@@ -10,13 +10,15 @@ import {
   query,
   updateDoc,
   limit,
+  getDoc,
 } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import { EMPTY, from, Observable } from 'rxjs';
 import { Project } from '@app/shared/interfaces/project-interface';
 import { AuthService } from '@app/auth/services/auth-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
+import { NotificationService } from '@app/shared/services/notification-service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +27,7 @@ export class ProjectsFirebaseService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
   private firebaseServiceTs = inject(FirebaseServiceTs);
+  private notificationService = inject(NotificationService);
 
   projectsCollection = collection(this.firestore, 'projects');
   projectsSortedByDate = query(
@@ -81,5 +84,22 @@ export class ProjectsFirebaseService {
     const docRef = doc(this.firestore, 'projects/' + projectID);
     const promise = updateDoc(docRef, dataToUpdate);
     return from(promise);
+  }
+
+  getProject(projectId: string): Observable<Project> {
+    const path = 'projects/' + projectId;
+    const docRef = doc(this.firestore, path);
+    const promise = getDoc(docRef)
+      .then((result) => {
+        const res = result.data();
+        console.log('Get current Project by id:', projectId, res);
+        return result.data();
+      })
+      .catch(() => {
+        const message = 'No such project!';
+        this.notificationService.showErrorMessage(message);
+        return EMPTY;
+      });
+    return from(promise) as Observable<Project>;
   }
 }
