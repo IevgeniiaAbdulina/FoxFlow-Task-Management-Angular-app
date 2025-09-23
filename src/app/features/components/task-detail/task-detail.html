@@ -5,7 +5,10 @@
     @if (!editing()) {
     <p>{{ task()?.title }}</p>
     <mat-icon
+      aria-label="Edit title"
       class="color"
+      matTooltip="Edit title"
+      matTooltipPosition="right"
       (click)="editTask()"
       >edit</mat-icon
     >

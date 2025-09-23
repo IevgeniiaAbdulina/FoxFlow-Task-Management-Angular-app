@@ -20,10 +20,11 @@ import { Months } from '@app/shared/enums/Months';
 //import { Timestamp } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { StyleChange } from '@app/shared/directives/style-change/style-change';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-task-list-item',
-  imports: [MatIconModule, CommonModule, StyleChange],
+  imports: [MatIconModule, CommonModule, StyleChange, MatTooltipModule],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

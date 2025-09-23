@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-task-detail',
@@ -42,6 +43,7 @@ import { MatDividerModule } from '@angular/material/divider';
     FormsModule,
     TranslateModule,
     MatDividerModule,
+    MatTooltipModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',

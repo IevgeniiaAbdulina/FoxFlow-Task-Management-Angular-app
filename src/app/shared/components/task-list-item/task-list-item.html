@@ -15,7 +15,10 @@
       @if (!isEditing()) {
       <p class="item__header__text">{{ task().title }}</p>
       <mat-icon
+        aria-label="Edit"
         class="color"
+        matTooltip="Edit"
+        matTooltipPosition="right"
         (click)="setTaskInEditMode()"
         >edit</mat-icon
       >
@@ -37,7 +40,10 @@
       </div>
       <button
         #actionButton
+        aria-label="Delete task"
         class="delete"
+        matTooltip="Delete task"
+        matTooltipPosition="right"
         type="submit"
         (click)="deleteTask()">
         <mat-icon class="color">delete_forever</mat-icon>
