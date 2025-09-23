@@ -107,8 +107,19 @@
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
   },
-    "TOOLS": {
+  "TOOLS": {
     "EDIT": "Edytuj tytuł",
     "DELETE": "Usuń zadanie"
+  },
+  "GREETING": {
+    "WELCOME": "Dobry {time}, {name}!",
+    "GUEST": "Dobry {time}, Gość!",
+    "MORNING": "poranek",
+    "AFTERNOON": "popołudnie",
+    "EVENING": "wieczór"
+  },
+  "PROJECTS": {
+    "TITLE": "Projekty",
+    "CREATE": "Utwórz projekt"
   }
 }

@@ -113,5 +113,16 @@
   "TOOLS": {
     "EDIT": "Edit title",
     "DELETE": "Delete task"
+  },
+  "GREETING": {
+    "WELCOME": "Good {time}, {name}!",
+    "GUEST": "Good {time}, Guest!",
+    "MORNING": "morning",
+    "AFTERNOON": "afternoon",
+    "EVENING": "evening"
+  },
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "CREATE": "Create project"
   }
 }

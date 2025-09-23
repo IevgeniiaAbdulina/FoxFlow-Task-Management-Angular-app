@@ -16,11 +16,12 @@ import { AuthService } from '@app/auth/services/auth-service';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BreakpointState } from '@angular/cdk/layout';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let breakpointSubject: Subject<any>;
+  let breakpointSubject: Subject<BreakpointState>;
   let authService: jasmine.SpyObj<AuthService>;
 
   beforeEach(async () => {
