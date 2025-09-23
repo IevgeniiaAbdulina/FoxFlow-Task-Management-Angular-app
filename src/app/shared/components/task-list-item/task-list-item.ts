@@ -65,8 +65,7 @@ export class TaskListItem implements OnInit, OnChanges {
       .deleteTask(this.projectId, this.task().id)
       .subscribe(() => {
         this.tasksService.deleteTask(this.task().id);
-      })
-      .unsubscribe();
+      });
   }
 
   setTaskInEditMode(): void {

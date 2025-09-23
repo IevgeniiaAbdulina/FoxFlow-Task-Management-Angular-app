@@ -3,6 +3,9 @@
   margin: 2rem auto;
   padding: 0 2rem;
   font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
   //font-weight: 500; ??? у всех элементов
 
   & > h3 {
@@ -25,30 +28,60 @@
     }
   }
 
-  &__assignee {
-    display: flex;
-    column-gap: 1.5rem;
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
     align-items: center;
+    gap: 1.5rem;
 
-    & > svg {
+    &__assign-text {
+      grid-column: 1;
+      grid-row: 1;
     }
-  }
 
-  &__deadline {
-    display: flex;
-    column-gap: 1.5rem;
-    align-items: center;
-  }
+    &__form-assign {
+      grid-column: 2;
+      grid-row: 1;
+    }
 
-  &__status {
-    display: flex;
-    column-gap: 1.5rem;
-    align-items: center;
+    &__deadline-text {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    &__form-deadline {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    &__status-text {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    &__form-status {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    &__deadline {
+      display: flex;
+      column-gap: 1.5rem;
+      align-items: center;
+    }
+
+    &__status {
+      display: flex;
+      column-gap: 1.5rem;
+      align-items: center;
+    }
   }
 
   &__description {
     display: flex;
     flex-direction: column;
+    row-gap: 1.5rem;
     position: relative;
 
     &__actions {
@@ -64,6 +97,12 @@
       border-radius: 10px;
       padding: 1rem;
     }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: end;
+    column-gap: 1.5rem;
   }
 }
 
@@ -82,7 +121,7 @@
   width: 100%;
 }
 
-:host ::ng-deep .form-assignee svg {
+:host ::ng-deep .task__details__form-assign svg {
   fill: none;
 }
 
@@ -97,6 +136,7 @@
   align-content: center;
 }
 
-.form-assignee {
-  border-color: red;
+:host ::ng-deep .mat-mdc-outlined-button:not(:disabled) {
+  color: var(--mat-sys-error);
+  border-color: var(--mat-sys-error);
 }

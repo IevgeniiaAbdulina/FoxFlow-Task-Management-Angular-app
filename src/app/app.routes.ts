@@ -35,13 +35,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-
-    path: 'kanban-board', // delete after adding to home page
-    component: KanbanBoard,
     path: 'project/:id',
     loadComponent: () =>
-      import('./features/components/project-page/project-page').then(
-        (c) => c.ProjectPage
+      import('./features/components/kanban-board/kanban-board').then(
+        (m) => m.KanbanBoard
       ),
     canActivate: [authGuard],
   },

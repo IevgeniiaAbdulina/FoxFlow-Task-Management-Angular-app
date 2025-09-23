@@ -94,7 +94,14 @@ export class TaskDetail implements OnInit {
   }
 
   deleteTask(): void {
-    console.log('delete task');
+    const currentTask = this.task();
+    if (!currentTask) return;
+    this.tasksFirebaseService
+      .deleteTask(this.projectId, currentTask.id)
+      .subscribe(() => {
+        this.tasksService.deleteTask(currentTask.id);
+      });
+    this.closeTask();
   }
 
   get selectedUsers(): MemberInterface[] {

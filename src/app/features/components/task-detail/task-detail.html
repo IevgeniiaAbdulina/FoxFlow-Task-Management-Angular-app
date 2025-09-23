@@ -37,11 +37,13 @@
     </div>
     }
   </div>
-  <div class="task__assignee">
-    <p>{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p>
+  <div class="task__details">
+    <p class="task__details__assign-text"
+      >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
+    >
     <mat-form-field
       appearance="outline"
-      class="form-assignee">
+      class="task__details__form-assign">
       <mat-label>{{ 'TASK.NO_ASSIGNEE' | translate }}</mat-label>
       <mat-icon matSuffix>person</mat-icon>
       <mat-select
@@ -73,10 +75,12 @@
         }
       </div>
     </mat-form-field>
-  </div>
-  <div class="task__deadline">
-    <p>{{ 'TASK.DUE_DATE_LABEL' | translate }}</p>
-    <mat-form-field appearance="outline">
+    <p class="task__details__deadline-text"
+      >{{ 'TASK.DUE_DATE_LABEL' | translate }}</p
+    >
+    <mat-form-field
+      appearance="outline"
+      class="task__details__form-deadline">
       <input
         matInput
         [matDatepicker]="picker"
@@ -87,10 +91,11 @@
         [for]="picker" />
       <mat-datepicker #picker />
     </mat-form-field>
-  </div>
-  <div class="task__status">
-    <p>{{ 'TASK.STATUS' | translate }}</p>
-    <mat-form-field appearance="outline">
+
+    <p class="task__details__status-text">{{ 'TASK.STATUS' | translate }}</p>
+    <mat-form-field
+      appearance="outline"
+      class="task__details__form-status">
       <mat-select
         [(value)]="selectedStatus"
         (selectionChange)="onStatusChange()">
@@ -100,6 +105,7 @@
       </mat-select>
     </mat-form-field>
   </div>
+
   <div class="task__description">
     <p>{{ 'TASK.DESCRIPTION' | translate }}</p>
 
@@ -130,10 +136,19 @@
     }
   </div>
 
-  <button
-    matButton="filled"
-    type="submit"
-    (click)="closeTask()">
-    Close
-  </button>
+  <div class="task__footer">
+    <button
+      class="task__footer__delete"
+      matButton="outlined"
+      type="submit"
+      (click)="deleteTask()">
+      Delete task
+    </button>
+    <button
+      matButton="filled"
+      type="submit"
+      (click)="closeTask()">
+      Close
+    </button>
+  </div>
 </div>
