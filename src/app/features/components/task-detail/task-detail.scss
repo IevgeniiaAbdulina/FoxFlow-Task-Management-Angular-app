@@ -63,18 +63,8 @@
     &__form-status {
       grid-column: 2;
       grid-row: 3;
-    }
-
-    &__deadline {
-      display: flex;
-      column-gap: 1.5rem;
-      align-items: center;
-    }
-
-    &__status {
-      display: flex;
-      column-gap: 1.5rem;
-      align-items: center;
+      border: 2px solid;
+      border-radius: 25px;
     }
   }
 
@@ -121,12 +111,28 @@
   width: 100%;
 }
 
+.todo {
+  border-color: var(--mat-sys-error);
+}
+
+.in-progress {
+  border-color: orange;
+}
+
+.done {
+  border-color: green;
+}
+
 :host ::ng-deep .task__details__form-assign svg {
   fill: none;
 }
 
 :host ::ng-deep .mat-mdc-form-field {
   flex-direction: row;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  width: 0;
 }
 
 :host ::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
@@ -139,4 +145,17 @@
 :host ::ng-deep .mat-mdc-outlined-button:not(:disabled) {
   color: var(--mat-sys-error);
   border-color: var(--mat-sys-error);
+}
+
+:host ::ng-deep .task__details__form-status .mdc-notched-outline__leading {
+  border-left: none;
+}
+
+:host ::ng-deep .task__details__form-status .mat-mdc-notch-piece {
+  border-top: none;
+  border-bottom: none;
+}
+
+:host ::ng-deep .task__details__form-status .mdc-notched-outline__trailing {
+  border-right: none;
 }

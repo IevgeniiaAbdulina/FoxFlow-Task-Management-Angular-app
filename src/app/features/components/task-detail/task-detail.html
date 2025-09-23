@@ -3,7 +3,7 @@
   <mat-divider class="color" />
   <div class="task__header">
     @if (!editing()) {
-    <p>{{ task()?.title }}</p>
+    <p>{{ task().title }}</p>
     <mat-icon
       aria-label="Edit title"
       class="color"
@@ -48,7 +48,8 @@
       <mat-icon matSuffix>person</mat-icon>
       <mat-select
         multiple
-        [(value)]="selectedUserIds">
+        [(value)]="selectedUserIds"
+        (blur)="saveUsersAssignedToTask()">
         @for (user of users; track user.id) {
         <mat-option [value]="user.id">
           <img
@@ -94,8 +95,10 @@
 
     <p class="task__details__status-text">{{ 'TASK.STATUS' | translate }}</p>
     <mat-form-field
+      appStatusTask
       appearance="outline"
-      class="task__details__form-status">
+      class="task__details__form-status"
+      [taskStatus]="task().status">
       <mat-select
         [(value)]="selectedStatus"
         (selectionChange)="onStatusChange()">

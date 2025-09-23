@@ -28,6 +28,7 @@ import { Timestamp } from 'firebase/firestore';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StatusTask } from '@app/shared/directives/status-task/status-task';
 
 @Component({
   selector: 'app-task-detail',
@@ -44,6 +45,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     TranslateModule,
     MatDividerModule,
     MatTooltipModule,
+    StatusTask,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
@@ -51,13 +53,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDetail implements OnInit {
-  readonly task = signal<TaskData | null>(null);
+  defaultTask: TaskData = {
+    id: '',
+    status: 'todo',
+    title: '',
+    createdAt: new Date(),
+  };
+  readonly task = signal<TaskData>(this.defaultTask);
   readonly editing = signal(false);
   readonly editingDescription = signal(false);
   projectId = 'MnUTvclhDFbntBHR8Hba';
   editingText = '';
   descriptionText = '';
   users: MemberInterface[] = [];
+  assignedUsers: MemberInterface[] = [];
   selectedUserIds: string[] = [];
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
@@ -82,7 +91,14 @@ export class TaskDetail implements OnInit {
         }
         this.descriptionText = task.description || '';
         this.selectedStatus = task.status;
+        //console.log('task', task)
+        task.assignedTo?.forEach((user) => {
+          console.log('user', user);
+          this.assignedUsers.push(user);
+        });
       });
+
+    console.log('assignedUsers', this.assignedUsers);
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
       this.users = users;
@@ -226,6 +242,24 @@ export class TaskDetail implements OnInit {
       .subscribe(() => {
         this.task.set({
           ...currentTask,
+        });
+      });
+  }
+
+  saveUsersAssignedToTask(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+    const assignedUsers: MemberInterface[] = this.selectedUsers;
+    const updateDate = {
+      assignedTo: assignedUsers,
+    };
+    this.tasksFirebaseService
+      .updateTask(this.projectId, currentTask.id, updateDate)
+      .subscribe(() => {
+        console.log('saveUsersAssignedToTask', assignedUsers);
+        this.task.set({
+          ...currentTask,
+          assignedTo: assignedUsers,
         });
       });
   }
