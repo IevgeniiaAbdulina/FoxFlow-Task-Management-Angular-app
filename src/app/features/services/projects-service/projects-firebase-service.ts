@@ -55,20 +55,10 @@ export class ProjectsFirebaseService {
 
     const promise = addDoc(this.projectsCollection, projectToCreate).then(
       (result) => {
-        this.addTasksCollection(result.id);
         return result.id;
       }
     );
     return from(promise);
-  }
-
-  addTasksCollection(projectId: string): void {
-    const date = new Date();
-    const todoToCreate = '[EXAMPLE TASK] Learn Routing';
-
-    this.firebaseServiceTs
-      .addTask(todoToCreate, projectId, date)
-      .subscribe((result) => console.log('Added default first task.', result));
   }
 
   removeProject(projectID: string): Observable<void> {
