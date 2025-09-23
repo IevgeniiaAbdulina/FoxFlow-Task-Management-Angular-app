@@ -1,56 +1,96 @@
-@if (!isEditing()) {
-<mat-label>
-  <h1>{{ project$()?.title }}</h1>
-</mat-label>
-} @else {
-<ng-container>
-  <mat-form-field
-    appearance="outline"
-    class="project-form-field">
-    <mat-label>Project title</mat-label>
-    <input
-      #titleInput
-      matInput
-      type="text"
-      [(ngModel)]="editingText"
-      (keydown.enter)="saveEditing()"
-      (keydown.escape)="cancelEditing()" />
-  </mat-form-field>
-</ng-container>
-}
-
-<div class="actions">
+<div class="project-title__container">
   @if (!isEditing()) {
-  <button
-    aria-label="Edit project button"
-    matIconButton
-    matTooltip="Edit paroject title"
-    type="button"
-    (click)="startEditing()">
-    <mat-icon>edit</mat-icon>
-  </button>
-  <button
-    aria-label="Remove project button"
-    matIconButton
-    matTooltip="Delete project"
-    type="button"
-    (click)="confirmDelete()">
-    <mat-icon>delete</mat-icon>
-  </button>
+  <mat-label>
+    <div class="project-title-group">
+      <img
+        alt="project image"
+        class="project-image"
+        height="48"
+        mat-card-sm-image
+        ngSrc="assets/images/logo-48x48.png"
+        width="48" />
+      <h1>{{ project$()?.title }}</h1>
+    </div>
+  </mat-label>
   } @else {
-  <button
-    aria-label="Edit project button"
-    matButton="filled"
-    type="button"
-    (click)="saveEditing()">
-    Save
-  </button>
-  <button
-    aria-label="Remove project button"
-    matButton="outlined"
-    type="button"
-    (click)="cancelEditing()">
-    Cancel
-  </button>
+  <ng-container>
+    <mat-form-field
+      appearance="outline"
+      class="project-form-field">
+      <mat-label>Project title</mat-label>
+      <input
+        #titleInput
+        matInput
+        type="text"
+        [(ngModel)]="editingText"
+        (keydown.enter)="saveEditing()"
+        (keydown.escape)="cancelEditing()" />
+    </mat-form-field>
+  </ng-container>
   }
+
+  <div class="actions">
+    @if (!isShowActions() && !isEditing()) {
+    <button
+      aria-label="Show actions button"
+      matIconButton
+      matTooltip="Show actions"
+      type="button"
+      [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        aria-label="Edit project button"
+        class="actions__edit"
+        mat-menu-item
+        type="button"
+        (click)="startEditing()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button
+        aria-label="Remove project button"
+        class="actions__delete"
+        mat-menu-item
+        type="button"
+        (click)="confirmDelete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    } @else { @if (!isEditing()) {
+    <button
+      aria-label="Edit project button"
+      matIconButton
+      matTooltip="Edit paroject title"
+      type="button"
+      (click)="startEditing()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      aria-label="Remove project button"
+      matIconButton
+      matTooltip="Delete project"
+      type="button"
+      (click)="confirmDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    } @else {
+    <button
+      aria-label="Edit project button"
+      matButton="filled"
+      type="button"
+      (click)="saveEditing()">
+      Save
+    </button>
+    <button
+      aria-label="Remove project button"
+      matButton="outlined"
+      type="button"
+      (click)="cancelEditing()">
+      Cancel
+    </button>
+    } }
+  </div>
 </div>

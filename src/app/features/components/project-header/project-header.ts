@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   computed,
   OnInit,
+  DestroyRef,
 } from '@angular/core';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -16,9 +17,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectStore } from '@app/features/project-store/project-store';
 import { ConfirmationDialog } from '@app/shared/components/confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCardSmImage } from '@angular/material/card';
+import { NgOptimizedImage } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-project-header',
@@ -31,13 +36,21 @@ import { MatDialog } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatCardSmImage,
+    NgOptimizedImage,
+    MatMenuModule,
   ],
   templateUrl: './project-header.html',
   styleUrl: './project-header.scss',
-  providers: [ProjectStore],
+  providers: [],
+  host: {
+    '[attr.data-actions-expand]': '!isEditing()',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectHeader implements OnInit {
+  private destroyRef = inject(DestroyRef);
+  private breakpointObserver = inject(BreakpointObserver);
   private projectService = inject(ProjectService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -46,15 +59,33 @@ export class ProjectHeader implements OnInit {
   readonly project$ = computed(() => this.projectService.currentProject());
   readonly isEditing = signal<boolean>(false);
   readonly editingText = signal('');
+  readonly isShowActions = signal<boolean>(true);
 
   projectId = '';
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.projectId = params['id'];
+    this.route.params
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => {
+        this.projectId = params['id'];
 
-      this.projectService.getProject(this.projectId);
-    });
+        this.projectService.getProject(this.projectId);
+      });
+
+    this.setResponsiveHeader();
+  }
+
+  private setResponsiveHeader(): void {
+    this.breakpointObserver
+      .observe(['(max-width: 800px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((screenSize) => {
+        if (screenSize.matches) {
+          this.isShowActions.set(false);
+        } else {
+          this.isShowActions.set(true);
+        }
+      });
   }
 
   startEditing(): void {

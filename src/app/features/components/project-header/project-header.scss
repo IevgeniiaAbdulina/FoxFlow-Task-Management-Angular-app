@@ -1,9 +1,27 @@
 :host {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .project-title__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 3rem 0;
+  }
 
-  padding: 3rem 3rem 0;
+  &[data-actions-expand='false'] {
+    @media (max-width: 800px) {
+      .project-title__container {
+        flex-direction: column;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        .actions {
+          width: 100%;
+          justify-content: end;
+        }
+      }
+    }
+  }
 
   mat-label,
   input,
@@ -16,4 +34,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.project-title-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
 }
