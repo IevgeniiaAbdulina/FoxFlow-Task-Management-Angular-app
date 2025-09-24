@@ -1,35 +1,50 @@
 <li
   class="list"
-  [ngClass]="{editing: isEditing()}">
-  <div class="item">
+  role="button"
+  tabindex="0"
+  [ngClass]="{editing: isEditing()}"
+  (dblclick)="openTaskDetailInformation()"
+  (keydown.enter)="openTaskDetailInformation()">
+  <div
+    appStyleChange
+    class="item"
+    [daysForDeadline]="daysToDeadline"
+    [taskStatus]="task().status">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
       @if (!isEditing()) {
       <p class="item__header__text">{{ task().title }}</p>
       <mat-icon
+        aria-label="Edit"
         class="color"
+        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
+        matTooltipPosition="right"
         (click)="setTaskInEditMode()"
         >edit</mat-icon
       >
       } @if (isEditing()) {
-      <ng-container>
-        <input
-          class="edit"
-          type="text"
-          [value]="editingText"
-          (keyup)="changeText($event)"
-          (keyup.enter)="changeTask()" />
-      </ng-container>
+      <input
+        class="edit"
+        type="text"
+        [value]="editingText"
+        (dateChange)="changeTask()"
+        (keyup)="changeText($event)"
+        (keyup.enter)="changeTask()" />
       }
     </div>
     <div class="item__footer">
       <div class="item__footer__information">
         <mat-icon class="disable">person</mat-icon>
-        <mat-icon class="disable">date_range</mat-icon>
+        @if (getDeadline()) {
+        <p> {{ getDeadline() }} </p>
+        } @else { <mat-icon class="disable">date_range</mat-icon>}
       </div>
       <button
         #actionButton
+        aria-label="Delete task"
         class="delete"
+        matTooltip="{{ 'TOOLS.DELETE' | translate }}"
+        matTooltipPosition="right"
         type="submit"
         (click)="deleteTask()">
         <mat-icon class="color">delete_forever</mat-icon>

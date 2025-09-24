@@ -18,10 +18,9 @@ export class TasksService {
   addTask(title: string, id: string, date: Date): void {
     const newTask: TaskData = {
       title: title,
-      isCompleted: false,
       id: id,
       createdAt: date,
-      //status: 'todo'
+      status: 'todo',
     };
 
     const updatedTask = [...this.tasks$.getValue(), newTask];

@@ -27,7 +27,11 @@
     "ADD": "Dodaj Zadanie",
     "TITLE_LABEL": "Tytuł Zadania",
     "DUE_DATE_LABEL": "Termin",
-    "ASSIGNEE_LABEL": "Przypisany"
+    "ASSIGNEE_LABEL": "Przypisany",
+    "TASK_DETAIL": "Szczegóły zadania",
+    "NO_ASSIGNEE": "Brak cesjonariusza",
+    "STATUS": "Status",
+    "DESCRIPTION": "Opis"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",
@@ -101,5 +105,9 @@
     "ACTION_SUBMIT": "Dalej",
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
+  },
+    "TOOLS": {
+    "EDIT": "Edytuj tytuł",
+    "DELETE": "Usuń zadanie"
   }
 }
