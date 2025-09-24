@@ -58,8 +58,8 @@ export class ProjectHeader implements OnInit {
 
   readonly project$ = computed(() => this.projectService.currentProject());
   readonly isEditing = signal<boolean>(false);
-  readonly editingText = signal('');
   readonly isShowActions = signal<boolean>(true);
+  readonly editingText = signal('');
 
   projectId = '';
 

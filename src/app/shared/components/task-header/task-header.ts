@@ -1,17 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  inject,
-} from '@angular/core';
-import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
   inject,
+  computed,
 } from '@angular/core';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
-import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
@@ -26,13 +20,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class TaskHeader {
   private projectService = inject(ProjectService);
+  private tasksFirebaseService = inject(FirebaseServiceTs);
+  private destroyRef = inject(DestroyRef);
 
   text = '';
   status: 'todo' | 'inProgress' | 'done' = 'todo';
-
-  tasksService = inject(TasksService);
-  tasksFirebaseService = inject(FirebaseServiceTs);
-  private destroyRef = inject(DestroyRef);
 
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
@@ -46,8 +38,8 @@ export class TaskHeader {
     this.tasksFirebaseService
       .addTask(this.text, this.projectId()!, date)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((taskId) => {
-        this.tasksService.addTask(this.text, taskId, date);
+      .subscribe(() => {
+        /* empty */
       });
     this.text = '';
   }

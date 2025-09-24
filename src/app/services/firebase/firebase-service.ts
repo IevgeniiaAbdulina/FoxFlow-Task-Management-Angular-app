@@ -26,7 +26,7 @@ export class FirebaseServiceTs {
   getProjectTasks(projectId: string): Observable<TaskData[]> {
     const collectionURL = `projects/${projectId}`;
     const projectDocRef = doc(this.firestore, collectionURL);
-    const taskCollectionRef = collection(projectDocRef, 'task-project1');
+    const taskCollectionRef = collection(projectDocRef, 'tasks');
     const tasksSortedByDate = query(taskCollectionRef, orderBy('createdAt'));
     return collectionData(tasksSortedByDate, { idField: 'id' }) as Observable<
       TaskData[]
@@ -34,20 +34,19 @@ export class FirebaseServiceTs {
   }
 
   getTask(projectId: string, taskId: string): Observable<TaskData> {
-    const collectionURL = `projects/${projectId}/task-project1/${taskId}`;
-    const tascDocRef = doc(this.firestore, collectionURL);
-    return docData(tascDocRef, { idField: 'id' }) as Observable<TaskData>;
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
+    const taskDocRef = doc(this.firestore, collectionURL);
+    return docData(taskDocRef, { idField: 'id' }) as Observable<TaskData>;
   }
 
   addTask(text: string, projectId: string, date: Date): Observable<string> {
     const collectionURL = `projects/${projectId}`;
     const projectDocRef = doc(this.firestore, collectionURL);
-    const taskCollectionRef = collection(projectDocRef, 'task-project1');
+    const taskCollectionRef = collection(projectDocRef, 'tasks');
     const todoToCreate = {
       title: text,
       status: 'todo',
       createdAt: date,
-      status: 'todo',
     };
 
     const promise = addDoc(taskCollectionRef, todoToCreate).then(
@@ -57,7 +56,7 @@ export class FirebaseServiceTs {
   }
 
   deleteTask(projectId: string, taskId: string): Observable<void> {
-    const collectionURL = `projects/${projectId}/task-project1/${taskId}`;
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
     const docRef = doc(this.firestore, collectionURL);
     const promise = deleteDoc(docRef);
     return from(promise);
@@ -68,7 +67,7 @@ export class FirebaseServiceTs {
     taskId: string,
     updateFields: Partial<TaskData>
   ): Observable<void> {
-    const collectionURL = `projects/${projectId}/task-project1/${taskId}`;
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
     const docRef = doc(this.firestore, collectionURL);
     const promise = updateDoc(docRef, updateFields);
     return from(promise);

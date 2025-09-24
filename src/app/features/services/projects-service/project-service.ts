@@ -16,9 +16,11 @@ export class ProjectService {
     signal<Project | null>(null);
 
   getProject(projectId: string): void {
-    this.projectsFirebaseService.getProject(projectId).subscribe((result) => {
-      this.currentProject.set(result);
-    });
+    this.projectsFirebaseService
+      .getProject(projectId)
+      .subscribe((result: Project) => {
+        this.currentProject.set(result);
+      });
   }
 
   removeProject(projectId: string, projectOwner: string): void {

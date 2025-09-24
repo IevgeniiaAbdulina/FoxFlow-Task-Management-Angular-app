@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { TaskHeader } from '@app/shared/components/task-header/task-header';
 import { TaskListItem } from '@app/shared/components/task-list-item/task-list-item';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 
 @Component({
   selector: 'app-kanban-board',
@@ -21,17 +23,15 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KanbanBoard implements OnInit {
-  readonly todo = signal<TaskData[]>([]);
-  readonly inProgress = signal<TaskData[]>([]);
-  readonly done = signal<TaskData[]>([]);
   private route = inject(ActivatedRoute);
-  private tasksService = inject(TasksService);
+  private destroyRef = inject(DestroyRef);
+  private tasksFirebaseService = inject(FirebaseServiceTs);
+
   readonly toDoTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
   readonly inProgressTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
   readonly doneTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
 
   projectId: string | undefined;
-
   localEditingId: string | null = null;
 
   ngOnInit(): void {
@@ -39,8 +39,9 @@ export class KanbanBoard implements OnInit {
       this.projectId = params['id'];
 
       if (this.projectId) {
-        this.tasksService
-          .getTasksFromFirebase(this.projectId)
+        this.tasksFirebaseService
+          .getProjectTasks(this.projectId)
+          .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe((tasks) => {
             const groupedTasks = Object.groupBy(
               tasks,
@@ -48,7 +49,7 @@ export class KanbanBoard implements OnInit {
             );
 
             this.toDoTasks.set(groupedTasks['todo'] ?? []);
-            this.inProgressTasks.set(groupedTasks['inprogress'] ?? []);
+            this.inProgressTasks.set(groupedTasks['in-progress'] ?? []);
             this.doneTasks.set(groupedTasks['done'] ?? []);
           });
       }

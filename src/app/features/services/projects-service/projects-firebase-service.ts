@@ -9,7 +9,6 @@ import {
   orderBy,
   query,
   updateDoc,
-  limit,
   getDoc,
 } from '@angular/fire/firestore';
 import { EMPTY, from, Observable } from 'rxjs';
@@ -30,8 +29,7 @@ export class ProjectsFirebaseService {
   projectsCollection = collection(this.firestore, 'projects');
   projectsSortedByDate = query(
     this.projectsCollection,
-    orderBy('createdAt', 'desc'),
-    limit(12)
+    orderBy('createdAt', 'desc')
   );
 
   private readonly projectOwner = toSignal(this.authService.user$, {
@@ -46,6 +44,7 @@ export class ProjectsFirebaseService {
 
   addProject(text: string): Observable<string> {
     const projectToCreate = {
+      id: null,
       title: text,
       owner: this.projectOwner().uid,
       createdAt: new Date().toISOString(),
@@ -53,9 +52,19 @@ export class ProjectsFirebaseService {
 
     const promise = addDoc(this.projectsCollection, projectToCreate).then(
       (result) => {
+        this.setIdProject(result.id, { id: result.id });
         return result.id;
       }
     );
+    return from(promise);
+  }
+
+  setIdProject(
+    projectID: string,
+    idToUpdate: { id: string }
+  ): Observable<void> {
+    const docRef = doc(this.firestore, 'projects/' + projectID);
+    const promise = updateDoc(docRef, idToUpdate);
     return from(promise);
   }
 

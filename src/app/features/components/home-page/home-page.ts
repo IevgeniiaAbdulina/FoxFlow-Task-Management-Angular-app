@@ -5,8 +5,6 @@ import {
   computed,
   Signal,
   signal,
-  OnInit,
-  WritableSignal,
 } from '@angular/core';
 import { AuthService } from '@app/auth/services/auth-service';
 import { GreetingComponent } from '@app/features/components/greeting-component/greeting-component';
@@ -18,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { ProjectsFirebaseService } from '@app/features/services/projects-service/projects-firebase-service';
 import { ProjectDetailsDialog } from '@app/shared/components/project-details-dialog/project-details-dialog';
-import { Project } from '@app/shared/interfaces/project-interface';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-page',
@@ -32,25 +30,17 @@ import { Project } from '@app/shared/interfaces/project-interface';
   styleUrl: './home-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage implements OnInit {
+export class HomePage {
   private authService = inject(AuthService);
   private projectsFirebaseService = inject(ProjectsFirebaseService);
   readonly dialog = inject(MatDialog);
-  readonly name = signal('');
 
-  readonly projects: WritableSignal<Project[]> = signal([]);
+  readonly projects = toSignal(this.projectsFirebaseService.getProjects());
+  readonly name = signal('');
 
   readonly user$ = computed(() =>
     this.authService.currentUser()
   ) as Signal<UserInterface>;
-
-  ngOnInit(): void {
-    this.projectsFirebaseService
-      .getProjects()
-      .subscribe((result: Project[]) => {
-        this.projects.set(result);
-      });
-  }
 
   addProject(): void {
     const dialogRef = this.dialog.open(ProjectDetailsDialog, {

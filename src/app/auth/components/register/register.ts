@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@app/auth/services/auth-service';
 import { HighlightMessage } from '@app/shared/directives/highlight-message';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -71,14 +70,7 @@ export class Register {
   form = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(StrongPasswordRegx),
-        passwordValidator(),
-      ],
-    ],
+    password: ['', [Validators.required, passwordValidator()]],
   });
 
   passwordRequirements = [
