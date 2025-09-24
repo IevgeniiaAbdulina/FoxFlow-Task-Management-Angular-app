@@ -47,6 +47,9 @@
   font-size: 1.8rem;
   font-weight: 400;
 }
+:host ::ng-deep .mdc-card__media:last-child {
+  border-radius: 50%;
+}
 
 a {
   text-decoration: none;
