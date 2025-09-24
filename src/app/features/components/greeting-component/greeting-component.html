@@ -2,12 +2,12 @@
   <p class="current-date">{{ today | date:"EEEE, MMMM d" }}</p>
   @if (user$()) {
   <h1>
-    {{ 'GREETING.WELCOME' | translate: { time: timeOfDay() | translate, name:
+    {{ 'GREETING.WELCOME' | translate: { time: timeOfDay(), name:
     user$()!.displayName } }}
   </h1>
   } @else {
-  <h1>{{ 'GREETING.GUEST' | translate: { time: timeOfDay() | translate } }}</h1
-  >> }
+  <h1>{{ 'GREETING.GUEST' | translate: { time: timeOfDay() } }}</h1>
+  }
 </div>
 <div class="home-page__content">
   <div class="projects-list">

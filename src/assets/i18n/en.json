@@ -115,8 +115,10 @@
     "DELETE": "Delete task"
   },
   "GREETING": {
-    "WELCOME": "Good {time}, {name}!",
-    "GUEST": "Good {time}, Guest!",
+    "WELCOME": "Good {{time}}, {{name}}!",
+    "GUEST": "Good {{time}}, Guest!"
+  },
+  "TIME": {
     "MORNING": "morning",
     "AFTERNOON": "afternoon",
     "EVENING": "evening"
