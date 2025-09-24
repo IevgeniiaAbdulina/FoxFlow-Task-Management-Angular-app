@@ -1,4 +1,50 @@
-<app-greeting-component
-  [projects$]="projects()!"
-  [user$]="user$()"
-  (addProject)="addProject()" />
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    class="sidebar"
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="!isMobile()">
+    <div class="sidebar-content">
+      <button
+        aria-label="Navigate to home page"
+        mat-button
+        routerLink="/home"
+        routerLinkActive="active"
+        type="button"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon>
+        {{ 'SIDEBAR.HOME' | translate }}
+      </button>
+      <h3>{{ 'SIDEBAR.PROJECTS' | translate }}</h3>
+      <mat-nav-list>
+        @for (project of projects(); track project.id) {
+        <mat-list-item
+          aria-label="Select project {{ project.title }}"
+          [class.active]="selectedProjectId() === project.id"
+          (click)="selectProject(project.id)">
+          {{ project.title }}
+        </mat-list-item>
+        } @empty {
+        <p>{{ 'SIDEBAR.NO_PROJECTS' | translate }}</p>
+        }
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    @if (isMobile()) {
+    <button
+      aria-label="Toggle sidebar"
+      class="menu-button"
+      mat-icon-button
+      type="button"
+      [matTooltip]="'SIDEBAR.TOGGLE' | translate"
+      (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    }
+    <app-greeting-component
+      [projects$]="projects()"
+      [user$]="user$()"
+      (addProject)="addProject()" />
+  </mat-sidenav-content>
+</mat-sidenav-container>

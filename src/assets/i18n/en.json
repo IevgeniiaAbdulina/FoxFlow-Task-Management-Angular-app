@@ -126,5 +126,11 @@
   "PROJECTS": {
     "TITLE": "Projects",
     "CREATE": "Create project"
+  },
+  "SIDEBAR": {
+    "HOME": "Home",
+    "PROJECTS": "Projects",
+    "NO_PROJECTS": "No projects available",
+    "TOGGLE": "Toggle sidebar"
   }
 }
