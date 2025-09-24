@@ -6,7 +6,6 @@ import { authGuard } from '@app/core/guards/auth-guard';
 import { isLoggedGuard } from '@app/core/guards/is-logged-guard';
 import { Main } from '@app/features/components/main/main';
 import { NotFoundComponent } from './shared/components/not-found/not-found';
-import { KanbanBoard } from './features/components/kanban-board/kanban-board';
 
 export const routes: Routes = [
   {
@@ -37,8 +36,8 @@ export const routes: Routes = [
   {
     path: 'project/:id',
     loadComponent: () =>
-      import('./features/components/kanban-board/kanban-board').then(
-        (m) => m.KanbanBoard
+      import('./features/components/project-page/project-page').then(
+        (c) => c.ProjectPage
       ),
     canActivate: [authGuard],
   },

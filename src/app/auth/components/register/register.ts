@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@app/auth/services/auth-service';
 import { HighlightMessage } from '@app/shared/directives/highlight-message';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { StrongPasswordRegx } from '@app/shared/utils/strong-password-regx';
 import { MatCardModule } from '@angular/material/card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -31,6 +30,7 @@ import { NotificationService } from '@app/shared/services/notification-service';
 import { FirebaseError } from '@firebase/util';
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
 import { MatTooltip } from '@angular/material/tooltip';
+import { passwordValidator } from '@app/shared/utils/password-validator';
 
 @Component({
   selector: 'app-register',
@@ -63,7 +63,6 @@ export class Register {
   private destroyRef = inject(DestroyRef);
   notificationService = inject(NotificationService);
 
-  readonly errorMessage = signal<string | null>(null);
   colorError = '#ba1a1a';
   colorValid = '#00c853';
   readonly hide = signal<boolean>(true);
@@ -71,11 +70,24 @@ export class Register {
   form = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [Validators.required, Validators.pattern(StrongPasswordRegx)],
-    ],
+    password: ['', [Validators.required, passwordValidator()]],
   });
+
+  passwordRequirements = [
+    { key: 'min_length', message: 'At least 8 characters long.' },
+    { key: 'uppercase', message: 'At least one uppercase letter.' },
+    { key: 'lowercase', message: 'At least one lowercase letter.' },
+    { key: 'digit', message: 'At least one digit.' },
+    {
+      key: 'specialChar',
+      message: 'At least one special character (!@#$%^&*).',
+    },
+  ];
+
+  hasError(errorKey: string): boolean {
+    const errors = this.form.get('password')?.errors;
+    return !!errors && errors[errorKey];
+  }
 
   visibilityToggle(event: MouseEvent): void {
     this.hide.update((value) => !value);
@@ -86,7 +98,8 @@ export class Register {
     const rawForm = this.form.getRawValue();
 
     if (this.form.invalid) {
-      this.errorMessage.set('Please enter the required information.');
+      const errorMessage = 'Please enter the required information.';
+      this.notificationService.showErrorMessage(errorMessage);
     } else {
       this.authService
         .register(rawForm.email, rawForm.username, rawForm.password)
@@ -103,10 +116,6 @@ export class Register {
           },
         });
     }
-  }
-
-  controlValidity(regex: string): RegExpMatchArray | null {
-    return this.form.value.password?.match(regex) ?? null;
   }
 
   loginWithGoogle(): void {

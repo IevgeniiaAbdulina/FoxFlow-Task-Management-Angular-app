@@ -1,5 +1,11 @@
 :host {
   display: flex;
+
+  button,
+  span.error,
+  span.success {
+    font-size: 12px;
+  }
 }
 
 .error {

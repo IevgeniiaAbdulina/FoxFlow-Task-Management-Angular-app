@@ -18,7 +18,6 @@ import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { NgOptimizedImage } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -29,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StatusTask } from '@app/shared/directives/status-task/status-task';
+import { ProjectService } from '@app/features/services/projects-service/project-service';
 
 @Component({
   selector: 'app-task-detail',
@@ -53,22 +53,27 @@ import { StatusTask } from '@app/shared/directives/status-task/status-task';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDetail implements OnInit {
+  private projectService = inject(ProjectService);
+  private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
+  private tasksFirebaseService = inject(FirebaseServiceTs);
+  private dialogRef = inject(MatDialogRef<TaskDetail>);
+
   defaultTask: TaskData = {
     id: '',
     status: 'todo',
     title: '',
     createdAt: new Date(),
   };
+
   readonly task = signal<TaskData>(this.defaultTask);
   readonly editing = signal(false);
   readonly editingDescription = signal(false);
   readonly isAssignedUser = signal(false);
 
-  projectId = 'MnUTvclhDFbntBHR8Hba';
+  projectId: string | undefined;
   editingText = '';
   descriptionText = '';
   users: MemberInterface[] = [];
-  //assignedUsers: MemberInterface[] = [];
   selectedUserIds: string[] = [];
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
@@ -76,30 +81,23 @@ export class TaskDetail implements OnInit {
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
 
-  private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
-  private tasksFirebaseService = inject(FirebaseServiceTs);
-  private tasksService = inject(TasksService);
-  private dialogRef = inject(MatDialogRef<TaskDetail>);
-
   ngOnInit(): void {
-    this.tasksFirebaseService
-      .getTask(this.projectId, this.data.taskId)
-      .subscribe((task) => {
-        this.task.set(task);
-        this.editingText = task.title;
+    this.projectId = this.projectService.currentProject()?.id;
 
-        if (task.dueTo instanceof Timestamp) {
-          this.selectedDate = task.dueTo.toDate();
-        }
-        this.descriptionText = task.description || '';
-        this.selectedStatus = task.status;
-        //console.log('task', task)
-        // task.assignedTo?.forEach((user) => {
-        //console.log('user', user);
-        // this.assignedUsers.push(user);
-        //});
-      });
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .getTask(this.projectId, this.data.taskId)
+        .subscribe((task) => {
+          this.task.set(task);
+          this.editingText = task.title;
 
+          if (task.dueTo instanceof Timestamp) {
+            this.selectedDate = task.dueTo.toDate();
+          }
+          this.descriptionText = task.description || '';
+          this.selectedStatus = task.status;
+        });
+    }
     console.log('assignedUsers', this.assignedUsers);
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
@@ -115,11 +113,13 @@ export class TaskDetail implements OnInit {
   deleteTask(): void {
     const currentTask = this.task();
     if (!currentTask) return;
-    this.tasksFirebaseService
-      .deleteTask(this.projectId, currentTask.id)
-      .subscribe(() => {
-        this.tasksService.deleteTask(currentTask.id);
-      });
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .deleteTask(this.projectId, currentTask.id)
+        .subscribe(() => {
+          /* EMPTY */
+        });
+    }
     this.closeTask();
   }
 
@@ -147,23 +147,6 @@ export class TaskDetail implements OnInit {
     this.editingText = value;
   }
 
-  changeTask(): void {
-    const currentTask = this.task();
-    if (!currentTask || !this.editingText) return;
-
-    const dataToUpdate = {
-      title: this.editingText,
-    };
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, dataToUpdate)
-      .subscribe(() => {
-        this.tasksService.changeTask(currentTask.id, this.editingText);
-      });
-
-    this.editing.set(false);
-    this.setEditingId.emit(null);
-  }
-
   saveHeaderTitle(): void {
     const currentTask = this.task();
     if (!currentTask || !this.editingText) return;
@@ -172,16 +155,17 @@ export class TaskDetail implements OnInit {
       id: currentTask.id,
       title: this.editingText,
     };
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, dataToUpdate)
-      .subscribe(() => {
-        this.tasksService.changeTask(currentTask.id, this.editingText!);
-        this.task.set({
-          ...currentTask,
-          title: this.editingText,
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, dataToUpdate)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+            title: this.editingText,
+          });
+          this.editing.set(false);
         });
-        this.editing.set(false);
-      });
+    }
   }
 
   cancelEditTask(): void {
@@ -199,17 +183,19 @@ export class TaskDetail implements OnInit {
       dueTo: dueTo,
     };
 
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, dataToUpdate)
-      .subscribe(() => {
-        this.task.set({
-          ...currentTask,
-          dueTo: dueTo,
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, dataToUpdate)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+            dueTo: dueTo,
+          });
         });
-      });
+    }
   }
 
-  editTaskDesription(): void {
+  editTaskDescription(): void {
     this.editingDescription.set(true);
   }
 
@@ -221,15 +207,17 @@ export class TaskDetail implements OnInit {
       id: currentTask.id,
       description: this.descriptionText,
     };
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, dataToUpdate)
-      .subscribe(() => {
-        this.task.set({
-          ...currentTask,
-          description: this.descriptionText,
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, dataToUpdate)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+            description: this.descriptionText,
+          });
+          this.editingDescription.set(false);
         });
-        this.editingDescription.set(false);
-      });
+    }
   }
 
   cancelEditDescription(): void {
@@ -244,13 +232,15 @@ export class TaskDetail implements OnInit {
     const updatedTask = {
       status: this.selectedStatus,
     };
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, updatedTask)
-      .subscribe(() => {
-        this.task.set({
-          ...currentTask,
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updatedTask)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+          });
         });
-      });
+    }
   }
 
   saveUsersAssignedToTask(): void {
@@ -260,15 +250,17 @@ export class TaskDetail implements OnInit {
     const updateDate = {
       assignedTo: assignedUsers,
     };
-    this.tasksFirebaseService
-      .updateTask(this.projectId, currentTask.id, updateDate)
-      .subscribe(() => {
-        console.log('saveUsersAssignedToTask', assignedUsers);
-        this.task.set({
-          ...currentTask,
-          assignedTo: assignedUsers,
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updateDate)
+        .subscribe(() => {
+          console.log('saveUsersAssignedToTask', assignedUsers);
+          this.task.set({
+            ...currentTask,
+            assignedTo: assignedUsers,
+          });
         });
-      });
+    }
     this.isAssignedUser.set(true);
   }
 }

@@ -1,19 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
+  DestroyRef,
   inject,
   OnInit,
-  Output,
   signal,
+  WritableSignal,
 } from '@angular/core';
-import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
-import { TasksService } from '@app/services/tasks-service/tasks-service';
-//import { TaskBody } from '@app/shared/components/task-body/task-body';
-import { TaskData } from '@app/shared/interfaces/task-interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { TaskData } from '@app/shared/interfaces/task-interface';
 import { TaskHeader } from '@app/shared/components/task-header/task-header';
 import { TaskListItem } from '@app/shared/components/task-list-item/task-list-item';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 
 @Component({
   selector: 'app-kanban-board',
@@ -23,27 +23,36 @@ import { TaskListItem } from '@app/shared/components/task-list-item/task-list-it
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KanbanBoard implements OnInit {
-  readonly todo = signal<TaskData[]>([]);
-  readonly inProgress = signal<TaskData[]>([]);
-  readonly done = signal<TaskData[]>([]);
+  private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
+  private tasksFirebaseService = inject(FirebaseServiceTs);
 
-  projectId = 'MnUTvclhDFbntBHR8Hba';
-  //editingId: string | null = null;
+  readonly toDoTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
+  readonly inProgressTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
+  readonly doneTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
+
+  projectId: string | undefined;
   localEditingId: string | null = null;
 
-  private taskService = inject(TasksService);
-
   ngOnInit(): void {
-    this.loadTasks();
-  }
+    this.route.params.subscribe((params) => {
+      this.projectId = params['id'];
 
-  private loadTasks(): void {
-    this.taskService.getTasksFromFirebase(this.projectId).subscribe((tasks) => {
-      this.todo.set(tasks.filter((task) => task.status === 'todo'));
-      this.inProgress.set(
-        tasks.filter((task) => task.status === 'in-progress')
-      );
-      this.done.set(tasks.filter((task) => task.status === 'done'));
+      if (this.projectId) {
+        this.tasksFirebaseService
+          .getProjectTasks(this.projectId)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe((tasks) => {
+            const groupedTasks = Object.groupBy(
+              tasks,
+              (task: TaskData) => task.status
+            );
+
+            this.toDoTasks.set(groupedTasks['todo'] ?? []);
+            this.inProgressTasks.set(groupedTasks['in-progress'] ?? []);
+            this.doneTasks.set(groupedTasks['done'] ?? []);
+          });
+      }
     });
   }
 
