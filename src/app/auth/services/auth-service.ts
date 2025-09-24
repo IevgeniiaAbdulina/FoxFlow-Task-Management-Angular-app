@@ -14,14 +14,17 @@ import { from, Observable } from 'rxjs';
 import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { NotificationService } from '@app/shared/services/notification-service';
+import { UsersService } from '@app/auth/services/users-service';
+import { MemberInterface } from '@app/shared/interfaces/member-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  firebaseAuth = inject(Auth);
-  router = inject(Router);
-  notificationService = inject(NotificationService);
+  private firebaseAuth = inject(Auth);
+  private router = inject(Router);
+  private notificationService = inject(NotificationService);
+  private usersService = inject(UsersService);
 
   user$: Observable<User | null> = user(this.firebaseAuth);
   readonly currentUser = signal<UserInterface | null>(null);
@@ -35,9 +38,19 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then((response) =>
-      updateProfile(response.user, { displayName: username })
-    );
+    ).then((response) => {
+      updateProfile(response.user, { displayName: username });
+
+      const newMember: MemberInterface = {
+        id: response.user.uid /* authorization id */,
+        userId: '' /* firebase document id */,
+        email: response.user.email ?? '',
+        displayName: username,
+        photoURL: response.user.photoURL ?? '',
+      };
+
+      this.usersService.addUser(newMember);
+    });
 
     return from(promise);
   }

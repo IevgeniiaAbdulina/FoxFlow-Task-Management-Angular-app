@@ -1,5 +1,6 @@
 export interface MemberInterface {
-  id: string;
+  id: string /* authorization id */;
+  userId: string /* firebase document id */;
   email: string;
   displayName: string;
   photoURL?: string;
