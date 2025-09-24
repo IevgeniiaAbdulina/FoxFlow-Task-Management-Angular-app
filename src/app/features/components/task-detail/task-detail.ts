@@ -62,11 +62,13 @@ export class TaskDetail implements OnInit {
   readonly task = signal<TaskData>(this.defaultTask);
   readonly editing = signal(false);
   readonly editingDescription = signal(false);
+  readonly isAssignedUser = signal(false);
+
   projectId = 'MnUTvclhDFbntBHR8Hba';
   editingText = '';
   descriptionText = '';
   users: MemberInterface[] = [];
-  assignedUsers: MemberInterface[] = [];
+  //assignedUsers: MemberInterface[] = [];
   selectedUserIds: string[] = [];
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
@@ -92,10 +94,10 @@ export class TaskDetail implements OnInit {
         this.descriptionText = task.description || '';
         this.selectedStatus = task.status;
         //console.log('task', task)
-        task.assignedTo?.forEach((user) => {
-          console.log('user', user);
-          this.assignedUsers.push(user);
-        });
+        // task.assignedTo?.forEach((user) => {
+        //console.log('user', user);
+        // this.assignedUsers.push(user);
+        //});
       });
 
     console.log('assignedUsers', this.assignedUsers);
@@ -106,6 +108,7 @@ export class TaskDetail implements OnInit {
   }
 
   closeTask(): void {
+    this.saveUsersAssignedToTask();
     this.dialogRef.close();
   }
 
@@ -122,6 +125,10 @@ export class TaskDetail implements OnInit {
 
   get selectedUsers(): MemberInterface[] {
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
+  }
+
+  get assignedUsers(): MemberInterface[] | undefined {
+    return this.task().assignedTo;
   }
 
   editTask(): void {
@@ -262,5 +269,6 @@ export class TaskDetail implements OnInit {
           assignedTo: assignedUsers,
         });
       });
+    this.isAssignedUser.set(true);
   }
 }

@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-task-header',
@@ -19,6 +25,7 @@ export class TaskHeader {
 
   tasksService = inject(TasksService);
   tasksFirebaseService = inject(FirebaseServiceTs);
+  private destroyRef = inject(DestroyRef);
 
   changeText(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -29,6 +36,7 @@ export class TaskHeader {
     const date = new Date();
     this.tasksFirebaseService
       .addTask(this.text, this.projectId, date)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((taskId) => {
         this.tasksService.addTask(this.text, taskId, date);
       });

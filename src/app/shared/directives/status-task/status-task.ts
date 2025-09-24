@@ -19,17 +19,17 @@ export class StatusTask implements OnChanges {
 
   ngOnChanges(): void {
     if (this.taskStatus() === 'todo') {
+      this.render.removeClass(this.el.nativeElement, 'in-progress');
+      this.render.removeClass(this.el.nativeElement, 'done');
       this.render.addClass(this.el.nativeElement, 'todo');
-      this.render.removeClass(this.el.nativeElement, 'in-progress');
-      this.render.removeClass(this.el.nativeElement, 'done');
     } else if (this.taskStatus() === 'in-progress') {
-      this.render.addClass(this.el.nativeElement, 'in-progress');
       this.render.removeClass(this.el.nativeElement, 'done');
       this.render.removeClass(this.el.nativeElement, 'todo');
+      this.render.addClass(this.el.nativeElement, 'in-progress');
     } else {
-      this.render.addClass(this.el.nativeElement, 'done');
       this.render.removeClass(this.el.nativeElement, 'in-progress');
       this.render.removeClass(this.el.nativeElement, 'todo');
+      this.render.addClass(this.el.nativeElement, 'done');
     }
   }
 }

@@ -7,6 +7,7 @@ import {
   Output,
   OnInit,
   OnChanges,
+  DestroyRef,
 } from '@angular/core';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TasksService } from '@app/services/tasks-service/tasks-service';
@@ -21,6 +22,7 @@ import { Timestamp } from 'firebase/firestore';
 import { StyleChange } from '@app/shared/directives/style-change/style-change';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-task-list-item',
@@ -49,6 +51,7 @@ export class TaskListItem implements OnInit, OnChanges {
 
   private tasksService = inject(TasksService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
+  private destroyRef = inject(DestroyRef);
   //private router = inject(Router);
   private dialog = inject(MatDialog);
 
@@ -63,6 +66,7 @@ export class TaskListItem implements OnInit, OnChanges {
   deleteTask(): void {
     this.tasksFirebaseService
       .deleteTask(this.projectId, this.task().id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.tasksService.deleteTask(this.task().id);
       });

@@ -41,6 +41,7 @@
     <p class="task__details__assign-text"
       >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
     >
+    @if (!isAssignedUser()) {
     <mat-form-field
       appearance="outline"
       class="task__details__form-assign">
@@ -49,7 +50,7 @@
       <mat-select
         multiple
         [(value)]="selectedUserIds"
-        (blur)="saveUsersAssignedToTask()">
+        (dateChange)="saveUsersAssignedToTask()">
         @for (user of users; track user.id) {
         <mat-option [value]="user.id">
           <img
@@ -61,21 +62,23 @@
         </mat-option>
         }
       </mat-select>
-      <div class="selected-users">
-        @for (user of selectedUsers; track user.id) {
-        <div class="user-card">
-          <img
-            alt="avatar"
-            height="40"
-            mat-card-md-image
-            ngSrc="{{user.photoURL}}"
-            style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
-            width="40" />
-          <span>{{user.displayName}}</span>
-        </div>
-        }
-      </div>
     </mat-form-field>
+    } @else {
+    <div class="selected-users">
+      @for (user of assignedUsers; track user.id) {
+      <div class="user-card">
+        <img
+          alt="avatar"
+          height="40"
+          mat-card-md-image
+          ngSrc="{{user.photoURL}}"
+          style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
+          width="40" />
+        <span>{{user.displayName}}</span>
+      </div>
+      }
+    </div>
+    }
     <p class="task__details__deadline-text"
       >{{ 'TASK.DUE_DATE_LABEL' | translate }}</p
     >

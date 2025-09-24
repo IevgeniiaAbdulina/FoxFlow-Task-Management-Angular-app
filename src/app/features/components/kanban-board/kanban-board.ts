@@ -37,7 +37,7 @@ export class KanbanBoard implements OnInit {
     this.loadTasks();
   }
 
-  loadTasks(): void {
+  private loadTasks(): void {
     this.taskService.getTasksFromFirebase(this.projectId).subscribe((tasks) => {
       this.todo.set(tasks.filter((task) => task.status === 'todo'));
       this.inProgress.set(
