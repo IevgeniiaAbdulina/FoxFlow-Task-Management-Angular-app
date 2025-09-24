@@ -1,0 +1,160 @@
+<div class="task">
+  <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+  <mat-divider class="color" />
+  <div class="task__header">
+    @if (!editing()) {
+    <p>{{ task().title }}</p>
+    <mat-icon
+      aria-label="Edit title"
+      class="color"
+      matTooltip="{{ 'TOOLS.EDIT' | translate }}"
+      matTooltipPosition="right"
+      (click)="editTask()"
+      >edit</mat-icon
+    >
+    } @if (editing()) {
+    <input
+      #titleInput
+      class="edit"
+      type="text"
+      [value]="editingText"
+      (keyup)="changeText($event)"
+      (keyup.enter)="saveHeaderTitle()" />
+
+    <div class="task__header__edit">
+      <button
+        mat-button
+        type="submit"
+        (click)="cancelEditTask()">
+        Cancel
+      </button>
+      <button
+        mat-button
+        type="submit"
+        (click)="saveHeaderTitle()">
+        Save
+      </button>
+    </div>
+    }
+  </div>
+  <div class="task__details">
+    <p class="task__details__assign-text"
+      >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
+    >
+    @if (!isAssignedUser()) {
+    <mat-form-field
+      appearance="outline"
+      class="task__details__form-assign">
+      <mat-label>{{ 'TASK.NO_ASSIGNEE' | translate }}</mat-label>
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-select
+        multiple
+        [(value)]="selectedUserIds"
+        (dateChange)="saveUsersAssignedToTask()">
+        @for (user of users; track user.id) {
+        <mat-option [value]="user.id">
+          <img
+            alt="avatar"
+            height="30"
+            ngSrc="{{user.photoURL}}"
+            width="30" />
+          {{ user.displayName }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    } @else {
+    <div class="selected-users">
+      @for (user of assignedUsers; track user.id) {
+      <div class="user-card">
+        <img
+          alt="avatar"
+          height="40"
+          mat-card-md-image
+          ngSrc="{{user.photoURL}}"
+          style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
+          width="40" />
+        <span>{{user.displayName}}</span>
+      </div>
+      }
+    </div>
+    }
+    <p class="task__details__deadline-text"
+      >{{ 'TASK.DUE_DATE_LABEL' | translate }}</p
+    >
+    <mat-form-field
+      appearance="outline"
+      class="task__details__form-deadline">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="selectedDate"
+        (dateChange)="saveDateOnBlur()" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+
+    <p class="task__details__status-text">{{ 'TASK.STATUS' | translate }}</p>
+    <mat-form-field
+      appStatusTask
+      appearance="outline"
+      class="task__details__form-status"
+      [taskStatus]="task().status">
+      <mat-select
+        [(value)]="selectedStatus"
+        (selectionChange)="onStatusChange()">
+        <mat-option value="todo">todo</mat-option>
+        <mat-option value="in-progress">in-progress</mat-option>
+        <mat-option value="done">done</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="task__description">
+    <p>{{ 'TASK.DESCRIPTION' | translate }}</p>
+
+    <div class="task__description__text">
+      <textarea
+        placeholder="What is this task about?"
+        [(ngModel)]="descriptionText"
+        (blur)="saveTaskDescription()"
+        (click)="editTaskDescription()">
+      </textarea>
+    </div>
+    @if (editingDescription()) {
+
+    <div class="task__description__actions">
+      <button
+        mat-button
+        type="submit"
+        (click)="saveTaskDescription()"
+        >Save</button
+      >
+      <button
+        mat-button
+        type="submit"
+        (click)="cancelEditDescription()"
+        >Cancel</button
+      >
+    </div>
+    }
+  </div>
+
+  <div class="task__footer">
+    <button
+      class="task__footer__delete"
+      matButton="outlined"
+      type="submit"
+      (click)="deleteTask()">
+      Delete task
+    </button>
+    <button
+      matButton="filled"
+      type="submit"
+      (click)="closeTask()">
+      Close
+    </button>
+  </div>
+</div>

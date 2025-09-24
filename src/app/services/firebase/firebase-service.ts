@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import {
   Firestore,
   collection,
-  DocumentData,
   collectionData,
   doc,
   addDoc,
@@ -11,7 +10,9 @@ import {
   updateDoc,
   query,
   orderBy,
+  docData,
 } from '@angular/fire/firestore';
+import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { from, Observable } from 'rxjs';
 
@@ -20,27 +21,33 @@ import { from, Observable } from 'rxjs';
 })
 export class FirebaseServiceTs {
   private firestore = inject(Firestore);
-  private testCollection = collection(this.firestore, 'foxflowtest');
-
-  getTestConnection(): Observable<DocumentData[]> {
-    return collectionData(this.testCollection, {
-      idField: 'id',
-    });
-  }
+  private usersCollection = collection(this.firestore, 'users');
 
   getProjectTasks(projectId: string): Observable<TaskData[]> {
-    const projectDocRef = doc(this.firestore, `projects/${projectId}`);
-    const taskCollectionRef = collection(projectDocRef, 'task-project1');
+    const collectionURL = `projects/${projectId}`;
+    const projectDocRef = doc(this.firestore, collectionURL);
+    const taskCollectionRef = collection(projectDocRef, 'tasks');
     const tasksSortedByDate = query(taskCollectionRef, orderBy('createdAt'));
     return collectionData(tasksSortedByDate, { idField: 'id' }) as Observable<
       TaskData[]
     >;
   }
 
+  getTask(projectId: string, taskId: string): Observable<TaskData> {
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
+    const taskDocRef = doc(this.firestore, collectionURL);
+    return docData(taskDocRef, { idField: 'id' }) as Observable<TaskData>;
+  }
+
   addTask(text: string, projectId: string, date: Date): Observable<string> {
-    const projectDocRef = doc(this.firestore, `projects/${projectId}`);
-    const taskCollectionRef = collection(projectDocRef, 'task-project1');
-    const todoToCreate = { title: text, isCompleted: false, createdAt: date };
+    const collectionURL = `projects/${projectId}`;
+    const projectDocRef = doc(this.firestore, collectionURL);
+    const taskCollectionRef = collection(projectDocRef, 'tasks');
+    const todoToCreate = {
+      title: text,
+      status: 'todo',
+      createdAt: date,
+    };
 
     const promise = addDoc(taskCollectionRef, todoToCreate).then(
       (response) => response.id
@@ -49,10 +56,8 @@ export class FirebaseServiceTs {
   }
 
   deleteTask(projectId: string, taskId: string): Observable<void> {
-    const docRef = doc(
-      this.firestore,
-      `projects/${projectId}/task-project1/${taskId}`
-    );
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
+    const docRef = doc(this.firestore, collectionURL);
     const promise = deleteDoc(docRef);
     return from(promise);
   }
@@ -62,11 +67,15 @@ export class FirebaseServiceTs {
     taskId: string,
     updateFields: Partial<TaskData>
   ): Observable<void> {
-    const docRef = doc(
-      this.firestore,
-      `projects/${projectId}/task-project1/${taskId}`
-    );
+    const collectionURL = `projects/${projectId}/tasks/${taskId}`;
+    const docRef = doc(this.firestore, collectionURL);
     const promise = updateDoc(docRef, updateFields);
     return from(promise);
+  }
+
+  getUsers(): Observable<MemberInterface[]> {
+    return collectionData(this.usersCollection, {
+      idField: 'id',
+    }) as Observable<MemberInterface[]>;
   }
 }

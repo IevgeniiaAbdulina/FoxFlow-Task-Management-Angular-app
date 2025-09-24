@@ -22,6 +22,11 @@ export class ProjectsListItem {
   private router = inject(Router);
 
   openProject(): void {
-    this.router.navigate(['project', this.project$().id]);
+    const projectId: string = this.project$().id as string;
+    if (projectId) {
+      this.router.navigate(['project', this.project$().id]);
+    } else {
+      console.error('cant navigate to not actualized project!');
+    }
   }
 }

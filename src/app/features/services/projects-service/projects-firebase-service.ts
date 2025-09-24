@@ -9,13 +9,14 @@ import {
   orderBy,
   query,
   updateDoc,
-  limit,
+  getDoc,
 } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import { EMPTY, from, Observable } from 'rxjs';
 import { Project } from '@app/shared/interfaces/project-interface';
 import { AuthService } from '@app/auth/services/auth-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserInterface } from '@app/shared/interfaces/user-interface';
+import { NotificationService } from '@app/shared/services/notification-service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,12 +24,12 @@ import { UserInterface } from '@app/shared/interfaces/user-interface';
 export class ProjectsFirebaseService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
 
   projectsCollection = collection(this.firestore, 'projects');
   projectsSortedByDate = query(
     this.projectsCollection,
-    orderBy('createdAt', 'desc'),
-    limit(12)
+    orderBy('createdAt', 'desc')
   );
 
   private readonly projectOwner = toSignal(this.authService.user$, {
@@ -43,14 +44,27 @@ export class ProjectsFirebaseService {
 
   addProject(text: string): Observable<string> {
     const projectToCreate = {
+      id: null,
       title: text,
       owner: this.projectOwner().uid,
       createdAt: new Date().toISOString(),
     };
 
     const promise = addDoc(this.projectsCollection, projectToCreate).then(
-      (result) => result.id
+      (result) => {
+        this.setIdProject(result.id, { id: result.id });
+        return result.id;
+      }
     );
+    return from(promise);
+  }
+
+  setIdProject(
+    projectID: string,
+    idToUpdate: { id: string }
+  ): Observable<void> {
+    const docRef = doc(this.firestore, 'projects/' + projectID);
+    const promise = updateDoc(docRef, idToUpdate);
     return from(promise);
   }
 
@@ -67,5 +81,22 @@ export class ProjectsFirebaseService {
     const docRef = doc(this.firestore, 'projects/' + projectID);
     const promise = updateDoc(docRef, dataToUpdate);
     return from(promise);
+  }
+
+  getProject(projectId: string): Observable<Project> {
+    const path = 'projects/' + projectId;
+    const docRef = doc(this.firestore, path);
+    const promise = getDoc(docRef)
+      .then((result) => {
+        const res = result.data();
+        console.log('Get current Project by id:', projectId, res);
+        return result.data();
+      })
+      .catch(() => {
+        const message = 'No such project!';
+        this.notificationService.showErrorMessage(message);
+        return EMPTY;
+      });
+    return from(promise) as Observable<Project>;
   }
 }

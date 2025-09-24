@@ -1,4 +1,5 @@
 @use '../../style/abstract/placeholders' as *;
+@use '../../style/abstract/constant' as *;
 
 .list {
   list-style: none;
@@ -27,6 +28,7 @@
   align-items: center;
   padding: 0.5rem 1rem;
   row-gap: 1.5rem;
+  @extend %transition;
 
   &__header {
     display: flex;
@@ -56,7 +58,15 @@
     &__information {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 7px grey;
+    background-color: var(--mat-sys-surface-container);
   }
 }
 
@@ -92,4 +102,13 @@ mat-icon.color {
 
 .mat-icon {
   color: var(--mat-icon-bg);
+}
+
+.deadline {
+  box-sizing: border-box;
+  border: 2px solid $color-deadline;
+}
+
+.task-complete {
+  border: 2px solid $color-task-isCompleted;
 }

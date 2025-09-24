@@ -68,11 +68,11 @@ mat-menu {
   z-index: 1000;
 }
 
-::ng-deep .icon-only-toggle .mdc-switch {
+:host::ng-deep .icon-only-toggle .mdc-switch {
   display: none;
 }
 
-::ng-deep .mat-internal-form-field > label {
+:host::ng-deep .mat-internal-form-field > label {
   padding-top: 4px;
 }
 

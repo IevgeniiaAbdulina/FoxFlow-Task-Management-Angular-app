@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskBody } from './task-body';
+import { ConfirmationDialog } from './confirmation-dialog';
 
-describe('TaskBody', () => {
-  let component: TaskBody;
-  let fixture: ComponentFixture<TaskBody>;
+describe('ConfirmationDialog', () => {
+  let component: ConfirmationDialog;
+  let fixture: ComponentFixture<ConfirmationDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskBody],
+      imports: [ConfirmationDialog],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TaskBody);
+    fixture = TestBed.createComponent(ConfirmationDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
