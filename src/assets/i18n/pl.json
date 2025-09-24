@@ -104,8 +104,10 @@
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
   },
   "GREETING": {
-    "WELCOME": "Dobry {time}, {name}!",
-    "GUEST": "Dobry {time}, Gość!",
+    "WELCOME": "Dobry {{time}}, {{name}}!",
+    "GUEST": "Dobry {{time}}, Gość!"
+  },
+  "TIME": {
     "MORNING": "poranek",
     "AFTERNOON": "popołudnie",
     "EVENING": "wieczór"
