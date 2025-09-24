@@ -68,7 +68,6 @@ export class TaskDetail implements OnInit {
   readonly task = signal<TaskData>(this.defaultTask);
   readonly editing = signal(false);
   readonly editingDescription = signal(false);
-  readonly isAssignedUser = signal(false);
 
   projectId: string | undefined;
   editingText = '';
@@ -80,6 +79,7 @@ export class TaskDetail implements OnInit {
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
+  assignedUsers: MemberInterface[] | undefined = [];
 
   ngOnInit(): void {
     this.projectId = this.projectService.currentProject()?.id;
@@ -96,9 +96,9 @@ export class TaskDetail implements OnInit {
           }
           this.descriptionText = task.description || '';
           this.selectedStatus = task.status;
+          this.assignedUsers = task.assignedTo;
         });
     }
-    console.log('assignedUsers', this.assignedUsers);
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
       this.users = users;
@@ -125,10 +125,6 @@ export class TaskDetail implements OnInit {
 
   get selectedUsers(): MemberInterface[] {
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
-  }
-
-  get assignedUsers(): MemberInterface[] | undefined {
-    return this.task().assignedTo;
   }
 
   editTask(): void {
@@ -254,13 +250,12 @@ export class TaskDetail implements OnInit {
       this.tasksFirebaseService
         .updateTask(this.projectId, currentTask.id, updateDate)
         .subscribe(() => {
-          console.log('saveUsersAssignedToTask', assignedUsers);
+          //console.log('saveUsersAssignedToTask', assignedUsers);
           this.task.set({
             ...currentTask,
             assignedTo: assignedUsers,
           });
         });
     }
-    this.isAssignedUser.set(true);
   }
 }

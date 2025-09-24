@@ -41,7 +41,7 @@
     <p class="task__details__assign-text"
       >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
     >
-    @if (!isAssignedUser()) {
+    @if (!assignedUsers) {
     <mat-form-field
       appearance="outline"
       class="task__details__form-assign">
