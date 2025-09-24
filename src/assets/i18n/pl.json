@@ -120,6 +120,12 @@
     "TITLE": "Projekty",
     "CREATE": "Utwórz projekt"
   },
+  "SIDEBAR": {
+    "HOME": "Strona główna",
+    "PROJECTS": "Projekty",
+    "NO_PROJECTS": "Brak dostępnych projektów",
+    "TOGGLE": "Przełącz pasek boczny"
+  },
   "TOOLS": {
     "EDIT": "Edytuj tytuł",
     "DELETE": "Usuń zadanie"
