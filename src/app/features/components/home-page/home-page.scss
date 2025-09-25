@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: 100vh;
+  height: auto;
 }
 
 mat-sidenav-container {
@@ -12,47 +12,50 @@ mat-sidenav-container {
   background-color: var(--background-color, #f5f5f5);
   border-right: 1px solid #999;
   padding: 16px;
+  position: absolute;
+}
 
-  .sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-    button {
-      justify-content: flex-start;
+  button {
+    justify-content: flex-start;
+    font-size: 16px;
+    text-transform: none;
+
+    &.active {
+      background-color: rgb(64 123 255 / 10%);
+    }
+  }
+
+  h3 {
+    margin: 16px 0 8px;
+    font-size: 1.8rem;
+  }
+
+  mat-nav-list {
+    .mat-list-item {
+      cursor: pointer;
       font-size: 16px;
-      text-transform: none;
 
       &.active {
-        background-color: rgb(64 123 255 / 10%);
+        background-color: rgb(64 123 255 / 20%);
       }
     }
+  }
 
-    h3 {
-      margin: 16px 0 8px;
-      font-size: 18px;
-    }
-
-    mat-nav-list {
-      .mat-list-item {
-        cursor: pointer;
-        font-size: 16px;
-
-        &.active {
-          background-color: rgb(64 123 255 / 20%);
-        }
-      }
-    }
-
-    p {
-      font-size: 14px;
-      color: #666;
-    }
+  p {
+    font-size: 1.4rem;
+    color: #666;
   }
 }
 
 mat-sidenav-content {
   padding: 16px;
+  z-index: 0;
+  position: relative;
 
   .menu-button {
     position: absolute;
@@ -60,17 +63,35 @@ mat-sidenav-content {
     left: 16px;
     z-index: 10;
   }
-}
-:host ::ng-deep .mdc-list-item__primary-text {
-  font-size: 1.6rem;
+
+  .menu-button.mobile {
+    top: 16px;
+    left: 16px;
+    transform: none;
+  }
 }
 
 @media (max-width: 600px) {
   .sidebar {
     width: 200px;
+    z-index: 100;
   }
 
   mat-sidenav-content {
     padding: 8px;
   }
+
+  .menu-button:not(.mobile) {
+    display: none;
+  }
+}
+
+:host ::ng-deep .mdc-list-item__primary-text {
+  font-size: 1.6rem;
+}
+
+:host ::ng-deep .mat-mdc-button > .mat-icon {
+  font-size: 2.125rem;
+  height: 2.125rem;
+  width: 2.125rem;
 }

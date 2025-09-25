@@ -37,8 +37,8 @@ export const routes: Routes = [
   {
     path: 'project/:id',
     loadComponent: () =>
-      import('./features/components/project-page/project-page').then(
-        (c) => c.ProjectPage
+      import('@app/features/components/project-page/project-page').then(
+        (m) => m.ProjectPage
       ),
     canActivate: [authGuard],
   },

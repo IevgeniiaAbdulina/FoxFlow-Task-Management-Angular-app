@@ -5,6 +5,7 @@ import {
   computed,
   Signal,
   signal,
+  viewChild,
 } from '@angular/core';
 import { AuthService } from '@app/auth/services/auth-service';
 import { GreetingComponent } from '@app/features/components/greeting-component/greeting-component';
@@ -15,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -47,8 +48,10 @@ export class HomePage {
   private projectsFirebaseService = inject(ProjectsFirebaseService);
   private breakpointObserver = inject(BreakpointObserver);
   readonly dialog = inject(MatDialog);
+  readonly sidenav = viewChild(MatSidenav);
   readonly name = signal('');
   readonly selectedProjectId = signal<string | null>(null);
+  readonly isSidebarOpen = signal(true);
 
   readonly projects = toSignal(this.projectsFirebaseService.getProjects(), {
     initialValue: [],
@@ -56,7 +59,7 @@ export class HomePage {
 
   readonly user$ = computed(() =>
     this.authService.currentUser()
-  ) as Signal<UserInterface>;
+  ) as Signal<UserInterface | null>;
 
   readonly isMobile = toSignal(
     this.breakpointObserver
@@ -64,6 +67,14 @@ export class HomePage {
       .pipe(map((result) => result.matches)),
     { initialValue: false }
   );
+
+  toggleSidebar(): void {
+    if (this.isMobile()) {
+      this.sidenav()?.toggle();
+    } else {
+      this.isSidebarOpen.set(!this.isSidebarOpen());
+    }
+  }
 
   selectProject(projectId: string): void {
     this.selectedProjectId.set(projectId);
