@@ -85,13 +85,11 @@ export class TaskDetail implements OnInit {
 
   ngOnInit(): void {
     this.projectId = this.projectService.currentProject()?.id;
-    console.log('isAssignedUsers', this.isAssignedUsers);
 
     if (this.projectId) {
       this.tasksFirebaseService
         .getTask(this.projectId, this.data.taskId)
         .subscribe((task) => {
-          //console.log('ngOnOninit downloaded task', task);
           this.task.set(task);
           this.editingText = task.title;
 
@@ -104,7 +102,6 @@ export class TaskDetail implements OnInit {
           task.assignedTo?.forEach((user) => {
             this.selectedUserIds.push(user.id);
           });
-          //this.selectedUserIds = task.assignedTo;
           if (this.assignedUsers?.length !== 0) {
             this.isAssignedUsers = true;
           }
@@ -117,7 +114,6 @@ export class TaskDetail implements OnInit {
   }
 
   get selectedUsers(): MemberInterface[] {
-    console.log('click on user');
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
   }
 
@@ -168,27 +164,18 @@ export class TaskDetail implements OnInit {
   //Assign Users
 
   chooseUserForAssign(): void {
-    console.log('chooseUserForAssign');
     this.selectedUserIds = this.assignedUsers?.map((user) => user.id) ?? [];
     this.isAssignedUsers = !this.isAssignedUsers;
-    //console.log('chooseUserForAssign', this.isAssignedUsers);
     setTimeout(() => {
       this.userSelect()?.open();
     });
   }
 
   saveUsersAssignedToTask(): void {
-    console.log('saveUsersAssignedToTask');
     const currentTask = this.task();
     if (!currentTask) return;
     let assignedUsersTemp: MemberInterface[] | undefined = [];
-    console.log('selectedUserids', this.selectedUserIds);
-    //console.log('saveUsersAssignedToTask', this.assignedUsers);
-    // if ( this.selectedUsers.length === 0) {
-    //   assignedUsersTemp = this.assignedUsers;
-    // } else {
     assignedUsersTemp = this.selectedUsers;
-    //}
 
     const updateDate = {
       assignedTo: assignedUsersTemp,
@@ -197,8 +184,6 @@ export class TaskDetail implements OnInit {
       this.tasksFirebaseService
         .updateTask(this.projectId, currentTask.id, updateDate)
         .subscribe(() => {
-          console.log('assignedUsersTemp', assignedUsersTemp);
-          console.log('currentTask', currentTask);
           this.task.set({
             ...currentTask,
             assignedTo: assignedUsersTemp,
