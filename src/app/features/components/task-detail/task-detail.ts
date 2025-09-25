@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { NgOptimizedImage } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -77,17 +77,21 @@ export class TaskDetail implements OnInit {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
+  readonly userSelect = viewChild('userSelect', { read: MatSelect });
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
   assignedUsers: MemberInterface[] | undefined = [];
+  isAssignedUsers = false;
 
   ngOnInit(): void {
     this.projectId = this.projectService.currentProject()?.id;
+    console.log('isAssignedUsers', this.isAssignedUsers);
 
     if (this.projectId) {
       this.tasksFirebaseService
         .getTask(this.projectId, this.data.taskId)
         .subscribe((task) => {
+          //console.log('ngOnOninit downloaded task', task);
           this.task.set(task);
           this.editingText = task.title;
 
@@ -97,8 +101,13 @@ export class TaskDetail implements OnInit {
           this.descriptionText = task.description || '';
           this.selectedStatus = task.status;
           this.assignedUsers = task.assignedTo;
-          console.log('ngOnOninit assignedUsers', this.assignedUsers);
-          //console.log('task.assignreTo', task.assignedTo);
+          task.assignedTo?.forEach((user) => {
+            this.selectedUserIds.push(user.id);
+          });
+          //this.selectedUserIds = task.assignedTo;
+          if (this.assignedUsers?.length !== 0) {
+            this.isAssignedUsers = true;
+          }
         });
     }
 
@@ -107,29 +116,14 @@ export class TaskDetail implements OnInit {
     });
   }
 
-  closeTask(): void {
-    this.saveUsersAssignedToTask();
-    this.dialogRef.close();
-  }
-
-  deleteTask(): void {
-    const currentTask = this.task();
-    if (!currentTask) return;
-    if (this.projectId) {
-      this.tasksFirebaseService
-        .deleteTask(this.projectId, currentTask.id)
-        .subscribe(() => {
-          /* EMPTY */
-        });
-    }
-    this.closeTask();
-  }
-
   get selectedUsers(): MemberInterface[] {
+    console.log('click on user');
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
   }
 
-  editTask(): void {
+  //Edit title
+
+  editTaskTitle(): void {
     const currentTask = this.task();
     if (!currentTask) return;
 
@@ -145,7 +139,7 @@ export class TaskDetail implements OnInit {
     this.editingText = value;
   }
 
-  saveHeaderTitle(): void {
+  saveTaskTitle(): void {
     const currentTask = this.task();
     if (!currentTask || !this.editingText) return;
 
@@ -171,7 +165,51 @@ export class TaskDetail implements OnInit {
     this.editingText = '';
   }
 
-  saveDateOnBlur(): void {
+  //Assign Users
+
+  chooseUserForAssign(): void {
+    console.log('chooseUserForAssign');
+    this.selectedUserIds = this.assignedUsers?.map((user) => user.id) ?? [];
+    this.isAssignedUsers = !this.isAssignedUsers;
+    //console.log('chooseUserForAssign', this.isAssignedUsers);
+    setTimeout(() => {
+      this.userSelect()?.open();
+    });
+  }
+
+  saveUsersAssignedToTask(): void {
+    console.log('saveUsersAssignedToTask');
+    const currentTask = this.task();
+    if (!currentTask) return;
+    let assignedUsersTemp: MemberInterface[] | undefined = [];
+    console.log('selectedUserids', this.selectedUserIds);
+    //console.log('saveUsersAssignedToTask', this.assignedUsers);
+    // if ( this.selectedUsers.length === 0) {
+    //   assignedUsersTemp = this.assignedUsers;
+    // } else {
+    assignedUsersTemp = this.selectedUsers;
+    //}
+
+    const updateDate = {
+      assignedTo: assignedUsersTemp,
+    };
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updateDate)
+        .subscribe(() => {
+          console.log('assignedUsersTemp', assignedUsersTemp);
+          console.log('currentTask', currentTask);
+          this.task.set({
+            ...currentTask,
+            assignedTo: assignedUsersTemp,
+          });
+        });
+    }
+  }
+
+  //Edit task deadline
+
+  saveTaskDeadline(): void {
     const currentTask = this.task();
     if (!currentTask) return;
 
@@ -192,6 +230,28 @@ export class TaskDetail implements OnInit {
         });
     }
   }
+
+  //Change task status
+
+  onStatusChange(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+
+    const updatedTask = {
+      status: this.selectedStatus,
+    };
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updatedTask)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+          });
+        });
+    }
+  }
+
+  //Edit task description
 
   editTaskDescription(): void {
     this.editingDescription.set(true);
@@ -223,50 +283,21 @@ export class TaskDetail implements OnInit {
     this.descriptionText = this.task()?.description || '';
   }
 
-  onStatusChange(): void {
-    const currentTask = this.task();
-    if (!currentTask) return;
-
-    const updatedTask = {
-      status: this.selectedStatus,
-    };
-    if (this.projectId) {
-      this.tasksFirebaseService
-        .updateTask(this.projectId, currentTask.id, updatedTask)
-        .subscribe(() => {
-          this.task.set({
-            ...currentTask,
-          });
-        });
-    }
+  closeTask(): void {
+    this.saveUsersAssignedToTask();
+    this.dialogRef.close();
   }
 
-  saveUsersAssignedToTask(): void {
+  deleteTask(): void {
     const currentTask = this.task();
     if (!currentTask) return;
-    let assignedUsersTemp: MemberInterface[] | undefined = [];
-    console.log('selectedUsers', this.selectedUsers);
-    console.log('saveUsers assignedUsers', this.assignedUsers);
-
-    if (this.selectedUsers.length === 0) {
-      assignedUsersTemp = this.assignedUsers;
-    } else {
-      assignedUsersTemp = this.selectedUsers;
-    }
-
-    const updateDate = {
-      assignedTo: assignedUsersTemp,
-    };
     if (this.projectId) {
       this.tasksFirebaseService
-        .updateTask(this.projectId, currentTask.id, updateDate)
+        .deleteTask(this.projectId, currentTask.id)
         .subscribe(() => {
-          console.log('assignedUsersTemp', assignedUsersTemp);
-          this.task.set({
-            ...currentTask,
-            assignedTo: assignedUsersTemp,
-          });
+          /* EMPTY */
         });
     }
+    this.closeTask();
   }
 }

@@ -31,7 +31,9 @@
     "TASK_DETAIL": "Task detail",
     "NO_ASSIGNEE": "No assignee",
     "STATUS": "Status",
-    "DESCRIPTION": "Description"
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_TEXT": "What is this task about?",
+    "ASSIGN_USER": "User(s) for task"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",

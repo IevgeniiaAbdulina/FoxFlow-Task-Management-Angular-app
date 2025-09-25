@@ -103,7 +103,14 @@
 .selected-users {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
+}
+
+.user-card {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
 }
 
 .edit {

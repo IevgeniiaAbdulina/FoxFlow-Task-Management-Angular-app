@@ -9,11 +9,7 @@
         <app-task-header />
         <ul>
           @for (task of toDoTasks(); track task.id) {
-
-          <app-task-list-item
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+          <app-task-list-item [task]="task" />
           }
         </ul>
       </div>
@@ -23,10 +19,7 @@
       <div class="board__column__content">
         <ul>
           @for (task of inProgressTasks(); track task.id) {
-          <app-task-list-item
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+          <app-task-list-item [task]="task" />
           }
         </ul>
       </div>
@@ -36,10 +29,7 @@
       <div class="board__column__content">
         <ul>
           @for (task of doneTasks(); track task.id) {
-          <app-task-list-item
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+          <app-task-list-item [task]="task" />
           }
         </ul>
       </div>
