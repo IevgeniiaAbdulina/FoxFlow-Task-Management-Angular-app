@@ -15,7 +15,21 @@
     </div>
     <div class="item__footer">
       <div class="item__footer__information">
-        <mat-icon class="disable">person</mat-icon>
+        <div class="item-assigned-user">
+          @if (task().assignedTo) { @for (user of task().assignedTo; track
+          user.id) {
+          <img
+            alt="avatar"
+            height="20"
+            mat-card-md-image
+            ngSrc="{{user.photoURL}}"
+            style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
+            width="20" />
+          } } @else {
+          <mat-icon class="disable">person</mat-icon>
+          }
+        </div>
+
         @if (getDeadline()) {
         <p> {{ getDeadline() }} </p>
         } @else { <mat-icon class="disable">date_range</mat-icon>}

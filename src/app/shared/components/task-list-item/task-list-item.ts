@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-task-list-item',
@@ -31,6 +32,7 @@ import { ProjectService } from '@app/features/services/projects-service/project-
     StyleChange,
     MatTooltipModule,
     TranslateModule,
+    NgOptimizedImage,
   ],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
