@@ -7,10 +7,19 @@
       }
       <div class="board__column__content">
         <app-task-header />
-        <ul>
+        <ul
+          #todoList="cdkDropList"
+          cdkDropList
+          class="drop-list todo-tasks__list"
+          id="todo"
+          [cdkDropListConnectedTo]="getConnectedLists()"
+          [cdkDropListData]="toDoTasks()"
+          (cdkDropListDropped)="drop($event)">
           @for (task of toDoTasks(); track task.id) {
 
           <app-task-list-item
+            cdkDrag
+            class="drag-item"
             [isEditing]="localEditingId === task.id"
             [task]="task"
             (setEditingId)="onEditClick($event)" />
@@ -21,9 +30,19 @@
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.INPROGRESS' | translate }}</h2>
       <div class="board__column__content">
-        <ul>
+        <ul
+          #inProgressList="cdkDropList"
+          cdkDropList
+          class="drop-list in-progress-tasks__list"
+          id="inProgress"
+          [cdkDropListConnectedTo]="getConnectedLists()"
+          [cdkDropListData]="inProgressTasks()"
+          (cdkDropListDropped)="drop($event)">
           @for (task of inProgressTasks(); track task.id) {
+
           <app-task-list-item
+            cdkDrag
+            class="drag-item"
             [isEditing]="localEditingId === task.id"
             [task]="task"
             (setEditingId)="onEditClick($event)" />
@@ -34,9 +53,19 @@
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.DONE' | translate }}</h2>
       <div class="board__column__content">
-        <ul>
+        <ul
+          #doneList="cdkDropList"
+          cdkDropList
+          class="drop-list done-tasks__list"
+          id="done"
+          [cdkDropListConnectedTo]="getConnectedLists()"
+          [cdkDropListData]="doneTasks()"
+          (cdkDropListDropped)="drop($event)">
           @for (task of doneTasks(); track task.id) {
+
           <app-task-list-item
+            cdkDrag
+            class="drag-item"
             [isEditing]="localEditingId === task.id"
             [task]="task"
             (setEditingId)="onEditClick($event)" />
