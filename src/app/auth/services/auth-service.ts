@@ -41,15 +41,7 @@ export class AuthService {
     ).then((response) => {
       updateProfile(response.user, { displayName: username });
 
-      const newMember: MemberInterface = {
-        id: response.user.uid /* authorization id */,
-        userId: '' /* firebase document id */,
-        email: response.user.email ?? '',
-        displayName: username,
-        photoURL: response.user.photoURL ?? '',
-      };
-
-      this.usersService.addUser(newMember);
+      this.checkUserExistence(response.user, username);
     });
 
     return from(promise);
@@ -85,6 +77,8 @@ export class AuthService {
           this.notificationService.showErrorMessage('Google-Login error');
           throw new Error('Google-Login error');
         } else {
+          this.checkUserExistence(currUser);
+
           this.router.navigate(['/home']);
         }
       })
@@ -99,16 +93,35 @@ export class AuthService {
 
     signInWithPopup(this.firebaseAuth, provider)
       .then((result) => {
-        //   Access token
         const credential = result.user;
-        const accessToken = credential.refreshToken;
+        this.checkUserExistence(credential);
 
-        console.log('TOKEN:', credential, accessToken);
         this.router.navigate(['/home']);
       })
       .catch((error) => {
-        this.notificationService.showErrorMessage('Login with GitHub failed.');
+        this.notificationService.showErrorMessage(
+          'Failed to sign in via GitHub. This email address may already exist.'
+        );
         console.error('Error during sign-in:', error.message);
       });
+  }
+
+  checkUserExistence(userData: User, name?: string): void {
+    const email = userData.email as string;
+    const username = userData.displayName ?? (name as string);
+
+    this.usersService.isUserExist(email).subscribe((exists) => {
+      if (!exists) {
+        const newMember: MemberInterface = {
+          id: userData?.uid ?? '' /* authorization id */,
+          userId: '' /* firebase document id */,
+          email: userData?.email ?? '',
+          displayName: username,
+          photoURL: userData?.photoURL ?? '',
+        };
+
+        this.usersService.addUser(newMember);
+      }
+    });
   }
 }

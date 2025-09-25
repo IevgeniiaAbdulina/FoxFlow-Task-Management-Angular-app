@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, map, Observable, take } from 'rxjs';
 import {
   addDoc,
   collection,
@@ -26,16 +26,21 @@ export class UsersService {
 
   addUser(member: MemberInterface): Observable<string> {
     const promise = addDoc(this.usersCollection, member).then((result) => {
-      console.log('[Add Member] Firebase', result.id);
-      this.updateUser(result.id);
+      const docRef = doc(this.firestore, 'users', result.id);
+      updateDoc(docRef, { userId: result.id });
+
       return result.id;
     });
     return from(promise);
   }
 
-  updateUser(userId: string): Observable<void> {
-    const docRef = doc(this.firestore, 'users/' + userId);
-    const promise = updateDoc(docRef, { userId: userId });
-    return from(promise);
+  isUserExist(userEmail: string): Observable<boolean> {
+    /* Nice to use `query` with `where` */
+    return this.getUsers().pipe(
+      take(1),
+      map((users: MemberInterface[]) => {
+        return users.filter((user) => user.email === userEmail).length > 0;
+      })
+    );
   }
 }
