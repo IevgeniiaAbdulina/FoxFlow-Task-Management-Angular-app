@@ -2,7 +2,6 @@
   class="list"
   role="button"
   tabindex="0"
-  [ngClass]="{editing: isEditing()}"
   (dblclick)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
   <div
@@ -12,25 +11,7 @@
     [taskStatus]="task().status">
     <div class="item__header">
       <mat-icon>star_border</mat-icon>
-      @if (!isEditing()) {
       <p class="item__header__text">{{ task().title }}</p>
-      <mat-icon
-        aria-label="Edit"
-        class="color"
-        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
-        matTooltipPosition="right"
-        (click)="setTaskInEditMode()"
-        >edit</mat-icon
-      >
-      } @if (isEditing()) {
-      <input
-        class="edit"
-        type="text"
-        [value]="editingText"
-        (dateChange)="changeTask()"
-        (keyup)="changeText($event)"
-        (keyup.enter)="changeTask()" />
-      }
     </div>
     <div class="item__footer">
       <div class="item__footer__information">

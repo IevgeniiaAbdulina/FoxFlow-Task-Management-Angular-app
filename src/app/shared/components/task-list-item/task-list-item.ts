@@ -5,7 +5,6 @@ import {
   inject,
   input,
   Output,
-  OnInit,
   computed,
   OnChanges,
   DestroyRef,
@@ -37,11 +36,10 @@ import { ProjectService } from '@app/features/services/projects-service/project-
   styleUrl: './task-list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListItem implements OnInit, OnChanges {
+export class TaskListItem implements OnChanges {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   @Output() readonly requestEdit = new EventEmitter<string>();
   readonly task = input.required<TaskData>();
-  readonly isEditing = input<boolean>(false);
 
   private projectService = inject(ProjectService);
   private tasksFirebaseService = inject(FirebaseServiceTs);
@@ -51,12 +49,7 @@ export class TaskListItem implements OnInit, OnChanges {
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
   isCompleted = false;
-  editingText = '';
   daysToDeadline = 0;
-
-  ngOnInit(): void {
-    this.editingText = this.task().title;
-  }
 
   ngOnChanges(): void {
     this.getDaysToDeadline();
@@ -69,29 +62,6 @@ export class TaskListItem implements OnInit, OnChanges {
       .subscribe(() => {
         /* empty */
       });
-  }
-
-  setTaskInEditMode(): void {
-    this.editingText = this.task().title;
-    this.setEditingId.emit(this.task().id);
-  }
-
-  changeText(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.editingText = value;
-  }
-
-  changeTask(): void {
-    const dataToUpdate = {
-      title: this.editingText,
-    };
-    this.tasksFirebaseService
-      .updateTask(this.projectId()!, this.task().id, dataToUpdate)
-      .subscribe(() => {
-        /* empty */
-      });
-
-    this.setEditingId.emit(null);
   }
 
   openTaskDetailInformation(): void {
