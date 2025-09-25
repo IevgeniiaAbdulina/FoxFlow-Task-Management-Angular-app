@@ -41,7 +41,7 @@
     <p class="task__details__assign-text"
       >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
     >
-    @if (!assignedUsers) {
+    @if (assignedUsers === null || assignedUsers === undefined) {
     <mat-form-field
       appearance="outline"
       class="task__details__form-assign">
@@ -118,10 +118,18 @@
     <div class="task__description__text">
       <textarea
         placeholder="What is this task about?"
-        [(ngModel)]="descriptionText"
-        (blur)="saveTaskDescription()"
-        (click)="editTaskDescription()">
+        [(ngModel)]="descriptionText">
       </textarea>
+      @if (!editingDescription()) {
+      <mat-icon
+        aria-label="Edit title"
+        class="edit-description"
+        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
+        matTooltipPosition="right"
+        (click)="editTaskDescription()"
+        >edit</mat-icon
+      >
+      }
     </div>
     @if (editingDescription()) {
 

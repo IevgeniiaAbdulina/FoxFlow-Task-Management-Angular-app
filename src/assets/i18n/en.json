@@ -110,7 +110,7 @@
     "ACTION_GITHUB": "Sign in with GitHub"
   },
   "TOOLS": {
-    "EDIT": "Edit title",
+    "EDIT": "Edit",
     "DELETE": "Delete task"
   }
 }

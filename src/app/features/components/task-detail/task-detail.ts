@@ -97,6 +97,8 @@ export class TaskDetail implements OnInit {
           this.descriptionText = task.description || '';
           this.selectedStatus = task.status;
           this.assignedUsers = task.assignedTo;
+          console.log('ngOnOninit assignedUsers', this.assignedUsers);
+          //console.log('task.assignreTo', task.assignedTo);
         });
     }
 
@@ -242,18 +244,27 @@ export class TaskDetail implements OnInit {
   saveUsersAssignedToTask(): void {
     const currentTask = this.task();
     if (!currentTask) return;
-    const assignedUsers: MemberInterface[] = this.selectedUsers;
+    let assignedUsersTemp: MemberInterface[] | undefined = [];
+    console.log('selectedUsers', this.selectedUsers);
+    console.log('saveUsers assignedUsers', this.assignedUsers);
+
+    if (this.selectedUsers.length === 0) {
+      assignedUsersTemp = this.assignedUsers;
+    } else {
+      assignedUsersTemp = this.selectedUsers;
+    }
+
     const updateDate = {
-      assignedTo: assignedUsers,
+      assignedTo: assignedUsersTemp,
     };
     if (this.projectId) {
       this.tasksFirebaseService
         .updateTask(this.projectId, currentTask.id, updateDate)
         .subscribe(() => {
-          //console.log('saveUsersAssignedToTask', assignedUsers);
+          console.log('assignedUsersTemp', assignedUsersTemp);
           this.task.set({
             ...currentTask,
-            assignedTo: assignedUsers,
+            assignedTo: assignedUsersTemp,
           });
         });
     }
