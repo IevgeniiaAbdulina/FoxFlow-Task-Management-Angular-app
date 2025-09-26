@@ -200,3 +200,9 @@
 :host ::ng-deep .task__details__form-status .mdc-notched-outline__trailing {
   border-right: none;
 }
+
+:host ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
