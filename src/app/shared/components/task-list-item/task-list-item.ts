@@ -7,9 +7,9 @@ import {
   Output,
   computed,
   OnChanges,
-  DestroyRef,
+  //DestroyRef,
 } from '@angular/core';
-import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
+//import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -20,9 +20,10 @@ import { Timestamp } from 'firebase/firestore';
 import { StyleChange } from '@app/shared/directives/style-change/style-change';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+//import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { NgOptimizedImage } from '@angular/common';
+import { StatusTask } from '@app/shared/directives/status-task/status-task';
 
 @Component({
   selector: 'app-task-list-item',
@@ -33,6 +34,7 @@ import { NgOptimizedImage } from '@angular/common';
     MatTooltipModule,
     TranslateModule,
     NgOptimizedImage,
+    StatusTask,
   ],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
@@ -44,8 +46,8 @@ export class TaskListItem implements OnChanges {
   readonly task = input.required<TaskData>();
 
   private projectService = inject(ProjectService);
-  private tasksFirebaseService = inject(FirebaseServiceTs);
-  private destroyRef = inject(DestroyRef);
+  //private tasksFirebaseService = inject(FirebaseServiceTs);
+  //private destroyRef = inject(DestroyRef);
   private dialog = inject(MatDialog);
 
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
@@ -57,14 +59,14 @@ export class TaskListItem implements OnChanges {
     this.getDaysToDeadline();
   }
 
-  deleteTask(): void {
-    this.tasksFirebaseService
-      .deleteTask(this.projectId()!, this.task().id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        /* empty */
-      });
-  }
+  // deleteTask(): void {
+  //   this.tasksFirebaseService
+  //     .deleteTask(this.projectId()!, this.task().id)
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe(() => {
+  //       /* empty */
+  //     });
+  // }
 
   openTaskDetailInformation(): void {
     this.dialog.open(TaskDetail, {

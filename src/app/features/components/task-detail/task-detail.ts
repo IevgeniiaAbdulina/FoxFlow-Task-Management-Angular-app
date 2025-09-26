@@ -77,6 +77,8 @@ export class TaskDetail implements OnInit {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
+  readonly descriptionArea =
+    viewChild<ElementRef<HTMLTextAreaElement>>('descriptionArea');
   readonly userSelect = viewChild('userSelect', { read: MatSelect });
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
@@ -240,6 +242,9 @@ export class TaskDetail implements OnInit {
 
   editTaskDescription(): void {
     this.editingDescription.set(true);
+    setTimeout(() => {
+      this.descriptionArea()?.nativeElement.focus();
+    });
   }
 
   saveTaskDescription(): void {
@@ -264,12 +269,11 @@ export class TaskDetail implements OnInit {
   }
 
   cancelEditDescription(): void {
-    this.editingDescription.set(false);
     this.descriptionText = this.task()?.description || '';
+    this.editingDescription.set(false);
   }
 
   closeTask(): void {
-    this.saveUsersAssignedToTask();
     this.dialogRef.close();
   }
 

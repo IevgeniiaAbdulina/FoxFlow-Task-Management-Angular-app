@@ -1,5 +1,14 @@
 <div class="task">
-  <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+  <div class="header">
+    <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+    <mat-icon
+      aria-label="Edit title"
+      matTooltip="{{ 'TOOLS.CLOSE' | translate }}"
+      matTooltipPosition="right"
+      (click)="closeTask()"
+      >clear</mat-icon
+    >
+  </div>
   <mat-divider class="color" />
   <div class="task__header">
     @if (!editing()) {
@@ -23,12 +32,14 @@
     <div class="task__header__edit">
       <button
         mat-button
+        matButton="filled"
         type="submit"
         (click)="cancelEditTask()">
         Cancel
       </button>
       <button
         mat-button
+        matButton="filled"
         type="submit"
         (click)="saveTaskTitle()">
         Save
@@ -93,6 +104,10 @@
     <mat-form-field
       appearance="outline"
       class="task__details__form-deadline">
+      @if (!task().dueTo) {
+      <mat-label>{{ 'TASK.CHOOSE_DATE' | translate }}</mat-label>
+      }
+
       <input
         matInput
         [matDatepicker]="picker"
@@ -125,7 +140,9 @@
 
     <div class="task__description__text">
       <textarea
+        #descriptionArea
         placeholder="{{'TASK.DESCRIPTION_TEXT' | translate}}"
+        [readonly]="!editingDescription()"
         [(ngModel)]="descriptionText">
       </textarea>
       @if (!editingDescription()) {
@@ -144,15 +161,17 @@
     <div class="task__description__actions">
       <button
         mat-button
-        type="submit"
-        (click)="saveTaskDescription()"
-        >Save</button
-      >
-      <button
-        mat-button
+        matButton="filled"
         type="submit"
         (click)="cancelEditDescription()"
         >Cancel</button
+      >
+      <button
+        mat-button
+        matButton="filled"
+        type="submit"
+        (click)="saveTaskDescription()"
+        >Save</button
       >
     </div>
     }
@@ -169,8 +188,8 @@
     <button
       matButton="filled"
       type="submit"
-      (click)="closeTask()">
-      Close
+      (click)="saveUsersAssignedToTask()">
+      Save
     </button>
   </div>
 </div>

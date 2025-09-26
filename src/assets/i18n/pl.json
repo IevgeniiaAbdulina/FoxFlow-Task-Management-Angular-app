@@ -33,7 +33,8 @@
     "STATUS": "Status",
     "DESCRIPTION": "Opis",
     "DESCRIPTION_TEXT": "Na czym polega to zadanie?",
-    "ASSIGN_USER": "Użytkownik(cy) dla zadania"
+    "ASSIGN_USER": "Użytkownik(cy) dla zadania",
+    "CHOOSE_DATE": "Wybierz datę"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",
@@ -110,6 +111,7 @@
   },
     "TOOLS": {
     "EDIT": "Edytuj",
-    "DELETE": "Usuń zadanie"
+    "DELETE": "Usuń zadanie",
+    "CLOSE": "Zamknij"
   }
 }

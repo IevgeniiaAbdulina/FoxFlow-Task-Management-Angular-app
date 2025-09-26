@@ -33,7 +33,8 @@
     "STATUS": "Status",
     "DESCRIPTION": "Description",
     "DESCRIPTION_TEXT": "What is this task about?",
-    "ASSIGN_USER": "User(s) for task"
+    "ASSIGN_USER": "User(s) for task",
+    "CHOOSE_DATE": "Choose date"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",
@@ -113,6 +114,7 @@
   },
   "TOOLS": {
     "EDIT": "Edit",
-    "DELETE": "Delete task"
+    "DELETE": "Delete task",
+    "CLOSE": "Close"
   }
 }
