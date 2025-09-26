@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ConfirmationDialog } from '@app/shared/components/confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardSmImage } from '@angular/material/card';
@@ -39,6 +39,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatCardSmImage,
     NgOptimizedImage,
     MatMenuModule,
+    RouterLink,
   ],
   templateUrl: './project-header.html',
   styleUrl: './project-header.scss',

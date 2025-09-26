@@ -1,3 +1,11 @@
+<div class="breadcrumbs">
+  <a
+    matButton
+    routerLink="/"
+    >Go Back</a
+  >
+</div>
+
 <div class="project-title__container">
   @if (!isEditing()) {
   <mat-label>
@@ -77,19 +85,20 @@
       <mat-icon>delete</mat-icon>
     </button>
     } @else {
-    <button
-      aria-label="Edit project button"
-      matButton="filled"
-      type="button"
-      (click)="saveEditing()">
-      Save
-    </button>
+
     <button
       aria-label="Remove project button"
       matButton="outlined"
       type="button"
       (click)="cancelEditing()">
       Cancel
+    </button>
+    <button
+      aria-label="Edit project button"
+      matButton="filled"
+      type="button"
+      (click)="saveEditing()">
+      Save
     </button>
     } }
   </div>
