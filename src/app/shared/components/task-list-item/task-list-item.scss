@@ -108,3 +108,18 @@ mat-icon.color {
 .task-complete {
   border: 2px solid $color-task-isCompleted;
 }
+
+.assigned-users {
+  position: relative;
+  width: 5rem;
+  height: 2rem;
+}
+
+.avatar {
+  position: absolute;
+  left: 0;
+  //width: 20px;
+  //height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
