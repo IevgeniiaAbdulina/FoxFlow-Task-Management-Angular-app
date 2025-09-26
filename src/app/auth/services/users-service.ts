@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { from, map, Observable, take } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import {
   addDoc,
   collection,

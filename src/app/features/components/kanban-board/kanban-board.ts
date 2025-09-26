@@ -23,6 +23,7 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+import { TaskContainerType } from '@app/shared/types/tasks-container-type';
 
 @Component({
   selector: 'app-kanban-board',
@@ -79,11 +80,15 @@ export class KanbanBoard implements OnInit {
   }
 
   drop(event: CdkDragDrop<TaskData[]>): void {
-    const previousContainerId = event.previousContainer.id;
-    const currentContainerId = event.container.id;
+    const previousContainerId = event.previousContainer.id as TaskContainerType;
+    const currentContainerId = event.container.id as TaskContainerType;
 
-    const previousSignal = this.getSignalForContainer(previousContainerId);
-    const currentSignal = this.getSignalForContainer(currentContainerId);
+    const previousSignal = this.getSignalForContainer(
+      previousContainerId
+    ) as WritableSignal<TaskData[]>;
+    const currentSignal = this.getSignalForContainer(
+      currentContainerId
+    ) as WritableSignal<TaskData[]>;
 
     if (event.previousContainer === event.container) {
       const currentItems = [...currentSignal()];
@@ -114,12 +119,12 @@ export class KanbanBoard implements OnInit {
   }
 
   private getSignalForContainer(
-    containerId: string
-  ): WritableSignal<TaskData[]> {
+    containerId: TaskContainerType
+  ): WritableSignal<TaskData[]> | null {
     if (containerId === 'todo') return this.toDoTasks;
     if (containerId === 'inProgress') return this.inProgressTasks;
     if (containerId === 'done') return this.doneTasks;
-    throw new Error(`Unknown container ID: ${containerId}`);
+    return null;
   }
 
   private updateTasksStatus(task: TaskData, newContainerId: string): void {
@@ -135,9 +140,6 @@ export class KanbanBoard implements OnInit {
       status: task.status,
     };
     this.tasksFirebaseService.updateTask(this.projectId!, task.id, updatedTask);
-    console.log(
-      `Task "${task.title}" moved to ${newContainerId} task data: ${task.status}`
-    );
   }
 
   getConnectedLists(): CdkDropList[] {
