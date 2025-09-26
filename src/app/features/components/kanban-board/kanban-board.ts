@@ -51,7 +51,7 @@ export class KanbanBoard implements OnInit {
   readonly doneTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
 
   projectId: string | undefined;
-  localEditingId: string | null = null;
+  //localEditingId: string | null = null;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -74,6 +74,7 @@ export class KanbanBoard implements OnInit {
       }
     });
   }
+
 
   onEditClick(id: string | null): void {
     this.localEditingId = id;
@@ -145,4 +146,5 @@ export class KanbanBoard implements OnInit {
   getConnectedLists(): CdkDropList[] {
     return this.dropList ? Array.from(this.dropList()) : [];
   }
+
 }

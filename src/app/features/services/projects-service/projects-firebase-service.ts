@@ -88,8 +88,6 @@ export class ProjectsFirebaseService {
     const docRef = doc(this.firestore, path);
     const promise = getDoc(docRef)
       .then((result) => {
-        const res = result.data();
-        console.log('Get current Project by id:', projectId, res);
         return result.data();
       })
       .catch(() => {

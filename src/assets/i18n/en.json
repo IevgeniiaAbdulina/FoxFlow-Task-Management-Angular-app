@@ -31,7 +31,10 @@
     "TASK_DETAIL": "Task detail",
     "NO_ASSIGNEE": "No assignee",
     "STATUS": "Status",
-    "DESCRIPTION": "Description"
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_TEXT": "What is this task about?",
+    "ASSIGN_USER": "User(s) for task",
+    "CHOOSE_DATE": "Choose date"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",
@@ -110,7 +113,8 @@
     "ACTION_GITHUB": "Sign in with GitHub"
   },
   "TOOLS": {
-    "EDIT": "Edit title",
-    "DELETE": "Delete task"
+    "EDIT": "Edit",
+    "DELETE": "Delete task",
+    "CLOSE": "Close"
   }
 }
