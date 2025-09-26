@@ -30,7 +30,7 @@
     grid-template-columns: 100px 1fr;
     grid-template-rows: repeat(3, auto);
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
 
     &__assign-text {
       grid-column: 1;
@@ -122,6 +122,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 }
 
 .user-card {

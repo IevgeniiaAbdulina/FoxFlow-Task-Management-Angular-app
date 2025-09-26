@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { NgOptimizedImage } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -29,6 +29,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StatusTask } from '@app/shared/directives/status-task/status-task';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-detail',
@@ -46,6 +47,7 @@ import { ProjectService } from '@app/features/services/projects-service/project-
     MatDividerModule,
     MatTooltipModule,
     StatusTask,
+    CommonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
@@ -79,7 +81,6 @@ export class TaskDetail implements OnInit {
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
   readonly descriptionArea =
     viewChild<ElementRef<HTMLTextAreaElement>>('descriptionArea');
-  readonly userSelect = viewChild('userSelect', { read: MatSelect });
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
   assignedUsers: MemberInterface[] | undefined = [];
@@ -168,9 +169,6 @@ export class TaskDetail implements OnInit {
   chooseUserForAssign(): void {
     this.selectedUserIds = this.assignedUsers?.map((user) => user.id) ?? [];
     this.isAssignedUsers = !this.isAssignedUsers;
-    setTimeout(() => {
-      this.userSelect()?.open();
-    });
   }
 
   saveUsersAssignedToTask(): void {

@@ -62,16 +62,24 @@
       <mat-select
         exportAs="userSelect"
         multiple
-        [(value)]="selectedUserIds"
-        (dateChange)="saveUsersAssignedToTask()">
+        [(value)]="selectedUserIds">
         @for (user of users; track user.id) {
         <mat-option [value]="user.id">
+          @if (user.photoURL) {
           <img
             alt="avatar"
+            class="avatar"
             height="30"
             ngSrc="{{user.photoURL}}"
             width="30" />
-          {{ user.displayName }}
+          } @else {
+          <img
+            alt="avatar"
+            class="avatar"
+            height="30"
+            ngSrc="./assets/images/person.png"
+            width="30" />
+          } {{ user.displayName }}
         </mat-option>
         }
       </mat-select>
