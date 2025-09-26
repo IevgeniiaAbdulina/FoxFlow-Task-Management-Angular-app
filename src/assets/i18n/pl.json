@@ -128,6 +128,8 @@
     "HOME": "Strona główna",
     "PROJECTS": "Projekty",
     "NO_PROJECTS": "Brak dostępnych projektów",
-    "TOGGLE": "Przełącz pasek boczny"
+    "TOGGLE": "Przełącz pasek boczny",
+    "OPEN": "Otwórz pasek boczny",
+    "CLOSE": "Zamknij pasek boczny"
   }
 }

@@ -131,6 +131,8 @@
     "HOME": "Home",
     "PROJECTS": "Projects",
     "NO_PROJECTS": "No projects available",
-    "TOGGLE": "Toggle sidebar"
+    "TOGGLE": "Toggle sidebar",
+    "OPEN": "Open sidebar",
+    "CLOSE": "Close sidebar"
   }
 }
