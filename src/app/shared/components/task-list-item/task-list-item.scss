@@ -100,6 +100,10 @@ mat-icon.color {
   width: 100%;
 }
 
+.mat-icon {
+  color: var(--mat-icon-bg);
+}
+
 .deadline {
   box-sizing: border-box;
   border: 2px solid $color-deadline;
