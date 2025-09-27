@@ -27,20 +27,26 @@ export const routes: Routes = [
     canActivate: [isLoggedGuard],
   },
   {
-    path: 'home',
+    path: '',
     loadComponent: () =>
-      import('@app/features/components/home-page/home-page').then(
-        (m) => m.HomePage
-      ),
+      import('@app/auth-layout/auth-layout').then((m) => m.AuthLayoutComponent),
     canActivate: [authGuard],
-  },
-  {
-    path: 'project/:id',
-    loadComponent: () =>
-      import('@app/features/components/project-page/project-page').then(
-        (m) => m.ProjectPage
-      ),
-    canActivate: [authGuard],
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('@app/features/components/home-page/home-page').then(
+            (m) => m.HomePage
+          ),
+      },
+      {
+        path: 'project/:id',
+        loadComponent: () =>
+          import('@app/features/components/project-page/project-page').then(
+            (m) => m.ProjectPage
+          ),
+      },
+    ],
   },
   {
     path: '**',

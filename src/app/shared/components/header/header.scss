@@ -75,11 +75,11 @@ mat-menu {
   padding-top: 4px;
 }
 
-:host::ng-deep .mdc-button__label {
+::ng-deep .mdc-button__label {
   font-size: 1.6rem;
 }
 
-:host::ng-deep
+::ng-deep
   .mat-mdc-menu-panel
   .mat-mdc-menu-content
   .mat-mdc-menu-item
