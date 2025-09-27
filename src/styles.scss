@@ -61,4 +61,11 @@ body.dark-theme {
   --mat-icon-bg-hover: rgba(0, 0, 0, 0.1);
   background: var(--primary-bg);
   color: var(--primary-text);
+
+  @include mat.tooltip-overrides(
+    (
+      supporting-text-size: 14px,
+      supporting-text-line-height: 100%,
+    )
+  );
 }

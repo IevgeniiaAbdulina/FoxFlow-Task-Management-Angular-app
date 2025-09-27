@@ -39,7 +39,8 @@ export class AuthService {
       email,
       password
     ).then((response) => {
-      updateProfile(response.user, { displayName: username });
+      const photo = './assets/images/person.png';
+      updateProfile(response.user, { displayName: username, photoURL: photo });
 
       this.checkUserExistence(response.user, username);
     });

@@ -1,0 +1,18 @@
+<div
+  class="project-owner__container"
+  [matTooltip]="owner().displayName">
+  @if (isVisible()) {
+  <span>Owner</span>
+  }
+  <div class="user-image">
+    @if (owner().photoURL) {
+    <img
+      alt="User avatar"
+      height="24"
+      width="24"
+      [ngSrc]="owner().photoURL ?? ''" />
+    } @if (isVisible()) {
+    <span>{{ owner().displayName }}</span>
+    }
+  </div>
+</div>

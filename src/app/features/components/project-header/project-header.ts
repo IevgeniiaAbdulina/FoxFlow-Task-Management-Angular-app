@@ -24,6 +24,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatMenuModule } from '@angular/material/menu';
+import { ProjectOwner } from '@app/shared/components/project-owner/project-owner';
 
 @Component({
   selector: 'app-project-header',
@@ -40,12 +41,14 @@ import { MatMenuModule } from '@angular/material/menu';
     NgOptimizedImage,
     MatMenuModule,
     RouterLink,
+    ProjectOwner,
   ],
   templateUrl: './project-header.html',
   styleUrl: './project-header.scss',
   providers: [],
   host: {
     '[attr.data-actions-expand]': '!isEditing()',
+    '[attr.data-sm-screen]': 'isShowActions()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -58,6 +61,7 @@ export class ProjectHeader implements OnInit {
   private dialog = inject(MatDialog);
 
   readonly project$ = computed(() => this.projectService.currentProject());
+  readonly owner$ = computed(() => this.projectService.currentProjectOwner());
   readonly isEditing = signal<boolean>(false);
   readonly isShowActions = signal<boolean>(true);
   readonly editingText = signal('');

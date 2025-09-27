@@ -101,5 +101,12 @@
       Save
     </button>
     } }
+    <div>
+      @if (owner$()) {
+      <app-project-owner
+        [isVisible]="isShowActions()"
+        [owner]="owner$()!" />
+      } @else { Loading... }
+    </div>
   </div>
 </div>
