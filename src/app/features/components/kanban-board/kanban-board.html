@@ -16,13 +16,7 @@
           [cdkDropListData]="toDoTasks()"
           (cdkDropListDropped)="drop($event)">
           @for (task of toDoTasks(); track task.id) {
-
-          <app-task-list-item
-            cdkDrag
-            class="drag-item"
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+            <app-task-list-item cdkDrag [task]="task" class="drag-item" />
           }
         </ul>
       </div>
@@ -39,13 +33,7 @@
           [cdkDropListData]="inProgressTasks()"
           (cdkDropListDropped)="drop($event)">
           @for (task of inProgressTasks(); track task.id) {
-
-          <app-task-list-item
-            cdkDrag
-            class="drag-item"
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+            <app-task-list-item [task]="task" cdkDrag class="drag-item"/>
           }
         </ul>
       </div>
@@ -62,13 +50,7 @@
           [cdkDropListData]="doneTasks()"
           (cdkDropListDropped)="drop($event)">
           @for (task of doneTasks(); track task.id) {
-
-          <app-task-list-item
-            cdkDrag
-            class="drag-item"
-            [isEditing]="localEditingId === task.id"
-            [task]="task"
-            (setEditingId)="onEditClick($event)" />
+            <app-task-list-item [task]="task" cdkDrag class="drag-item"/>
           }
         </ul>
       </div>

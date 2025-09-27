@@ -2,44 +2,51 @@
   class="list"
   role="button"
   tabindex="0"
-  [ngClass]="{editing: isEditing()}"
   (dblclick)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
-  <div
-    appStyleChange
-    class="item"
-    [daysForDeadline]="daysToDeadline"
-    [taskStatus]="task().status">
+  <div class="item">
     <div class="item__header">
-      <mat-icon>star_border</mat-icon>
-      @if (!isEditing()) {
-      <p class="item__header__text">{{ task().title }}</p>
       <mat-icon
-        aria-label="Edit"
-        class="color"
-        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
-        matTooltipPosition="right"
-        (click)="setTaskInEditMode()"
-        >edit</mat-icon
+        appStatusTask
+        [taskStatus]="task().status"
+        >radio_button_checked</mat-icon
       >
-      } @if (isEditing()) {
-      <input
-        class="edit"
-        type="text"
-        [value]="editingText"
-        (dateChange)="changeTask()"
-        (keyup)="changeText($event)"
-        (keyup.enter)="changeTask()" />
-      }
+      <p class="item__header__text">{{ task().title }}</p>
     </div>
     <div class="item__footer">
       <div class="item__footer__information">
-        <mat-icon class="disable">person</mat-icon>
-        @if (getDeadline()) {
-        <p> {{ getDeadline() }} </p>
-        } @else { <mat-icon class="disable">date_range</mat-icon>}
+        <div class="assigned-users">
+          @if ((task().assignedTo?.length || 0) > 0) {
+          <div class="avatar-container">
+            @for (user of task().assignedTo; track user.id) {
+            <img
+              alt="avatar"
+              class="avatar"
+              height="20"
+              ngSrc="{{user.photoURL}}"
+              style="--index: {{ $index }}"
+              width="20" />
+            }
+          </div>
+          <span> + {{ (task().assignedTo?.length || 0) - 1 | number}} </span>
+          } @else {
+          <mat-icon class="disable">person</mat-icon>
+          }
+        </div>
       </div>
-      <button
+
+      @if (task().status === 'done') {
+      <p class="done"> {{'NOTIFICATION.COMPLETE' | translate}}</p>
+      } @else { @if (getDeadline()) {
+      <p
+        appStyleChange
+        [daysForDeadline]="daysToDeadline"
+        [taskStatus]="task().status">
+        {{ getDeadline() }}
+      </p>
+      } @else { <mat-icon class="disable">date_range</mat-icon>} }
+
+      <!--<button
         #actionButton
         aria-label="Delete task"
         class="delete"
@@ -48,7 +55,7 @@
         type="submit"
         (click)="deleteTask()">
         <mat-icon class="color">delete_forever</mat-icon>
-      </button>
+      </button> -->
     </div>
   </div>
 </li>

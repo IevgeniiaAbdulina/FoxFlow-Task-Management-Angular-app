@@ -1,15 +1,23 @@
 <div class="task">
-  <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+  <div class="header">
+    <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
+    <mat-icon
+      aria-label="Edit title"
+      matTooltip="{{ 'TOOLS.CLOSE' | translate }}"
+      matTooltipPosition="right"
+      (click)="closeTask()"
+      >clear</mat-icon
+    >
+  </div>
   <mat-divider class="color" />
   <div class="task__header">
     @if (!editing()) {
     <p>{{ task().title }}</p>
     <mat-icon
       aria-label="Edit title"
-      class="color"
       matTooltip="{{ 'TOOLS.EDIT' | translate }}"
       matTooltipPosition="right"
-      (click)="editTask()"
+      (click)="editTaskTitle()"
       >edit</mat-icon
     >
     } @if (editing()) {
@@ -19,19 +27,21 @@
       type="text"
       [value]="editingText"
       (keyup)="changeText($event)"
-      (keyup.enter)="saveHeaderTitle()" />
+      (keyup.enter)="saveTaskTitle()" />
 
     <div class="task__header__edit">
       <button
         mat-button
+        matButton="filled"
         type="submit"
         (click)="cancelEditTask()">
         Cancel
       </button>
       <button
         mat-button
+        matButton="filled"
         type="submit"
-        (click)="saveHeaderTitle()">
+        (click)="saveTaskTitle()">
         Save
       </button>
     </div>
@@ -41,39 +51,56 @@
     <p class="task__details__assign-text"
       >{{ 'TASK.ASSIGNEE_LABEL' | translate }}</p
     >
-    @if (!isAssignedUser()) {
+    @if ((!isAssignedUsers && assignedUsers !== undefined &&
+    assignedUsers.length > 0) || (assignedUsers === undefined ||
+    assignedUsers.length === 0 )){
     <mat-form-field
       appearance="outline"
       class="task__details__form-assign">
-      <mat-label>{{ 'TASK.NO_ASSIGNEE' | translate }}</mat-label>
+      <mat-label>{{ 'TASK.ASSIGN_USER' | translate }}</mat-label>
       <mat-icon matSuffix>person</mat-icon>
       <mat-select
+        exportAs="userSelect"
         multiple
-        [(value)]="selectedUserIds"
-        (dateChange)="saveUsersAssignedToTask()">
+        [(value)]="selectedUserIds">
         @for (user of users; track user.id) {
         <mat-option [value]="user.id">
+          @if (user.photoURL) {
           <img
             alt="avatar"
+            class="avatar"
             height="30"
             ngSrc="{{user.photoURL}}"
             width="30" />
-          {{ user.displayName }}
+          } @else {
+          <img
+            alt="avatar"
+            class="avatar"
+            height="30"
+            ngSrc="./assets/images/person.png"
+            width="30" />
+          } {{ user.displayName }}
         </mat-option>
         }
       </mat-select>
     </mat-form-field>
-    } @else {
-    <div class="selected-users">
+
+    } @if (isAssignedUsers && assignedUsers !== undefined &&
+    assignedUsers.length > 0) {
+    <div
+      class="selected-users"
+      tabindex="0"
+      (click)="chooseUserForAssign()"
+      (keyup.enter)="chooseUserForAssign()">
       @for (user of assignedUsers; track user.id) {
       <div class="user-card">
         <img
           alt="avatar"
-          height="40"
+          height="20"
           mat-card-md-image
           ngSrc="{{user.photoURL}}"
           style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
-          width="40" />
+          width="20" />
         <span>{{user.displayName}}</span>
       </div>
       }
@@ -85,11 +112,15 @@
     <mat-form-field
       appearance="outline"
       class="task__details__form-deadline">
+      @if (!task().dueTo) {
+      <mat-label>{{ 'TASK.CHOOSE_DATE' | translate }}</mat-label>
+      }
+
       <input
         matInput
         [matDatepicker]="picker"
         [(ngModel)]="selectedDate"
-        (dateChange)="saveDateOnBlur()" />
+        (dateChange)="saveTaskDeadline()" />
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker" />
@@ -117,26 +148,38 @@
 
     <div class="task__description__text">
       <textarea
-        placeholder="What is this task about?"
-        [(ngModel)]="descriptionText"
-        (blur)="saveTaskDescription()"
-        (click)="editTaskDescription()">
+        #descriptionArea
+        placeholder="{{'TASK.DESCRIPTION_TEXT' | translate}}"
+        [readonly]="!editingDescription()"
+        [(ngModel)]="descriptionText">
       </textarea>
+      @if (!editingDescription()) {
+      <mat-icon
+        aria-label="Edit title"
+        class="edit-description"
+        matTooltip="{{ 'TOOLS.EDIT' | translate }}"
+        matTooltipPosition="right"
+        (click)="editTaskDescription()"
+        >edit</mat-icon
+      >
+      }
     </div>
     @if (editingDescription()) {
 
     <div class="task__description__actions">
       <button
         mat-button
-        type="submit"
-        (click)="saveTaskDescription()"
-        >Save</button
-      >
-      <button
-        mat-button
+        matButton="filled"
         type="submit"
         (click)="cancelEditDescription()"
         >Cancel</button
+      >
+      <button
+        mat-button
+        matButton="filled"
+        type="submit"
+        (click)="saveTaskDescription()"
+        >Save</button
       >
     </div>
     }
@@ -153,8 +196,8 @@
     <button
       matButton="filled"
       type="submit"
-      (click)="closeTask()">
-      Close
+      (click)="saveUsersAssignedToTask()">
+      Save
     </button>
   </div>
 </div>

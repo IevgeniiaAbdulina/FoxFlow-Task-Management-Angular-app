@@ -29,6 +29,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StatusTask } from '@app/shared/directives/status-task/status-task';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-detail',
@@ -46,6 +47,7 @@ import { ProjectService } from '@app/features/services/projects-service/project-
     MatDividerModule,
     MatTooltipModule,
     StatusTask,
+    CommonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './task-detail.html',
@@ -68,7 +70,6 @@ export class TaskDetail implements OnInit {
   readonly task = signal<TaskData>(this.defaultTask);
   readonly editing = signal(false);
   readonly editingDescription = signal(false);
-  readonly isAssignedUser = signal(false);
 
   projectId: string | undefined;
   editingText = '';
@@ -78,8 +79,12 @@ export class TaskDetail implements OnInit {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
+  readonly descriptionArea =
+    viewChild<ElementRef<HTMLTextAreaElement>>('descriptionArea');
   selectedDate: Date | null = null;
   selectedStatus: TaskStatus | undefined = 'todo';
+  assignedUsers: MemberInterface[] | undefined = [];
+  isAssignedUsers = false;
 
   ngOnInit(): void {
     this.projectId = this.projectService.currentProject()?.id;
@@ -96,42 +101,28 @@ export class TaskDetail implements OnInit {
           }
           this.descriptionText = task.description || '';
           this.selectedStatus = task.status;
+          this.assignedUsers = task.assignedTo;
+          task.assignedTo?.forEach((user) => {
+            this.selectedUserIds.push(user.id);
+          });
+          if (this.assignedUsers?.length !== 0) {
+            this.isAssignedUsers = true;
+          }
         });
     }
-    console.log('assignedUsers', this.assignedUsers);
 
     this.tasksFirebaseService.getUsers().subscribe((users) => {
       this.users = users;
     });
   }
 
-  closeTask(): void {
-    this.saveUsersAssignedToTask();
-    this.dialogRef.close();
-  }
-
-  deleteTask(): void {
-    const currentTask = this.task();
-    if (!currentTask) return;
-    if (this.projectId) {
-      this.tasksFirebaseService
-        .deleteTask(this.projectId, currentTask.id)
-        .subscribe(() => {
-          /* EMPTY */
-        });
-    }
-    this.closeTask();
-  }
-
   get selectedUsers(): MemberInterface[] {
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
   }
 
-  get assignedUsers(): MemberInterface[] | undefined {
-    return this.task().assignedTo;
-  }
+  //Edit title
 
-  editTask(): void {
+  editTaskTitle(): void {
     const currentTask = this.task();
     if (!currentTask) return;
 
@@ -147,7 +138,7 @@ export class TaskDetail implements OnInit {
     this.editingText = value;
   }
 
-  saveHeaderTitle(): void {
+  saveTaskTitle(): void {
     const currentTask = this.task();
     if (!currentTask || !this.editingText) return;
 
@@ -173,7 +164,37 @@ export class TaskDetail implements OnInit {
     this.editingText = '';
   }
 
-  saveDateOnBlur(): void {
+  //Assign Users
+
+  chooseUserForAssign(): void {
+    this.selectedUserIds = this.assignedUsers?.map((user) => user.id) ?? [];
+    this.isAssignedUsers = !this.isAssignedUsers;
+  }
+
+  saveUsersAssignedToTask(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+    let assignedUsersTemp: MemberInterface[] | undefined = [];
+    assignedUsersTemp = this.selectedUsers;
+
+    const updateDate = {
+      assignedTo: assignedUsersTemp,
+    };
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updateDate)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+            assignedTo: assignedUsersTemp,
+          });
+        });
+    }
+  }
+
+  //Edit task deadline
+
+  saveTaskDeadline(): void {
     const currentTask = this.task();
     if (!currentTask) return;
 
@@ -195,8 +216,33 @@ export class TaskDetail implements OnInit {
     }
   }
 
+  //Change task status
+
+  onStatusChange(): void {
+    const currentTask = this.task();
+    if (!currentTask) return;
+
+    const updatedTask = {
+      status: this.selectedStatus,
+    };
+    if (this.projectId) {
+      this.tasksFirebaseService
+        .updateTask(this.projectId, currentTask.id, updatedTask)
+        .subscribe(() => {
+          this.task.set({
+            ...currentTask,
+          });
+        });
+    }
+  }
+
+  //Edit task description
+
   editTaskDescription(): void {
     this.editingDescription.set(true);
+    setTimeout(() => {
+      this.descriptionArea()?.nativeElement.focus();
+    });
   }
 
   saveTaskDescription(): void {
@@ -221,46 +267,24 @@ export class TaskDetail implements OnInit {
   }
 
   cancelEditDescription(): void {
-    this.editingDescription.set(false);
     this.descriptionText = this.task()?.description || '';
+    this.editingDescription.set(false);
   }
 
-  onStatusChange(): void {
-    const currentTask = this.task();
-    if (!currentTask) return;
-
-    const updatedTask = {
-      status: this.selectedStatus,
-    };
-    if (this.projectId) {
-      this.tasksFirebaseService
-        .updateTask(this.projectId, currentTask.id, updatedTask)
-        .subscribe(() => {
-          this.task.set({
-            ...currentTask,
-          });
-        });
-    }
+  closeTask(): void {
+    this.dialogRef.close();
   }
 
-  saveUsersAssignedToTask(): void {
+  deleteTask(): void {
     const currentTask = this.task();
     if (!currentTask) return;
-    const assignedUsers: MemberInterface[] = this.selectedUsers;
-    const updateDate = {
-      assignedTo: assignedUsers,
-    };
     if (this.projectId) {
       this.tasksFirebaseService
-        .updateTask(this.projectId, currentTask.id, updateDate)
+        .deleteTask(this.projectId, currentTask.id)
         .subscribe(() => {
-          console.log('saveUsersAssignedToTask', assignedUsers);
-          this.task.set({
-            ...currentTask,
-            assignedTo: assignedUsers,
-          });
+          /* EMPTY */
         });
     }
-    this.isAssignedUser.set(true);
+    this.closeTask();
   }
 }

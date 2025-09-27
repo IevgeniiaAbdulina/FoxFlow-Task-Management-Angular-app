@@ -32,7 +32,10 @@
     "TASK_DETAIL": "Szczegóły zadania",
     "NO_ASSIGNEE": "Brak cesjonariusza",
     "STATUS": "Status",
-    "DESCRIPTION": "Opis"
+    "DESCRIPTION": "Opis",
+    "DESCRIPTION_TEXT": "Na czym polega to zadanie?",
+    "ASSIGN_USER": "Użytkownik(cy) dla zadania",
+    "CHOOSE_DATE": "Wybierz datę"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",

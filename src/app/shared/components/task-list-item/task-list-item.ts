@@ -5,12 +5,11 @@ import {
   inject,
   input,
   Output,
-  OnInit,
   computed,
   OnChanges,
-  DestroyRef,
+  //DestroyRef,
 } from '@angular/core';
-import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
+//import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { TaskData } from '@app/shared/interfaces/task-interface';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -21,8 +20,10 @@ import { Timestamp } from 'firebase/firestore';
 import { StyleChange } from '@app/shared/directives/style-change/style-change';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+//import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
+import { NgOptimizedImage } from '@angular/common';
+import { StatusTask } from '@app/shared/directives/status-task/status-task';
 
 @Component({
   selector: 'app-task-list-item',
@@ -32,67 +33,40 @@ import { ProjectService } from '@app/features/services/projects-service/project-
     StyleChange,
     MatTooltipModule,
     TranslateModule,
+    NgOptimizedImage,
+    StatusTask,
   ],
   templateUrl: './task-list-item.html',
   styleUrl: './task-list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListItem implements OnInit, OnChanges {
+export class TaskListItem implements OnChanges {
   @Output() readonly setEditingId = new EventEmitter<string | null>();
   @Output() readonly requestEdit = new EventEmitter<string>();
   readonly task = input.required<TaskData>();
-  readonly isEditing = input<boolean>(false);
 
   private projectService = inject(ProjectService);
-  private tasksFirebaseService = inject(FirebaseServiceTs);
-  private destroyRef = inject(DestroyRef);
+  //private tasksFirebaseService = inject(FirebaseServiceTs);
+  //private destroyRef = inject(DestroyRef);
   private dialog = inject(MatDialog);
 
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
   isCompleted = false;
-  editingText = '';
   daysToDeadline = 0;
-
-  ngOnInit(): void {
-    this.editingText = this.task().title;
-  }
 
   ngOnChanges(): void {
     this.getDaysToDeadline();
   }
 
-  deleteTask(): void {
-    this.tasksFirebaseService
-      .deleteTask(this.projectId()!, this.task().id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        /* empty */
-      });
-  }
-
-  setTaskInEditMode(): void {
-    this.editingText = this.task().title;
-    this.setEditingId.emit(this.task().id);
-  }
-
-  changeText(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.editingText = value;
-  }
-
-  changeTask(): void {
-    const dataToUpdate = {
-      title: this.editingText,
-    };
-    this.tasksFirebaseService
-      .updateTask(this.projectId()!, this.task().id, dataToUpdate)
-      .subscribe(() => {
-        /* empty */
-      });
-
-    this.setEditingId.emit(null);
-  }
+  // deleteTask(): void {
+  //   this.tasksFirebaseService
+  //     .deleteTask(this.projectId()!, this.task().id)
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe(() => {
+  //       /* empty */
+  //     });
+  // }
 
   openTaskDetailInformation(): void {
     this.dialog.open(TaskDetail, {
