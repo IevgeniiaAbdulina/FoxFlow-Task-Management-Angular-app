@@ -4,7 +4,8 @@
     "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
-    "ERROR": "Nieprawidłowy e-mail lub hasło"
+    "ERROR": "Nieprawidłowy e-mail lub hasło",
+    "LOGOUT": "Wyloguj się"
   },
   "HOME": {
     "TITLE": "Witaj w FoxFlow",
@@ -47,7 +48,6 @@
     "LANGUAGE": "Język"
   },
   "NOT_FOUND": {
-    "TITLE": "Strona nie znaleziona",
     "MESSAGE": "Przepraszamy, strona, której szukasz, nie istnieje.",
     "HOME": "Przejdź do strony głównej"
   },
@@ -109,9 +109,30 @@
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
   },
-    "TOOLS": {
-    "EDIT": "Edytuj",
+  "TOOLS": {
+    "EDIT": "Edytuj tytuł",
     "DELETE": "Usuń zadanie",
     "CLOSE": "Zamknij"
+  },
+  "GREETING": {
+    "WELCOME": "Dobry {{time}}, {{name}}!",
+    "GUEST": "Dobry {{time}}, Gość!"
+  },
+  "TIME": {
+    "MORNING": "poranek",
+    "AFTERNOON": "popołudnie",
+    "EVENING": "wieczór"
+  },
+  "PROJECTS": {
+    "TITLE": "Projekty",
+    "CREATE": "Utwórz projekt"
+  },
+  "SIDEBAR": {
+    "HOME": "Strona główna",
+    "PROJECTS": "Projekty",
+    "NO_PROJECTS": "Brak dostępnych projektów",
+    "TOGGLE": "Przełącz pasek boczny",
+    "OPEN": "Otwórz pasek boczny",
+    "CLOSE": "Zamknij pasek boczny"
   }
 }

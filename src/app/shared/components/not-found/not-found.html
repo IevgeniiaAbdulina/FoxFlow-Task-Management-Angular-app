@@ -2,8 +2,13 @@
   aria-label="Page not found"
   class="not-found"
   role="alert">
-  <h1>{{ 'NOT_FOUND.TITLE' | translate }}</h1>
-  <p>{{ 'NOT_FOUND.MESSAGE' | translate }}</p>
+  <img
+    alt="400 Not Found"
+    height="500"
+    ngSrc="assets/images/404-not-found.svg"
+    priority="high"
+    width="750" />
+  <h1>{{ 'NOT_FOUND.MESSAGE' | translate }}</h1>
   <a
     aria-label="Return to home page"
     color="primary"
