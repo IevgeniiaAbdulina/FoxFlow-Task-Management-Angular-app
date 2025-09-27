@@ -1,0 +1,28 @@
+<div class="sidebar-content">
+  <button
+    aria-label="Navigate to home page"
+    class="home-button"
+    mat-button
+    routerLink="/home"
+    routerLinkActive="active"
+    type="button"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <mat-icon>home</mat-icon>
+    {{ 'SIDEBAR.HOME' | translate }}
+  </button>
+  <h3>{{ 'SIDEBAR.PROJECTS' | translate }}</h3>
+  <mat-nav-list>
+    @for (project of projects(); track project.id) {
+    <mat-list-item
+      aria-label="Select project {{ project.title }}"
+      routerLinkActive="active"
+      [class.active]="selectedProjectId() === project.id"
+      [routerLink]="['/project', project.id]"
+      (click)="selectProject(project.id)">
+      {{ project.title }}
+    </mat-list-item>
+    } @empty {
+    <p>{{ 'SIDEBAR.NO_PROJECTS' | translate }}</p>
+    }
+  </mat-nav-list>
+</div>

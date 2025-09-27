@@ -1,16 +1,23 @@
 <div class="home-page__header">
-  <h3 class="current-date">{{ today | date:"EEEE, MMMM d" }}</h3>
-  <h1>Good {{ today | date:"bbbb" }}, {{ user$().displayName }}</h1>
+  <p class="current-date">{{ today | date:"EEEE, MMMM d" }}</p>
+  @if (user$()) {
+  <h1>
+    {{ 'GREETING.WELCOME' | translate: { time: timeOfDay(), name:
+    user$()!.displayName } }}
+  </h1>
+  } @else {
+  <h1>{{ 'GREETING.GUEST' | translate: { time: timeOfDay() } }}</h1>
+  }
 </div>
 <div class="home-page__content">
   <div class="projects-list">
-    <h2>Projects</h2>
+    <h2>{{ 'PROJECTS.TITLE' | translate }}</h2>
     <button
       matButton="filled"
       type="button"
       (click)="addProject.emit()">
       <mat-icon matPrefix>add</mat-icon>
-      Create project
+      {{ 'PROJECTS.CREATE' | translate }}
     </button>
     <app-projects-list-large [projects$]="projects$()" />
   </div>

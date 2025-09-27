@@ -4,7 +4,8 @@
     "REGISTER": "Get started",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "ERROR": "Invalid email or password"
+    "ERROR": "Invalid email or password",
+    "LOGOUT": "Log Out"
   },
   "HOME": {
     "TITLE": "Welcome to FoxFlow",
@@ -47,7 +48,6 @@
     "LANGUAGE": "Language"
   },
   "NOT_FOUND": {
-    "TITLE": "Page Not Found",
     "MESSAGE": "Sorry, the page you are looking for does not exist.",
     "HOME": "Go to Home"
   },
@@ -113,8 +113,29 @@
     "ACTION_GITHUB": "Sign in with GitHub"
   },
   "TOOLS": {
-    "EDIT": "Edit",
+    "EDIT": "Edit title",
     "DELETE": "Delete task",
     "CLOSE": "Close"
+  },
+  "GREETING": {
+    "WELCOME": "Good {{time}}, {{name}}!",
+    "GUEST": "Good {{time}}, Guest!"
+  },
+  "TIME": {
+    "MORNING": "morning",
+    "AFTERNOON": "afternoon",
+    "EVENING": "evening"
+  },
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "CREATE": "Create project"
+  },
+  "SIDEBAR": {
+    "HOME": "Home",
+    "PROJECTS": "Projects",
+    "NO_PROJECTS": "No projects available",
+    "TOGGLE": "Toggle sidebar",
+    "OPEN": "Open sidebar",
+    "CLOSE": "Close sidebar"
   }
 }
