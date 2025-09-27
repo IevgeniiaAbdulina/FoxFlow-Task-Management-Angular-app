@@ -1,3 +1,11 @@
+:host {
+  button,
+  input,
+  mat-label {
+    font-size: 1.4rem;
+  }
+}
+
 .task {
   width: 500px;
   margin: 2rem auto;

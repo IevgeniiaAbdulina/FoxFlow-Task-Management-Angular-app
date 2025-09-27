@@ -2,7 +2,7 @@
   class="list"
   role="button"
   tabindex="0"
-  (dblclick)="openTaskDetailInformation()"
+  (click)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
   <div class="item">
     <div class="item__header">
@@ -25,7 +25,8 @@
               height="20"
               ngSrc="{{user.photoURL}}"
               style="--index: {{ $index }}"
-              width="20" />
+              width="20"
+              [matTooltip]="user.displayName" />
             }
           </div>
           <span> + {{ (task().assignedTo?.length || 0) - 1 | number}} </span>
@@ -36,7 +37,11 @@
       </div>
 
       @if (task().status === 'done') {
-      <p class="done"> {{'NOTIFICATION.COMPLETE' | translate}}</p>
+      <mat-icon
+        class="done"
+        [matTooltip]="'NOTIFICATION.COMPLETE' | translate">
+        done_all
+      </mat-icon>
       } @else { @if (getDeadline()) {
       <p
         appStyleChange
