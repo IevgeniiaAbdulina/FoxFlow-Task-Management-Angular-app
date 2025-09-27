@@ -45,7 +45,6 @@
     "LANGUAGE": "Language"
   },
   "NOT_FOUND": {
-    "TITLE": "Page Not Found",
     "MESSAGE": "Sorry, the page you are looking for does not exist.",
     "HOME": "Go to Home"
   },
