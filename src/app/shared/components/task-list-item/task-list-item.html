@@ -40,22 +40,10 @@
       } @else { @if (getDeadline()) {
       <p
         appStyleChange
-        [daysForDeadline]="daysToDeadline"
-        [taskStatus]="task().status">
+        [task]="task()">
         {{ getDeadline() }}
       </p>
       } @else { <mat-icon class="disable">date_range</mat-icon>} }
-
-      <!--<button
-        #actionButton
-        aria-label="Delete task"
-        class="delete"
-        matTooltip="{{ 'TOOLS.DELETE' | translate }}"
-        matTooltipPosition="right"
-        type="submit"
-        (click)="deleteTask()">
-        <mat-icon class="color">delete_forever</mat-icon>
-      </button> -->
     </div>
   </div>
 </li>

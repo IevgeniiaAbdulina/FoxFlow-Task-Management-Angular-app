@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TaskStatus } from '@app/shared/interfaces/task-interface';
 
 @Component({
   selector: 'app-task-header',
@@ -24,7 +25,7 @@ export class TaskHeader {
   private destroyRef = inject(DestroyRef);
 
   text = '';
-  status: 'todo' | 'inProgress' | 'done' = 'todo';
+  status: TaskStatus = 'todo';
 
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
 

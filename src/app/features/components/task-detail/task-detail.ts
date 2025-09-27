@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  DestroyRef,
   ElementRef,
-  EventEmitter,
   inject,
   OnInit,
-  Output,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
@@ -30,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { StatusTask } from '@app/shared/directives/status-task/status-task';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-task-detail',
@@ -59,6 +61,7 @@ export class TaskDetail implements OnInit {
   private data = inject<{ taskId: string }>(MAT_DIALOG_DATA);
   private tasksFirebaseService = inject(FirebaseServiceTs);
   private dialogRef = inject(MatDialogRef<TaskDetail>);
+  private destroyRef = inject(DestroyRef);
 
   defaultTask: TaskData = {
     id: '',
@@ -76,13 +79,13 @@ export class TaskDetail implements OnInit {
   descriptionText = '';
   users: MemberInterface[] = [];
   selectedUserIds: string[] = [];
-  @Output() readonly setEditingId = new EventEmitter<string | null>();
+  readonly setEditingId = output<string | null>();
   readonly titleInputRef =
     viewChild<ElementRef<HTMLInputElement>>('titleInput');
   readonly descriptionArea =
     viewChild<ElementRef<HTMLTextAreaElement>>('descriptionArea');
   selectedDate: Date | null = null;
-  selectedStatus: TaskStatus | undefined = 'todo';
+  selectedStatus: TaskStatus = 'todo';
   assignedUsers: MemberInterface[] | undefined = [];
   isAssignedUsers = false;
 
@@ -92,6 +95,7 @@ export class TaskDetail implements OnInit {
     if (this.projectId) {
       this.tasksFirebaseService
         .getTask(this.projectId, this.data.taskId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((task) => {
           this.task.set(task);
           this.editingText = task.title;
@@ -111,14 +115,17 @@ export class TaskDetail implements OnInit {
         });
     }
 
-    this.tasksFirebaseService.getUsers().subscribe((users) => {
-      this.users = users;
-    });
+    this.tasksFirebaseService
+      .getUsers()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((users) => {
+        this.users = users;
+      });
   }
 
-  get selectedUsers(): MemberInterface[] {
+  readonly selectedUsers = computed(() => {
     return this.users.filter((user) => this.selectedUserIds.includes(user.id));
-  }
+  });
 
   //Edit title
 
@@ -175,7 +182,7 @@ export class TaskDetail implements OnInit {
     const currentTask = this.task();
     if (!currentTask) return;
     let assignedUsersTemp: MemberInterface[] | undefined = [];
-    assignedUsersTemp = this.selectedUsers;
+    assignedUsersTemp = this.selectedUsers();
 
     const updateDate = {
       assignedTo: assignedUsersTemp,
@@ -281,6 +288,7 @@ export class TaskDetail implements OnInit {
     if (this.projectId) {
       this.tasksFirebaseService
         .deleteTask(this.projectId, currentTask.id)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
           /* EMPTY */
         });
