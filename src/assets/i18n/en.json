@@ -112,7 +112,8 @@
   },
   "TOOLS": {
     "EDIT": "Edit title",
-    "DELETE": "Delete task"
+    "DELETE": "Delete task",
+    "CLOSE": "Close"
   },
   "GREETING": {
     "WELCOME": "Good {{time}}, {{name}}!",

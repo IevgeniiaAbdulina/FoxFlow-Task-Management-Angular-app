@@ -109,7 +109,8 @@
   },
   "TOOLS": {
     "EDIT": "Edytuj tytuł",
-    "DELETE": "Usuń zadanie"
+    "DELETE": "Usuń zadanie",
+    "CLOSE": "Zamknij"
   },
   "GREETING": {
     "WELCOME": "Dobry {{time}}, {{name}}!",
