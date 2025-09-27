@@ -2,9 +2,6 @@
   <div class="board">
     <div class="board__column">
       <h2 class="board__column__title">{{ 'BOARD.NEW_TASKS' | translate }}</h2>
-      @if (toDoTasks().length === 0) {
-      <p>{{ 'EMPTY_STATE.NO_TASKS' | translate }}</p>
-      }
       <div class="board__column__content">
         <app-task-header />
         <ul
@@ -20,6 +17,8 @@
             cdkDrag
             class="drag-item"
             [task]="task" />
+          } @empty {
+          <p class="empty-tasks">{{ 'EMPTY_STATE.NO_TASKS' | translate }}</p>
           }
         </ul>
       </div>
@@ -40,6 +39,8 @@
             cdkDrag
             class="drag-item"
             [task]="task" />
+          } @empty {
+          <p class="empty-tasks">{{ 'EMPTY_STATE.NO_TASKS' | translate }}</p>
           }
         </ul>
       </div>
@@ -60,6 +61,8 @@
             cdkDrag
             class="drag-item"
             [task]="task" />
+          } @empty {
+          <p class="empty-tasks">{{ 'EMPTY_STATE.NO_TASKS' | translate }}</p>
           }
         </ul>
       </div>
