@@ -32,12 +32,15 @@
 
 .board {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  overflow-x: auto;
   padding: 3rem 0;
 
   &__column {
     padding: 1.2rem;
-    width: 30rem;
+    width: 44rem;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     row-gap: 1.5rem;
@@ -52,10 +55,6 @@
     border-radius: var(
       --mat-card-elevated-container-shape,
       var(--mat-sys-corner-medium)
-    );
-    box-shadow: var(
-      --mat-card-elevated-container-elevation,
-      var(--mat-sys-level1)
     );
 
     &__title {
