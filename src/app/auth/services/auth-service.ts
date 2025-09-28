@@ -42,7 +42,7 @@ export class AuthService {
       const photo = './assets/images/person.png';
       updateProfile(response.user, { displayName: username, photoURL: photo });
 
-      this.checkUserExistence(response.user, username);
+      this.updateUserData(response.user, username, photo);
     });
 
     return from(promise);
@@ -78,7 +78,7 @@ export class AuthService {
           this.notificationService.showErrorMessage('Google-Login error');
           throw new Error('Google-Login error');
         } else {
-          this.checkUserExistence(currUser);
+          this.updateUserData(currUser);
 
           this.router.navigate(['/home']);
         }
@@ -95,7 +95,7 @@ export class AuthService {
     signInWithPopup(this.firebaseAuth, provider)
       .then((result) => {
         const credential = result.user;
-        this.checkUserExistence(credential);
+        this.updateUserData(credential);
 
         this.router.navigate(['/home']);
       })
@@ -107,9 +107,10 @@ export class AuthService {
       });
   }
 
-  checkUserExistence(userData: User, name?: string): void {
+  updateUserData(userData: User, name?: string, photo?: string): void {
     const email = userData.email as string;
     const username = userData.displayName ?? (name as string);
+    const userPhoto = userData.photoURL ?? (photo as string);
 
     this.usersService.isUserExist(email).subscribe((exists) => {
       if (!exists) {
@@ -118,7 +119,7 @@ export class AuthService {
           userId: '' /* firebase document id */,
           email: userData?.email ?? '',
           displayName: username,
-          photoURL: userData?.photoURL ?? '',
+          photoURL: userPhoto,
         };
 
         this.usersService.addUser(newMember);
