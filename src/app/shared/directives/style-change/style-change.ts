@@ -6,15 +6,13 @@ import {
   OnChanges,
   Renderer2,
 } from '@angular/core';
-import { TaskData, TaskStatus } from '@app/shared/interfaces/task-interface';
+import { TaskData } from '@app/shared/interfaces/task-interface';
 import { Timestamp } from 'firebase/firestore';
 
 @Directive({
   selector: '[appStyleChange]',
 })
 export class StyleChange implements OnChanges {
-  //readonly daysForDeadline = input.required<number>();
-  //readonly taskStatus = input.required<TaskStatus>();
   readonly task = input.required<TaskData>();
 
   private el = inject(ElementRef);
