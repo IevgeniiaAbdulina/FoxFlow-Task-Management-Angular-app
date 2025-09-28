@@ -52,6 +52,10 @@ body.dark-theme {
   --mat-toolbar-container-background-color: #44474e;
   --mat-sys-surface-container-low: #252323;
   --mat-sys-on-surface-variant: #000;
+
+  mat-card {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 :root {
