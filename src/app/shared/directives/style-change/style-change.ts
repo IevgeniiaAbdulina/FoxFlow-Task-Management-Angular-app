@@ -18,8 +18,6 @@ export class StyleChange implements OnChanges {
   private el = inject(ElementRef);
   private render = inject(Renderer2);
 
-  //constructor(private el: ElementRef, private render: Renderer2) {}
-
   private getDaysToDeadline(task: TaskData): number {
     const dueTo = task?.dueTo;
 
