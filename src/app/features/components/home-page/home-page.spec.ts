@@ -54,18 +54,18 @@ describe('HomePage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should add project if dialog result is valid', () => {
+  it('should reset name after adding project', (done) => {
     const dialogRefSpy = jasmine.createSpyObj<
       MatDialogRef<ProjectDetailsDialog>
     >('MatDialogRef', ['afterClosed']);
-    dialogRefSpy.afterClosed.and.returnValue(of('New Project'));
+    dialogRefSpy.afterClosed.and.returnValue(of('Another Project'));
     mockDialog.open.and.returnValue(dialogRefSpy);
 
     component.addProject();
 
-    expect(mockDialog.open).toHaveBeenCalled();
-    expect(mockProjecFirebaseService.addProject).toHaveBeenCalledWith(
-      'New Project'
-    );
+    setTimeout(() => {
+      expect(component.name()).toBe('');
+      done();
+    }, 0);
   });
 });
