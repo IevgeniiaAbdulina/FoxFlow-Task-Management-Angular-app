@@ -88,11 +88,7 @@
     <h2 class="owners__title">{{ 'MAIN.TEAM' | translate }}</h2>
     <div class="owners__container">
       @for (owner of owners(); track owner.id) {
-      <app-owner
-        [gitHub]="owner.gitHub"
-        [image]="owner.image"
-        [name]="owner.name"
-        [position]="owner.position" />
+      <app-owner [owner]="owner" />
       }
     </div>
   </div>
