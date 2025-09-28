@@ -4,26 +4,26 @@
 
 <a
   target="_blank"
-  [href]="gitHub()">
+  [href]="owner().gitHub">
   <mat-card
     appearance="outlined"
     class="card">
     <mat-card-header>
       <mat-card-title-group>
-        <mat-card-title>{{ name() }}</mat-card-title>
-        <mat-card-subtitle>{{ position() }}</mat-card-subtitle>
+        <mat-card-title>{{ owner().name }}</mat-card-title>
+        <mat-card-subtitle>{{ owner().position }}</mat-card-subtitle>
         <img
           alt="avatar"
           class="card__image"
           height="50"
           mat-card-md-image
-          ngSrc="{{ image() }}"
+          ngSrc="{{ owner().image }}"
           priority
           width="50" />
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content class="card__content">
-      gitHub {{ name() }}
+      gitHub {{ owner().name }}
     </mat-card-content>
   </mat-card>
 </a>

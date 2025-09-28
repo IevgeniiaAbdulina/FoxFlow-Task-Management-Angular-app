@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { NgOptimizedImage } from '@angular/common';
+import { OwnerData } from '@app/shared/interfaces/owner-interface';
 
 @Component({
   selector: 'app-owner',
@@ -11,8 +12,5 @@ import { NgOptimizedImage } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Owner {
-  readonly name = input<string>('');
-  readonly position = input<string>('');
-  readonly image = input<string>('');
-  readonly gitHub = input<string>('');
+  readonly owner = input.required<OwnerData>();
 }
