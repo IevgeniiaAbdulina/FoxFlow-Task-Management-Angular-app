@@ -4,9 +4,6 @@ import { TaskHeader } from './task-header';
 import { FirebaseServiceTs } from '@app/services/firebase/firebase-service';
 import { ProjectService } from '@app/features/services/projects-service/project-service';
 import { of } from 'rxjs';
-//import { Auth } from '@angular/fire/auth';
-//import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-//import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 describe('TaskHeader', () => {
@@ -22,15 +19,11 @@ describe('TaskHeader', () => {
     mockFirebaseService = jasmine.createSpyObj('FirebaseServiceTs', [
       'addTask',
     ]);
-    //const mockAuth = jasmine.createSpyObj('Auth', ['signInWithEmailAndPassword', 'signOut']);
 
     await TestBed.configureTestingModule({
       imports: [TaskHeader, TranslateModule.forRoot()],
       providers: [
         TranslateService,
-        //provideFirebaseApp(() => initializeApp(environment.firebase)),
-        //provideFirestore(() => getFirestore()),
-        //{provide: Auth, useValue: mockAuth },
         { provide: ProjectService, useValue: mockProjectService },
         { provide: FirebaseServiceTs, useValue: mockFirebaseService },
       ],
@@ -64,5 +57,14 @@ describe('TaskHeader', () => {
       jasmine.any(Date)
     );
     expect(component.text).toBe('');
+  });
+  it('should update text when changeText is called', () => {
+    const inputEvent = {
+      target: { value: 'new task' },
+    } as unknown as Event;
+
+    component.changeText(inputEvent);
+
+    expect(component.text).toBe('new task');
   });
 });
