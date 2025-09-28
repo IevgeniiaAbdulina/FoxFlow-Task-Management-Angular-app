@@ -43,8 +43,8 @@ export class SidebarComponent {
         this.selectedProjectId.set(projectId);
       });
 
-    this.projectsFirebaseService.getProjects().subscribe((projects) => {
-      console.log('Sidebar projects fetched:', projects);
+    this.projectsFirebaseService.getProjects().subscribe(() => {
+      /* empty */
     });
   }
 

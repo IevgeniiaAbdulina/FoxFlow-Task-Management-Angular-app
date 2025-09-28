@@ -29,7 +29,6 @@ export class HomePage {
   private projectsFirebaseService = inject(ProjectsFirebaseService);
   readonly dialog = inject(MatDialog);
   readonly name = signal('');
-  readonly selectedProjectId = signal<string | null>(null);
 
   readonly projects = toSignal(this.projectsFirebaseService.getProjects(), {
     initialValue: [],
@@ -39,17 +38,12 @@ export class HomePage {
     this.authService.currentUser()
   ) as Signal<UserInterface | null>;
 
-  selectProject(projectId: string): void {
-    this.selectedProjectId.set(projectId);
-  }
-
   addProject(): void {
     const dialogRef = this.dialog.open(ProjectDetailsDialog, {
       data: { name: this.name() },
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
-      console.log('The dialog was closed');
       if (!result) {
         return;
       } else {
