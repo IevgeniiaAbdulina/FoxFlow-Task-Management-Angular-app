@@ -122,6 +122,13 @@ export class AuthService {
           photoURL: userPhoto,
         };
 
+        this.currentUser.set({
+          uid: userData.uid,
+          email: userData.email ?? '',
+          displayName: username,
+          photoURL: userPhoto,
+        });
+
         this.usersService.addUser(newMember);
       }
     });
