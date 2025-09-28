@@ -1,28 +1,28 @@
-//import { signal } from '@angular/core';
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTooltipModule } from '@angular/material/tooltip';
+// import { CommonModule, NgOptimizedImage } from '@angular/common';
+// import { RouterLink, RouterLinkActive } from '@angular/router';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatIconModule } from '@angular/material/icon';
+// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+// import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatMenuModule } from '@angular/material/menu';
-import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
+// import { MatMenuModule } from '@angular/material/menu';
+// import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
 import { AuthService } from '@app/auth/services/auth-service';
-import { By } from '@angular/platform-browser';
-import { of, Subject } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BreakpointState } from '@angular/cdk/layout';
-import { Auth } from '@angular/fire/auth';
+//import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { BreakpointState } from '@angular/cdk/layout';
+//import { Auth } from '@angular/fire/auth';
 import { provideRouter } from '@angular/router';
 import { routes } from '@app/app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { UsersService } from '@app/auth/services/users-service';
+//import { UsersService } from '@app/auth/services/users-service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -34,7 +34,6 @@ describe('HeaderComponent', () => {
     mockAuthService = jasmine.createSpyObj('AuthService', ['logout'], {
       currentUser: signal(null),
     });
-
     mockBreakpointObserver = jasmine.createSpyObj('BreakpointObserver', [
       'observe',
     ]);
@@ -133,8 +132,8 @@ describe('HeaderComponent', () => {
 
     const avatar: HTMLImageElement =
       fixture.nativeElement.querySelector('.user-avatar');
-    expect(avatar).toBeTruthy(); // Проверяем, что элемент найден
-    expect(avatar.src).toContain('avatar.jpg'); // Проверяем, что src содержит ожидаемый URL
+    expect(avatar).toBeTruthy();
+    expect(avatar.src).toContain('avatar.jpg');
   });
 
   it('should toggle theme correctly', () => {
