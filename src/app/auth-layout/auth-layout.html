@@ -15,9 +15,9 @@
       type="button"
       [matTooltip]="'SIDEBAR.TOGGLE' | translate"
       (click)="toggleSidebar()">
-      <mat-icon
-        >{{ sidenav.opened ? 'arrow_back_ios' : 'arrow_forward_ios' }}</mat-icon
-      >
+      <mat-icon>
+        {{ sidenav.opened ? 'arrow_back_ios' : 'arrow_forward_ios' }}
+      </mat-icon>
     </button>
     } @if (!isMobile()) {
     <button
