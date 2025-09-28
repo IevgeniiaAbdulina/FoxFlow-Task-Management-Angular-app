@@ -13,6 +13,7 @@ describe('Owner', () => {
 
     fixture = TestBed.createComponent(Owner);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
