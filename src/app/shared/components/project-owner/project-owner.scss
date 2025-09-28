@@ -1,0 +1,45 @@
+:host {
+  &[data-details-visible='false'] {
+    .project-owner__container {
+      padding: 4px;
+    }
+
+    .user-image {
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
+.project-owner__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-radius: 32px;
+  border: 1px dashed rgba(14, 14, 14, 0.5);
+  padding: 8px 16px;
+
+  span {
+    color: rgba(14, 14, 14, 0.6);
+    font-weight: 500;
+  }
+}
+
+.user-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}
+
+.user-name {
+  margin-left: 8px;
+}

@@ -52,6 +52,10 @@ body.dark-theme {
   --mat-toolbar-container-background-color: #44474e;
   --mat-sys-surface-container-low: #252323;
   --mat-sys-on-surface-variant: #000;
+
+  mat-card {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 :root {
@@ -61,4 +65,11 @@ body.dark-theme {
   --mat-icon-bg-hover: rgba(0, 0, 0, 0.1);
   background: var(--primary-bg);
   color: var(--primary-text);
+
+  @include mat.tooltip-overrides(
+    (
+      supporting-text-size: 14px,
+      supporting-text-line-height: 100%,
+    )
+  );
 }

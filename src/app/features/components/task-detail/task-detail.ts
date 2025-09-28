@@ -197,6 +197,8 @@ export class TaskDetail implements OnInit {
           });
         });
     }
+
+    this.closeTask();
   }
 
   //Edit task deadline

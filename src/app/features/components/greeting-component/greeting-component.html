@@ -1,5 +1,5 @@
 <div class="home-page__header">
-  <p class="current-date">{{ today | date:"EEEE, MMMM d" }}</p>
+  <h3 class="current-date">{{ today | date:"EEEE, MMMM d" }}</h3>
   @if (user$()) {
   <h1>
     {{ 'GREETING.WELCOME' | translate: { time: timeOfDay(), name:

@@ -1,12 +1,19 @@
+:host {
+  button,
+  input,
+  mat-label {
+    font-size: 1.4rem;
+  }
+}
+
 .task {
-  width: 500px;
+  max-width: 500px;
   margin: 2rem auto;
   padding: 0 2rem;
   font-size: 1.6rem;
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
-  //font-weight: 500; ??? у всех элементов
 
   &__header {
     display: flex;

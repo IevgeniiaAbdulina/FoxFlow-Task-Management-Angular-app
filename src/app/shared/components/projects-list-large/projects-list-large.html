@@ -1,3 +1,5 @@
 @for (project of projects$(); track project?.id) {
 <app-projects-list-item [project$]="project" />
+} @empty {
+<h3>There is no project yet. Create the first one!</h3>
 }

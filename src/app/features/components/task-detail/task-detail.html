@@ -1,25 +1,29 @@
 <div class="task">
   <div class="header">
     <h3>{{ 'TASK.TASK_DETAIL' | translate }}</h3>
-    <mat-icon
-      aria-label="Edit title"
+    <button
+      aria-label="Edit task title close button"
+      matIconButton
       matTooltip="{{ 'TOOLS.CLOSE' | translate }}"
       matTooltipPosition="right"
-      (click)="closeTask()"
-      >clear</mat-icon
-    >
+      type="button"
+      (click)="closeTask()">
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
   <mat-divider class="color" />
   <div class="task__header">
     @if (!editing()) {
     <p>{{ task().title }}</p>
-    <mat-icon
-      aria-label="Edit title"
+    <button
+      aria-label="Edit title button"
+      matIconButton
       matTooltip="{{ 'TOOLS.EDIT' | translate }}"
       matTooltipPosition="right"
-      (click)="editTaskTitle()"
-      >edit</mat-icon
-    >
+      type="button"
+      (click)="editTaskTitle()">
+      <mat-icon>edit</mat-icon>
+    </button>
     } @if (editing()) {
     <input
       #titleInput
@@ -32,7 +36,7 @@
     <div class="task__header__edit">
       <button
         mat-button
-        matButton="filled"
+        matButton="tonal"
         type="submit"
         (click)="cancelEditTask()">
         Cancel
@@ -53,12 +57,17 @@
     >
     @if ((!isAssignedUsers && assignedUsers !== undefined &&
     assignedUsers.length > 0) || (assignedUsers === undefined ||
-    assignedUsers.length === 0 )){
+    assignedUsers.length === 0)) {
     <mat-form-field
       appearance="outline"
       class="task__details__form-assign">
       <mat-label>{{ 'TASK.ASSIGN_USER' | translate }}</mat-label>
-      <mat-icon matSuffix>person</mat-icon>
+      <button
+        matIconButton
+        matSuffix
+        type="button">
+        <mat-icon>person</mat-icon>
+      </button>
       <mat-select
         exportAs="userSelect"
         multiple
@@ -101,14 +110,14 @@
           ngSrc="{{user.photoURL}}"
           style="object-fit: cover; border-radius: 50%; aspect-ratio: 1"
           width="20" />
-        <span>{{user.displayName}}</span>
+        <span>{{ user.displayName }}</span>
       </div>
       }
     </div>
     }
-    <p class="task__details__deadline-text"
-      >{{ 'TASK.DUE_DATE_LABEL' | translate }}</p
-    >
+    <p class="task__details__deadline-text">
+      {{ 'TASK.DUE_DATE_LABEL' | translate }}
+    </p>
     <mat-form-field
       appearance="outline"
       class="task__details__form-deadline">
@@ -154,14 +163,16 @@
         [(ngModel)]="descriptionText">
       </textarea>
       @if (!editingDescription()) {
-      <mat-icon
-        aria-label="Edit title"
+      <button
+        aria-label="Edit task description button"
         class="edit-description"
+        matIconButton
         matTooltip="{{ 'TOOLS.EDIT' | translate }}"
         matTooltipPosition="right"
-        (click)="editTaskDescription()"
-        >edit</mat-icon
-      >
+        type="button"
+        (click)="editTaskDescription()">
+        <mat-icon>edit</mat-icon>
+      </button>
       }
     </div>
     @if (editingDescription()) {
@@ -169,18 +180,18 @@
     <div class="task__description__actions">
       <button
         mat-button
-        matButton="filled"
+        matButton="tonal"
         type="submit"
         (click)="cancelEditDescription()"
-        >Cancel</button
-      >
+        >Cancel
+      </button>
       <button
         mat-button
         matButton="filled"
         type="submit"
         (click)="saveTaskDescription()"
-        >Save</button
-      >
+        >Save
+      </button>
     </div>
     }
   </div>

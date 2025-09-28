@@ -47,7 +47,6 @@ export class TaskListItem {
   readonly projectId = computed(() => this.projectService.currentProject()?.id);
 
   isCompleted = false;
-  // daysToDeadline = 0;
 
   openTaskDetailInformation(): void {
     this.dialog.open(TaskDetail, {

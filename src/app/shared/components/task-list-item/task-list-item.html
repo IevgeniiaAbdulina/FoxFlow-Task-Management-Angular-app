@@ -2,15 +2,15 @@
   class="list"
   role="button"
   tabindex="0"
-  (dblclick)="openTaskDetailInformation()"
+  (click)="openTaskDetailInformation()"
   (keydown.enter)="openTaskDetailInformation()">
   <div class="item">
     <div class="item__header">
       <mat-icon
         appStatusTask
         [taskStatus]="task().status"
-        >radio_button_checked</mat-icon
-      >
+        >radio_button_checked
+      </mat-icon>
       <p class="item__header__text">{{ task().title }}</p>
     </div>
     <div class="item__footer">
@@ -25,25 +25,33 @@
               height="20"
               ngSrc="{{user.photoURL}}"
               style="--index: {{ $index }}"
-              width="20" />
+              width="20"
+              [matTooltip]="user.displayName" />
             }
           </div>
-          <span> + {{ (task().assignedTo?.length || 0) - 1 | number}} </span>
-          } @else {
+          @if (task().assignedTo?.length! > 1) {
+          <span> + {{ (task().assignedTo?.length || 0) - 1 | number }} </span>
+          } } @else {
           <mat-icon class="disable">person</mat-icon>
           }
         </div>
       </div>
 
       @if (task().status === 'done') {
-      <p class="done"> {{'NOTIFICATION.COMPLETE' | translate}}</p>
+      <mat-icon
+        class="done"
+        [matTooltip]="'NOTIFICATION.COMPLETE' | translate">
+        done_all
+      </mat-icon>
       } @else { @if (getDeadline()) {
       <p
         appStyleChange
         [task]="task()">
         {{ getDeadline() }}
       </p>
-      } @else { <mat-icon class="disable">date_range</mat-icon>} }
+      } @else {
+      <mat-icon class="disable">date_range</mat-icon>
+      } }
     </div>
   </div>
 </li>

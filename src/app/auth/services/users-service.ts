@@ -39,4 +39,14 @@ export class UsersService {
       })
     );
   }
+
+  findProjectOwner(userId: string): Observable<MemberInterface> {
+    const q = query(this.usersCollection, where('id', '==', userId));
+
+    return collectionData(q, { idField: 'id' }).pipe(
+      map((users) => {
+        return users[0];
+      })
+    ) as Observable<MemberInterface>;
+  }
 }

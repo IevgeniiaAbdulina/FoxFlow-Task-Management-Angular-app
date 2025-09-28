@@ -36,6 +36,7 @@
       matIconButton
       matTooltip="Show actions"
       type="button"
+      [disabled]="!isOwner()"
       [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -65,6 +66,7 @@
       matIconButton
       matTooltip="Edit paroject title"
       type="button"
+      [disabled]="!isOwner()"
       (click)="startEditing()">
       <mat-icon>edit</mat-icon>
     </button>
@@ -73,17 +75,12 @@
       matIconButton
       matTooltip="Delete project"
       type="button"
+      [disabled]="!isOwner()"
       (click)="confirmDelete()">
       <mat-icon>delete</mat-icon>
     </button>
     } @else {
-    <button
-      aria-label="Edit project button"
-      matButton="filled"
-      type="button"
-      (click)="saveEditing()">
-      Save
-    </button>
+
     <button
       aria-label="Remove project button"
       matButton="outlined"
@@ -91,6 +88,20 @@
       (click)="cancelEditing()">
       Cancel
     </button>
+    <button
+      aria-label="Edit project button"
+      matButton="filled"
+      type="button"
+      (click)="saveEditing()">
+      Save
+    </button>
     } }
+    <div>
+      @if (owner$()) {
+      <app-project-owner
+        [isVisible]="isShowActions()"
+        [owner]="owner$()!" />
+      } @else { Loading... }
+    </div>
   </div>
 </div>

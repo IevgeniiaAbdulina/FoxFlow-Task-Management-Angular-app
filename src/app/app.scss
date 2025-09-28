@@ -1,3 +1,7 @@
 :host ::ng-deep .mdc-card__media:last-child {
   border-radius: 50%;
 }
+
+main {
+  height: calc(100vh - 64px);
+}
