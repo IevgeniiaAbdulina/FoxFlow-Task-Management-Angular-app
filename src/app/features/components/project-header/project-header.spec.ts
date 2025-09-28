@@ -37,4 +37,21 @@ describe('ProjectHeader', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should start editing with project title', () => {
+    component.startEditing();
+    expect(component.isEditing()).toBeTrue();
+    expect(component.editingText()).toBe('');
+  });
+
+  it('should cancel editing and reset editingText', () => {
+    component.editingText.set('Some text');
+    component.cancelEditing();
+    expect(component.isEditing()).toBeFalse();
+    expect(component.editingText()).toBe('');
+  });
+
+  it('should compute isOwner correctly', () => {
+    expect(component.isOwner()).toBeTrue();
+  });
 });
