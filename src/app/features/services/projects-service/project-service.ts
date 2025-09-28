@@ -1,7 +1,6 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Project } from '@app/shared/interfaces/project-interface';
 import { ProjectsFirebaseService } from '@app/features/services/projects-service/projects-firebase-service';
-import { AuthService } from '@app/auth/services/auth-service';
 import { NotificationService } from '@app/shared/services/notification-service';
 import { MemberInterface } from '@app/shared/interfaces/member-interface';
 import { UsersService } from '@app/auth/services/users-service';
@@ -11,7 +10,6 @@ import { UsersService } from '@app/auth/services/users-service';
 })
 export class ProjectService {
   private projectsFirebaseService = inject(ProjectsFirebaseService);
-  private authService = inject(AuthService);
   private notificationService = inject(NotificationService);
   private usersService = inject(UsersService);
 
@@ -32,20 +30,12 @@ export class ProjectService {
       });
   }
 
-  removeProject(projectId: string, projectOwner: string): void {
-    const user = this.authService.currentUser()?.uid;
-
-    if (user === projectOwner) {
-      this.projectsFirebaseService.removeProject(projectId).subscribe(() => {
-        this.notificationService.showSuccessMessage(
-          'Project deleted successfully.'
-        );
-      });
-    } else {
-      const message = 'Project can be removed only by owner.';
-      this.notificationService.showErrorMessage(message);
-      return;
-    }
+  removeProject(projectId: string): void {
+    this.projectsFirebaseService.removeProject(projectId).subscribe(() => {
+      this.notificationService.showSuccessMessage(
+        'Project deleted successfully.'
+      );
+    });
   }
 
   updateProject(editingId: string, editingText: string): void {

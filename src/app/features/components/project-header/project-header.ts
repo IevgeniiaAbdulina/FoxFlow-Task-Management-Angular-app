@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialog } from '@app/shared/components/confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardSmImage } from '@angular/material/card';
@@ -25,6 +25,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { ProjectOwner } from '@app/shared/components/project-owner/project-owner';
+import { AuthService } from '@app/auth/services/auth-service';
 
 @Component({
   selector: 'app-project-header',
@@ -40,7 +41,6 @@ import { ProjectOwner } from '@app/shared/components/project-owner/project-owner
     MatCardSmImage,
     NgOptimizedImage,
     MatMenuModule,
-    RouterLink,
     ProjectOwner,
   ],
   templateUrl: './project-header.html',
@@ -59,12 +59,16 @@ export class ProjectHeader implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  private authService = inject(AuthService);
 
   readonly project$ = computed(() => this.projectService.currentProject());
   readonly owner$ = computed(() => this.projectService.currentProjectOwner());
   readonly isEditing = signal<boolean>(false);
   readonly isShowActions = signal<boolean>(true);
   readonly editingText = signal('');
+  readonly isOwner = computed(
+    () => this.project$()?.owner === this.authService.currentUser()?.uid
+  );
 
   projectId = '';
 
@@ -133,10 +137,8 @@ export class ProjectHeader implements OnInit {
     this.isEditing.set(false);
     this.editingText.set('');
 
-    const projectOwner = this.project$()?.owner as string;
-
     if (this.project$()) {
-      this.projectService.removeProject(this.projectId, projectOwner);
+      this.projectService.removeProject(this.projectId);
     } else {
       console.log('No such project!');
     }

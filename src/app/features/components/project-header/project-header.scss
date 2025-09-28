@@ -1,18 +1,10 @@
 :host {
-  .breadcrumbs {
-    padding: 16px 0 0;
-
-    a {
-      font-size: 1.4rem;
-    }
-  }
-
   .project-title__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 24px 0 0;
+    padding: 16px 0 0;
   }
 
   &[data-actions-expand='false'] {
