@@ -1,0 +1,18 @@
+:host {
+  font-size: 16px;
+
+  h2 {
+    font-size: 24px;
+  }
+
+  mat-label,
+  input,
+  button,
+  p {
+    font-size: 16px;
+  }
+}
+
+.dialog-subtitle {
+  margin: 16px 0 16px;
+}

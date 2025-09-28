@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  height: calc(100vh - 64px);
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--background-color, #f5f5f5);
+  border-right: 1px solid #999;
+  padding: 16px;
+  position: absolute;
+  z-index: 1;
+}
+
+mat-sidenav-content {
+  padding: 16px;
+  z-index: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.menu-button {
+  position: relative;
+  top: 16px;
+  z-index: 10;
+}
+
+.menu-button.mobile {
+  top: 16px;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 210px;
+    z-index: 100;
+  }
+
+  mat-sidenav-content {
+    padding: 8px;
+    margin-left: 0;
+  }
+
+  .menu-button:not(.mobile) {
+    display: none;
+  }
+}

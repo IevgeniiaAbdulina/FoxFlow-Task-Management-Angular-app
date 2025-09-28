@@ -14,14 +14,17 @@ import { from, Observable } from 'rxjs';
 import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { NotificationService } from '@app/shared/services/notification-service';
+import { UsersService } from '@app/auth/services/users-service';
+import { MemberInterface } from '@app/shared/interfaces/member-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  firebaseAuth = inject(Auth);
-  router = inject(Router);
-  notificationService = inject(NotificationService);
+  private firebaseAuth = inject(Auth);
+  private router = inject(Router);
+  private notificationService = inject(NotificationService);
+  private usersService = inject(UsersService);
 
   user$: Observable<User | null> = user(this.firebaseAuth);
   readonly currentUser = signal<UserInterface | null>(null);
@@ -35,9 +38,12 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then((response) =>
-      updateProfile(response.user, { displayName: username })
-    );
+    ).then((response) => {
+      const photo = './assets/images/person.png';
+      updateProfile(response.user, { displayName: username, photoURL: photo });
+
+      this.updateUserData(response.user, username, photo);
+    });
 
     return from(promise);
   }
@@ -72,6 +78,8 @@ export class AuthService {
           this.notificationService.showErrorMessage('Google-Login error');
           throw new Error('Google-Login error');
         } else {
+          this.updateUserData(currUser);
+
           this.router.navigate(['/home']);
         }
       })
@@ -86,16 +94,43 @@ export class AuthService {
 
     signInWithPopup(this.firebaseAuth, provider)
       .then((result) => {
-        //   Access token
         const credential = result.user;
-        const accessToken = credential.refreshToken;
+        this.updateUserData(credential);
 
-        console.log('TOKEN:', credential, accessToken);
         this.router.navigate(['/home']);
       })
       .catch((error) => {
-        this.notificationService.showErrorMessage('Login with GitHub failed.');
+        this.notificationService.showErrorMessage(
+          'Failed to sign in via GitHub. This email address may already exist.'
+        );
         console.error('Error during sign-in:', error.message);
       });
+  }
+
+  updateUserData(userData: User, name?: string, photo?: string): void {
+    const email = userData.email as string;
+    const username = userData.displayName ?? (name as string);
+    const userPhoto = userData.photoURL ?? (photo as string);
+
+    this.usersService.isUserExist(email).subscribe((exists) => {
+      if (!exists) {
+        const newMember: MemberInterface = {
+          id: userData?.uid ?? '' /* authorization id */,
+          userId: '' /* firebase document id */,
+          email: userData?.email ?? '',
+          displayName: username,
+          photoURL: userPhoto,
+        };
+
+        this.currentUser.set({
+          uid: userData.uid,
+          email: userData.email ?? '',
+          displayName: username,
+          photoURL: userPhoto,
+        });
+
+        this.usersService.addUser(newMember);
+      }
+    });
   }
 }

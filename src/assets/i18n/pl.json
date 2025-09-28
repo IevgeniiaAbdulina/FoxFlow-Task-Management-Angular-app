@@ -4,7 +4,8 @@
     "REGISTER": "Zacznij",
     "EMAIL": "E-mail",
     "PASSWORD": "Hasło",
-    "ERROR": "Nieprawidłowy e-mail lub hasło"
+    "ERROR": "Nieprawidłowy e-mail lub hasło",
+    "LOGOUT": "Wyloguj się"
   },
   "HOME": {
     "TITLE": "Witaj w FoxFlow",
@@ -17,13 +18,24 @@
   },
   "BOARD": {
     "TITLE": "Tablica Zadań",
-    "CREATE": "Utwórz Tablicę"
+    "CREATE": "Utwórz Tablicę",
+    "NEW_TASKS": "Nowe zadania",
+    "INPROGRESS": "W postępie",
+    "DONE": "Zrobione",
+    "NOT_APPROVED": "Niezatwierdzone"
   },
   "TASK": {
     "ADD": "Dodaj Zadanie",
     "TITLE_LABEL": "Tytuł Zadania",
     "DUE_DATE_LABEL": "Termin",
-    "ASSIGNEE_LABEL": "Przypisany"
+    "ASSIGNEE_LABEL": "Przypisany",
+    "TASK_DETAIL": "Szczegóły zadania",
+    "NO_ASSIGNEE": "Brak cesjonariusza",
+    "STATUS": "Status",
+    "DESCRIPTION": "Opis",
+    "DESCRIPTION_TEXT": "Na czym polega to zadanie?",
+    "ASSIGN_USER": "Użytkownik(cy) dla zadania",
+    "CHOOSE_DATE": "Wybierz datę"
   },
   "NOTIFICATION": {
     "DUE": "Zadanie {{title}} jest do wykonania w dniu {{date}}",
@@ -36,7 +48,6 @@
     "LANGUAGE": "Język"
   },
   "NOT_FOUND": {
-    "TITLE": "Strona nie znaleziona",
     "MESSAGE": "Przepraszamy, strona, której szukasz, nie istnieje.",
     "HOME": "Przejdź do strony głównej"
   },
@@ -97,5 +108,31 @@
     "ACTION_SUBMIT": "Dalej",
     "ACTION_GOOGLE": "Zaloguj się za pomocą Google",
     "ACTION_GITHUB": "Zaloguj się za pomocą GitHub"
+  },
+  "TOOLS": {
+    "EDIT": "Edytuj tytuł",
+    "DELETE": "Usuń zadanie",
+    "CLOSE": "Zamknij"
+  },
+  "GREETING": {
+    "WELCOME": "Dobry {{time}}, {{name}}!",
+    "GUEST": "Dobry {{time}}, Gość!"
+  },
+  "TIME": {
+    "MORNING": "poranek",
+    "AFTERNOON": "popołudnie",
+    "EVENING": "wieczór"
+  },
+  "PROJECTS": {
+    "TITLE": "Projekty",
+    "CREATE": "Utwórz projekt"
+  },
+  "SIDEBAR": {
+    "HOME": "Strona główna",
+    "PROJECTS": "Projekty",
+    "NO_PROJECTS": "Brak dostępnych projektów",
+    "TOGGLE": "Przełącz pasek boczny",
+    "OPEN": "Otwórz pasek boczny",
+    "CLOSE": "Zamknij pasek boczny"
   }
 }

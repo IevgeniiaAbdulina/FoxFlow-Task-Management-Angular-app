@@ -1,0 +1,15 @@
+<mat-card
+  appearance="outlined"
+  class="project-card"
+  (click)="openProject()">
+  <div class="card-title-group">
+    <img
+      alt="project image"
+      class="project-image"
+      height="48"
+      mat-card-sm-image
+      ngSrc="assets/images/logo-48x48.png"
+      width="48" />
+    <mat-card-title>{{ project$().title }}</mat-card-title>
+  </div>
+</mat-card>

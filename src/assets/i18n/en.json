@@ -4,7 +4,8 @@
     "REGISTER": "Get started",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "ERROR": "Invalid email or password"
+    "ERROR": "Invalid email or password",
+    "LOGOUT": "Log Out"
   },
   "HOME": {
     "TITLE": "Welcome to FoxFlow",
@@ -17,13 +18,24 @@
   },
   "BOARD": {
     "TITLE": "Task Board",
-    "CREATE": "Create Board"
+    "CREATE": "Create Board",
+    "NEW_TASKS": "New Requests",
+    "INPROGRESS": "In progress",
+    "DONE": "Done",
+    "NOT_APPROVED": "Not approved"
   },
   "TASK": {
     "ADD": "Add Task",
     "TITLE_LABEL": "Task Title",
     "DUE_DATE_LABEL": "Due Date",
-    "ASSIGNEE_LABEL": "Assignee"
+    "ASSIGNEE_LABEL": "Assignee",
+    "TASK_DETAIL": "Task detail",
+    "NO_ASSIGNEE": "No assignee",
+    "STATUS": "Status",
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_TEXT": "What is this task about?",
+    "ASSIGN_USER": "User(s) for task",
+    "CHOOSE_DATE": "Choose date"
   },
   "NOTIFICATION": {
     "DUE": "Task {{title}} is due on {{date}}",
@@ -36,7 +48,6 @@
     "LANGUAGE": "Language"
   },
   "NOT_FOUND": {
-    "TITLE": "Page Not Found",
     "MESSAGE": "Sorry, the page you are looking for does not exist.",
     "HOME": "Go to Home"
   },
@@ -100,5 +111,31 @@
     "ACTION_SUBMIT": "Continue",
     "ACTION_GOOGLE": "Sign in with Google",
     "ACTION_GITHUB": "Sign in with GitHub"
+  },
+  "TOOLS": {
+    "EDIT": "Edit title",
+    "DELETE": "Delete task",
+    "CLOSE": "Close"
+  },
+  "GREETING": {
+    "WELCOME": "Good {{time}}, {{name}}!",
+    "GUEST": "Good {{time}}, Guest!"
+  },
+  "TIME": {
+    "MORNING": "morning",
+    "AFTERNOON": "afternoon",
+    "EVENING": "evening"
+  },
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "CREATE": "Create project"
+  },
+  "SIDEBAR": {
+    "HOME": "Home",
+    "PROJECTS": "Projects",
+    "NO_PROJECTS": "No projects available",
+    "TOGGLE": "Toggle sidebar",
+    "OPEN": "Open sidebar",
+    "CLOSE": "Close sidebar"
   }
 }

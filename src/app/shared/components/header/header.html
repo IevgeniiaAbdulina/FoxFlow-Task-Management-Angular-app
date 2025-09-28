@@ -12,19 +12,79 @@
         alt="FoxFlow Logo"
         height="48"
         ngSrc="assets/images/logo.png"
+        priority="high"
         width="48" />
+      <span>FoxFlow</span>
     </a>
     <span class="spacer"></span>
-    @if (!isAuthenticated && isMobile) {
+    <app-language-switcher />
+    <mat-slide-toggle
+      aria-label="Toggle dark/light theme"
+      class="icon-only-toggle"
+      matTooltip="Toggle dark/light theme"
+      matTooltipPosition="above"
+      [checked]="isDarkMode()"
+      (change)="toggleTheme()">
+      <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </mat-slide-toggle>
+    @if (isAuthenticated()) {
+    <div
+      class="user-info"
+      [matTooltip]="user()?.email ?? ''">
+      @if (user()?.photoURL) {
+      <img
+        alt="User avatar"
+        class="user-avatar"
+        height="32"
+        width="32"
+        [ngSrc]="user()!.photoURL!" />
+      } @else {
+      <span class="user-initials">{{ getUserInitials() }}</span>
+      }
+    </div>
+    @if (isMobile) {
+    <button
+      aria-label="Open user menu"
+      mat-icon-button
+      type="button"
+      [matMenuTriggerFor]="userMenu"
+      [matMenuTriggerRestoreFocus]="true">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu
+      #userMenu="matMenu"
+      overlapTrigger="false"
+      xPosition="before">
+      <button
+        aria-label="Log out"
+        mat-menu-item
+        type="button"
+        (click)="logout()">
+        {{ 'AUTH.LOGOUT' | translate }}
+      </button>
+    </mat-menu>
+    } @else {
+    <button
+      aria-label="Log out"
+      mat-icon-button
+      matTooltip="Log out"
+      type="button"
+      (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+    } } @else if (!isAuthenticated() && isMobile) {
     <button
       aria-label="Open navigation menu"
       mat-icon-button
       type="button"
-      [matMenuTriggerFor]="menu">
+      [matMenuTriggerFor]="menu"
+      [matMenuTriggerRestoreFocus]="true">
       <mat-icon>menu</mat-icon>
     </button>
-    }
-    <mat-menu #menu="matMenu">
+    <mat-menu
+      #menu="matMenu"
+      overlapTrigger="false"
+      xPosition="before">
       <button
         aria-label="Log in"
         mat-menu-item
@@ -40,17 +100,7 @@
         {{ 'AUTH.REGISTER' | translate }}
       </button>
     </mat-menu>
-    <mat-slide-toggle
-      aria-label="Toggle dark/light theme"
-      class="icon-only-toggle"
-      matTooltip="Toggle dark/light theme"
-      matTooltipPosition="above"
-      [checked]="isDarkMode()"
-      (change)="toggleTheme()">
-      <mat-icon>{{ isDarkMode() ? 'dark_mode' : 'light_mode' }}</mat-icon>
-    </mat-slide-toggle>
-    <app-language-switcher />
-    @if (!isAuthenticated() && !isMobile) {
+    } @else if (!isAuthenticated() && !isMobile) {
     <div class="nav-links">
       <a
         aria-label="Log in"
@@ -61,7 +111,7 @@
       </a>
       <a
         aria-label="Register"
-        matButton="filled"
+        mat-button="filled"
         routerLink="/register"
         routerLinkActive="active">
         {{ 'AUTH.REGISTER' | translate }}
