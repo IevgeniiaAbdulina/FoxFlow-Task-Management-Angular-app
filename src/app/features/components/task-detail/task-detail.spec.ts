@@ -58,6 +58,7 @@ describe('TaskDetail', () => {
     mockFirebaseService = jasmine.createSpyObj('FirebaseServiceTs', [
       'getUsers',
       'getTask',
+      'updateTask',
     ]);
 
     mockProjectService.currentProject.and.returnValue({
@@ -87,5 +88,31 @@ describe('TaskDetail', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should enable title editing', () => {
+    component.editTaskTitle();
+    expect(component.editing()).toBeTrue();
+    expect(component.editingText).toBe('test');
+  });
+
+  it('should cancel title editing', () => {
+    component.editingText = 'new title';
+    component.cancelEditTask();
+    expect(component.editing()).toBeFalse();
+    expect(component.editingText).toBe('');
+  });
+
+  it('should toggle user assignment UI', () => {
+    component.chooseUserForAssign();
+    expect(component.isAssignedUsers).toBeFalse();
+    expect(component.selectedUserIds).toContain('user1');
+  });
+
+  it('should cancel description editing', () => {
+    component.descriptionText = 'Changed';
+    component.cancelEditDescription();
+    expect(component.descriptionText).toBe('Test Description');
+    expect(component.editingDescription()).toBeFalse();
   });
 });
