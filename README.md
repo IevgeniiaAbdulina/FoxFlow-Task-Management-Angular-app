@@ -37,8 +37,11 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#architecture-diagram">Architecture</a></li>
-    <li><a href="#feature-sliced-project-structure">Project structure</a></li>
+    <li><a href="#backend">Backend & Data Persistence</a></li>
+    <li><a href="#project-structure">Project structure</a></li>
+    <li><a href="#why-signals">Why Signals</a></li>
     <li><a href="#performance-budgets">Performance budgets</a></li>
+    <li><a href="#lighthouse-numbers">Lighthouse numbers</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -53,7 +56,7 @@
 </p>
 
 | Why Choose FoxFlow      | Description                                                                                                                                                     |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | User-Friendly Interface | FoxFlow features an intuitive design that makes it easy for users of all skill levels to navigate and manage tasks efficiently.                                 |
 | Collaboration Tools     | The application offers robust collaboration features, allowing teams to work together seamlessly, share updates, and communicate effectively on projects.       |
 | Customizable Workflows  | FoxFlow enables users to tailor their task management experience with customizable workflows, ensuring that it fits their unique project needs and preferences. |
@@ -73,12 +76,11 @@ FoxFlow is built using a modern tech stack that includes:
 - ✅ Firebase - Backend services including Firestore for database, Authentication, and Hosting.
 - ✅ OAuth - Secure authentication for user login.
 - ✅ RxJS - For reactive programming in Angular.
-- ✅ NgRx - State management for Angular applications.
 - ✅ SCSS - stylesheets using the Angular CLI.
 - ✅ Angular Material - For responsive UI design.
 - ✅ Google Fonts & Icons & custom icons.
 - ✅ ESLint, Prettier, Husky, Lint-Staged - Clear coding guidelines for a clean and consistent codebase.
-- ✅ Testing Jasmine/Karma - unit tests for core logic and **E2E** for the main user flow.
+- ✅ Testing Jasmine/Karma - unit tests for core logic.
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
@@ -180,12 +182,6 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-### Running end-to-end tests
-
-```bash
-ng e2e
-```
-
 ### Running ESLint
 
 ```bash
@@ -206,28 +202,44 @@ Clear coding guidelines for a clean and consistent codebase.
 
 ## Usage
 
-<!--  Use this space to show useful examples of how a project can be used.
-      Additional screenshots, code examples and demos work well in this space.
-      You may also link to more resources. -->
-
 1. **Task Creation and Management**: Users can create, edit, and delete tasks, assign them to team members, and set deadlines.
-2. **Project Collaboration**: Team members can collaborate on projects by sharing tasks, commenting, and updating task statuses.
 
 - _Screenshots_:
-  - Task Detail View: A detailed view of a specific task, including comments, attachments, and status updates.
 
-3. **Progress Tracking**: Users can track the progress of tasks and projects through visual indicators like progress bars or Kanban boards.
+<details>
+  <summary> Task Detail View: A detailed view of a specific task and status updates. </summary>
+
+<div align="left">
+  <img src="./src/assets/images/task-deteils.png" alt="angular" width=60%>
+</div>
+
+</details>
+
+2. **Progress Tracking**: Users can track the progress of tasks and projects through visual indicators like progress bars or Kanban boards.
 
 - _Screenshots_:
-  - Dashboard: A view of the main dashboard displaying active projects and tasks.
-  - Task List: A screenshot showing a list of tasks with options to filter, sort, and search.
-  - Project Overview: A visual representation of project progress, including completed and pending tasks.
 
-4. **Notifications and Reminders**: Users receive notifications for upcoming deadlines, task assignments, and comments from team members.
-5. **User Authentication**: Secure login and registration using Firebase OAuth, allowing users to manage their tasks safely.
+<details>
+  <summary> Dashboard: A view of the main dashboard displaying active projects and tasks. </summary>
+
+<div align="left">
+  <img src="./src/assets/images/kanban-page.png" alt="angular" width=60%>
+</div>
+
+</details>
+
+3. **User Authentication**: Secure login and registration using Firebase OAuth, allowing users to manage their tasks safely.
 
 - _Screenshots_:
-  - Login Screen: A screenshot of the login form where users enter their credentials.
+
+<details>
+  <summary> Login Screen: A screenshot of the login form where users enter their credentials. </summary>
+
+<div align="left">
+  <img src="./src/assets/images/log-in-page.png" alt="angular" width=60%>
+</div>
+
+</details>
 
 ### Code Examples
 
@@ -239,29 +251,15 @@ export interface Task {
   title: string;
   description: string;
   assignedTo: string;
-  dueDate: Date;
-  status: 'pending' | 'in-progress' | 'completed';
+  dueTo: Date;
+  createdAt: Date;
+  status: 'todo' | 'in-progress' | 'done';
 }
 ```
 
 ### Demo of features
 
-Video Walkthrough: Create a video walkthrough demonstrating how to use the application, showcasing features like task creation, collaboration, and progress tracking.
-
-<details>
-  <summary>✏️ Task creation</summary>
-  <video></video>
-</details>
-
-<details>
-  <summary>🚀 Collaboration</summary>
-  <video></video>
-</details>
-
-<details>
-  <summary>🎯 Progress tracking</summary>
-  <video></video>
-</details>
+<a href="https://foxflowangular2025.web.app/"><strong>FoxFlow Application Deploy</strong></a>
 
 _For more examples, please refer to the [Project Wiki](https://github.com/IevgeniiaAbdulina/FoxFlow-Task-Management-Angular-app/wiki)_
 
@@ -276,29 +274,29 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 | ✅    | User Authentication                        | Implement OAuth for secure login and user management. Google, GitHub (OAuth)                                              |
 | 📊   | **Boards:**                                |
 | 🔲   | List Board                                 | Organize tasks in a powerful table.                                                                                       |
-| 🔲   | Kanban Board                               | Track work in a Kanban view.                                                                                              |
+| ✅    | Kanban Board                               | Track work in a Kanban view.                                                                                              |
 | 🔲   | Analytics Dashboard                        | Generate real-time reports with customizable charts. (Use Signals & Reactivity)                                           |
 | 🎯   | **Actions:**                               |
-| 🔲   | Task Creation and Assignment               | Users can create tasks, assign them to team members, and set deadlines.                                                   |
+| ✅    | Task Creation and Assignment               | Users can create tasks, assign them to team members, and set deadlines.                                                   |
 | 🔲   | Subtasks                                   | Allow users to break down tasks into smaller, manageable subtasks.                                                        |
 | 🔲   | Search and Filter                          | Enable users to search and filter tasks based on various criteria.                                                        |
 | 🔲   | Sort                                       | Enable users to sort tasks by Due date or Assignee members.                                                               |
 | 🚀   | **Collaboration features:**                |
 | 🔲   | Collaboration Tools                        | Allow users to comment on tasks and share files.                                                                          |
-| 🔲   | Task Tracking                              | Monitor task progress and status updates.                                                                                 |
+| ✅    | Task Tracking                              | Monitor task progress and status updates.                                                                                 |
 | 🔲   | Notifications                              | Send reminders for deadlines and updates on task status. (Optional: add accent text color or status label on a task card) |
 | 🔲   | Labels and Tags                            | Organize tasks with customizable labels and tags.                                                                         | 👀  |
 | 🎨   | **Visual implementation:**                 |
-| 🔲   | Dark Mode                                  | Offer a dark mode option for customizing the user interface.                                                              |
+| ✅    | Dark Mode                                  | Offer a dark mode option for customizing the user interface.                                                              |
 | ✅    | Mobile Responsiveness                      | Ensure the application is usable on mobile devices.                                                                       |
-| 🔲   | Angular animations                         | That improve UX.                                                                                                          |
-| 🔲   | Good empty/loading/error states, skeletons | Show user-friendly messages and view without content.                                                                     |
+| ✅    | Angular animations                         | That improve UX.                                                                                                          |
+| ✅    | Good empty/loading/error states, skeletons | Show user-friendly messages and view without content.                                                                     |
 | 🌐   |                                            |
 | ✅    | Internationalization                       | Two languages using Angular i18n or ngx-translate.                                                                        |
 | 💻   | **User Experience Enhancements:**          |
-| 🔲   | Drag-and-Drop Interface                    | Implement a user-friendly drag-and-drop interface for task management.                                                    |
-| 🔲   | Keyboard Shortcuts                         | Provide keyboard shortcuts for common actions to improve efficiency.                                                      |
-| 🔲   | Tooltips                                   | Include guided tutorials for new users to help them navigate the application.                                             |
+| ✅    | Drag-and-Drop Interface                    | Implement a user-friendly drag-and-drop interface for task management.                                                    |
+| ✅    | Keyboard Shortcuts                         | Provide keyboard shortcuts for common actions to improve efficiency.                                                      |
+| ✅    | Tooltips                                   | Include guided tutorials for new users to help them navigate the application.                                             |
 | 🔲   | Mark task Complete                         | Show success notification or animated image.                                                                              |
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
@@ -308,14 +306,28 @@ _For more examples, please refer to the [Project Wiki](https://github.com/Ievgen
 ## Architecture diagram
 
 <div align="left">
-  <img src="./src/assets/images/project-architecture.png" alt="angular" width=60%>
+  <img src="./src/assets/images/architecture-diagram.png" alt="angular" width=60%>
+</div>
+
+<p align="right"><a href="#readme-top">⬆️ back to top</a></p>
+
+<!-- BACKEND -->
+
+## Backend & Data Persistence
+
+<div align="left">
+  <img src="./src/assets/images/firebase-store.png" alt="angular" width=60%>
+</div>
+
+<div align="left">
+  <img src="./src/assets/images/firebase-auth.png" alt="angular" width=60%>
 </div>
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
 <!-- FOLDER STRUCTURE -->
 
-## Feature-sliced project structure
+## Project structure
 
 ```
 src/
@@ -372,6 +384,20 @@ src/
 
 <p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
+<!-- WHY SIGNALS -->
+
+## Why Signals
+
+To manage the `Project` state, We've chosen Angular Signals over RxJS for this implementation.
+**Signals** provide superior performance in Angular applications, especially for future updates
+in zoneless configurations where change detection is optimized.
+The **reactive nature** of Signals ensures precise updates to components without the overhead of zone.js.
+While RxJS offers powerful stream manipulation, Signals deliver clearer syntax and simpler state management for this use case.
+This approach maintains excellent **performance** while reducing complexity, making the code more **maintainable** and easier to reason about.
+The built-in change detection optimization with **Signals aligns perfectly with modern Angular best practices**.
+
+<p align="right"><a href="#readme-top">⬆️ back to top</a></p>
+
 <!-- PERFORMANCE BUDGETS -->
 
 ## Performance budgets
@@ -380,16 +406,15 @@ src/
 
 The Angular CLI performs the checks at build time, looking at the production assets and verifying their sizes.
 
-| Initial chunk files   | Names         |  Raw size | Estimated transfer size |
-| --------------------- | ------------- | --------: | ----------------------: |
-| main-6NGPTIUD.js      | main          | 837.84 kB |               216.67 kB |
-| polyfills-ED6LRYKL.js | polyfills     |  34.59 kB |                11.32 kB |
-| styles-DTTV3AOM.css   | styles        |   8.10 kB |                 1.32 kB |
-|                       | Initial total | 880.53 kB |               229.31 kB |
+<div align="left">
+  <img src="./src/assets/images/performance-budget.png" alt="angular" width=60%>
+</div>
 
-Application bundle generation complete. [5.920 seconds]
+<p align="right"><a href="#readme-top">⬆️ back to top</a></p>
 
-### Performance budgets with the Lighthouse
+<!-- LIGHTHOUSE NUMBERS -->
+
+## Lighthouse numbers
 
 Lighthouse opens the deployed version of the application and measures the asset size.
 
