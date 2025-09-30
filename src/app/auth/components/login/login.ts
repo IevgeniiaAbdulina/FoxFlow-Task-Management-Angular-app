@@ -29,6 +29,8 @@ import { NotificationService } from '@app/shared/services/notification-service';
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
 import { FirebaseError } from '@firebase/util';
 import { MatTooltip } from '@angular/material/tooltip';
+import { SvgGraphicComponentGoogle } from '@app/shared/components/svg-graphic/svg-graphic-component-google';
+import { SvgGraphicComponentGitHub } from '@app/shared/components/svg-graphic/svg-graphic-component-github';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +50,8 @@ import { MatTooltip } from '@angular/material/tooltip';
     Divider,
     UpperCasePipe,
     MatTooltip,
+    SvgGraphicComponentGoogle,
+    SvgGraphicComponentGitHub,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

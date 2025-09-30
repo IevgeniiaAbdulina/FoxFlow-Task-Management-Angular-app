@@ -31,6 +31,8 @@ import { FirebaseError } from '@firebase/util';
 import { FormatErrorMessage } from '@app/shared/utils/format-error-message';
 import { MatTooltip } from '@angular/material/tooltip';
 import { passwordValidator } from '@app/shared/utils/password-validator';
+import { SvgGraphicComponentGitHub } from '@app/shared/components/svg-graphic/svg-graphic-component-github';
+import { SvgGraphicComponentGoogle } from '@app/shared/components/svg-graphic/svg-graphic-component-google';
 
 @Component({
   selector: 'app-register',
@@ -51,6 +53,8 @@ import { passwordValidator } from '@app/shared/utils/password-validator';
     Divider,
     UpperCasePipe,
     MatTooltip,
+    SvgGraphicComponentGitHub,
+    SvgGraphicComponentGoogle,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
