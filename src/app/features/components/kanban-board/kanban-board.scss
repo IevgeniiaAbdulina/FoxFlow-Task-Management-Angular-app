@@ -54,10 +54,11 @@
 
     &__title {
       border-radius: 8px;
-      background-color: var(--mat-sys-on-primary);
       padding: 1.2rem;
       font-size: 2rem;
       font-weight: 500;
+      width: 20ch;
+      flex: 1 0 auto;
     }
 
     &__content {

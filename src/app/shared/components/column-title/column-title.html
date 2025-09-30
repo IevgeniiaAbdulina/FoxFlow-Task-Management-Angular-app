@@ -1,0 +1,13 @@
+<div class="progress-bar-container">
+  <div
+    animate.enter="progress-animation"
+    class="progress-bar"
+    [style.width.%]="progressPercentage()">
+    <div class="progress-bar__title">
+      <ng-content />
+      @if (total() > 0) {
+      <span>{{ column() }} / {{ total() }}</span>
+      }
+    </div>
+  </div>
+</div>

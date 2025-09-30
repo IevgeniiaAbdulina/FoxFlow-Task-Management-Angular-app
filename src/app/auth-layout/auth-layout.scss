@@ -44,6 +44,7 @@ mat-sidenav-content {
   mat-sidenav-content {
     padding: 8px;
     margin-left: 0;
+    flex-direction: column;
   }
 
   .menu-button:not(.mobile) {
