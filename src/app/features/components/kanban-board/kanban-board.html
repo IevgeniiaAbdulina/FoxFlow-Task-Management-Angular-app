@@ -14,6 +14,7 @@
           (cdkDropListDropped)="drop($event)">
           @for (task of toDoTasks(); track task.id) {
           <app-task-list-item
+            animate.enter="enter-animation"
             cdkDrag
             class="drag-item"
             [task]="task" />
@@ -36,6 +37,7 @@
           (cdkDropListDropped)="drop($event)">
           @for (task of inProgressTasks(); track task.id) {
           <app-task-list-item
+            animate.enter="enter-animation"
             cdkDrag
             class="drag-item"
             [task]="task" />
@@ -58,6 +60,7 @@
           (cdkDropListDropped)="drop($event)">
           @for (task of doneTasks(); track task.id) {
           <app-task-list-item
+            animate.enter="enter-animation"
             cdkDrag
             class="drag-item"
             [task]="task" />
