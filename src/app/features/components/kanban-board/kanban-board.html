@@ -1,7 +1,14 @@
 <section>
   <div class="board">
     <div class="board__column">
-      <h2 class="board__column__title">{{ 'BOARD.NEW_TASKS' | translate }}</h2>
+      <app-column-title
+        class="board__column__todo"
+        [column]="toDoTasks().length"
+        [total]="totalTasks()">
+        <h2 class="board__column__title"
+          >{{ 'BOARD.NEW_TASKS' | translate }}</h2
+        >
+      </app-column-title>
       <div class="board__column__content">
         <app-task-header />
         <ul
@@ -25,7 +32,15 @@
       </div>
     </div>
     <div class="board__column">
-      <h2 class="board__column__title">{{ 'BOARD.INPROGRESS' | translate }}</h2>
+      <app-column-title
+        class="board__column__in-progress"
+        [column]="inProgressTasks().length"
+        [total]="totalTasks()">
+        <h2 class="board__column__title"
+          >{{ 'BOARD.INPROGRESS' | translate }}</h2
+        >
+      </app-column-title>
+
       <div class="board__column__content">
         <ul
           #inProgressList="cdkDropList"
@@ -48,7 +63,12 @@
       </div>
     </div>
     <div class="board__column">
-      <h2 class="board__column__title">{{ 'BOARD.DONE' | translate }}</h2>
+      <app-column-title
+        class="board__column__done"
+        [column]="doneTasks().length"
+        [total]="totalTasks()">
+        <h2 class="board__column__title">{{ 'BOARD.DONE' | translate }}</h2>
+      </app-column-title>
       <div class="board__column__content">
         <ul
           #doneList="cdkDropList"

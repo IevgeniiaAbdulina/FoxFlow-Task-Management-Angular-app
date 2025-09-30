@@ -24,6 +24,7 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { TaskContainerType } from '@app/shared/types/tasks-container-type';
+import { ColumnTitle } from '@app/shared/components/column-title/column-title';
 
 @Component({
   selector: 'app-kanban-board',
@@ -34,6 +35,7 @@ import { TaskContainerType } from '@app/shared/types/tasks-container-type';
     DragDropModule,
     CdkDropList,
     CdkDrag,
+    ColumnTitle,
   ],
   templateUrl: './kanban-board.html',
   styleUrl: './kanban-board.scss',
@@ -49,6 +51,7 @@ export class KanbanBoard implements OnInit {
   readonly toDoTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
   readonly inProgressTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
   readonly doneTasks: WritableSignal<TaskData[]> = signal<TaskData[]>([]);
+  readonly totalTasks = signal<number>(0);
 
   projectId: string | undefined;
 
@@ -61,6 +64,8 @@ export class KanbanBoard implements OnInit {
           .getProjectTasks(this.projectId)
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe((tasks) => {
+            this.totalTasks.set(tasks.length);
+
             const groupedTasks = Object.groupBy(
               tasks,
               (task: TaskData) => task.status
