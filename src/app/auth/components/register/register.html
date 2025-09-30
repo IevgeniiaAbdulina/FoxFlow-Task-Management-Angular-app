@@ -9,15 +9,23 @@
   <mat-card-content>
     <div class="social-buttons__container">
       <app-social-button-google (loginWithGoogle)="loginWithGoogle()">
-        {{ "REGISTER_PAGE.ACTION_GOOGLE" | translate }}
+        <app-svg-graphic-google ngProjectAs="button-icon" />
+        <span ngProjectAs="button-title">
+          {{ "REGISTER_PAGE.ACTION_GOOGLE" | translate }}
+        </span>
       </app-social-button-google>
       <app-social-button-github (loginWithGitHub)="loginWithGitHub()">
-        {{ "REGISTER_PAGE.ACTION_GITHUB" | translate }}
+        <app-svg-graphic-github ngProjectAs="button-icon" />
+        <span ngProjectAs="button-title">
+          {{ "REGISTER_PAGE.ACTION_GITHUB" | translate }}
+        </span>
       </app-social-button-github>
     </div>
 
     <app-divider>
-      {{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
+      <span ngProjectAs="divider-title">
+        {{ "REGISTER_PAGE.DIVIDER" | translate | uppercase }}
+      </span>
     </app-divider>
 
     <h3 class="section-title">{{ "REGISTER_PAGE.SUBTITLE" | translate }}</h3>
