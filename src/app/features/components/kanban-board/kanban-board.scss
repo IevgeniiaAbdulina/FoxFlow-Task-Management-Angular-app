@@ -14,7 +14,7 @@
 
 /* Style the empty space where a card was lifted from */
 .cdk-drag-placeholder {
-  background-color: #f0f0f0;
+  background-color: inherit;
   border-radius: 4px;
   opacity: 0.6;
   transition: opacity 300ms ease;

@@ -5,6 +5,15 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+:root {
+  @include mat.tooltip-overrides(
+    (
+      supporting-text-size: 14px,
+      supporting-text-line-height: 100%,
+    )
+  );
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,14 +22,23 @@
 
 html {
   font-size: 10px;
+  color-scheme: light dark;
+
   @include mat.theme(
     (
       color: (
         primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
+        theme-type: light,
       ),
       typography: Roboto,
       density: 0,
+    )
+  );
+
+  @include mat.dialog-overrides(
+    (
+      container-elevation-shadow: 0px 0px 1px 1px grey,
     )
   );
 }
@@ -39,37 +57,120 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--primary-bg);
-  color: var(--primary-text);
-  font: var(--mat-sys-body-medium);
+
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+
+  --mat-icon-bg: rgba(0, 0, 0, 0.5);
 }
-/* You can add global styles to this file, and also import other style files */
 
 body.dark-theme {
-  --primary-bg: #333333;
-  --primary-text: #ffffff;
-  --mat-toolbar-container-background-color: #44474e;
-  --mat-sys-surface-container-low: #252323;
-  --mat-sys-on-surface-variant: #000;
+  color-scheme: dark;
+
+  @include mat.theme(
+    (
+      color: mat.$blue-palette,
+      tertiary: mat.$violet-palette,
+    )
+  );
+
+  // Override specific background colors using CSS custom properties
+  --mat-icon-bg: #e4e4e4;
+  --mat-sys-surface: #232327;
+
+  // Custom elements style
+  a {
+    color: inherit;
+  }
 
   mat-card {
-    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #3c3c3c;
   }
-}
 
-:root {
-  --primary-bg: #ffffff;
-  --primary-text: #333333;
-  --mat-icon-bg: rgba(0, 0, 0, 0.6);
-  --mat-icon-bg-hover: rgba(0, 0, 0, 0.1);
-  background: var(--primary-bg);
-  color: var(--primary-text);
+  .project-card {
+    &:hover {
+      background-color: var(--mat-sys-surface);
+    }
+  }
 
-  @include mat.tooltip-overrides(
+  .rs-link {
+    &:hover {
+      box-shadow: 0 2px 2px grey;
+    }
+  }
+
+  .board__column__title {
+    background-color: inherit;
+  }
+
+  .board {
+    .header {
+      background-color: inherit;
+    }
+
+    .empty-tasks {
+      color: grey;
+    }
+
+    app-task-list-item {
+      .item {
+        border: 1px solid #3c3c3c;
+        background-color: #2a2a2a;
+
+        .todo {
+          color: #3da1ff;
+        }
+
+        &:hover {
+          box-shadow: none;
+          background-color: var(--mat-sys-surface);
+        }
+      }
+    }
+  }
+
+  .task__details {
+    .todo {
+      border-color: #3da1ff;
+    }
+  }
+
+  .project-owner__container {
+    border: 1px dashed #3c3c3c;
+
+    span {
+      color: inherit !important;
+    }
+  }
+
+  app-project-owner {
+    .user-name {
+      color: inherit;
+    }
+  }
+
+  .sidebar {
+    background-color: #2a2a2a;
+
+    .sidebar-content {
+      .home-button {
+        background-color: inherit;
+
+        &:hover {
+          background-color: #2a2a2a;
+        }
+      }
+    }
+  }
+
+  @include mat.card-overrides(
     (
-      supporting-text-size: 14px,
-      supporting-text-line-height: 100%,
+      elevated-container-color: #2a2a2a,
+      outlined-container-color: rgba(64 123 255 / 10%),
+      outlined-outline-color: #3c3c3c,
+      subtitle-text-color: inherit,
     )
   );
 }
