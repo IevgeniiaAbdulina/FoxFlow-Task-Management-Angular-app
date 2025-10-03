@@ -131,6 +131,34 @@ body.dark-theme {
     }
   }
 
+  .progress-bar-container {
+    background-color: var(--mat-sys-surface);
+  }
+
+  .board__column__todo {
+    .progress-bar-container {
+      .progress-bar {
+        background-color: #3da1ff;
+      }
+    }
+  }
+
+  .board__column__in-progress {
+    .progress-bar-container {
+      .progress-bar {
+        background-color: #d29922;
+      }
+    }
+  }
+
+  .board__column__done {
+    .progress-bar-container {
+      .progress-bar {
+        background-color: #34a853;
+      }
+    }
+  }
+
   .task__details {
     .todo {
       border-color: #3da1ff;
