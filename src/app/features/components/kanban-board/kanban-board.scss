@@ -30,7 +30,7 @@
   align-items: flex-start;
   gap: 16px;
   overflow-x: auto;
-  padding: 3rem 0;
+  padding: 3rem 0 8px;
 
   &__column {
     padding: 1.2rem;
@@ -71,6 +71,12 @@
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
+      }
+
+      .todo-tasks__list {
+        position: relative;
+        height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 200px);
+        overflow-y: auto;
       }
     }
   }

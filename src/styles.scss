@@ -64,6 +64,10 @@ body {
   color: var(--mat-sys-on-surface);
 
   --mat-icon-bg: rgba(0, 0, 0, 0.5);
+
+  .mat-drawer-content {
+    overflow: unset;
+  }
 }
 
 body.dark-theme {
