@@ -73,9 +73,9 @@
         row-gap: 1rem;
       }
 
-      .todo-tasks__list {
+      .drop-list {
         position: relative;
-        height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 200px);
+        max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 140px);
         overflow-y: auto;
       }
     }
