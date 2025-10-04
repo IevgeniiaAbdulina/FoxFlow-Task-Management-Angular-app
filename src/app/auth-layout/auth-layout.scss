@@ -9,11 +9,15 @@ mat-sidenav-container {
 
 .sidebar {
   width: 250px;
-  background-color: var(--background-color, #f5f5f5);
+  background-color: var(
+    --mat-card-elevated-container-color,
+    var(--mat-sys-surface-container-low)
+  );
   border-right: 1px solid #999;
   padding: 16px;
   position: absolute;
   z-index: 1;
+  border-radius: unset;
 }
 
 mat-sidenav-content {

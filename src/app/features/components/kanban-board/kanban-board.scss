@@ -14,7 +14,7 @@
 
 /* Style the empty space where a card was lifted from */
 .cdk-drag-placeholder {
-  background-color: #f0f0f0;
+  background-color: inherit;
   border-radius: 4px;
   opacity: 0.6;
   transition: opacity 300ms ease;
@@ -30,7 +30,12 @@
   align-items: flex-start;
   gap: 16px;
   overflow-x: auto;
-  padding: 3rem 0;
+  padding: 3rem 0 8px;
+  min-height: calc(100vh - 64px - 30px - 65px);
+
+  @media (max-width: 600px) {
+    min-height: calc(100vh - 64px - 30px - 80px);
+  }
 
   &__column {
     padding: 1.2rem;
@@ -71,6 +76,25 @@
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
+        padding-bottom: 10px;
+      }
+
+      .drop-list {
+        position: relative;
+        overflow-y: auto;
+        max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 120px);
+
+        @media (max-width: 600px) {
+          max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 140px);
+        }
+
+        &.todo-tasks__list {
+          max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 180px);
+
+          @media (max-width: 600px) {
+            max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 200px);
+          }
+        }
       }
     }
   }
