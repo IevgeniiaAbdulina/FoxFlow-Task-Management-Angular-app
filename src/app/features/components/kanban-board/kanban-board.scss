@@ -79,7 +79,7 @@
         padding-bottom: 10px;
       }
 
-      .drop-list {
+      .tasks__list__container {
         position: relative;
         overflow-y: auto;
         max-height: calc(100vh - 64px - 30px - 16px - 16px - 65px - 120px);
@@ -96,6 +96,22 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  ::ng-deep .tasks__list__container {
+    overflow-y: auto !important;
+  }
+
+  app-task-header {
+    padding-right: 2rem;
+  }
+
+  .tasks__list__container {
+    & > * {
+      width: calc(100% - 2rem);
     }
   }
 }

@@ -14,7 +14,7 @@
         <ul
           #todoList="cdkDropList"
           cdkDropList
-          class="drop-list todo-tasks__list"
+          class="drop-list todo-tasks__list tasks__list__container"
           id="todo"
           [cdkDropListConnectedTo]="getConnectedLists()"
           [cdkDropListData]="toDoTasks()"
@@ -45,7 +45,7 @@
         <ul
           #inProgressList="cdkDropList"
           cdkDropList
-          class="drop-list in-progress-tasks__list"
+          class="drop-list in-progress-tasks__list tasks__list__container"
           id="inProgress"
           [cdkDropListConnectedTo]="getConnectedLists()"
           [cdkDropListData]="inProgressTasks()"
@@ -73,7 +73,7 @@
         <ul
           #doneList="cdkDropList"
           cdkDropList
-          class="drop-list done-tasks__list"
+          class="drop-list done-tasks__list tasks__list__container"
           id="done"
           [cdkDropListConnectedTo]="getConnectedLists()"
           [cdkDropListData]="doneTasks()"
