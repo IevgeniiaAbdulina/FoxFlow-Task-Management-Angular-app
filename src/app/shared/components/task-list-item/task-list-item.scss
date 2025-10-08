@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 10px;
-  background-color: var(--mat-sys-on-primary);
+  background-color: inherit;
   border-color: var(
     --mat-card-elevated-container-color,
     var(--mat-sys-surface-container-low)
